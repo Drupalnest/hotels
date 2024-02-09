@@ -1,6 +1,6 @@
 import React from "react";
 // import Header from "../components/Header/Header";
-import { graphql } from "gatsby";
+import { Link, graphql } from "gatsby";
 import "../index.css";
 // import Footer from "../components/Footer/Footer";
 // import Banner from "../components/Home/Banner";
@@ -22,11 +22,12 @@ const MyPage = ({ data }) => {
       <h1 className="text-3xl font-semibold mt-8 mb-4">Hotel List</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {hotels.map((hotel, index) => (
-          <div
+          <Link
             key={index}
+            to={`/hotels/${hotel.id}`}
             className="bg-white p-4 rounded-md shadow-md transition-transform transform hover:scale-105"
           >
-            <div>
+            <div key={hotel.id}>
               <strong className="block mb-2 text-gray-600">Hotel</strong>
               {imagePaths.length > 0 && (
                 <img
@@ -55,7 +56,7 @@ const MyPage = ({ data }) => {
                 35% off
               </button>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
