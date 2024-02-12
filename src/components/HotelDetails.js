@@ -1,3 +1,5 @@
+// src/templates/hotel-details.js
+
 import React from "react";
 import { graphql } from "gatsby";
 
@@ -6,8 +8,8 @@ const HotelDetailsTemplate = ({ data }) => {
 
   return (
     <div>
-      <h1>{ hotel.id}</h1>
-      <h1>{ hotel.name}</h1>
+      <h1>{hotel ? hotel.id : "No hotel found"}</h1>
+      <h1>{hotel ? hotel.name : "No name found"}</h1>
     </div>
   );
 };

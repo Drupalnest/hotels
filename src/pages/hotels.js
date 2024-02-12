@@ -21,6 +21,8 @@ export const query = graphql`
       nodes {
         id
         name
+        phone 
+        status
       }
     }
   }

@@ -9,6 +9,8 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           id
           name
+          phone
+          status
         }
       }
     }
@@ -21,8 +23,8 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         id: hotel.id,
         name: hotel.name,
+        phone: hotel.phone,
       },
     });
   });
 };
-
