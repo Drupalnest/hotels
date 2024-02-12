@@ -9,7 +9,6 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           id
           name
-          phone
           status
         }
       }
@@ -19,11 +18,11 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.allHotel.nodes.forEach((hotel) => {
     createPage({
       path: `/hotels/${hotel.id}`,
-      component: path.resolve("./src/templates/hotel-details.js"),
+      component: path.resolve("./src/templates/hoteldetails.js"),
       context: {
         id: hotel.id,
         name: hotel.name,
-        phone: hotel.phone,
+        status: hotel.status,
       },
     });
   });
