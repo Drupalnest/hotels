@@ -6,7 +6,7 @@ const HotelDetailsTemplate = ({ data }) => {
 
   return (
     <div>
-      <h1>{hotel ? hotel.id : "No hotel found"}</h1>
+      <h1>{ hotel.id}</h1>
     </div>
   );
 };
