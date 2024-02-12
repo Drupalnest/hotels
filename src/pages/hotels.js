@@ -1,8 +1,8 @@
 // src/pages/demo.js
 
-import React from 'react';
-import { graphql } from 'gatsby';
-import HotelList from '../components/HotelList';
+import React from "react";
+import { graphql } from "gatsby";
+import HotelList from "../components/HotelList";
 
 const Demo = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
@@ -20,8 +20,7 @@ export const query = graphql`
     allHotel {
       nodes {
         id
-     
-        
+        name
       }
     }
   }

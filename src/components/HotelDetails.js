@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 
-const HotelDetails = ({ data }) => {
+const HotelDetailsTemplate = ({ data }) => {
   const hotel = data?.allHotel?.nodes[0] || null;
 
   return (
@@ -21,4 +21,4 @@ export const query = graphql`
   }
 `;
 
-export default HotelDetails;
+export default HotelDetailsTemplate;
