@@ -12,7 +12,7 @@ const HotelList = ({ hotels }) => {
             <h2>{hotel.id}</h2>
             <h2>{hotel.name}</h2>
             <h2>{hotel.phone}</h2>
-            <h2>{hotel.status}</h2>
+           
           </Link>
         </div>
       ))}

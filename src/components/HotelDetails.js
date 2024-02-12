@@ -26,21 +26,20 @@
 // `;
 
 // export default HotelDetailsTemplate;
-
 import React from "react";
 import { graphql } from "gatsby";
 
 const HotelDetails = ({ data }) => {
-  const hotels = data?.allHotel?.edges || [];
+  const hotels = data.allHotel.edges;
 
   return (
     <div>
       {hotels.map(({ node }) => (
         <div key={node.id}>
           <h1>{node.name}</h1>
-          <h1>lxciud</h1>
-          <p>{node.status}</p>
+          <h1>{node.id}</h1>
 
+          <p>{node.status}</p>
           {/* Add other fields as needed */}
         </div>
       ))}
@@ -54,9 +53,7 @@ export const query = graphql`
       edges {
         node {
           id
-
           name
-
           status
         }
       }
