@@ -8,7 +8,7 @@ const HotelList = ({ hotels }) => {
     <div>
       {hotels.map((hotel) => (
         <div key={hotel.id}>
-          <Link to={`/hotels`}>
+          <Link to={`/hotels/${hotel.id}`}>
             <h2>{hotel.id}</h2>
             <h2>{hotel.name}</h2>
           </Link>
