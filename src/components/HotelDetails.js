@@ -7,6 +7,7 @@ const HotelDetailsTemplate = ({ data }) => {
   return (
     <div>
       <h1>{ hotel.id}</h1>
+      <h1>{ hotel.name}</h1>
     </div>
   );
 };
@@ -16,6 +17,7 @@ export const query = graphql`
     allHotel(filter: { id: { eq: $id } }) {
       nodes {
         id
+        name
       }
     }
   }
