@@ -42,6 +42,7 @@ const MyPage = ({ data }) => {
               {/* Rest of your hotel information */}
               <span className="block mt-2">
                 <h2 className="text-xl font-semibold mb-2">{hotel.name}</h2>
+                <h2 className="text-xl font-semibold mb-2">{hotel.id}</h2>
                 <h3 className="text-gray-600">New Delhi</h3>
               </span>
               <span className="block mt-2">
@@ -67,15 +68,15 @@ export const query = graphql`
   query MyQuery {
     allHotel {
       nodes {
+        id
         name
-        rlh_status
-
-        banner_images {
-          url
-        }
+       
       }
     }
   }
 `;
 
 export default MyPage;
+
+
+

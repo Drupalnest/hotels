@@ -20,15 +20,8 @@ export const query = graphql`
     allHotel {
       nodes {
         id
-        name
-        address {
-          address_line1
-          address_line2
-          administrative_area
-          country_code
-          locality
-          postal_code
-        }
+     
+        
       }
     }
   }

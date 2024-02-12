@@ -9,14 +9,23 @@ module.exports = {
 
   plugins: [
     "gatsby-plugin-postcss",
+    // {
+    //   resolve: `gatsby-source-drupal`,
+    //   options: {
+    //     baseUrl: `http://165.227.127.224/`,
+    //     apiBase: `jsonapi`, // optional, defaults to `jsonapi`
+    //     skipFileDownloads: true,
+    //   },
+    // },
     {
       resolve: `gatsby-source-drupal`,
       options: {
         baseUrl: `http://165.227.127.224/`,
-        apiBase: `jsonapi`, // optional, defaults to `jsonapi`
+        apiBase: `jsonapi`,
         skipFileDownloads: true,
       },
     },
+
     {
       resolve: "gatsby-source-filesystem",
       options: {

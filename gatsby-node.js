@@ -8,6 +8,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allHotel {
         nodes {
           id
+          name
         }
       }
     }
@@ -19,7 +20,9 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve("./src/templates/hotel-details.js"),
       context: {
         id: hotel.id,
+        name: hotel.name,
       },
     });
   });
 };
+

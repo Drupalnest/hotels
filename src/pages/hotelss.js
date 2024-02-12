@@ -1,48 +1,61 @@
-import React from 'react';
-import { graphql } from 'gatsby';
+// import React from 'react';
+// import { graphql } from 'gatsby';
 
-const HotelDetails = ({ data }) => {
-  const hotels = data?.allHotel?.edges || [];
+// const HotelDetails = ({ data }) => {
+//   const hotels = data?.allHotel?.edges || [];
 
+//   return (
+//     <div>
+//       {hotels.map(({ node }) => (
+//         <div key={node.id}>
+//           <h1>{node.name}</h1>
+//           <p>{node.hotel_code}</p>
+//           <p>{node.phone}</p>
+//           <p>{node.rlh_status}</p>
+//           <p>{node.status}</p>
+//           <p>{node.email}</p>
+//           <p>{node.description}</p>
+//           <p>{node.crs_name}</p>
+//           <p>{node.crs_code}</p>
+//           {/* Add other fields as needed */}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export const query = graphql`
+//   query MyQuery {
+//     allHotel {
+//       edges {
+//         node {
+//           id
+//           hotel_code
+//           name
+//           phone
+//           rlh_status
+//           status
+//           email
+//           description
+//           crs_name
+//           crs_code
+//         }
+//       }
+//     }
+//   }
+// `;
+
+// export default HotelDetails;
+
+
+import React from 'react'
+
+const hotelss = () => {
   return (
     <div>
-      {hotels.map(({ node }) => (
-        <div key={node.id}>
-          <h1>{node.name}</h1>
-          <p>{node.hotel_code}</p>
-          <p>{node.phone}</p>
-          <p>{node.rlh_status}</p>
-          <p>{node.status}</p>
-          <p>{node.email}</p>
-          <p>{node.description}</p>
-          <p>{node.crs_name}</p>
-          <p>{node.crs_code}</p>
-          {/* Add other fields as needed */}
-        </div>
-      ))}
+      
     </div>
-  );
-};
+  )
+}
 
-export const query = graphql`
-  query MyQuery {
-    allHotel {
-      edges {
-        node {
-          id
-          hotel_code
-          name
-          phone
-          rlh_status
-          status
-          email
-          description
-          crs_name
-          crs_code
-        }
-      }
-    }
-  }
-`;
-
-export default HotelDetails;
+export default hotelss
