@@ -23,6 +23,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import RoomCard from "../components/RoomCard";
 import Amenities from "../components/HotelDetails/Amenities ";
 import AboutHotel from "../components/HotelDetails/AboutHotel";
+import GuestPolicies from "../components/HotelDetails/GuestPolicies ";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
@@ -407,7 +408,7 @@ const HotelDetails = ({ data }) => {
 
         <AboutHotel />
 
-        <div>
+        {/* <div>
           <div>Guest Policies</div>
           <div className="flex flex-row ">
             <span>Check-in</span>
@@ -433,11 +434,12 @@ const HotelDetails = ({ data }) => {
             <span>Check-in</span>
             <span>After 4:00 PM</span>
           </div>
-        </div>
+        </div> */}
+        <GuestPolicies />
 
         <div>
-          <h3>Important Info</h3>
-          <span>
+          <h3 className="text-2xl font-bold mb-4">Important Info</h3>
+          <span className="text-xl  mb-4">
             Guests are required to show a photo ID and credit card upon
             check-in. Please note that all Special Requests are subject to
             availability and additional charges may apply.
@@ -445,7 +447,7 @@ const HotelDetails = ({ data }) => {
         </div>
 
         <div>
-          <h1>1788 Verified Guest Ratings</h1>
+          <h1 className="text-2xl font-bold mb-4 mt-5">1788 Verified Guest Ratings</h1>
           <div>
             <span>
               <p>Overall Score</p> <p>8.7</p> <span></span>
