@@ -24,7 +24,8 @@ const ImageSlider = () => {
             position: "absolute",
             top: "50%",
             left: "20px",
-            transform: "translateX(-50%)",
+            transform: "translate(-50%, 50%)",
+            
           }}
         >
           &lt;
@@ -44,8 +45,9 @@ const ImageSlider = () => {
             color: "green",
             position: "absolute",
             top: "50%",
-            right: "20px",
-            transform: "translateY(-50%)",
+            right: "60px",
+            transform: "translate(50%, -50%)",
+            
           }}
         >
           &gt;
@@ -53,6 +55,7 @@ const ImageSlider = () => {
       </div>
     );
   };
+
 
   const settings = {
     infinite: true,
