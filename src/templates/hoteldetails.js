@@ -16,6 +16,7 @@ import WifiIcon from "@mui/icons-material/Wifi";
 import PetsIcon from "@mui/icons-material/Pets";
 import VapeFreeIcon from "@mui/icons-material/VapeFree";
 import AccessibleIcon from "@mui/icons-material/Accessible";
+import TextField from "@mui/material/TextField";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
@@ -177,13 +178,13 @@ const HotelDetails = ({ data }) => {
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center items-start border border-blue-500 ">
+        <div className="flex flex-wrap justify-center items-start border border-green-500 sm:w-full ">
           <div className="flex-1 p-4 border border-gray-400 border-r-2">
             <h1 className="text-2xl font-bold mb-2">Top Reasons to Book</h1>
             <div className="space-y-2">
               <div className="flex gap-2">
                 <span className="flex mt-1">
-                  <CachedIcon className=" text-green-700 bg-green-300 hover:bg-green-700 rounded-full " />
+                  <CachedIcon className=" text-green-700 bg-green-300 hover:bg-green-700 rounded-full p-0.5  " />
                 </span>
                 <span>
                   <h4 className="text-lg font-bold">KIDS STAY FREE</h4>
@@ -195,7 +196,7 @@ const HotelDetails = ({ data }) => {
               </div>
               <div className="flex gap-2">
                 <span className="flex mt-1">
-                  <ShoppingCartIcon className=" text-green-700 bg-green-300 hover:bg-green-700 rounded-full " />
+                  <ShoppingCartIcon className=" text-green-700 bg-green-300 hover:bg-green-700 rounded-full p-0.5" />
                 </span>
                 <span>
                   <h4 className="text-lg font-bold">KIDS STAY FREE</h4>
@@ -207,7 +208,7 @@ const HotelDetails = ({ data }) => {
               </div>
               <div className="flex gap-2">
                 <span className="flex mt-1">
-                  <CheckCircleIcon className=" text-green-700 bg-green-300 hover:bg-green-700 rounded-full " />
+                  <CheckCircleIcon className=" text-orange-500 bg-orange-200 hover:bg-orange-500 rounded-full p-0.5 " />
                 </span>
                 <span>
                   <h4 className="text-lg font-bold">KIDS STAY FREE</h4>
@@ -219,7 +220,7 @@ const HotelDetails = ({ data }) => {
               </div>
               <div className="flex gap-2">
                 <span className="flex mt-1">
-                  <EmojiEventsIcon className=" text-green-700 bg-green-300 hover:bg-green-700 rounded-full " />
+                  <EmojiEventsIcon className=" text-orange-500 bg-orange-200 hover:bg-orange-500 rounded-full p-0.5" />
                 </span>
                 <span>
                   <h4 className="text-lg font-bold">KIDS STAY FREE</h4>
@@ -284,26 +285,36 @@ const HotelDetails = ({ data }) => {
             </div>
             <p className="mt-4">Show All Amenities</p>
           </div>
-        
         </div>
 
-        <div className="container mx-auto  border border-yellow-700">
+        {/* Room Options */}
+        <div className="  border border-yellow-700">
           <div className="flex flex-col  md:justify-between ">
-            <div className="mb-4  md:mr-4 border border-red-700">
-              <div className="flex justify-between">
-                <span>
-                  <h1 className="text-2xl font-bold mb-2">Room Options</h1>
-                </span>
+            <div className="mb-4  border border-red-700">
+              <div className="flex justify-between border border-b border-gray-500">
+                <div className="flex flex-col justify-end ">
+                  <span className="mt-auto">
+                    <h1 className="text-2xl font-bold mb-2">Room Options</h1>
+                  </span>
+                </div>
                 <span>
                   <p className="mb-2">Best Price. GUARANTEED.</p>
-                  <p className="mb-4">
-                    Exclusively for Priceline membersDetails
-                  </p>
+                  <p className="">Exclusively for Priceline membersDetails</p>
                 </span>
               </div>
-              <div className="flex justify-between">
-                <Input placeholder="Check-in" className="mr-2 mb-2 md:mb-0" />
-                <Input placeholder="Check-out" className="mr-2 mb-2 md:mb-0" />
+
+              <div className="flex justify-between mt-4 m-2 bg-slate-300 border rounded">
+                <TextField
+                  id="outlined-basic"
+                  label="Check-in "
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Rooms & Guests"
+                  variant="outlined"
+                />
+
                 <Button>Update Search</Button>
               </div>
             </div>
