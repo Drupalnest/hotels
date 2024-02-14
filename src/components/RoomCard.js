@@ -12,7 +12,7 @@ const RoomCard = ({ imageIndex }) => (
       <CardMedia
         component="img"
         alt={`Room ${imageIndex + 1}`}
-        height="140" // Set a fixed height for the image
+        style={{ height: "200px" }} // Set a fixed height for the image
         // Use the actual image paths
         image={require(`../assets/room${imageIndex + 1}.jpg`).default}
       />

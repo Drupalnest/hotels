@@ -21,6 +21,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import RoomCard from "../components/RoomCard";
+import Amenities from "../components/HotelDetails/Amenities ";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
@@ -362,7 +363,8 @@ const HotelDetails = ({ data }) => {
           </div>
         </div>
 
-        <div>
+        {/* Amenities */}
+        {/* <div>
           <h1>Amenities</h1>
           <div className="flex ">
             <span>
@@ -399,11 +401,12 @@ const HotelDetails = ({ data }) => {
           <div className="flex justify-center p-3">
             <Button>Show All Amenities</Button>
           </div>
-        </div>
+        </div> */}
+        <Amenities />
 
         <div>
-          <h1>About the Hotel</h1>
-          <h3>About the Hotel</h3>
+          <h1 className="text-2xl font-bold mb-4">About the Hotel</h1>
+          <h3 className="text-xl font-bold mb-4">Hotel Features</h3>
           <p>
             Featuring free WiFi and a restaurant, NOPSI Hotel, New Orleans
             offers pet-friendly accommodations within walking distance of the
