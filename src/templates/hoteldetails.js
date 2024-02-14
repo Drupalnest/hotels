@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { graphql } from "gatsby";
 import { Button, Card, Input, PopoverPaper } from "@mui/material";
 import Footer from "../components/Footer";
@@ -17,12 +17,21 @@ import PetsIcon from "@mui/icons-material/Pets";
 import VapeFreeIcon from "@mui/icons-material/VapeFree";
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import TextField from "@mui/material/TextField";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
+import RoomCard from "../components/RoomCard";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
 
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
+  useEffect(() => {
+    // Handle date changes
+    console.log("Selected Date:", selectedDate);
+  }, [selectedDate]);
   const handleItemClick = (index) => {
     setSelectedItem(index);
   };
@@ -303,38 +312,50 @@ const HotelDetails = ({ data }) => {
                 </span>
               </div>
 
-              <div className="flex justify-between mt-4 m-2 bg-slate-300 border rounded">
+              {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Check-in - check-out"
+                    variant="outlined"
+                  />
+                  <DatePicker
+                    value={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Check-in - check-out"
+                        variant="outlined"
+                      />
+                    )}
+                  />
+                </LocalizationProvider> */}
+
+              <div className="flex justify-between mt-4 m-2 gap-2 bg-slate-300 border rounded">
                 <TextField
                   id="outlined-basic"
-                  label="Check-in "
+                  label="Check-in - check-out"
                   variant="outlined"
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Rooms & Guests"
-                  variant="outlined"
+                  className="w-full bg-white" // This class sets the width to 100%
                 />
 
-                <Button>Update Search</Button>
+                <TextField
+                  id="outlined-basic"
+                  label="Check-in - check-out"
+                  variant="outlined"
+                  className="w-full bg-white" // This class sets the width to 100%
+                />
+
+                <Button className="w-1/2 border text-white bg-orange-500 border-blue-500 rounded">
+                  Update Search
+                </Button>
               </div>
             </div>
+
             <div className="">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[...Array(6)].map((_, index) => (
-                  <div key={index} className="mb-4">
-                    <Card>
-                      <img
-                        src={`your-image-url-${index + 1}.jpg`}
-                        alt={`Room ${index + 1}`}
-                        className="w-full h-40 object-cover mb-4"
-                      />
-                      <div className="flex flex-col">
-                        <p className="mb-2">Free WIFI</p>
-                        <p className="mb-4">View Room Details and Photos</p>
-                        <Button>Select dates for prices</Button>
-                      </div>
-                    </Card>
-                  </div>
+                  <RoomCard key={index} imageIndex={index} />
                 ))}
               </div>
             </div>
