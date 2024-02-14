@@ -446,27 +446,40 @@ const HotelDetails = ({ data }) => {
           </span>
         </div>
 
-        <div>
-          <h1 className="text-2xl font-bold mb-4 mt-5">1788 Verified Guest Ratings</h1>
-          <div>
-            <span>
-              <p>Overall Score</p> <p>8.7</p> <span></span>
-            </span>
-          </div>
-          <div>
-            <span>
-              <p>Overall Score</p> <p>8.7</p> <span></span>
-            </span>
-          </div>
-          <div>
-            <span>
-              <p>Overall Score</p> <p>8.7</p> <span></span>
-            </span>
-          </div>
-          <div>
-            <span>
-              <p>Overall Score</p> <p>8.7</p> <span></span>
-            </span>
+        <div className="flex  border border-blue-500 p-4">
+          <div className="flex flex-row space-y-4">
+            <div className="flex items-center">
+              <span className="text-2xl text-white font-bold bg-orange-500 px-2 py-0 rounded-full mr-2">
+                8.7
+              </span>
+              <h1 className="text-xl font-bold">Guest Rating</h1>
+
+              <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
+            </div>
+
+            <div className="">
+              <span className="flex justify-between">
+                <p className="text-sm font-semibold">CLEANLINESS</p>
+                <span className="text-lg font-bold">9.2</span>
+              </span>
+              <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
+            </div>
+
+            <div className="">
+              <span className="flex justify-between">
+                <p className="text-sm font-semibold">CLEANLINESS</p>
+                <span className="text-lg font-bold">9.2</span>
+              </span>
+              <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
+            </div>
+
+            <div className="">
+              <span className="flex justify-between">
+                <p className="text-sm font-semibold">CLEANLINESS</p>
+                <span className="text-lg font-bold">9.2</span>
+              </span>
+              <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
+            </div>
           </div>
         </div>
 
@@ -500,7 +513,7 @@ const HotelDetails = ({ data }) => {
                 height="100%"
                 frameBorder="0"
                 style={{ border: "0" }}
-                src="https://www.google.com/maps/embed/v1/place?q=place_id:YOUR_PLACE_ID&key=YOUR_API_KEY"
+                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJgUbEo8cfqokR5lP9_Wh_DaM &key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ"
                 allowFullScreen
               ></iframe>
             </div>
