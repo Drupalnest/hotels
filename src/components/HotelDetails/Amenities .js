@@ -42,9 +42,9 @@ const Amenities = () => (
       {/* Repeat the same structure for other divs */}
     </div>
     <div className="flex justify-center p-3">
-      <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
         Show All Amenities
-      </Button>
+      </button>
     </div>
   </div>
 );
