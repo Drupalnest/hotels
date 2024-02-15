@@ -1,11 +1,12 @@
 import React from "react";
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 const Footer = () => {
   return (
     <>
-      <footer className="relative z-10 bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
-        <div className="container">
-          <div className="-mx-4 flex flex-wrap">
+      <footer className="relative z-10 bg-white pb-10 dark:bg-dark lg:pb-20 lg:pt-[120px] border border-green-400">
+        <div className="container border border-red-300">
+          <div className="-mx-4 flex flex-wrap border border-red-500">
             <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
               <div className="mb-10 w-full">
                 <a href="/#" className="mb-6 inline-block max-w-[160px]">
@@ -20,10 +21,10 @@ const Footer = () => {
                     className="max-w-full hidden dark:block"
                   />
                 </a>
-                <p className="mb-7 text-base text-body-color dark:text-dark-6">
+                {/* <p className="mb-7 text-base text-body-color dark:text-dark-6">
                   Sed ut perspiciatis undmnis is iste natus error sit amet
                   voluptatem totam rem aperiam.
-                </p>
+                </p> */}
                 <p className="flex items-center text-sm font-medium text-dark dark:text-white">
                   <span className="mr-3 text-primary">
                     <svg
@@ -54,18 +55,18 @@ const Footer = () => {
                       </defs>
                     </svg>
                   </span>
-                  <span>+012 (345) 678 99</span>
+                  <span className="text-black">+012 (345) 678 99</span>
                 </p>
               </div>
             </div>
 
-            <LinkGroup header="Resources">
+            <LinkGroup headerStyle="text-gray-500" header="Company">
               <NavLink link="/#" label="SaaS Development" />
               <NavLink link="/#" label="Our Products" />
               <NavLink link="/#" label="User Flow" />
               <NavLink link="/#" label="User Strategy" />
             </LinkGroup>
-            <LinkGroup header="Company">
+            <LinkGroup  className="text-dark" header="Company">
               <NavLink link="/#" label="About TailGrids" />
               <NavLink link="/#" label="Contact & Support" />
               <NavLink link="/#" label="Success History" />
@@ -80,13 +81,13 @@ const Footer = () => {
 
             <div className="w-full px-4 sm:w-1/2 lg:w-3/12">
               <div className="mb-10 w-full">
-                <h4 className="mb-9 text-lg font-semibold text-dark dark:text-white">
+                <h4 className="mb-9 text-black text-lg font-semibold ">
                   Follow Us On
                 </h4>
                 <div className="mb-6 flex items-center">
                   <a
                     href="javascript:void(0)"
-                    className="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-stroke text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white dark:hover:border-primary sm:mr-4 lg:mr-3 xl:mr-4"
+                    className="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-stroke text-dark hover:border-primary hover:bg-primary dark:border-dark-3 hover:text-white dark:hover:border-primary sm:mr-4 lg:mr-3 xl:mr-4"
                   >
                     <svg
                       width="8"
@@ -99,7 +100,7 @@ const Footer = () => {
                   </a>
                   <a
                     href="javascript:void(0)"
-                    className="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-stroke text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white dark:hover:border-primary sm:mr-4 lg:mr-3 xl:mr-4"
+                    className="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-stroke text-dark hover:border-primary hover:bg-primary dark:border-dark-3 hover:text-white dark:hover:border-primary sm:mr-4 lg:mr-3 xl:mr-4"
                   >
                     <svg
                       width="16"
@@ -112,7 +113,7 @@ const Footer = () => {
                   </a>
                   <a
                     href="javascript:void(0)"
-                    className="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-stroke text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white dark:hover:border-primary sm:mr-4 lg:mr-3 xl:mr-4"
+                    className="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-stroke text-dark hover:border-primary hover:bg-primary dark:border-dark-3 hover:text-white dark:hover:border-primary sm:mr-4 lg:mr-3 xl:mr-4"
                   >
                     <svg
                       width="16"
@@ -125,7 +126,7 @@ const Footer = () => {
                   </a>
                   <a
                     href="javascript:void(0)"
-                    className="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-stroke text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-dark-3 dark:text-white dark:hover:border-primary sm:mr-4 lg:mr-3 xl:mr-4"
+                    className="mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-stroke text-dark hover:border-primary hover:bg-primary dark:border-dark-3 hover:text-white dark:hover:border-primary sm:mr-4 lg:mr-3 xl:mr-4"
                   >
                     <svg
                       width="14"
@@ -138,40 +139,15 @@ const Footer = () => {
                   </a>
                 </div>
                 <p className="text-base text-body-color dark:text-dark-6">
-                  &copy; 2025 TailGrids
+                  &copy; 2024-2025 Sastoo
                 </p>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <span className="absolute bottom-0 left-0 z-[-1]">
-            <svg
-              width={217}
-              height={229}
-              viewBox="0 0 217 229"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M-64 140.5C-64 62.904 -1.096 1.90666e-05 76.5 1.22829e-05C154.096 5.49924e-06 217 62.904 217 140.5C217 218.096 154.096 281 76.5 281C-1.09598 281 -64 218.096 -64 140.5Z"
-                fill="url(#paint0_linear_1179_5)"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1179_5"
-                  x1="76.5"
-                  y1={281}
-                  x2="76.5"
-                  y2="1.22829e-05"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#3056D3" stopOpacity="0.08" />
-                  <stop offset={1} stopColor="#C4C4C4" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-            </svg>
-          </span>
+          
+
           <span className="absolute right-10 top-10 z-[-1]">
             <svg
               width={75}
@@ -234,3 +210,498 @@ const NavLink = ({ link, label }) => {
     </li>
   );
 };
+
+// import React, { useState, useRef, useEffect } from "react";
+// import styled from "styled-components";
+// import { useStaticQuery, graphql, Link } from "gatsby";
+// import { useSelector } from "react-redux";
+// import Container from "react-bootstrap/Container";
+// import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
+// import { Tooltip, Overlay } from "react-bootstrap";
+// // import BrandLogos from "./BrandLogos";
+// import Logo from "../images/svg/brand_logos/rlh_white.svg";
+// import { borderColor } from "./styles/theme";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// // import { getParagraph } from "../utils/paragraphHelpers";
+// // import useMobileDetect from "../hooks/useMobileDetect";
+// // import helloRewardsIcon from "../images/svg/hello-rewards.svg";
+// // import GoNativeBrandBar from "./GoNativeBrandBarFooter";
+
+// const FooterWrapper = styled.footer`
+//   background-color: #404040;
+//   color: #9f9f9f;
+//   .footer-content {
+//     padding-bottom: 15px;
+//     justify-content: space-between;
+//   }
+//   .footer-content-logo {
+//     flex: 0 0 10%;
+//     @media only screen and (max-width: 991px) {
+//       flex: 0 0 100%;
+//       text-align: center;
+//     }
+//   }
+//   .footer-content-links {
+//     flex: 0 0 60%;
+//     @media only screen and (max-width: 991px) {
+//       margin-bottom: 30px;
+//       flex: 0 0 100%;
+//     }
+//   }
+//   .footer-content-hrcta {
+//     flex: 0 0 20%;
+//     text-align: center;
+//     @media only screen and (max-width: 991px) {
+//       flex: 0 0 100%;
+//       margin-bottom: 20px;
+//     }
+//   }
+//   .goNativeFooterBrand{
+//     img {
+//       filter: brightness(0) invert(1) opacity(0.5);
+//     }
+//     img:hover {
+//       filter: brightness(0) invert(1) opacity(1);
+//     }
+//   }
+//   .brand-logos {
+//     margin-top: 0;
+//     display: flex;
+//     justify-content: center;
+//     flex-wrap: wrap;
+//     img {
+//       filter: brightness(0) invert(1) opacity(0.5);
+//     }
+//     img:hover {
+//       filter: brightness(0) invert(1) opacity(1);
+//     }
+//     @media only screen and (max-width: 991px) {
+//       padding-top: 15px;
+//       padding-left: 0px !important;
+//       padding-right: 0px !important;
+//     }
+//   }
+//   .brand-logos > div {
+//     @media only screen and (max-width: 991px) {
+//       margin-right: 0 !important;
+//       flex: 1 0 25%;
+//       &:nth-of-type(5) {
+//         flex-basis: 15%;
+//       }
+//       &:nth-of-type(6) {
+//         flex-basis: 15%;
+//       }
+//     }
+//   }
+//   .footerIcons > div {
+//     padding-left: 27px;
+//     padding-right: 27px;
+//   }
+//   .footer-inner {
+//     border-top: 1px solid #e0e0e0;
+//   }
+//   .footer-links {
+//     div {
+//       text-transform: uppercase;
+//       font-size: 13px;
+//       line-height: 18px;
+//       font-weight: 700;
+//       cursor: pointer;
+//       position: relative;
+//       margin-bottom: 0.5rem;
+//       h6 {
+//         color: #fff;
+//       }
+//       svg {
+//         z-index: 0;
+//         position: absolute;
+//         top: 50%;
+//         transform: translateY(-50%);
+//         display: none;
+//       }
+//     }
+//     ul.menu {
+//       margin: 0;
+//       li {
+//         span:hover {
+//           color: #fff;
+//         }
+//         font-size: 14px;
+//         margin-bottom: 10px;
+//         color: #9f9f9f;
+//         a {
+//           cursor: pointer;
+//           text-decoration: none;
+//           color: #9f9f9f;
+//           transition: color 0.2s ease-out;
+//           &:focus,
+//           &:hover {
+//             color: #fff;
+//           }
+//         }
+//       }
+//     }
+//     &.show {
+//       svg {
+//         transform: translateY(-50%) rotate(180deg);
+//       }
+//     }
+//   }
+//   @media (max-width: 991px) {
+//     .footer-links {
+//       div {
+//         pointer-events: auto;
+//         cursor: pointer;
+//         padding: 8px 8px 8px 8px;
+//         border-bottom: 1px solid ${borderColor};
+//         margin: 0;
+//         svg {
+//           color: #fff;
+//           display: block;
+//           right: 8px;
+//         }
+//       }
+//       &:first-child {
+//         div {
+//           border-top: 1px solid ${borderColor};
+//         }
+//       }
+//       ul.menu {
+//         display: none !important;
+//         li {
+//           margin: 0;
+//           a,
+//           span {
+//             display: block;
+//             padding: 8px 8px 8px 8px;
+//           }
+//         }
+//       }
+//       &.show {
+//         ul.menu {
+//           display: block !important;
+//         }
+//       }
+//     }
+//   }
+//   .logo {
+//     max-width: 85px;
+//   }
+// `;
+// const CopyRight = styled.p`
+//   margin: 0;
+//   font-weight: 700;
+//   font-size: 12px;
+//   line-height: 18px;
+// `;
+
+// const Footer = ({ onBookNowClick }) => {
+//   const isLoggedIn = useSelector((state) => state.member.isLoggedIn);
+//   const [showBook, setShowBook] = useState(false);
+//   const [showManage, setShowManage] = useState(false);
+//   const [showSupport, setShowSupport] = useState(false);
+//   const [showCompany, setShowCompany] = useState(false);
+//   const [showCallUsPopup, setShowCallUsPopup] = useState(false);
+//   const targetCallUsPopup = useRef(null);
+//   // const isMobileOnly = useMobileDetect();
+//   const [isGoNative, setIsGoNative] = useState(false);
+
+//   const checkGonative = () => {
+//     if (navigator.userAgent.indexOf("gonative") > -1) {
+//       setIsGoNative(true);
+//     }
+//   };
+
+//   const handleShowMenu = (event) => {
+//     const menu = event.target.dataset.menu;
+//     switch (menu) {
+//       case "book":
+//         setShowBook(!showBook);
+//         setShowManage(false);
+//         setShowCompany(false);
+//         setShowSupport(false);
+//         break;
+//       case "manage":
+//         setShowManage(!showManage);
+//         setShowCompany(false);
+//         setShowSupport(false);
+//         setShowBook(false);
+//         break;
+//       case "support":
+//         setShowSupport(!showSupport);
+//         setShowManage(false);
+//         setShowCompany(false);
+//         setShowBook(false);
+//         break;
+//       case "company":
+//         setShowCompany(!showCompany);
+//         setShowManage(false);
+//         setShowSupport(false);
+//         setShowBook(false);
+//         break;
+//       default:
+//     }
+//   };
+//   // const data = useStaticQuery(graphql`
+//   //   {
+//   //     site: rlhsite {
+//   //       id
+//   //       relationships {
+//   //         footerCta: field_footer {
+//   //           type: __typename
+//   //           ...ParagraphFooterCta
+//   //         }
+//   //       }
+//   //     }
+//   //   }
+//   // `);
+
+//   // const handleBookNowClick = () => {
+//   //   if (isMobileOnly) {
+//   //     onBookNowClick && onBookNowClick();
+//   //   } else {
+//   //     window.scrollTo(0, 0);
+//   //   }
+//   // };
+
+//   const handlePopupClickOutside = (event) => {
+//     if (
+//       targetCallUsPopup.current &&
+//       !targetCallUsPopup.current.contains(event.target)
+//     ) {
+//       setShowCallUsPopup(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     document.addEventListener("click", handlePopupClickOutside, true);
+//     checkGonative();
+//     return () => {
+//       document.removeEventListener("click", handlePopupClickOutside, true);
+//     };
+//   }, []);
+
+//   // const footerCta = data.site.relationships.footerCta.map(getParagraph);
+//   return (
+//     <FooterWrapper className="pt-4 pb-3 pt-sm-5 pb-sm-5">
+//       <Container fluid="sm">
+//         <Row className={`footer-content`}>
+//           <Col className={`footer-content-logo`}>
+//             {isGoNative ? (
+//               <>
+//                 <Link to={isLoggedIn ? "/account" : "/hellorewards"}>
+//                   <img
+//                     // src={helloRewardsIcon}
+//                     className="logo mb-3"
+//                     alt="Hello Rewards"
+//                     style={{ marginRight: "5%", verticalAlign: "unset" }}
+//                   />
+//                 </Link>
+//                 <span
+//                   style={{
+//                     borderLeft: "1px solid #adb5bd",
+//                     display: "inline-block",
+//                     height: "85%",
+//                     marginRight: "5%",
+//                     marginBottom: "10px",
+//                   }}
+//                 ></span>
+//                 <Link to="/">
+//                   <img
+//                     src={Logo}
+//                     className="logo mb-3"
+//                     alt="RLH Corporation"
+//                     style={{ verticalAlign: "unset" }}
+//                   />
+//                 </Link>
+//               </>
+//             ) : (
+//               <Link to="/">
+//                 <img src={Logo} className="logo mb-3" alt="RLH Corporation" />
+//               </Link>
+//             )}
+//           </Col>
+//           <Col className={`footer-content-links`}>
+//             <Row>
+//               <Col
+//                 lg={3}
+//                 className={`footer-links ${showBook ? "show" : ""} text-center`}
+//               >
+//                 <div onClick={handleShowMenu} data-menu="book">
+//                   <span data-menu="book">{`Book`}</span>
+//                   <FontAwesomeIcon icon="chevron-down" />
+//                 </div>
+//                 <ul className="menu list-unstyled">
+//                   <li>
+//                     <span
+//                       // onClick={handleBookNowClick}
+//                       role="button"
+//                       tabIndex="0"
+//                     >
+//                       Book Now
+//                     </span>
+//                   </li>
+//                   <li>
+//                     <>
+//                       <a
+//                         ref={targetCallUsPopup}
+//                         onClick={() => setShowCallUsPopup(!showCallUsPopup)}
+//                       >
+//                         Voice Reservations
+//                       </a>
+//                       <Overlay
+//                         target={targetCallUsPopup.current}
+//                         show={showCallUsPopup}
+//                         // placement={isMobileOnly ? "bottom" : "right"}
+//                       >
+//                         {(props) => (
+//                           <Tooltip {...props}>Call Us 1-800-REDLION</Tooltip>
+//                         )}
+//                       </Overlay>
+//                     </>
+//                   </li>
+//                   <li>
+//                     <Link to="/meetings-and-events">Meetings &amp; Events</Link>
+//                   </li>
+//                   <li>
+//                     <Link to="/offers">Offers</Link>
+//                   </li>
+//                 </ul>
+//               </Col>
+//               <Col
+//                 lg={3}
+//                 className={`footer-links ${
+//                   showManage ? "show" : ""
+//                 } text-center`}
+//               >
+//                 <div onClick={handleShowMenu} data-menu="manage">
+//                   <span data-menu="manage">{`Manage`}</span>
+//                   <FontAwesomeIcon icon="chevron-down" />
+//                 </div>
+//                 <ul className="menu list-unstyled">
+//                   <li>
+//                     <Link to="/manage-reservation">View Reservations</Link>
+//                   </li>
+//                   <li>
+//                     <Link to="/hellorewards">Hello Rewards</Link>
+//                   </li>
+//                   <li>
+//                     <Link to="/hellorewardsapp">Get The App</Link>
+//                   </li>
+//                 </ul>
+//               </Col>
+//               <Col
+//                 lg={3}
+//                 className={`footer-links ${
+//                   showSupport ? "show" : ""
+//                 } text-center`}
+//               >
+//                 <div onClick={handleShowMenu} data-menu="support">
+//                   <span data-menu="support">{`Support`}</span>
+//                   <FontAwesomeIcon icon="chevron-down" />
+//                 </div>
+//                 <ul className="menu list-unstyled">
+//                   <li>
+//                     <Link to="/support">Need Help?</Link>
+//                   </li>
+//                   <li>
+//                     <Link to="/privacy">Privacy</Link>
+//                   </li>
+//                   <li>
+//                     <Link to="/sitemap">Sitemap</Link>
+//                   </li>
+//                   <li>
+//                     <Link to="/RLH-Accessibility">Accessibility</Link>
+//                   </li>
+//                   <li>
+//                     <Link to="/RLH-Cookie-Statement">Cookies Statement</Link>
+//                   </li>
+//                 </ul>
+//               </Col>
+//               <Col
+//                 lg={3}
+//                 className={`footer-links ${
+//                   showCompany ? "show" : ""
+//                 } text-center`}
+//               >
+//                 <div onClick={handleShowMenu} data-menu="company">
+//                   <span data-menu="company">{`Company`}</span>
+//                   <FontAwesomeIcon icon="chevron-down" />
+//                 </div>
+//                 <ul className="menu list-unstyled">
+//                   <li>
+//                     <Link to="/rlh-clean-2021">RLH Clean</Link>
+//                   </li>
+//                   <li>
+//                     <a
+//                       href="https://workforcenow.adp.com/jobs/apply/posting.html?client=RLHCO&ccId=19000101_000001&type=MP&lang=en_US"
+//                       target="_blank"
+//                       rel="noopener noreferrer"
+//                     >
+//                       Careers
+//                     </a>
+//                   </li>
+//                   <li>
+//                     <Link to="/about">About Us</Link>
+//                   </li>
+//                   <li>
+//                     <a
+//                       href="https://franchise.rlhco.com"
+//                       target="_blank"
+//                       rel="noopener noreferrer"
+//                     >
+//                       Franchising
+//                     </a>
+//                   </li>
+//                   <li>
+//                     <Link to="/RLH-Terms-Conditions">Terms of Use</Link>
+//                   </li>
+//                 </ul>
+//               </Col>
+//             </Row>
+//           </Col>
+//           {/* {!isGoNative && (
+//             <Col className={`footer-content-hrcta`}>{footerCta}</Col>
+//           )} */}
+//         </Row>
+//         <Row>
+//           <Col>
+//             <hr className="d-none d-lg-block" />
+//             <Row className="pt-0 pt-lg-2">
+//               {!isGoNative && (
+//                 <Col xs={12} lg={4} className="mb-2">
+//                   <CopyRight className="text-center text-lg-left">
+//                     © {new Date().getFullYear()} RLH Corporation.
+//                     <br />
+//                     All rights reserved.
+//                   </CopyRight>
+//                 </Col>
+//               )}
+//               {!isGoNative ? (
+//                 <Col className={`footerIcons`}>
+//                   <Row className={`brand-logos`}>
+//                     {/* <BrandLogos colored={false} isFooter={true} /> */}
+//                   </Row>
+//                 </Col>
+//               ) : (<div className="goNativeFooterBrand">
+//                 {/* <GoNativeBrandBar /> */}
+//                 </div>
+//               )}
+//               {isGoNative && (
+//                 <Col xs={12} lg={4} className="mb-2 mt-4">
+//                   <CopyRight className="text-center text-lg-left">
+//                     © {new Date().getFullYear()} RLH Corporation. All rights
+//                     reserved.
+//                   </CopyRight>
+//                 </Col>
+//               )}
+//             </Row>
+//           </Col>
+//         </Row>
+//       </Container>
+//     </FooterWrapper>
+//   );
+// };
+
+// export default Footer;

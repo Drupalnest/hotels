@@ -24,6 +24,8 @@ import RoomCard from "../components/RoomCard";
 import Amenities from "../components/HotelDetails/Amenities ";
 import AboutHotel from "../components/HotelDetails/AboutHotel";
 import GuestPolicies from "../components/HotelDetails/GuestPolicies ";
+import ReviewBox from "../components/HotelDetails/ReviewBox";
+import RatingSection from "../components/HotelDetails/RatingBar";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
@@ -437,7 +439,7 @@ const HotelDetails = ({ data }) => {
         </div> */}
         <GuestPolicies />
 
-        <div>
+        <div className="border border-b ">
           <h3 className="text-2xl font-bold mb-4">Important Info</h3>
           <span className="text-xl  mb-4">
             Guests are required to show a photo ID and credit card upon
@@ -446,44 +448,51 @@ const HotelDetails = ({ data }) => {
           </span>
         </div>
 
-        <div className="flex  border border-blue-500 p-4">
-          <div className="flex flex-row space-y-4">
-            <div className="flex items-center">
-              <span className="text-2xl text-white font-bold bg-orange-500 px-2 py-0 rounded-full mr-2">
+        {/* <div className="flex flex-col md:flex-row justify-between border-b border-blue-500 p-4">
+          <div className="mb-4 md:mb-0 border border-red-500 w-full md:w-auto">
+            <span className="flex flex-col gap-4 md:flex-row items-center">
+              <h1 className="text-xl font-bold mb-2 md:mb-0 md:mr-2">
+                Guest Rating
+              </h1>
+              <span className="text-md text-white font-bold bg-orange-500 px-2 py-0 rounded-full mb-2 md:mb-0 md:ml-2">
                 8.7
               </span>
-              <h1 className="text-xl font-bold">Guest Rating</h1>
-
-              <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
-            </div>
-
-            <div className="">
-              <span className="flex justify-between">
-                <p className="text-sm font-semibold">CLEANLINESS</p>
-                <span className="text-lg font-bold">9.2</span>
-              </span>
-              <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
-            </div>
-
-            <div className="">
-              <span className="flex justify-between">
-                <p className="text-sm font-semibold">CLEANLINESS</p>
-                <span className="text-lg font-bold">9.2</span>
-              </span>
-              <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
-            </div>
-
-            <div className="">
-              <span className="flex justify-between">
-                <p className="text-sm font-semibold">CLEANLINESS</p>
-                <span className="text-lg font-bold">9.2</span>
-              </span>
-              <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
-            </div>
+            </span>
+            <span className="w-full border rounded h-1.5 bg-orange-600 block mt-4 md:mt-0"></span>
           </div>
-        </div>
 
-        <div className="flex flex-row">
+          <div className="mb-4 md:mb-0 md:ml-4 w-full md:w-auto">
+            <span className="flex flex-col gap-4 md:flex-row items-center">
+              <p className="text-sm font-semibold mb-2 md:mb-0 md:mr-2">
+                CLEANLINESS
+              </p>
+              <span className="text-lg font-bold">9.2</span>
+            </span>
+            <span className="w-full border rounded h-1.5 bg-orange-600 block mt-4 md:mt-0"></span>
+          </div>
+
+          <div className="mb-4 md:mb-0 md:ml-4 w-full md:w-auto">
+            <span className="flex flex-col gap-4 md:flex-row items-center">
+              <p className="text-sm font-semibold mb-2 md:mb-0 md:mr-2">
+                CLEANLINESS
+              </p>
+              <span className="text-lg font-bold">9.2</span>
+            </span>
+            <span className="w-full border rounded h-1.5 bg-orange-600 block mt-4 md:mt-0"></span>
+          </div>
+
+          <div className="md:ml-4 w-full md:w-auto">
+            <span className="flex flex-col gap-4 md:flex-row items-center">
+              <p className="text-sm font-semibold mb-2 md:mb-0 md:mr-2">
+                YET ANOTHER CATEGORY
+              </p>
+              <span className="text-lg font-bold">8.8</span>
+            </span>
+            <span className="w-full border rounded h-1.5 bg-orange-600 block mt-4 md:mt-0"></span>
+          </div>
+        </div> */}
+
+        {/* <div className="flex flex-row">
           <span> 10 Perfect Feb 7, 2024 Mary Traveling as Couple</span>
           <span>
             <p>
@@ -498,14 +507,16 @@ const HotelDetails = ({ data }) => {
               received. Thanks Was there anything you didn't like? No
             </span>
           </span>
-        </div>
+        </div> */}
+        <RatingSection />
+        <ReviewBox />
 
         <div>
-          <h1>Location</h1>
-          <span>
+          <h1 className="text-2xl p-2 ">Location</h1>
+          <span className="text-lg p-2 ">
             NOPSI Hotel, New Orleans 317 Baronne Street, New Orleans, LA
           </span>
-          <div>
+          <div className="p-3">
             <div style={containerStyle}>
               <iframe
                 title="Google Map"
@@ -513,7 +524,7 @@ const HotelDetails = ({ data }) => {
                 height="100%"
                 frameBorder="0"
                 style={{ border: "0" }}
-                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJgUbEo8cfqokR5lP9_Wh_DaM &key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ"
+                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJgUbEo8cfqokR5lP9_Wh_DaM&key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ"
                 allowFullScreen
               ></iframe>
             </div>

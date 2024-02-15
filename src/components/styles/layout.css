@@ -1,0 +1,222 @@
+html,
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  color: #404040;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #404040;
+  font-weight: 700;
+}
+
+h1,
+.h1 {
+  font-size: 28px;
+}
+
+h2,
+.h2 {
+  font-size: 24px;
+}
+
+h3,
+.h3 {
+  font-size: 20px;
+}
+
+h4,
+.h4 {
+  font-size: 18px;
+}
+
+h5,
+.h5 {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+h6,
+.h6 {
+  font-size: 14px;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+.modal-backdrop {
+  z-index: 5000;
+}
+
+.modal {
+  z-index: 10000;
+  padding-left: 0 !important;
+}
+
+.modal.full-screen {
+  padding: 0 !important;
+}
+
+.full-screen .modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+}
+
+.full-screen .modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+  border: none;
+}
+
+.container {
+  max-width: 1280px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+  word-wrap: normal;
+}
+
+/* Form overrides */
+form label {
+  font-size: 13px;
+}
+
+input[type="tel"],
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid #e0e0e0;
+  color: #404040;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 500;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  outline: none;
+  outline-offset: 0;
+}
+
+.custom-select:focus,
+.custom-select:hover,
+input.form-control:focus,
+input.form-control:hover,
+input[type="tel"]:focus,
+input[type="tel"]:hover,
+input[type="text"]:focus,
+input[type="text"]:hover,
+input[type="email"]:focus,
+input[type="email"]:hover,
+input[type="search"]:focus,
+input[type="search"]:hover,
+input[type="password"]:focus,
+input[type="password"]:hover,
+textarea:focus,
+textarea:hover {
+  box-shadow: none;
+  border-color: #e0e0e0;
+}
+
+.error input {
+  border-color: #ae1e22;
+}
+
+::placeholder {
+  color: #bcbcbc !important;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: normal;
+  opacity: 1 !important;
+  font-size: 14px;
+}
+
+input:focus::placeholder {
+  color: transparent !important;
+  opacity: 0 !important;
+}
+
+.myc-wallet-common .add-credit-wrap {
+  height: 300px !important;
+}
+
+#mywalletSdk {
+  position: relative;
+  z-index: 1;
+}
+
+.ReactModal__Overlay {
+  z-index: 23;
+}
+
+.tippy-tooltip {
+  font-size: 12px;
+  background: #404040;
+  padding: 8px;
+}
+b,
+strong {
+  font-weight: 500;
+}
+
+.font-weight-thin {
+  font-weight: 100 !important;
+}
+
+.font-weight-light {
+  font-weight: 300 !important;
+}
+
+.font-weight-medium {
+  font-weight: 500 !important;
+}
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+
+.font-weight-black {
+  font-weight: 900 !important;
+}
+.mobile-overflow-hidden {
+  overflow: hidden;
+  position: fixed;
+  z-index: 99999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#gift-card-modal {
+  bottom: unset !important;
+}
+
+div#_hj_feedback_container div {
+  top: 80% !important;
+}
+
+@media (max-width: 991px) {
+  div#_hj_feedback_container div {
+    top: 45% !important;
+  }
+}
