@@ -1,5 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
+import { IconButton } from "@mui/material";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,49 +21,44 @@ const ImageSlider = () => {
   ];
 
   const PrevArrow = (props) => {
-    const { className, onClick } = props;
+    const { onClick } = props;
     return (
-      <div className={className} onClick={onClick}>
-        {/* Customize the left arrow */}
-        <span
-          style={{
-            fontSize: "100px",
-            color: "red",
-            position: "absolute",
-            top: "50%",
-            left: "20px",
-            transform: "translate(-50%, 50%)",
-            
-          }}
-        >
-          &lt;
-        </span>
-      </div>
+      <IconButton
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "20px",
+          transform: "translate(-50%, -50%)",
+          zIndex: 1,
+          backgroundColor:"white"
+        }}
+        onClick={onClick}
+        aria-label="previous"
+      >
+        <ArrowForwardIosIcon sx={{ fontSize: "40px", color: "gray",transform: "scaleX(-1)" }} />
+      </IconButton>
     );
   };
 
   const NextArrow = (props) => {
-    const { className, onClick } = props;
+    const { onClick } = props;
     return (
-      <div className={className} onClick={onClick}>
-        {/* Customize the right arrow */}
-        <span
-          style={{
-            fontSize: "100px",
-            color: "green",
-            position: "absolute",
-            top: "50%",
-            right: "60px",
-            transform: "translate(50%, -50%)",
-            
-          }}
-        >
-          &gt;
-        </span>
-      </div>
+      <IconButton
+        sx={{
+          position: "absolute",
+          top: "50%",
+          right: "20px",
+          transform: "translate(50%, -50%)",
+          zIndex: 1,
+          backgroundColor:"white"
+        }}
+        onClick={onClick}
+        aria-label="next"
+      >
+        <ArrowForwardIosIcon sx={{ fontSize: "40px", color: "gray"}} />
+      </IconButton>
     );
   };
-
 
   const settings = {
     infinite: true,
