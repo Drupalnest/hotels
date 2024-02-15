@@ -1,10 +1,20 @@
 import React from "react";
-import { Typography, Box, LinearProgress, Container, Grid } from "@mui/material";
+import {
+  Typography,
+  Box,
+  LinearProgress,
+  Container,
+  Grid,
+} from "@mui/material";
 
 const RatingBar = ({ title, rating }) => {
   return (
     <Box sx={{ mb: 4, width: "100%" }}>
-      <Typography  mb={2} fontWeight="bold" sx={{ fontSize: { xs: "subtitle1",  } }}>
+      <Typography
+        mb={2}
+        fontWeight="bold"
+        sx={{ fontSize: { xs: "subtitle1" } }}
+      >
         {title}
       </Typography>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -13,7 +23,6 @@ const RatingBar = ({ title, rating }) => {
             variant="determinate"
             value={rating * 10}
             sx={{ height: 10, borderRadius: 5 }}
-            className=""
           />
         </Box>
         <Typography variant="body1" fontWeight="bold">
@@ -26,8 +35,14 @@ const RatingBar = ({ title, rating }) => {
 
 const RatingSection = () => {
   return (
-    <Container maxWidth="lg"  className="p-0" sx={{ mt: 4 }} >
-   <h1 className="py-2 py-3 text-2xl font-bold mb-4 ">1788 Verified Guest Ratings</h1>
+    <Container
+      maxWidth="lg"
+      className="p-0  border-b  border-gray-500"
+      sx={{ mt: 4 }}
+    >
+      <h1 className="py-2 py-3 text-2xl font-bold mb-4 ">
+        1788 Verified Guest Ratings
+      </h1>
 
       <Grid container spacing={5}>
         <Grid item xs={12} sm={6} md={3}>

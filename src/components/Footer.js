@@ -4,8 +4,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 const Footer = () => {
   return (
     <>
-      <footer className="relative z-10 bg-white pb-10 dark:bg-dark lg:pb-20 lg:pt-[120px] border border-green-400">
-        <div className="container border border-red-300">
+      <footer className="relative p-0 z-10 bg-white pb-10 dark:bg-dark lg:pb-20 lg:pt-[120px] border border-green-400">
+        <div className="container p-0 border border-red-300">
           <div className="-mx-4 flex flex-wrap border border-red-500">
             <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
               <div className="mb-10 w-full">
@@ -66,7 +66,7 @@ const Footer = () => {
               <NavLink link="/#" label="User Flow" />
               <NavLink link="/#" label="User Strategy" />
             </LinkGroup>
-            <LinkGroup  className="text-dark" header="Company">
+            <LinkGroup className="text-dark" header="Company">
               <NavLink link="/#" label="About TailGrids" />
               <NavLink link="/#" label="Contact & Support" />
               <NavLink link="/#" label="Success History" />
@@ -146,8 +146,6 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          
-
           <span className="absolute right-10 top-10 z-[-1]">
             <svg
               width={75}

@@ -439,9 +439,9 @@ const HotelDetails = ({ data }) => {
         </div> */}
         <GuestPolicies />
 
-        <div className="border border-b ">
+        <div className=" py-3 mt-4 border-b  border-gray-500">
           <h3 className="text-2xl font-bold mb-4">Important Info</h3>
-          <span className="text-xl  mb-4">
+          <span className="text-xl  mb-4 ">
             Guests are required to show a photo ID and credit card upon
             check-in. Please note that all Special Requests are subject to
             availability and additional charges may apply.
@@ -511,12 +511,12 @@ const HotelDetails = ({ data }) => {
         <RatingSection />
         <ReviewBox />
 
-        <div>
-          <h1 className="text-2xl p-2 ">Location</h1>
-          <span className="text-lg p-2 ">
+        <div className="mt-5 p-0  border-b  border-gray-500">
+          <h1 className="text-2xl  font-bold ">Location</h1>
+          <span className="text-lg p-0 ">
             NOPSI Hotel, New Orleans 317 Baronne Street, New Orleans, LA
           </span>
-          <div className="p-3">
+          <div className="mt-5">
             <div style={containerStyle}>
               <iframe
                 title="Google Map"

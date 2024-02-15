@@ -39,7 +39,7 @@ const ReviewBox = ({ author, date, rating, numericRating, content }) => {
   const ratingLabel = getRatingLabel(numericRating);
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} className="">
       <Paper elevation={3} style={{ padding: "16px", minHeight: "200px" }}>
         <Typography variant="h6">{author}</Typography>
         <Typography variant="subtitle2" color="textSecondary">
@@ -59,7 +59,7 @@ const ReviewBox = ({ author, date, rating, numericRating, content }) => {
 
 const ReviewsPage = () => {
   return (
-    <Container maxWidth="md" style={{ marginTop: "40px" }}>
+    <Container className="p-0 " style={{ marginTop: "40px" }}>
       <Typography variant="h4" align="center" gutterBottom>
         Customer Reviews
       </Typography>

@@ -9,6 +9,12 @@ const ImageSlider = () => {
     "https://via.placeholder.com/800x600?text=Image1",
     "https://via.placeholder.com/800x600?text=Image2",
     "https://via.placeholder.com/800x600?text=Image3",
+    "https://via.placeholder.com/800x600?text=Image1",
+    "https://via.placeholder.com/800x600?text=Image2",
+    "https://via.placeholder.com/800x600?text=Image3",
+    "https://via.placeholder.com/800x600?text=Image1",
+    "https://via.placeholder.com/800x600?text=Image2",
+    "https://via.placeholder.com/800x600?text=Image3",
     // Add more image URLs as needed
   ];
 
