@@ -10,6 +10,7 @@ import { Button } from "@mui/material";
 import { Container, Typography, Paper } from "@mui/material";
 import { shadows } from "@mui/system";
 import DemoImage from "../assets/room1.jpg";
+import { CheckBox } from "@mui/icons-material";
 
 const steps = [
   "Select master blaster campaign settings",
@@ -102,6 +103,66 @@ export default function Cart() {
             <span>
               <h1>Guest Name</h1>
             </span>
+            <span class="flex flex-row">
+              <input placeholder="First Name" />
+              <input placeholder="Last Name" />
+            </span>
+            <span className="flex flex-row">
+              <CheckBox />
+              <p>Guest name and name on card are the same</p>
+            </span>
+          </div>
+          <div className="border border-pink-700 flex flex-col">
+            <h1>Payment Method</h1>
+            <span className="flex flex-row">
+              <CheckBox />
+              <span className="flex flex-col">
+                <p>Credit Card or Debit</p>
+                <p>Visa, Mastercard, Diners Club, Discover, American Express</p>
+              </span>
+            </span>
+            <span>
+              <input placeholder="Name on card*" />
+              <input placeholder="card number*" />
+              <input placeholder="MM/YYYY*" />
+              <input placeholder="CVV code*" />
+            </span>
+          </div>
+          <div>
+            <CheckBox />
+          </div>
+          <div>
+            <CheckBox />
+          </div>
+          <div>
+            <h1>Billing</h1>
+            <input placeholder="Street address*" />
+            <input placeholder="Country*" />
+            <input placeholder="State*" />
+            <input placeholder="Postal Code*" />
+            <input placeholder="Email address*" />
+            <span className="flex flex-row">
+              <span>+91</span>
+              <span>Mobile phone number</span>
+            </span>
+          </div>
+          <div>
+            <p>Important Information</p>
+            <li>
+              Fully Refundable until 11:59pm (property local time) on
+              02-26-2024. After that time hotel cancellation and change fees
+              apply as stated in the Booking Conditions (this link opens in a
+              modal dialog).
+            </li>
+            <li>Check-in begins at 4pm and check-out is at 12pm.</li>
+            <li>
+              By selecting Book & Pay you agree to theBooking Conditions (this
+              link opens in a modal dialog),Terms & Conditions and Privacy
+              Policy.
+            </li>
+          </div>
+          <div className="p-3">
+            <button>Book & Pay</button>
           </div>
         </div>
 
