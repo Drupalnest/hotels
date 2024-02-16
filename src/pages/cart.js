@@ -16,6 +16,10 @@ import CallIcon from "@mui/icons-material/Call";
 import CheckIcon from "@mui/icons-material/Check";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import American_express from "../images/american-express.svg";
+import Discover from "../images/discover.svg";
+import Mastercard from "../images/mastercard.svg";
+import Visa from "../images/visa.svg";
 
 const steps = [
   "Select master blaster campaign settings",
@@ -177,32 +181,55 @@ export default function Cart() {
                 </span>
               </span>
 
-              <div className="  p-3 bg-gray-200 rounded-2xl flex flex-col">
+              <div className="p-3 bg-gray-200 rounded-2xl flex flex-col">
+                <span className="flex flex-row gap-3 py-2">
+                  <img
+                    src={Visa}
+                    alt="Visa"
+                    style={{ height: "2em", width: "2rem" }}
+                  />
+                  <img
+                    src={Mastercard}
+                    alt="MasterCard"
+                    style={{ height: "2em", width: "2rem" }}
+                  />
+                  <img
+                    src={Discover}
+                    alt="Discover"
+                    style={{ height: "2em", width: "2rem" }}
+                  />
+                  <img
+                    src={American_express}
+                    alt="American Express"
+                    style={{ height: "2em", width: "2rem" }}
+                  />
+                </span>
                 <TextField
                   id="outlined-basic"
                   label="Name on card*"
                   variant="outlined"
                   sx={{
-                    width: "50%",
-                    height: "2rem",
+                    width: { xs: "100%", sm: "100%" },
+                    marginBottom: "1rem",
                   }}
                 />
                 <TextField
                   id="outlined-basic"
-                  label="card number*"
+                  label="Card number*"
                   variant="outlined"
                   sx={{
-                    width: "50%",
-                    height: "2rem",
+                    width: { xs: "100%", sm: "100%" },
+                    marginBottom: "1rem",
                   }}
                 />
+
                 <TextField
                   id="outlined-basic"
                   label="MM/YYYY*"
                   variant="outlined"
                   sx={{
-                    width: "50%",
-                    height: "2rem",
+                    width: { xs: "100%", sm: "100%" },
+                    marginBottom: "1rem",
                   }}
                 />
                 <TextField
@@ -210,31 +237,95 @@ export default function Cart() {
                   label="CVV code*"
                   variant="outlined"
                   sx={{
-                    width: "50%",
-                    height: "2rem",
+                    width: { xs: "100%", sm: "100%" },
+                    marginBottom: "1rem",
                   }}
                 />
               </div>
             </div>
           </div>
-          <div>
+
+          {/* <div>
             <CheckBox />
           </div>
           <div>
             <CheckBox />
-          </div>
-          <div>
-            <h1>Billing</h1>
-            <input placeholder="Street address*" />
-            <input placeholder="Country*" />
-            <input placeholder="State*" />
-            <input placeholder="Postal Code*" />
-            <input placeholder="Email address*" />
-            <span className="flex flex-row">
-              <span>+91</span>
-              <span>Mobile phone number</span>
+          </div> */}
+          <div className="p-4 m-4 border border-gray-500 rounded-2xl flex flex-col">
+            <h1 className="font-bold py-2">Billing</h1>
+
+            <TextField
+              id="outlined-basic"
+              label="Street address*"
+              variant="outlined"
+              sx={{
+                width: { xs: "100%", sm: "100%" },
+                marginBottom: "1rem",
+              }}
+            />
+
+            <TextField
+              id="outlined-basic"
+              label="Country*"
+              variant="outlined"
+              sx={{
+                width: { xs: "100%", sm: "100%" },
+                marginBottom: "1rem",
+              }}
+            />
+
+            <TextField
+              id="outlined-basic"
+              label="State*"
+              variant="outlined"
+              sx={{
+                width: { xs: "100%", sm: "100%" },
+                marginBottom: "1rem",
+              }}
+            />
+
+            <TextField
+              id="outlined-basic"
+              label="Postal Code*"
+              variant="outlined"
+              sx={{
+                width: { xs: "100%", sm: "100%" },
+                marginBottom: "1rem",
+              }}
+            />
+
+            <TextField
+              id="outlined-basic"
+              label="Email address*"
+              variant="outlined"
+              sx={{
+                width: { xs: "100%", sm: "100%" },
+                marginBottom: "1rem",
+              }}
+            />
+
+            <span className="flex flex-row gap-2">
+              <TextField
+                id="outlined-basic"
+                label="+91"
+                variant="outlined"
+                sx={{
+                width: { xs: "30%", sm: "30%" },
+                marginBottom: "1rem",
+              }}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Mobile Phone Number*"
+                variant="outlined"
+                sx={{
+                width: { xs: "100%", sm: "100%" },
+                marginBottom: "1rem",
+              }}
+              />
             </span>
           </div>
+
           <div>
             <p>Important Information</p>
             <li>
