@@ -309,40 +309,46 @@ export default function Cart() {
                 id="outlined-basic"
                 label="+91"
                 variant="outlined"
+                disabled
                 sx={{
-                width: { xs: "30%", sm: "30%" },
-                marginBottom: "1rem",
-              }}
+                  width: { xs: "30%", sm: "30%" },
+                  marginBottom: "1rem",
+                }}
               />
               <TextField
                 id="outlined-basic"
                 label="Mobile Phone Number*"
                 variant="outlined"
                 sx={{
-                width: { xs: "100%", sm: "100%" },
-                marginBottom: "1rem",
-              }}
+                  width: { xs: "100%", sm: "100%" },
+                  marginBottom: "1rem",
+                }}
               />
             </span>
           </div>
 
-          <div>
-            <p>Important Information</p>
-            <li>
-              Fully Refundable until 11:59pm (property local time) on
-              02-26-2024. After that time hotel cancellation and change fees
-              apply as stated in the Booking Conditions (this link opens in a
-              modal dialog).
-            </li>
-            <li>Check-in begins at 4pm and check-out is at 12pm.</li>
-            <li>
-              By selecting Book & Pay you agree to theBooking Conditions (this
-              link opens in a modal dialog),Terms & Conditions and Privacy
-              Policy.
-            </li>
+          <div className="p-4 m-4 border border-gray-500 rounded-2xl flex flex-col">
+            <p className="font-bold text-xl py-2">Important Information</p>
+            <ul className="list-disc pl-6">
+              <li className="mb-3">
+                Fully refundable until 11:59 pm (property local time) on
+                February 26, 2024. After that time, hotel cancellation and
+                change fees apply as stated in the Booking Conditions.
+              </li>
+              <li className="mb-3">
+                Check-in begins at 4 pm, and check-out is at 12 pm.
+              </li>
+              <li>
+                By selecting Book & Pay, you agree to the Booking Conditions,
+                Terms & Conditions, and Privacy Policy.
+              </li>
+            </ul>
           </div>
-          <div className="p-3">
-            <button>Book & Pay</button>
+
+          <div className="p-4 m-4 border border-gray-500 rounded-2xl flex flex-col">
+            <button className="p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300 ease-in-out focus:outline-none">
+              Book & Pay
+            </button>
           </div>
         </div>
 
