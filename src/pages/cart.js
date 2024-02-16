@@ -13,7 +13,7 @@ import DemoImage from "../assets/room1.jpg";
 import { CheckBox } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CallIcon from "@mui/icons-material/Call";
-import CheckIcon from '@mui/icons-material/Check';
+import CheckIcon from "@mui/icons-material/Check";
 
 const steps = [
   "Select master blaster campaign settings",
@@ -49,42 +49,46 @@ export default function Cart() {
             <strong>Almost done!</strong> Enter your details and complete your
             booking now.
           </p>
-          <div className="border border-gray-500 rounded-2xl p-4">
-            <div className="flex flex-row ">
+          <div className="border border-gray-500 rounded-2xl ">
+            <div className="flex flex-row p-4 ">
               <img width="234" height="351" src={DemoImage} alt="Hotel" />
               <div className="flex flex-col px-3">
                 <p className="font-bold ">NOPSI Hotel, New Orleans</p>
                 <p className="py-1">Downtown New Orleans</p>
                 <span className="py-1 flex flex-row gap-3">
-                  <p className="px-2 font-bold text-white bg-orange-400 rounded">8.7</p>VERY GOOD |
-                  5-STAR HOTEL
+                  <p className="px-2 font-bold text-white bg-orange-400 rounded">
+                    8.7
+                  </p>
+                  VERY GOOD | 5-STAR HOTEL
                 </span>
                 <p className="py-1 flex text-green">
-                <CheckIcon className="text-green"/>
+                  <CheckIcon className="text-green" />
                   Fully Refundable until 11:59 PM (property local time) on Feb
                   26
                 </p>
               </div>
             </div>
-            <div className="flex flex-row p-4 border border-green-500 rounded bg-slate-300">
-              <span className="flex flex-col">
+
+            <div className="flex flex-row  justify-around m-4 border rounded-2xl bg-slate-200">
+              <span className="flex flex-col text-center p-2 ">
                 <p>CHECK-IN</p>
                 <p>Fri, Mar 1, 2024</p>
               </span>
-              <span className="flex flex-col">
+              <span className="flex flex-col p-2 text-center">
                 <p>CHECK-OUT</p>
                 <p>Tue, Mar 5, 2024</p>
               </span>
-              <span className="flex flex-col">
+              <span className="flex flex-col p-2 text-center">
                 <p>NIGHTS</p>
                 <p>4</p>
               </span>
-              <span className="flex flex-col">
+              <span className="flex flex-col p-2 text-center">
                 <p>ROOMS</p>
                 <p>1</p>
               </span>
             </div>
-            <div>
+
+            <div className="m-4">
               <h1>Deluxe Suite with King Bed</h1>
               <span className="flex flex-row">
                 <ul>
@@ -102,7 +106,7 @@ export default function Cart() {
             </div>
           </div>
 
-          <div className="border border-red-600">
+          <div className="border border-red-600 ">
             <span className="p-2">
               The guest checking into each hotel room must be 21 or older,
               present a valid Photo ID and credit card.
