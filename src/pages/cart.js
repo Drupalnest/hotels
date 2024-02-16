@@ -11,6 +11,9 @@ import { Container, Typography, Paper } from "@mui/material";
 import { shadows } from "@mui/system";
 import DemoImage from "../assets/room1.jpg";
 import { CheckBox } from "@mui/icons-material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import CallIcon from "@mui/icons-material/Call";
+import CheckIcon from '@mui/icons-material/Check';
 
 const steps = [
   "Select master blaster campaign settings",
@@ -42,21 +45,25 @@ export default function Cart() {
 
       <div className="flex flex-row border border-green-600">
         <div className="border border-yellow-400">
-          <p>
+          <p className="p-2 m-3">
             <strong>Almost done!</strong> Enter your details and complete your
             booking now.
           </p>
-          <div className="border border-gray-500 p-4">
+          <div className="border border-gray-500 rounded-2xl p-4">
             <div className="flex flex-row ">
               <img width="234" height="351" src={DemoImage} alt="Hotel" />
-              <div className="flex flex-col">
-                <span>NOPSI Hotel, New Orleans</span>
-                <p>Downtown New Orleans</p>
-                <span>VERY GOOD | 5-STAR HOTEL</span>
-                <span>
+              <div className="flex flex-col px-3">
+                <p className="font-bold ">NOPSI Hotel, New Orleans</p>
+                <p className="py-1">Downtown New Orleans</p>
+                <span className="py-1 flex flex-row gap-3">
+                  <p className="px-2 font-bold text-white bg-orange-400 rounded">8.7</p>VERY GOOD |
+                  5-STAR HOTEL
+                </span>
+                <p className="py-1 flex text-green">
+                <CheckIcon className="text-green"/>
                   Fully Refundable until 11:59 PM (property local time) on Feb
                   26
-                </span>
+                </p>
               </div>
             </div>
             <div className="flex flex-row p-4 border border-green-500 rounded bg-slate-300">
@@ -166,8 +173,8 @@ export default function Cart() {
           </div>
         </div>
 
-        <div className="border border-red-500 w-7/12">
-          <div className="p-3 ">
+        <div className="border border-red-500 w-6/12 ">
+          <div className="p-3 m-3 border border-gray-500 rounded-2xl">
             <span className="flex flex-row justify-between py-1">
               <p>Price per night</p>
               <p>$340.55</p>
@@ -201,6 +208,39 @@ export default function Cart() {
             <span className="flex flex-row justify-between border-b border-gray-500 py-3">
               <p>Total Cost</p>
               <p>$1,686.89</p>
+            </span>
+          </div>
+          <div className="p-3 m-3 border border-gray-500 rounded-2xl">
+            <span className="flex flex-row justify-between">
+              <p>Have a promo code?</p>
+              <p>
+                <KeyboardArrowDownIcon />
+              </p>
+            </span>
+          </div>
+          <div className="p-3 m-3 border border-gray-500 rounded-2xl">
+            <span className="flex flex-row justify-between">
+              <p>
+                <CallIcon />
+              </p>
+              <span className="flex flex-col">
+                <p>Have questions? We're here to help!</p>
+                <p>1800 365-254</p>
+              </span>
+            </span>
+          </div>
+          <div className="p-3 m-3 ">
+            <span className="border-b border-gray-500">
+              <p>
+                Prices in USD. Prices include all taxes and fees (this link
+                opens in a modal dialog)charged by Priceline.
+              </p>
+            </span>
+            <span className="p-3 m-3 ">
+              <p>
+                *Collected at the property. Please bring a valid form of
+                payment.
+              </p>
             </span>
           </div>
         </div>
