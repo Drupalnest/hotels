@@ -50,7 +50,8 @@ export default function Cart() {
       </div>
 
       <div className="flex flex-row border border-green-600">
-        <div className="border border-yellow-400,">
+       
+        <div className="border-4 border-yellow-400  overflow-auto h-screen " style={{ scrollBehavior: 'smooth' }}>
           <p className="p-2 m-3">
             <strong>Almost done!</strong> Enter your details and complete your
             booking now.
