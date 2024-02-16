@@ -166,36 +166,39 @@ export default function Cart() {
           </div>
         </div>
 
-        <div className="border border-red-500">
-          <div>
-            <span className="flex flex-row">
+        <div className="border border-red-500 w-7/12">
+          <div className="p-3 ">
+            <span className="flex flex-row justify-between py-1">
               <p>Price per night</p>
               <p>$340.55</p>
             </span>
-            <span className="flex flex-row">
+            <span className="flex flex-row justify-between py-1">
               <p>1 room</p>
             </span>
-            <span className="flex flex-row">
+            <span className="flex flex-row justify-between py-1">
               <p>Number of nights</p>
               <p>4</p>
             </span>
-            <span className="flex flex-row">
+            <span className="flex flex-row justify-between py-1 border-b border-gray-500 ">
               <p>Taxes and fees</p>
               <p>$224.69</p>
             </span>
-            <span className="flex flex-row">
+            <span className="flex flex-row justify-between pt-4">
+              <p className="text-bold text-green-500">You pay today</p>
+              <p>$1,586.89</p>
+            </span>
+            <span className="text-end border-b border-gray-500  ">
+              <p className="text-blue">as low as $144/month</p>
+            </span>
+            <span className="flex flex-row justify-between">
               <p>You pay today</p>
               <p>$1,586.89</p>
             </span>
-            <span className="flex flex-row">
-              <p>You pay today</p>
-              <p>$1,586.89</p>
-            </span>
-            <span className="flex flex-row">
+            <span className="flex flex-row  justify-between border-b border-gray-500 py-3">
               <p>Property Fee*</p>
               <p>$100.00</p>
             </span>
-            <span className="flex flex-row">
+            <span className="flex flex-row justify-between border-b border-gray-500 py-3">
               <p>Total Cost</p>
               <p>$1,686.89</p>
             </span>
