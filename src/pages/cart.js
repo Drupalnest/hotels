@@ -7,13 +7,15 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Button } from "@mui/material";
-import { Container, Typography, Paper } from "@mui/material";
+import { Container, Typography, Paper, TextField } from "@mui/material";
 import { shadows } from "@mui/system";
 import DemoImage from "../assets/room1.jpg";
-import { CheckBox } from "@mui/icons-material";
+import { CheckBox, Radio } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CallIcon from "@mui/icons-material/Call";
 import CheckIcon from "@mui/icons-material/Check";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const steps = [
   "Select master blaster campaign settings",
@@ -44,12 +46,12 @@ export default function Cart() {
       </div>
 
       <div className="flex flex-row border border-green-600">
-        <div className="border border-yellow-400">
+        <div className="border border-yellow-400,">
           <p className="p-2 m-3">
             <strong>Almost done!</strong> Enter your details and complete your
             booking now.
           </p>
-          <div className="border border-gray-500 rounded-2xl ">
+          <div className="m-4 border border-gray-500 rounded-2xl ">
             <div className="flex flex-row p-4 ">
               <img width="234" height="351" src={DemoImage} alt="Hotel" />
               <div className="flex flex-col px-3">
@@ -88,56 +90,132 @@ export default function Cart() {
               </span>
             </div>
 
-            <div className="m-4">
-              <h1>Deluxe Suite with King Bed</h1>
-              <span className="flex flex-row">
+            <div className="m-4 w-96">
+              <h1 className="font-bold py-3">Deluxe Suite with King Bed</h1>
+
+              <span className="flex flex-row justify-between">
                 <ul>
-                  <li>1 King Bed</li>
-                  <li>Free WIFI</li>
-                  <li>Hand sanitizer</li>
-                  <li>Room sanitizing</li>
+                  <li>
+                    <CheckIcon sx={{ fontSize: 16, color: "green" }} /> 1 King
+                    Bed
+                  </li>
+                  <li>
+                    <CheckIcon sx={{ fontSize: 16, color: "green" }} /> Free
+                    WIFI
+                  </li>
+                  <li>
+                    <CheckIcon sx={{ fontSize: 16, color: "green" }} /> Hand
+                    sanitizer
+                  </li>
+                  <li>
+                    <CheckIcon sx={{ fontSize: 16, color: "green" }} /> Room
+                    sanitizing
+                  </li>
                 </ul>
                 <ul>
-                  <li>Free Wifi</li>
-                  <li>Drinking water included</li>
-                  <li>Cable TV channels</li>
+                  <li>
+                    <CheckIcon sx={{ fontSize: 16, color: "green" }} /> Free
+                    Wifi
+                  </li>
+                  <li>
+                    <CheckIcon sx={{ fontSize: 16, color: "green" }} /> Drinking
+                    water included
+                  </li>
+                  <li>
+                    <CheckIcon sx={{ fontSize: 16, color: "green" }} /> Cable TV
+                    channels
+                  </li>
                 </ul>
               </span>
             </div>
           </div>
 
-          <div className="border border-red-600 ">
-            <span className="p-2">
+          <div className="p-4 m-4 border  border-gray-500 rounded-2xl ">
+            <div className="p-2 border bg-slate-200 rounded-2xl">
               The guest checking into each hotel room must be 21 or older,
               present a valid Photo ID and credit card.
-            </span>
-            <span>
+            </div>
+            <div className="font-bold py-2">
               <h1>Guest Name</h1>
+            </div>
+            <span class="flex flex-row gap-2 ">
+              <TextField
+                id="outlined-basic"
+                label="First Name*"
+                variant="outlined"
+                sx={{
+                  width: "50%",
+                  height: "2rem",
+                }}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Last Name*"
+                variant="outlined"
+                sx={{
+                  width: "50%",
+                  height: "2rem",
+                }}
+              />
             </span>
-            <span class="flex flex-row">
-              <input placeholder="First Name" />
-              <input placeholder="Last Name" />
-            </span>
-            <span className="flex flex-row">
-              <CheckBox />
+            <span className="flex flex-row mt-3 py-5">
+              <Checkbox />
               <p>Guest name and name on card are the same</p>
             </span>
           </div>
-          <div className="border border-pink-700 flex flex-col">
-            <h1>Payment Method</h1>
-            <span className="flex flex-row">
-              <CheckBox />
-              <span className="flex flex-col">
-                <p>Credit Card or Debit</p>
-                <p>Visa, Mastercard, Diners Club, Discover, American Express</p>
+
+          <div className="p-4 m-4 border  border-gray-500 rounded-2xl flex flex-col">
+            <h1 className="font-bold">Payment Method</h1>
+            <div className="border m-2 p-2  border-gray-500 rounded-2xl flex flex-col">
+              <span className="flex flex-row">
+                <CheckBox />
+                <span className="flex flex-col">
+                  <p className="font-bold">Credit Card or Debit</p>
+                  <p>
+                    Visa, Mastercard, Diners Club, Discover, American Express
+                  </p>
+                </span>
               </span>
-            </span>
-            <span>
-              <input placeholder="Name on card*" />
-              <input placeholder="card number*" />
-              <input placeholder="MM/YYYY*" />
-              <input placeholder="CVV code*" />
-            </span>
+
+              <div className="  p-3 bg-gray-200 rounded-2xl flex flex-col">
+                <TextField
+                  id="outlined-basic"
+                  label="Name on card*"
+                  variant="outlined"
+                  sx={{
+                    width: "50%",
+                    height: "2rem",
+                  }}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="card number*"
+                  variant="outlined"
+                  sx={{
+                    width: "50%",
+                    height: "2rem",
+                  }}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="MM/YYYY*"
+                  variant="outlined"
+                  sx={{
+                    width: "50%",
+                    height: "2rem",
+                  }}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="CVV code*"
+                  variant="outlined"
+                  sx={{
+                    width: "50%",
+                    height: "2rem",
+                  }}
+                />
+              </div>
+            </div>
           </div>
           <div>
             <CheckBox />
