@@ -149,7 +149,7 @@ const HotelDetails = ({ data }) => {
       </div>
 
       <div className="container p-0 mx-auto flex flex-col justify-center border border-red-500">
-        <div className="flex flex-wrap p-1 border-b border-gray-500">
+        {/* <div className="flex flex-wrap p-1 border-b border-gray-500">
           <div className="w-full md:w-8/12 mb-4 md:mb-0">
             <h1 className="text-3xl font-bold mb-2">{hotel.name}</h1>
 
@@ -189,6 +189,55 @@ const HotelDetails = ({ data }) => {
             <Button color="primary" className="mt-4">
               Choose Your Room
             </Button>
+          </div>
+        </div> */}
+        <div className="flex flex-wrap p-4 border-b border-gray-500">
+          <div className="w-full md:w-8/12 mb-4 md:mb-0">
+            <p className="text-2xl font-bold mb-2 text-gray-800">
+              {hotel.name}
+            </p>
+
+            <div className="flex items-center mb-2">
+              <p className="text-gray-600 text-sm">5-STAR HOTEL Luxury</p>
+              <p className="text-blue-500 ml-2">
+                <PlaceIcon className="text-lg" />
+              </p>
+              <p className="text-blue-500 ml-1 text-sm cursor-pointer">
+                View Map
+              </p>
+            </div>
+
+            <div className="flex items-center mb-4">
+              <p className="text-pink-600 text-sm font-bold bg-gray-300 px-1  rounded-full mr-2">
+                TOP BOOKED HOTEL
+              </p>
+              <p className="text-red-600 text-sm">
+                30 people are looking at this hotel
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+              <Button className="border border-blue-700 bg-white text-blue-700 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-full flex items-center">
+                <IosShareIcon className="text-lg mr-2" />
+                Share
+              </Button>
+
+              <Button className="bg-white text-blue-700 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-full flex items-center">
+                <FavoriteBorderIcon className="text-lg mr-2" />
+                Save
+              </Button>
+            </div>
+          </div>
+
+          <div className="w-full md:w-4/12 text-left md:text-right">
+            <h1 className="text-4xl font-bold mb-2 text-blue-700">
+              {/* ${hotel.price} */}
+              $312
+            </h1>
+            <p className="text-gray-600">Price per night</p>
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+              Choose Your Room
+            </button>
           </div>
         </div>
 
