@@ -27,12 +27,11 @@ import GuestPolicies from "../components/HotelDetails/GuestPolicies ";
 import ReviewBox from "../components/HotelDetails/ReviewBox";
 import RatingSection from "../components/HotelDetails/RatingBar";
 
-
-import { styled } from '@mui/material/styles';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch, { SwitchProps } from '@mui/material/Switch';
-import Typography from '@mui/material/Typography';
+import { styled } from "@mui/material/styles";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch, { SwitchProps } from "@mui/material/Switch";
+import Typography from "@mui/material/Typography";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
@@ -80,60 +79,61 @@ const HotelDetails = ({ data }) => {
     }
   };
 
-
-
-  const IOSSwitch = styled((props: SwitchProps) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+  const IOSSwitch = styled((props) => (
+    <Switch
+      focusVisibleClassName=".Mui-focusVisible"
+      disableRipple
+      {...props}
+    />
   ))(({ theme }) => ({
     width: 42,
     height: 26,
     padding: 0,
-    '& .MuiSwitch-switchBase': {
+    "& .MuiSwitch-switchBase": {
       padding: 0,
       margin: 2,
-      transitionDuration: '300ms',
-      '&.Mui-checked': {
-        transform: 'translateX(16px)',
-        color: '#fff',
-        '& + .MuiSwitch-track': {
-          backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+      transitionDuration: "300ms",
+      "&.Mui-checked": {
+        transform: "translateX(16px)",
+        color: "#fff",
+        "& + .MuiSwitch-track": {
+          backgroundColor:
+            theme.palette.mode === "dark" ? "#2ECA45" : "#0000FF",
           opacity: 1,
           border: 0,
         },
-        '&.Mui-disabled + .MuiSwitch-track': {
+        "&.Mui-disabled + .MuiSwitch-track": {
           opacity: 0.5,
         },
       },
-      '&.Mui-focusVisible .MuiSwitch-thumb': {
-        color: '#33cf4d',
-        border: '6px solid #fff',
+      "&.Mui-focusVisible .MuiSwitch-thumb": {
+        color: "#0000FF",
+        border: "6px solid #fff",
       },
-      '&.Mui-disabled .MuiSwitch-thumb': {
+      "&.Mui-disabled .MuiSwitch-thumb": {
         color:
-          theme.palette.mode === 'light'
+          theme.palette.mode === "light"
             ? theme.palette.grey[100]
             : theme.palette.grey[600],
       },
-      '&.Mui-disabled + .MuiSwitch-track': {
-        opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
       },
     },
-    '& .MuiSwitch-thumb': {
-      boxSizing: 'border-box',
+    "& .MuiSwitch-thumb": {
+      boxSizing: "border-box",
       width: 22,
       height: 22,
     },
-    '& .MuiSwitch-track': {
+    "& .MuiSwitch-track": {
       borderRadius: 26 / 2,
-      backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+      backgroundColor: theme.palette.mode === "light" ? "#808080" : "#0000FF",
       opacity: 1,
-      transition: theme.transitions.create(['background-color'], {
+      transition: theme.transitions.create(["background-color"], {
         duration: 500,
       }),
     },
   }));
-
-  
 
   return (
     <div className="container-fluid">
@@ -586,8 +586,8 @@ const HotelDetails = ({ data }) => {
                 </span>
               </div>
 
-              <div className=" flex flex-row border py-4 border-blue-600">
-                <div className="flex justify-between  m-2 gap-2 bg-slate-200 border border-gray-900 ">
+              {/* <div className=" flex flex-row border py-4 border-blue-600">
+                <div className="w-full sm:w-full md:w-full lg:w-full xl:w-1/1 flex justify-between  m-2 gap-2 bg-slate-200 border border-gray-900 ">
                   <TextField
                     id="outlined-basic"
                     label="Check-in - check-out"
@@ -602,7 +602,7 @@ const HotelDetails = ({ data }) => {
                     className="w-full max-w-lg h-12 sm:h-14 bg-white rounded-2xl"
                   />
 
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-2xl">
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold  px-4 rounded-2xl">
                     Update Search
                   </button>
                 </div>
@@ -616,12 +616,55 @@ const HotelDetails = ({ data }) => {
                     </span>
                   </div>
                   <div className="ml-auto">
-                  <FormGroup>
-      <FormControlLabel
-        control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-        label="iOS style"
-      />
-    </FormGroup>
+                    <FormGroup>
+                      <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} />} />
+                    </FormGroup>
+                  </div>
+                </div>
+              </div> */}
+
+              <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row border  border-blue-600">
+                {/* Search Inputs */}
+                <div className="w-full sm:w-full md:w-full lg:w-full xl:w-1/1 flex flex-col sm:flex-row justify-between gap-2 bg-slate-500 border border-gray-900 rounded-xl p-4">
+                  {/* Check-in and Check-out Inputs */}
+                  <TextField
+                    id="outlined-basic-1"
+                    label="Check-in - check-out"
+                    variant="outlined"
+                    className="mb-4 w-full max-w-lg h-12 sm:h-14 bg-white rounded-2xl"
+                  />
+
+                  <TextField
+                    id="outlined-basic-2"
+                    label="Check-in - check-out"
+                    variant="outlined"
+                    className="mb-4 w-full max-w-lg h-12 sm:h-14 bg-white rounded-2xl"
+                  />
+
+                  {/* Update Search Button */}
+                  <Button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded-2xl"
+                    variant="contained"
+                  >
+                    Update Search
+                  </Button>
+                </div>
+
+                {/* Show total prices section */}
+                <div className="flex flex-row items-center justify-between border border-gray-500  rounded-xl mt-4 sm:mt-0">
+                  <div className="flex flex-col">
+                    <span className="mb-1 text-sm sm:text-base font-semibold text-end">
+                      Show total prices
+                    </span>
+                    <span className="mb-1 text-sm sm:text-base">
+                      For 1 night, includes taxes & fees
+                    </span>
+                  </div>
+
+                  <div className="ml-auto">
+                    <FormGroup>
+                      <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} />} />
+                    </FormGroup>
                   </div>
                 </div>
               </div>
