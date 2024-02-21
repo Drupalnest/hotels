@@ -2,10 +2,10 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 
 const GuestPolicies = () => (
-  <div className="container mx-auto p-0">
-    <Typography variant="h4" className="mb-4 font-bold">
+  <div className="m-2 py-4">
+    <p variant="h4" className="mb-4 font-bold text-xl ">
       Guest Policies
-    </Typography>
+    </p>
     <div className="flex flex-col">
       <div className="flex flex-row  mb-2 gap-1">
         <span
@@ -30,7 +30,7 @@ const GuestPolicies = () => (
           After 4:00 PM
         </span>
       </div>
-      <div className="flex flex-row  mb-2 gap-1">
+      <div className="flex flex-row border mb-2 gap-1">
         <span
           className="font-bold p-5 bg-gray-300 text-end"
           style={{ flex: "20%" }}
@@ -41,7 +41,7 @@ const GuestPolicies = () => (
           After 4:00 PM
         </span>
       </div>
-      <div className="flex flex-row  mb-2 gap-1">
+      <div className="flex flex-row  border mb-2 gap-1">
         <span
           className="font-bold p-5 bg-white text-end"
           style={{ flex: "20%" }}
@@ -63,7 +63,7 @@ const GuestPolicies = () => (
           After 4:00 PM
         </span>
       </div>
-      <div className="flex flex-row  mb-2 gap-1">
+      <div className="flex flex-row border mb-2 gap-1">
         <span
           className="font-bold p-5 bg-white text-end"
           style={{ flex: "20%" }}

@@ -3,13 +3,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 const AboutHotel = () => (
-  <div className="container mx-auto p-0">
-    <Typography variant="h4" className="mb-4 font-bold">
+  <div className="m-2 py-4 border-gray-500 border-b  border-t">
+    <p variant="h5" className="mb-4 font-bold text-3xl ">
       About the Hotel
-    </Typography>
-    <Typography variant="h5" className="mb-4 font-bold">
+    </p>
+    <p variant="h5" className="mb-4 font-bold text-xl">
       Hotel Features
-    </Typography>
+    </p>
     <Typography variant="body1" className="mb-4">
       Featuring free WiFi and a restaurant, NOPSI Hotel, New Orleans offers
       pet-friendly accommodations within walking distance of the French Quarter

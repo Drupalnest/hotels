@@ -642,12 +642,12 @@ const HotelDetails = ({ data }) => {
                   />
 
                   {/* Update Search Button */}
-                  <Button
+                  <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded-2xl"
                     variant="contained"
                   >
                     Update Search
-                  </Button>
+                  </button>
                 </div>
 
                 {/* Show total prices section */}
@@ -752,7 +752,7 @@ const HotelDetails = ({ data }) => {
         </div> */}
         <GuestPolicies />
 
-        <div className=" py-3 mt-4 border-b  border-gray-500">
+        <div className=" m-2 py-4  border-b  border-gray-500">
           <h3 className="text-2xl font-bold mb-4">Important Info</h3>
           <span className="text-xl  mb-4 ">
             Guests are required to show a photo ID and credit card upon

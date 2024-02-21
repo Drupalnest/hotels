@@ -60,9 +60,9 @@ const ReviewBox = ({ author, date, rating, numericRating, content }) => {
 const ReviewsPage = () => {
   return (
     <Container className="p-0 " style={{ marginTop: "40px" }}>
-      <Typography variant="h4" align="center" gutterBottom>
+      <p variant="h4" align="center" className="mb-4 font-bold text-2xl" gutterBottom>
         Customer Reviews
-      </Typography>
+      </p>
       <Grid container spacing={3}>
         {reviews.map((review) => (
           <ReviewBox key={review.id} {...review} />
