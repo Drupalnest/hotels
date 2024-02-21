@@ -198,11 +198,13 @@ const HotelDetails = ({ data }) => {
             </p>
 
             <div className="flex items-center mb-2">
-              <p className="text-gray-600 text-sm">5-STAR HOTEL Luxury</p>
+              <p className="text-gray-600 font-bold text-sm">
+                5-STAR HOTEL Luxury
+              </p>
               <p className="text-blue-500 ml-2">
                 <PlaceIcon className="text-lg" />
               </p>
-              <p className="text-blue-500 ml-1 text-sm cursor-pointer">
+              <p className="text-blue-500 ml-1 font-bold text-sm cursor-pointer">
                 View Map
               </p>
             </div>
@@ -217,32 +219,34 @@ const HotelDetails = ({ data }) => {
             </div>
 
             <div className="flex gap-3">
-              <Button className="border border-blue-700 bg-white text-blue-700 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-full flex items-center">
-                <IosShareIcon className="text-lg mr-2" />
+              <button className="bg-white text-blue-700 hover:bg-blue-700 hover:text-white font-bold py-1 px-2 rounded-full flex items-center text-xs underline">
+                <IosShareIcon className="text-md mr-1" />
                 Share
-              </Button>
+              </button>
 
-              <Button className="bg-white text-blue-700 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-full flex items-center">
-                <FavoriteBorderIcon className="text-lg mr-2" />
+              <button className="bg-white text-blue-700 hover:bg-blue-700 hover:text-white font-bold py-1 px-2 rounded-full flex items-center text-xs underline">
+                <FavoriteBorderIcon className="text-md mr-1" />
                 Save
-              </Button>
+              </button>
             </div>
           </div>
 
           <div className="w-full md:w-4/12 text-left md:text-right">
-            <h1 className="text-4xl font-bold mb-2 text-blue-700">
+            <h1 className="text-2xl md:text-4xl font-bold mb-2 text-blue-700">
               {/* ${hotel.price} */}
-              $312
+              ₹13075
             </h1>
-            <p className="text-gray-600">Price per night</p>
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+            <p className="text-sm md:text-base text-gray-600">
+              Price per night
+            </p>
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 md:py-2 md:px-4 rounded-full mt-2 md:mt-2">
               Choose Your Room
             </button>
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center items-start border border-green-500 sm:w-full ">
-          <div className="flex-1 p-4 border border-gray-400 border-r-2">
+        {/* <div className=" flex flex-wrap justify-center items-start border border-green-500 sm:w-full ">
+          <div className=" p-4 border border-gray-400 border-r-2">
             <h1 className="text-2xl font-bold mb-2">Top Reasons to Book</h1>
             <div className="space-y-2">
               <div className="flex gap-2">
@@ -296,7 +300,7 @@ const HotelDetails = ({ data }) => {
             </div>
           </div>
 
-          <div className="flex-1 border border-blue-500  p-4">
+          <div className="  border border-blue-500  p-4">
             <div className="space-y-4">
               <div className="flex items-center">
                 <span className="text-2xl text-white font-bold bg-orange-500 px-2 py-0 rounded-full mr-2">
@@ -335,18 +339,166 @@ const HotelDetails = ({ data }) => {
             </div>
           </div>
 
-          <div className="flex-1 p-3 border-l border-gray-500">
+          <div className=" p-3 border-l border-gray-500">
             <h1 className="text-2xl font-bold mb-2">Top Amenities</h1>
             <div className="grid grid-cols-2 gap-4">
               {hotel.amenities.map((amenity) => (
                 <div key={amenity.machine_name} className="flex items-center">
-                  {getAmenityIcon(amenity.name)}{" "}
-                  {/* Use a function to determine the appropriate icon */}
+                  {getAmenityIcon(amenity.name)}
+
                   <span>{amenity.name}</span>
                 </div>
               ))}
             </div>
             <p className="mt-4">Show All Amenities</p>
+          </div>
+        </div> */}
+
+        <div className=" border border-yellow-500 flex flex-wrap justify-center ">
+          <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 ">
+            <div className="h-full bg-white ">
+              <div className=" p-4  border-r ">
+                <h1 className="text-2xl font-bold mb-5">Top Reasons to Book</h1>
+                <div className="space-y-2">
+                  <div className="flex gap-2">
+                    <span className="flex mt-1">
+                      <CachedIcon className=" text-green-700 bg-green-300 hover:bg-green-700 rounded-full p-0.5  " />
+                    </span>
+                    <span>
+                      <h4 className="text-lg font-bold">KIDS STAY FREE</h4>
+                      <p>
+                        Children 2 and under stay for free when using an
+                        available crib (details)
+                      </p>
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="flex mt-1">
+                      <ShoppingCartIcon className=" text-green-700 bg-green-300 hover:bg-green-700 rounded-full p-0.5" />
+                    </span>
+                    <span>
+                      <h4 className="text-lg font-bold">KIDS STAY FREE</h4>
+                      <p>
+                        Children 2 and under stay for free when using an
+                        available crib (details)
+                      </p>
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="flex mt-1">
+                      <CheckCircleIcon className=" text-orange-500 bg-orange-200 hover:bg-orange-500 rounded-full p-0.5 " />
+                    </span>
+                    <span>
+                      <h4 className="text-lg font-bold">KIDS STAY FREE</h4>
+                      <p>
+                        Children 2 and under stay for free when using an
+                        available crib (details)
+                      </p>
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="flex mt-1">
+                      <EmojiEventsIcon className=" text-orange-500 bg-orange-200 hover:bg-orange-500 rounded-full p-0.5" />
+                    </span>
+                    <span>
+                      <h4 className="text-lg font-bold">KIDS STAY FREE</h4>
+                      <p>
+                        Children 2 and under stay for free when using an
+                        available crib (details)
+                      </p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 ">
+            <div className="h-full bg-white rounded-md">
+              <div className="    p-4">
+                <div className="space-y-4">
+                  <div className="flex items-center mb-5">
+                    <span className="text-2xl text-white font-bold bg-orange-500 px-2 py-0 rounded-full mr-2">
+                      8.7
+                    </span>
+                    <h1 className="text-xl font-bold">Guest Rating</h1>
+                  </div>
+
+                  <div className="">
+                    <span className="flex justify-between">
+                      <p className="text-sm font-semibold">CLEANLINESS</p>
+                      <span className="text-lg font-bold">9.2</span>
+                    </span>
+                    <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
+                  </div>
+
+                  <div className="">
+                    <span className="flex justify-between">
+                      <p className="text-sm font-semibold">CLEANLINESS</p>
+                      <span className="text-lg font-bold">9.2</span>
+                    </span>
+                    <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
+                  </div>
+                  <div className="">
+                    <span className="flex justify-between">
+                      <p className="text-sm font-semibold">CLEANLINESS</p>
+                      <span className="text-lg font-bold">9.2</span>
+                    </span>
+                    <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
+                  </div>
+                  <div className="p-0">
+                    <span className="text-sm text-blue-600  ">
+                      Verified ratings from 1788 guests
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="w-full sm:w-full md:w-full lg:w-1/3 xl:w-1/3">
+            <div className="h-full bg-white">
+              <div className="p-4 border-l">
+                <h1 className="text-xl sm:text-2xl font-bold mb-2">
+                  Top Amenities
+                </h1>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {hotel.amenities.map((amenity) => (
+                    <div
+                      key={amenity.machine_name}
+                      className="flex items-center"
+                    >
+                      {getAmenityIcon(amenity.name)}
+                      <span>{amenity.name}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 text-blue-500 underline">
+                  Show All Amenities
+                </p>
+              </div>
+            </div>
+          </div> */}
+          <div className="w-full sm:w-full md:w-full lg:w-1/3 xl:w-1/3">
+            <div className="h-full bg-white">
+              <div className="p-4 border-l r">
+                <h1 className="text-xl sm:text-2xl font-bold mb-5">
+                  Top Amenities
+                </h1>
+                <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-3 gap-4">
+                  {hotel.amenities.map((amenity) => (
+                    <div
+                      key={amenity.machine_name}
+                      className="flex items-center"
+                    >
+                      <WifiIcon className="mr-2 text-3xl border rounded-full p-1 bg-gray-300" />
+                      <span>{amenity.name}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 text-blue-500 underline md:text-center sm:text-center">
+                  Show All Amenities
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
