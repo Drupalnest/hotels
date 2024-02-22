@@ -734,7 +734,7 @@ const HotelDetails = ({ data }) => {
         </div> */}
         <Amenities amenities={hotel.amenities} />
 
-        <AboutHotel />
+        <AboutHotel description={hotel.description}/>
 
         {/* <div>
           <div>Guest Policies</div>
@@ -874,15 +874,24 @@ const HotelDetails = ({ data }) => {
               <p>{hotel.address.postal_code}</p>
               <p>{hotel.address.country_code}</p>
 
-              <div>
+              {/* <div>
                 <h2>Amenities:</h2>
                 <ul>
                   {hotel.amenities.map((amenity) => (
                     <li key={amenity.machine_name}>{amenity.name}</li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
+              {/* <div><p>{hotel.description}</p></div> */}
             </div>
+             <div>
+                <h2>Hotel lattitude and longitude:</h2>
+                <ul>
+                  {hotel.lat_lon.map((amenity) => (
+                    <li key={amenity.machine_name}>{amenity.name}</li>
+                  ))}
+                </ul>
+              </div>
           </div>
         </div>
       </div>
@@ -898,6 +907,7 @@ export const query = graphql`
           id
           name
           rlh_status
+          description
           address {
             address_line1
             locality
@@ -908,6 +918,18 @@ export const query = graphql`
           amenities {
             machine_name
             name
+          }
+          lat_lon {
+            bottom
+            geo_type
+            geohash
+            lat
+            latlon
+            left
+            lon
+            right
+            top
+            value
           }
         }
       }

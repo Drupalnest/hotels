@@ -51,13 +51,11 @@
 
 // export default Amenities;
 
-
 import React from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import Button from "@mui/material/Button";
 
 const Amenities = ({ amenities }) => (
-  
   <div className="container mx-auto p-4 border border-b border-gray-700">
     <h1 className="text-2xl font-bold mb-4">Amenities</h1>
     <div className="flex flex-wrap m-auto justify-center border border-red-500 ">
@@ -104,8 +102,6 @@ const Amenities = ({ amenities }) => (
 );
 
 export default Amenities;
-
-
 
 // import React, { useState } from "react";
 // import CheckIcon from "@mui/icons-material/Check";
