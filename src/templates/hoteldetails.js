@@ -26,18 +26,12 @@ import AboutHotel from "../components/HotelDetails/AboutHotel";
 import GuestPolicies from "../components/HotelDetails/GuestPolicies ";
 import ReviewBox from "../components/HotelDetails/ReviewBox";
 import RatingSection from "../components/HotelDetails/RatingBar";
-
-import { styled } from "@mui/material/styles";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch, { SwitchProps } from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import GoogleMapComponent from "../components/HotelDetails/GoogleMapComponent";
+import Search from "../components/HotelDetails/Search";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
-  //const mapUrl = `https://www.google.com/maps/embed/v1/view?key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ&center=${hotel.lat_lon.lat},${hotel.lat_lon.lon},${hotel.lat_lon.top},${hotel.lat_lon.bottom},${hotel.lat_lon.left},${hotel.lat_lon.right}&zoom=15`;
-  const mapUrl = `https://www.google.com/maps/embed/v1/view?key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ&center=${hotel.lat_lon.lat},${hotel.lat_lon.lon}&zoom=15&bounds=${hotel.lat_lon.top},${hotel.lat_lon.left}|${hotel.lat_lon.bottom},${hotel.lat_lon.right}`;
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -81,62 +75,6 @@ const HotelDetails = ({ data }) => {
         return <FiberManualRecordIcon className="mr-2" />; // Default icon
     }
   };
-
-  const IOSSwitch = styled((props) => (
-    <Switch
-      focusVisibleClassName=".Mui-focusVisible"
-      disableRipple
-      {...props}
-    />
-  ))(({ theme }) => ({
-    width: 42,
-    height: 26,
-    padding: 0,
-    "& .MuiSwitch-switchBase": {
-      padding: 0,
-      margin: 2,
-      transitionDuration: "300ms",
-      "&.Mui-checked": {
-        transform: "translateX(16px)",
-        color: "#fff",
-        "& + .MuiSwitch-track": {
-          backgroundColor:
-            theme.palette.mode === "dark" ? "#2ECA45" : "#0000FF",
-          opacity: 1,
-          border: 0,
-        },
-        "&.Mui-disabled + .MuiSwitch-track": {
-          opacity: 0.5,
-        },
-      },
-      "&.Mui-focusVisible .MuiSwitch-thumb": {
-        color: "#0000FF",
-        border: "6px solid #fff",
-      },
-      "&.Mui-disabled .MuiSwitch-thumb": {
-        color:
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[600],
-      },
-      "&.Mui-disabled + .MuiSwitch-track": {
-        opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
-      },
-    },
-    "& .MuiSwitch-thumb": {
-      boxSizing: "border-box",
-      width: 22,
-      height: 22,
-    },
-    "& .MuiSwitch-track": {
-      borderRadius: 26 / 2,
-      backgroundColor: theme.palette.mode === "light" ? "#808080" : "#0000FF",
-      opacity: 1,
-      transition: theme.transitions.create(["background-color"], {
-        duration: 500,
-      }),
-    },
-  }));
 
   return (
     <div className="container-fluid">
@@ -626,64 +564,7 @@ const HotelDetails = ({ data }) => {
                 </div>
               </div> */}
 
-              <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row border border-blue-600">
-                {/* Search Inputs */}
-                <div className="w-full sm:w-full md:w-full lg:w-full xl:w-1/1 flex flex-col sm:flex-row  gap-2 bg-slate-500 border border-gray-900 rounded-xl p-2">
-                  {/* Check-in and Check-out Inputs */}
-                  <TextField
-                    label="Check-in - check-out"
-                    variant="outlined"
-                    className=" w-full sm:w-64 h-12 sm:h-14 bg-white rounded-2xl"
-                  />
-
-                  <TextField
-                    label="Check-in - check-out"
-                    variant="outlined"
-                    className=" w-full sm:w-64 h-12 sm:h-14 bg-white rounded-2xl"
-                  />
-
-                  {/* Update Search Button */}
-                  <button className="h-10 sm:h-14 bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 sm:px-6 py-1 sm:py-2 rounded-2xl">
-                    Update Search
-                  </button>
-
-                  <div className="flex flex-col sm:flex-row bg-slate-500 border border-gray-900 rounded-xl ">
-                    <div className="flex flex-col p-2  ">
-                      <span className="text-sm sm:text-base font-semibold">
-                        Show total prices
-                      </span>
-                      <span className="text-sm sm:text-base">
-                        For 1 night, includes taxes & fees
-                      </span>
-                    </div>
-                    <div className="">
-                      <FormGroup>
-                        <FormControlLabel
-                          control={<IOSSwitch sx={{ m: 1 }} />}
-                        />
-                      </FormGroup>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Show total prices section */}
-                {/* <div className="text-end w-1/2 sm:w-1/2 md:w-1/2 lg:w-full xl:w-1/1 flex flex-col sm:flex-row bg-slate-500 border border-gray-900 rounded-xl ">
-                  <div className="flex flex-col p-2  ">
-                    <span className="text-sm sm:text-base font-semibold">
-                      Show total prices
-                    </span>
-                    <span className="text-sm sm:text-base">
-                      For 1 night, includes taxes & fees
-                    </span>
-                  </div>
-
-                  <div className="p-4">
-                    <FormGroup>
-                      <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} />} />
-                    </FormGroup>
-                  </div>
-                </div> */}
-              </div>
+              <Search />
             </div>
 
             <div className="">
