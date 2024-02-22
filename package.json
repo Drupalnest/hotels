@@ -12,7 +12,8 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "force-install": "npm install --force"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
