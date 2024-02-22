@@ -32,9 +32,12 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
+import GoogleMapComponent from "../components/HotelDetails/GoogleMapComponent";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
+  //const mapUrl = `https://www.google.com/maps/embed/v1/view?key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ&center=${hotel.lat_lon.lat},${hotel.lat_lon.lon},${hotel.lat_lon.top},${hotel.lat_lon.bottom},${hotel.lat_lon.left},${hotel.lat_lon.right}&zoom=15`;
+  const mapUrl = `https://www.google.com/maps/embed/v1/view?key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ&center=${hotel.lat_lon.lat},${hotel.lat_lon.lon}&zoom=15&bounds=${hotel.lat_lon.top},${hotel.lat_lon.left}|${hotel.lat_lon.bottom},${hotel.lat_lon.right}`;
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -734,7 +737,7 @@ const HotelDetails = ({ data }) => {
         </div> */}
         <Amenities amenities={hotel.amenities} />
 
-        <AboutHotel description={hotel.description}/>
+        <AboutHotel description={hotel.description} />
 
         {/* <div>
           <div>Guest Policies</div>
@@ -842,7 +845,8 @@ const HotelDetails = ({ data }) => {
           <span className="text-lg p-0 ">
             NOPSI Hotel, New Orleans 317 Baronne Street, New Orleans, LA
           </span>
-          <div className="py-4">
+
+          {/* <div className="py-4">
             <div style={containerStyle}>
               <iframe
                 title="Google Map"
@@ -850,11 +854,13 @@ const HotelDetails = ({ data }) => {
                 height="100%"
                 frameBorder="0"
                 style={{ border: "0" }}
-                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJgUbEo8cfqokR5lP9_Wh_DaM&key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ"
+               // src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJgUbEo8cfqokR5lP9_Wh_DaM&key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ"
+               src={mapUrl}
                 allowFullScreen
               ></iframe>
             </div>
-          </div>
+          </div> */}
+          <GoogleMapComponent lat_lon={hotel.lat_lon} />
         </div>
 
         <div>
@@ -884,14 +890,15 @@ const HotelDetails = ({ data }) => {
               </div> */}
               {/* <div><p>{hotel.description}</p></div> */}
             </div>
-             <div>
-                <h2>Hotel lattitude and longitude:</h2>
-                <ul>
-                  {hotel.lat_lon.map((amenity) => (
-                    <li key={amenity.machine_name}>{amenity.name}</li>
-                  ))}
-                </ul>
-              </div>
+            {hotel.lat_lon.bottom}
+            {hotel.lat_lon.geo_type}
+            {hotel.lat_lon.geohash}
+            {hotel.lat_lon.lat}
+            {hotel.lat_lon.left}
+            {hotel.lat_lon.lon}
+            {hotel.lat_lon.right}
+            {hotel.lat_lon.top}
+            {hotel.lat_lon.value}
           </div>
         </div>
       </div>
