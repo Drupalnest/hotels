@@ -623,50 +623,63 @@ const HotelDetails = ({ data }) => {
                 </div>
               </div> */}
 
-              <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row border  border-blue-600">
+              <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row border border-blue-600">
                 {/* Search Inputs */}
-                <div className="w-full sm:w-full md:w-full lg:w-full xl:w-1/1 flex flex-col sm:flex-row justify-between gap-2 bg-slate-500 border border-gray-900 rounded-xl p-4">
+                <div className="w-full sm:w-full md:w-full lg:w-full xl:w-1/1 flex flex-col sm:flex-row  gap-2 bg-slate-500 border border-gray-900 rounded-xl p-2">
                   {/* Check-in and Check-out Inputs */}
                   <TextField
-                    id="outlined-basic-1"
                     label="Check-in - check-out"
                     variant="outlined"
-                    className="mb-4 w-full max-w-lg h-12 sm:h-14 bg-white rounded-2xl"
+                    className=" w-full sm:w-64 h-12 sm:h-14 bg-white rounded-2xl"
                   />
 
                   <TextField
-                    id="outlined-basic-2"
                     label="Check-in - check-out"
                     variant="outlined"
-                    className="mb-4 w-full max-w-lg h-12 sm:h-14 bg-white rounded-2xl"
+                    className=" w-full sm:w-64 h-12 sm:h-14 bg-white rounded-2xl"
                   />
 
                   {/* Update Search Button */}
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded-2xl"
-                    variant="contained"
-                  >
+                  <button className="h-10 sm:h-14 bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 sm:px-6 py-1 sm:py-2 rounded-2xl">
                     Update Search
                   </button>
+
+                  <div className="flex flex-col sm:flex-row bg-slate-500 border border-gray-900 rounded-xl ">
+                    <div className="flex flex-col p-2  ">
+                      <span className="text-sm sm:text-base font-semibold">
+                        Show total prices
+                      </span>
+                      <span className="text-sm sm:text-base">
+                        For 1 night, includes taxes & fees
+                      </span>
+                    </div>
+                    <div className="">
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<IOSSwitch sx={{ m: 1 }} />}
+                        />
+                      </FormGroup>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Show total prices section */}
-                <div className="flex flex-row items-center justify-between border border-gray-500  rounded-xl mt-4 sm:mt-0">
-                  <div className="flex flex-col">
-                    <span className="mb-1 text-sm sm:text-base font-semibold text-end">
+                {/* <div className="text-end w-1/2 sm:w-1/2 md:w-1/2 lg:w-full xl:w-1/1 flex flex-col sm:flex-row bg-slate-500 border border-gray-900 rounded-xl ">
+                  <div className="flex flex-col p-2  ">
+                    <span className="text-sm sm:text-base font-semibold">
                       Show total prices
                     </span>
-                    <span className="mb-1 text-sm sm:text-base">
+                    <span className="text-sm sm:text-base">
                       For 1 night, includes taxes & fees
                     </span>
                   </div>
 
-                  <div className="ml-auto">
+                  <div className="p-4">
                     <FormGroup>
                       <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} />} />
                     </FormGroup>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -719,7 +732,7 @@ const HotelDetails = ({ data }) => {
             <Button>Show All Amenities</Button>
           </div>
         </div> */}
-        <Amenities />
+        <Amenities amenities={hotel.amenities} />
 
         <AboutHotel />
 
@@ -824,12 +837,12 @@ const HotelDetails = ({ data }) => {
         <RatingSection />
         <ReviewBox />
 
-        <div className="mt-5 p-0  border-b  border-gray-500">
+        <div className=" py-4  border-b  border-gray-500">
           <h1 className="text-2xl  font-bold ">Location</h1>
           <span className="text-lg p-0 ">
             NOPSI Hotel, New Orleans 317 Baronne Street, New Orleans, LA
           </span>
-          <div className="mt-5">
+          <div className="py-4">
             <div style={containerStyle}>
               <iframe
                 title="Google Map"
@@ -860,6 +873,15 @@ const HotelDetails = ({ data }) => {
               <p>{hotel.address.administrative_area}</p>
               <p>{hotel.address.postal_code}</p>
               <p>{hotel.address.country_code}</p>
+
+              <div>
+                <h2>Amenities:</h2>
+                <ul>
+                  {hotel.amenities.map((amenity) => (
+                    <li key={amenity.machine_name}>{amenity.name}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
