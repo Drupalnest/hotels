@@ -56,25 +56,27 @@
 // export default GoogleMapComponent;
 
 //AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ
-import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import React, { useState, useEffect } from "react";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  Rectangle,
+  Circle,
+} from "@react-google-maps/api";
+import HomeIcon from "@mui/icons-material/Home";
 
-const GoogleMapComponent = ({ lat_lon }) => {
-  const [map, setMap] = useState(null);
-  const [mapType, setMapType] = useState('roadmap');
+const GoogleMapComponent = ({ lat_lon, address }) => {
+  const [mapType, setMapType] = useState("roadmap");
 
   const centerLat = (lat_lon.top + lat_lon.bottom) / 2;
   const centerLng = (lat_lon.left + lat_lon.right) / 2;
 
-  const latDifference = lat_lon.top - lat_lon.bottom;
-  const lngDifference = lat_lon.right - lat_lon.left;
-
-  // Adjust the zoom value to your preferred level
-  const zoom = 18;
+  const zoom = 15;
 
   const mapContainerStyle = {
-    width: '100%',
-    height: '400px',
+    width: "100%",
+    height: "500px",
   };
 
   const options = {
@@ -83,34 +85,71 @@ const GoogleMapComponent = ({ lat_lon }) => {
     mapTypeId: mapType,
   };
 
-  const defaultCenter = {
-    lat: centerLat,
-    lng: centerLng,
-  };
-
   const handleToggleMapType = () => {
-    setMapType((prevType) => (prevType === 'roadmap' ? 'satellite' : 'roadmap'));
+    setMapType((prevType) =>
+      prevType === "roadmap" ? "satellite" : "roadmap"
+    );
   };
-
-  useEffect(() => {
-    if (map) {
-      map.setMapTypeId(mapType);
-    }
-  }, [map, mapType]);
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        center={defaultCenter}
+        center={{ lat: centerLat, lng: centerLng }}
         zoom={zoom}
         options={options}
-        onLoad={(map) => setMap(map)}
       >
-        <Marker position={defaultCenter} />
+        <Marker position={{ lat: centerLat, lng: centerLng }} />
+
+        {/* Red rectangle surrounding the location */}
+        {/* <Rectangle
+          bounds={{
+            north: lat_lon.top,
+            south: lat_lon.bottom,
+            east: lat_lon.right,
+            west: lat_lon.left,
+          }}
+          options={{
+            fillColor: "red",
+            fillOpacity: 0.2,
+            strokeColor: "red",
+            strokeOpacity: 1,
+            strokeWeight: 2,
+          }}
+        /> */}
+
+        {/* Blue rectangle representing the discovery area */}
+        {/* <Rectangle
+          bounds={{
+            north: centerLat + 0.01,
+            south: centerLat - 0.01,
+            east: centerLng + 0.01,
+            west: centerLng - 0.01,
+          }}
+          options={{
+            fillColor: "blue",
+            fillOpacity: 0.1,
+            strokeColor: "blue",
+            strokeOpacity: 1,
+            strokeWeight: 2,
+          }}
+        /> */}
+
+        {/* Circular overlay around the city center */}
+        <Circle
+          center={{ lat: centerLat, lng: centerLng }}
+          radius={1000} // Adjust the radius as needed (in meters)
+          options={{
+            fillColor: "blue", // You can change the color
+            fillOpacity: 0.1,
+            strokeColor: "blue",
+            strokeOpacity: 1,
+            strokeWeight: 0.5,
+          }}
+        />
 
         <button onClick={handleToggleMapType}>
-          Toggle Map Type ({mapType === 'roadmap' ? 'Satellite' : 'Standard'})
+          Toggle Map Type ({mapType === "roadmap" ? "Satellite" : "Standard"})
         </button>
       </GoogleMap>
     </LoadScript>
@@ -118,11 +157,6 @@ const GoogleMapComponent = ({ lat_lon }) => {
 };
 
 export default GoogleMapComponent;
-
-
-
-
-
 
 // GoogleMapComponent.js
 // import React from "react";

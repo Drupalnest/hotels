@@ -842,8 +842,12 @@ const HotelDetails = ({ data }) => {
 
         <div className=" py-4  border-b  border-gray-500">
           <h1 className="text-2xl  font-bold ">Location</h1>
-          <span className="text-lg p-0 ">
-            NOPSI Hotel, New Orleans 317 Baronne Street, New Orleans, LA
+          <span className="text-lg p-0 flex flex-row gap-2">
+            <p>{hotel.address.address_line1}</p>
+            <p>{hotel.address.locality}</p>
+            <p>{hotel.address.administrative_area}</p>
+            <p>{hotel.address.postal_code}</p>
+            <p>{hotel.address.country_code}</p>
           </span>
 
           {/* <div className="py-4">
@@ -860,7 +864,7 @@ const HotelDetails = ({ data }) => {
               ></iframe>
             </div>
           </div> */}
-          <GoogleMapComponent lat_lon={hotel.lat_lon} />
+          <GoogleMapComponent lat_lon={hotel.lat_lon} address={hotel.address} />
         </div>
 
         <div>
@@ -890,15 +894,16 @@ const HotelDetails = ({ data }) => {
               </div> */}
               {/* <div><p>{hotel.description}</p></div> */}
             </div>
-            {hotel.lat_lon.bottom}
-            {hotel.lat_lon.geo_type}
-            {hotel.lat_lon.geohash}
-            {hotel.lat_lon.lat}
-            {hotel.lat_lon.left}
-            {hotel.lat_lon.lon}
-            {hotel.lat_lon.right}
-            {hotel.lat_lon.top}
-            {hotel.lat_lon.value}
+            <p>latlon des sdfdf </p>
+            <p> {hotel.lat_lon.geo_type}</p>
+            <p> {hotel.lat_lon.geohash}</p>
+            <p> {hotel.lat_lon.lat}</p>
+            <p>{hotel.lat_lon.lon}</p>
+            <p> {hotel.lat_lon.top}</p>
+            <p> {hotel.lat_lon.bottom}</p>
+            <p> {hotel.lat_lon.left}</p>
+            <p> {hotel.lat_lon.right}</p>
+            <p> {hotel.lat_lon.value}</p>
           </div>
         </div>
       </div>
@@ -937,6 +942,12 @@ export const query = graphql`
             right
             top
             value
+          }
+          address {
+            address_line1
+            locality
+            postal_code
+            country_code
           }
         }
       }
