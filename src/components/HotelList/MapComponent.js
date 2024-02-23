@@ -36,6 +36,7 @@
 import React, { useState } from "react";
 import { LoadScript, GoogleMap } from "@react-google-maps/api";
 import MapIcon from "@mui/icons-material/Map";
+import FilterByMaps from "../MapComponents/FilterByMaps";
 
 const MapComponent = () => {
   const center = {
@@ -46,7 +47,7 @@ const MapComponent = () => {
   const [showMap, setShowMap] = useState(false);
 
   const handleButtonClick = () => {
-    setShowMap(!showMap);
+    <FilterByMaps />;
   };
 
   return (
@@ -54,6 +55,7 @@ const MapComponent = () => {
       <button
         className="border-2 hover:border-gray-500 bg-white  font-bold p-2 rounded-xl text-blue-800 z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         style={{ zIndex: 1 }}
+        onClick={handleButtonClick}
       >
         <MapIcon className="mr-2" />
         View Map
@@ -74,6 +76,7 @@ const MapComponent = () => {
           />
         </LoadScript>
       </div>
+     
     </div>
   );
 };
