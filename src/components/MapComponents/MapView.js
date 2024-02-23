@@ -1,6 +1,6 @@
 import React from "react";
 
-const FilterByMaps = () => {
+const MapView = () => {
   return (
     <div>
       <div className="flex flex-row">
@@ -11,4 +11,4 @@ const FilterByMaps = () => {
   );
 };
 
-export default FilterByMaps;
+export default MapView;

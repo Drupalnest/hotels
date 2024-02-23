@@ -36,7 +36,7 @@
 import React, { useState } from "react";
 import { LoadScript, GoogleMap } from "@react-google-maps/api";
 import MapIcon from "@mui/icons-material/Map";
-import FilterByMaps from "../MapComponents/FilterByMaps";
+import { navigate } from "gatsby";
 
 const MapComponent = () => {
   const center = {
@@ -47,7 +47,8 @@ const MapComponent = () => {
   const [showMap, setShowMap] = useState(false);
 
   const handleButtonClick = () => {
-    <FilterByMaps />;
+    
+    navigate('/map');
   };
 
   return (
@@ -76,7 +77,6 @@ const MapComponent = () => {
           />
         </LoadScript>
       </div>
-     
     </div>
   );
 };
