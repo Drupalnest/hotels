@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Checkbox from "@mui/material/Checkbox";
 
-const DropdownButton = () => {
+const PropertyTypes = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -74,4 +74,4 @@ const DropdownButton = () => {
   );
 };
 
-export default DropdownButton;
+export default PropertyTypes;

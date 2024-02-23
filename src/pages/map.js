@@ -1,24 +1,36 @@
-import React from "react";
-import room1 from "../assets/room1.jpg";
-import Filter from "../components/HotelList/Filter";
-import MapComponent from "../components/HotelList/MapComponent";
+//AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ
 
+import React from "react";
+import { LoadScript, GoogleMap } from "@react-google-maps/api";
+import AllFilter from "../components/FilterComponents/AllFilter";
 const hotellist = () => {
+  const center = {
+    lat: 37.7749,
+    lng: -122.4194,
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center border border-red-500 ">
+    <div className="flex  flex-col items-center justify-center border border-red-500 ">
       <div className="w-full container-fluid h-10 border-2">Navbar</div>
       <div className="w-full container-fluid h-10 border-2">Search</div>
       <div className="border border-blue-500 flex flex-row  w-full  justify-center">
         <div className="flex flex-col border-2 w-1/1 py-2 px-4">
           <div>
-            <Filter />
+            <AllFilter />
           </div>
         </div>
-        <div
-          className=" flex flex-row border border-red-500"
-          style={{ width: "500px" }}
-        >
-            <MapComponent/>
+        <div className="w-full flex flex-row border border-red-500">
+          <LoadScript googleMapsApiKey="AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ">
+            <GoogleMap
+              mapContainerStyle={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "4%",
+              }}
+              center={center}
+              zoom={10}
+            />
+          </LoadScript>
         </div>
       </div>
     </div>
