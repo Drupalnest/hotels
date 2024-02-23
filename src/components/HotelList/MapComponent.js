@@ -35,6 +35,7 @@
 
 import React, { useState } from "react";
 import { LoadScript, GoogleMap } from "@react-google-maps/api";
+import MapIcon from "@mui/icons-material/Map";
 
 const MapComponent = () => {
   const center = {
@@ -51,9 +52,10 @@ const MapComponent = () => {
   return (
     <div style={{ position: "relative", height: "150px" }}>
       <button
-        className="border-2 bg-white  font-bold p-2 rounded text-blue-800 z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        className="border-2 hover:border-gray-500 bg-white  font-bold p-2 rounded-xl text-blue-800 z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         style={{ zIndex: 1 }}
       >
+        <MapIcon className="mr-2" />
         View Map
       </button>
       <div
