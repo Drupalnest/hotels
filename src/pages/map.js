@@ -24,7 +24,7 @@ const hotellist = () => {
             <GoogleMap
               mapContainerStyle={{
                 width: "100%",
-                height: "100%",
+                height: "800px",
                 borderRadius: "4%",
               }}
               center={center}
