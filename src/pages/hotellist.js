@@ -1,14 +1,16 @@
 import React from "react";
 import room1 from "../assets/room1.jpg";
+import Filter from "../components/HotelList/Filter";
+
 const hotellist = () => {
   return (
     <div>
       <div className="container-fluid h-10 border-2">Navbar</div>
       <div className="container-fluid h-10 border-2">serach</div>
-      <div className="flex flex-row border-2">
+      <div className="container flex flex-row border-2">
         <div className="flex flex-col border-2 w-1/3">
           <div>
-            
+            <Filter/>
           </div>
         </div>
         <div className="flex flex-row border-2">
