@@ -35,7 +35,7 @@ const SetYourBudget = () => {
         onClick={handleToggle}
       >
         <div className="flex justify-between items-center">
-          <span className="font-bold text-lg">Property Types</span>
+          <span className="font-bold text-lg">Set Your Budget</span>
           <ExpandMoreIcon
             style={{
               transform: isOpen ? "rotate(180deg)" : "rotate(360deg)",
