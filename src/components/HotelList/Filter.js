@@ -2,6 +2,7 @@ import React from "react";
 import MapComponent from "./MapComponent";
 import SortBy from "../FilterComponents/SortBy";
 import PropertyTypes from "../FilterComponents/PropertyTypes";
+import SetYourBudget from "../FilterComponents/SetYourBudget";
 
 const Filter = () => {
   return (
@@ -10,7 +11,8 @@ const Filter = () => {
       <div>
         <p>Sort by</p>
         <SortBy />
-        <PropertyTypes/>
+        <PropertyTypes />
+        <SetYourBudget />
       </div>
     </div>
   );

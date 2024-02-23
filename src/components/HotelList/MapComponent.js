@@ -1,26 +1,27 @@
 //AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ
 
-
-
-
 import React from "react";
 import { LoadScript, GoogleMap } from "@react-google-maps/api";
 
 const MapComponent = () => {
   const center = {
-    lat: 37.7749, // Replace with the desired latitude
-    lng: -122.4194, // Replace with the desired longitude
+    lat: 37.7749,
+    lng: -122.4194,
   };
 
   return (
-    <div className="border-2">
+    <div
+      className="border-2  "
+      style={{ width: "100%", height: "150px", borderRadius: "4%" }}
+    >
       <LoadScript googleMapsApiKey="AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ">
         <GoogleMap
-          style={{
+          mapContainerStyle={{
             width: "100%",
-            height: "100px", // Adjust the height as needed
+            height: "100%",
+            borderRadius: "4%",
           }}
-          center={center} // Add the center prop
+          center={center}
           zoom={10}
         />
       </LoadScript>
