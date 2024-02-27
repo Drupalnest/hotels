@@ -14,6 +14,7 @@ import Image6 from "../assets/room6.jpg";
 
 const MyPage = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
+  // console.log("hotelsdfdv",hotels)
 
   const imagePaths = [Image1, Image2, Image3, Image4, Image5, Image6];
 
