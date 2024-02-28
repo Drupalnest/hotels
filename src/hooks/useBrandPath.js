@@ -1,6 +1,6 @@
-// import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 
-// export const useBrandPath = (brandId) => {
+export const useBrandPath = (brandId) => {
 //   const data = useStaticQuery(graphql`
 //     {
 //       allBrand {
@@ -27,4 +27,4 @@
 //   } else {
 //     return null;
 //   }
-// }
+}
