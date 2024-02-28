@@ -302,7 +302,7 @@ const MapComponent = () => {
 
     // Load Google Maps API script
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&v=weekly&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ&libraries=places&v=weekly&callback=initMap`;
     script.defer = true;
     document.head.appendChild(script);
 
