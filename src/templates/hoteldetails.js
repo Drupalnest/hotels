@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { graphql } from "gatsby";
 import { Button, Card, Input, PopoverPaper } from "@mui/material";
 import Footer from "../components/Footer";
-import Navbar from "../components/Header";
+//import Navbar from "../components/Header";
 import ImageSlider from "../components/ImageSlider";
 import PlaceIcon from "@mui/icons-material/Place";
 import IosShareIcon from "@mui/icons-material/IosShare";
@@ -78,7 +78,7 @@ const HotelDetails = ({ data }) => {
 
   return (
     <div className="container-fluid">
-      <Navbar />
+      {/* <Navbar /> */}
       <ImageSlider />
 
       {/* <div className="container-fluid flex flex-row overflow-x-auto">
