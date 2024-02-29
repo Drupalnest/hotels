@@ -214,257 +214,6 @@
 // };
 // export default Search;
 
-import React, { useEffect, useRef, useState } from "react";
-import DatePicker from "react-datepicker";
-import { DayPicker } from "react-day-picker";
-import "react-datepicker/dist/react-datepicker.css";
-import "./DayPicker.css";
-import "react-day-picker/dist/style.css";
-
-const Search = ({ hotels, airports, cruise, interest, city }) => {
-  const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-
-  const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
-
-  // Filter based on the entered search term
-  const filteredData = allData.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const today = new Date(); // Get the current date
-  const tomorrow = new Date(today); // Get tomorrow's date
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [dateRange, setDateRange] = useState([today, tomorrow]);
-
-  const handleDayPickerToggle = () => {
-    setIsCalendarOpen(!isCalendarOpen);
-  };
-
-  const handleDayClick = (day) => {
-    const newDateRange = [...dateRange];
-
-    if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
-      newDateRange[0] = day;
-      newDateRange[1] = null;
-    } else if (day > newDateRange[0]) {
-      newDateRange[1] = day;
-      setIsCalendarOpen(false);
-    } else {
-      // Swap dates if the selected date is before the check-in date
-      newDateRange[1] = newDateRange[0];
-      newDateRange[0] = day;
-      setIsCalendarOpen(false);
-    }
-
-    setDateRange(newDateRange);
-  };
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [rooms, setRooms] = useState(1);
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(0);
-  const dropdownRef = useRef(null);
-
-  const handleToggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsDropdownOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const handleIncrement = (type) => {
-    switch (type) {
-      case "rooms":
-        setRooms(rooms + 1);
-        break;
-      case "adults":
-        setAdults(adults + 1);
-        break;
-      case "children":
-        setChildren(children + 1);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleDecrement = (type) => {
-    if (type === "rooms" && rooms > 1) {
-      setRooms(rooms - 1);
-    } else if (type === "adults" && adults > 1) {
-      setAdults(adults - 1);
-    } else if (type === "children" && children > 0) {
-      setChildren(children - 1);
-    }
-  };
-
-  return (
-    <div className="w-1/ border-2 border border-red-500  flex flex-row">
-      <div className=" mb-4 sm:mr-4 sm:mb-0 border rounded focus:outline-none border-gray-500">
-        <input
-          type="text"
-          className="w-full p-3 border rounded focus:outline-none focus:border-blue-500"
-          placeholder="Search by Hotel Name"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        {/* Display filtered hotels if there is a search term */}
-        {searchTerm && (
-          <div className="mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
-            {filteredData.map((item) => (
-              <div key={item.id} className="mb-2">
-                {item.name}
-                {/* {item.lat_lon.lat} */}
-
-                {item.lat_lon
-                ? item.lat_lon.latlon
-                : "Address Not Available"} 
-
-                {/* {item.address
-                ? item.address.address_line1
-                : "Address Not Available"} */}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div
-        style={{ position: "relative" }}
-        className="flex-grow mb-4 sm:mr-4 sm:mb-0"
-      >
-        <input
-          type="text"
-          placeholder="Check-in Check-out"
-          onClick={handleDayPickerToggle}
-          value={`${dateRange[0]?.toLocaleDateString()}${
-            dateRange[0] && dateRange[1]
-              ? " - " + dateRange[1]?.toLocaleDateString()
-              : ""
-          }`}
-          readOnly
-          className="overflow-x-auto w-full p-3 border rounded focus:outline-none focus:border-blue-500"
-        />
-        {isCalendarOpen && (
-          <DayPicker
-            numberOfMonths={2}
-            pagedNavigation
-            selected={dateRange[0]}
-            onDayClick={handleDayClick}
-            startDate={dateRange[0]}
-            endDate={dateRange[1]}
-            selectsRange
-            placeholderText="Check-in Check-out"
-            className="w-full p-3 border rounded focus:outline-none focus:border-blue-500"
-            style={{
-              zIndex: 1000,
-              width: "300px",
-              backgroundColor: "#ffffff",
-              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.15)",
-              borderRadius: "8px",
-            }}
-            modifiers={{
-              disabled: { before: today },
-            }}
-          />
-        )}
-      </div>
-
-      <div
-        ref={dropdownRef}
-        className=" relative flex-grow mb-4 sm:mr-4 sm:mb-0"
-      >
-        <button
-          className="w-full p-3 border rounded focus:outline-none focus:border-blue-500 text-blue-500 hover:bg-blue-50"
-          onClick={handleToggleDropdown}
-        >
-          {rooms} Rooms, {children} Children, {adults} Adults
-        </button>
-        {isDropdownOpen && (
-          <div className="absolute top-10 right-0 p-4 bg-white border rounded shadow">
-            <div className="mb-4">
-              <label className="block text-gray-700">Rooms:</label>
-              <div className="flex">
-                <button
-                  className="px-2 py-1 border rounded hover:bg-gray-200"
-                  onClick={() => handleDecrement("rooms")}
-                >
-                  -
-                </button>
-                <span className="mx-2">{rooms}</span>
-                <button
-                  className="px-2 py-1 border rounded hover:bg-gray-200"
-                  onClick={() => handleIncrement("rooms")}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Adults:</label>
-              <div className="flex">
-                <button
-                  className="px-2 py-1 border rounded hover:bg-gray-200"
-                  onClick={() => handleDecrement("adults")}
-                >
-                  -
-                </button>
-                <span className="mx-2">{adults}</span>
-                <button
-                  className="px-2 py-1 border rounded hover:bg-gray-200"
-                  onClick={() => handleIncrement("adults")}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-            <div>
-              <label className="block text-gray-700">Children:</label>
-              <div className="flex">
-                <button
-                  className="px-2 py-1 border rounded hover:bg-gray-200"
-                  onClick={() => handleDecrement("children")}
-                >
-                  -
-                </button>
-                <span className="mx-2">{children}</span>
-                <button
-                  className="px-2 py-1 border rounded hover:bg-gray-200"
-                  onClick={() => handleIncrement("children")}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="flex-grow">
-        <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded transition duration-300 w-full sm:w-auto">
-          Update Search
-        </button>
-      </div>
-    </div>
-  );
-};
-export default Search;
-
 // import React, { useState, useEffect } from "react";
 // import Axios from "axios";
 // import "../styles/autocomplete.css";
@@ -901,3 +650,80 @@ export default Search;
 // SearchAutocomplete.defaultProps = {
 //   id: null,
 // };
+
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchTerm, setSelectedHotel, setHotelDetails } from "../../redux/actions";
+import HotelDetailsComponent from "../HotelList/HotelDetailss";
+
+// Placeholder function to simulate fetching hotel details
+const fetchHotelDetails = (hotelId) => {
+  // Replace this with your actual logic to fetch hotel details
+  return {
+    id: hotelId,
+    name: "Hotel Name",
+    address: "Hotel Address",
+    // Add other details as needed
+  };
+};
+
+const Search = ({ hotels, airports, cruise, interest, city }) => {
+  const dispatch = useDispatch();
+  const searchTerm = useSelector((state) => state.hotel.searchTerm);
+  const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
+  const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
+
+  const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
+
+  const filteredData = allData.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleHotelClick = (hotel) => {
+    dispatch(setSelectedHotel(hotel));
+
+    // Fetch detailed information for the selected hotel (replace with your logic)
+    const details = fetchHotelDetails(hotel.id,hotel.Name,hotel.address);
+
+    console.log("detailsdfdfg",details)
+    // Dispatch the action to store hotel details in Redux
+    dispatch(setHotelDetails(details));
+  };
+
+  return (
+    <div>
+      <div className="mb-4 sm:mr-4 sm:mb-0 border rounded focus:outline-none border-gray-500">
+        <input
+          type="text"
+          className="w-full p-3 border rounded focus:outline-none focus:border-blue-500"
+          placeholder="Search by Hotel Name"
+          value={searchTerm}
+          onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+        />
+        {searchTerm && (
+          <div className="mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
+            {filteredData.map((item) => (
+              <div
+                key={item.id}
+                className="mb-2 cursor-pointer"
+                onClick={() => handleHotelClick(item)}
+              >
+                {item.name}
+                {/* {item.address.address_line1} */}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      
+      {/* {selectedHotel && <HotelDetailsComponent hotel={selectedHotel} />}
+
+    
+      {hotelDetails && <HotelDetailsComponent hotel={hotelDetails} />} */}
+    </div>
+  );
+};
+
+export default Search;
+

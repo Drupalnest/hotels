@@ -1,10 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import hotelReducer from './reducer';
+// store.js
+import { createStore, combineReducers } from 'redux';
+import reducer from './reducer';
 
-const store = configureStore({
-  reducer: {
-    hotel: hotelReducer,
-  },
+// Combine reducers if you have multiple reducers
+const rootReducer = combineReducers({
+  // Add other reducers here if needed
+  hotel: reducer,
 });
+
+// Create the Redux store
+const store = createStore(rootReducer);
 
 export default store;

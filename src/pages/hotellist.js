@@ -87,6 +87,9 @@ import Filter from "../components/HotelList/Filter";
 import Search from "../components/SearchComponents/Search";
 import PreHeader from "../components/PreHeader";
 import Header from "../components/Header";
+import HotelDetailss from "../components/HotelList/HotelDetailss";
+import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
+import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 
 const hotellist = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
@@ -105,7 +108,7 @@ const hotellist = ({ data }) => {
       {/* <Header /> */}
 
       <div className="w-full container-fluid h-10 border-2">Navbar</div>
-      <Search
+      <HeaderSearchBox
         hotels={hotels}
         airports={airports}
         city={city}
@@ -118,7 +121,7 @@ const hotellist = ({ data }) => {
             <Filter />
           </div>
         </div>
-        <div className="flex flex-row border-2">
+        {/* <div className="flex flex-row border-2">
           <div>
             <img
               src={room1}
@@ -161,7 +164,9 @@ const hotellist = ({ data }) => {
               <button>Choose your room</button>
             </div>
           </div>
-        </div>
+         
+        </div> */}
+        <HotelDetailsComponent />
       </div>
     </div>
   );

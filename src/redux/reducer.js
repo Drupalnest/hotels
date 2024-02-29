@@ -1,18 +1,23 @@
-import { createReducer } from '@reduxjs/toolkit';
+// Reducer.js
+import { SET_SEARCH_TERM, SET_SELECTED_HOTEL, SET_HOTEL_DETAILS } from './actions';
 
 const initialState = {
-  cart: [],
-  bookedRooms: [],
+  searchTerm: '',
+  selectedHotel: null,
+  hotelDetails: null, 
 };
 
-const hotelReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase('hotel/addToCart', (state, action) => {
-      state.cart.push(action.payload);
-    })
-    .addCase('hotel/bookRoom', (state, action) => {
-      state.bookedRooms.push(action.payload);
-    });
-});
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_SEARCH_TERM:
+      return { ...state, searchTerm: action.payload };
+    case SET_SELECTED_HOTEL:
+      return { ...state, selectedHotel: action.payload };
+    case SET_HOTEL_DETAILS:
+      return { ...state, hotelDetails: action.payload };
+    default:
+      return state;
+  }
+};
 
-export default hotelReducer;
+export default reducer;
