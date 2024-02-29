@@ -103,6 +103,7 @@ const hotellist = ({ data }) => {
     <div className="flex flex-col items-center justify-center border border-red-500 ">
       <PreHeader />
       {/* <Header /> */}
+      
       <div className="w-full container-fluid h-10 border-2">Navbar</div>
       <Search
         hotels={hotels}
