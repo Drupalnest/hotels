@@ -315,7 +315,6 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
 
   return (
     <div className="w-1/ border-2 border border-red-500  flex flex-row">
-      {/* Input box for searching hotels by name */}
       <div className=" mb-4 sm:mr-4 sm:mb-0 border rounded focus:outline-none border-gray-500">
         <input
           type="text"
@@ -330,6 +329,12 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
             {filteredData.map((item) => (
               <div key={item.id} className="mb-2">
                 {item.name}
+                {/* {item.lat_lon.lat} */}
+
+                {item.lat_lon
+                ? item.lat_lon.latlon
+                : "Address Not Available"} 
+
                 {/* {item.address
                 ? item.address.address_line1
                 : "Address Not Available"} */}
