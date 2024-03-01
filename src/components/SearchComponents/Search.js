@@ -652,12 +652,187 @@
 // };
 // Search.js
 
+// import React from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import {
+//   setSearchTerm,
+//   setSelectedHotel,
+//   setHotelDetails,
+// } from "../../redux/actions";
+// import HotelDetailsComponent from "../HotelList/HotelDetailss";
+
+// const Search = ({ hotels, airports, cruise, interest, city }) => {
+//   const dispatch = useDispatch();
+
+//   const fetchHotelDetails = (hotelId, hotelName, addressLine) => {
+//     // Replace this with your actual logic to fetch hotel details
+//     return {
+//       id: hotelId,
+//       name: hotelName,
+//       address: "Hotel Address",
+//       // Add other details as needed
+//     };
+//   };
+
+//   const searchTerm = useSelector((state) => state.hotel.searchTerm);
+//   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
+//   const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
+
+//   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
+
+//   const filteredData = allData.filter((item) =>
+//     item.name.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+
+//   const handleHotelClick = (hotel) => {
+//     dispatch(setSelectedHotel(hotel));
+
+//     // Fetch detailed information for the selected hotel (replace with your logic)
+//     const details = fetchHotelDetails(
+//       hotel.id,
+//       hotel.Name,
+//       hotel.address ? hotel.address.address_line1 : "Address not available"
+//     );
+
+//     // Dispatch the action to store hotel details in Redux
+//     dispatch(setHotelDetails(details));
+//   };
+
+//   return (
+//     <div>
+//       <div className="relative mb-4 sm:mr-4 sm:mb-0 border rounded focus:outline-none border-gray-500">
+//         <input
+//           type="text"
+//           className="w-full p-3 border rounded focus:outline-none focus:border-blue-500"
+//           placeholder="Search by Hotel Name"
+//           value={searchTerm}
+//           onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+//         />
+//         {searchTerm && (
+//           <div className="mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
+//             {filteredData.map((item) => (
+//               <div
+//                 key={item.id}
+//                 className="mb-2 cursor-pointer"
+//                 onClick={() => handleHotelClick(item)}
+//               >
+//                 {item.name}
+//                 {item.address && (
+//                   <div>
+//                     <div>{item.address.address_line1}</div>
+//                     <div>{item.address.locality}</div>
+//                     {/* Add other address properties as needed */}
+//                   </div>
+//                 )}
+//               </div>
+//             ))}
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Search;
+// import React from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import {
+//   setSearchTerm,
+//   setSelectedHotel,
+//   setHotelDetails,
+// } from "../../redux/actions";
+// import HotelDetailsComponent from "../HotelList/HotelDetailss";
+
+// const Search = ({ hotels, airports, cruise, interest, city }) => {
+//   const dispatch = useDispatch();
+
+//   const fetchHotelDetails = (hotelId, hotelName, addressLine) => {
+//     // Replace this with your actual logic to fetch hotel details
+//     return {
+//       id: hotelId,
+//       name: hotelName,
+//       address: "Hotel Address",
+//       // Add other details as needed
+//     };
+//   };
+
+//   const searchTerm = useSelector((state) => state.hotel.searchTerm);
+//   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
+//   const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
+
+//   // Combine all data into a single array
+//   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
+
+//   // Filter hotels based on the selected locality
+//   // ...
+
+//   const filteredData = allData.filter(
+//     (item) =>
+//       item.name.toLowerCase().includes(searchTerm.toLowerCase())
+//       // Remove the locality condition for now
+//   );
+
+//   // ...
+
+//   const handleHotelClick = (hotel) => {
+//     dispatch(setSelectedHotel(hotel));
+
+//     // Fetch detailed information for the selected hotel (replace with your logic)
+//     const details = fetchHotelDetails(
+//       hotel.id,
+//       hotel.Name,
+//       hotel.address ? hotel.address.address_line1 : "Address not available"
+//     );
+
+//     // Dispatch the action to store hotel details in Redux
+//     dispatch(setHotelDetails(details));
+//   };
+
+//   console.log("searchTerm", searchTerm);
+//   console.log("selectedHotel", selectedHotel);
+
+//   return (
+//     <div>
+//       <div className="relative mb-4 sm:mr-4 sm:mb-0 border rounded focus:outline-none border-gray-500">
+//         <input
+//           type="text"
+//           className="w-full p-3 border rounded focus:outline-none focus:border-blue-500"
+//           placeholder="Search by Hotel Name"
+//           value={searchTerm}
+//           onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+//         />
+//         {searchTerm && (
+//           <div className="z-50 bg-slate-50 mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
+//             {filteredData.map((item) => (
+//               <div
+//                 key={item.id}
+//                 className="mb-2 cursor-pointer"
+//                 onClick={() => handleHotelClick(item)}
+//               >
+//                 {item.address && (
+//                   <div>
+//                     <div>{item.address.locality}</div>
+//                     {/* Add other address properties as needed */}
+//                   </div>
+//                 )}
+//               </div>
+//             ))}
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Search;
+
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSearchTerm,
   setSelectedHotel,
   setHotelDetails,
+  setFilteredHotels 
 } from "../../redux/actions";
 import HotelDetailsComponent from "../HotelList/HotelDetailss";
 
@@ -678,12 +853,28 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
   const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
 
+  // Combine all data into a single array
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
 
-  const filteredData = allData.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filter hotels based on the selected locality
 
+  const uniqueLocalities = new Set();
+
+  const filteredData = allData.filter((item) => {
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      item.address && item.address.locality &&
+      item.address.locality.toLowerCase().includes(searchTerm.toLowerCase());
+
+    if (matchesSearch) {
+      // Add the locality to the set if it matches the search
+      uniqueLocalities.add(item.address.locality);
+    }
+
+    return matchesSearch;
+  });
+
+
+  // Handle click on hotel item
   const handleHotelClick = (hotel) => {
     dispatch(setSelectedHotel(hotel));
 
@@ -696,6 +887,19 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
 
     // Dispatch the action to store hotel details in Redux
     dispatch(setHotelDetails(details));
+
+    // Log filtered hotels based on locality
+   
+
+    const filteredHotels = allData.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        item.address &&
+        item.address.locality &&
+        item.address.locality.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    console.log("Filtered Hotels based on Locality:", filteredHotels);
+    dispatch(setFilteredHotels(filteredHotels));
   };
 
   return (
@@ -709,17 +913,15 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
           onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
         {searchTerm && (
-          <div className="mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
+          <div className="z-50 bg-slate-50 mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
             {filteredData.map((item) => (
               <div
                 key={item.id}
                 className="mb-2 cursor-pointer"
                 onClick={() => handleHotelClick(item)}
               >
-                {item.name}
                 {item.address && (
                   <div>
-                    <div>{item.address.address_line1}</div>
                     <div>{item.address.locality}</div>
                     {/* Add other address properties as needed */}
                   </div>

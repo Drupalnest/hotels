@@ -102,7 +102,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   };
 
   return (
-    <div className=" w-1/ h-20 border-2 border border-red-500  flex flex-row">
+    <div className=" relative z-50 w-1/ h-20 border-2 border border-red-500  flex flex-row">
       <Search
         hotels={hotels}
         airports={airports}

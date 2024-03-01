@@ -64,8 +64,147 @@
 
 // export default HotelDetailsComponent;
 
+// // HotelDetailsComponent.js
+// import React from "react";
+// import { useSelector } from "react-redux";
+// import room1 from "../../assets/room1.jpg";
 
+// const HotelDetailsComponent = () => {
+//   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
 
+//   if (!selectedHotel) {
+//     return <div>No hotel selected</div>;
+//   }
+
+//   console.log("selectedHotel", selectedHotel); // Check if you see details in the console
+
+//   return (
+//     <div className="flex flex-row border-2">
+//       <div>
+//         <img
+//           src={room1}
+//           className=""
+//           style={{
+//             border: "2px solid red",
+//             width: "200px",
+//             height: "150px",
+//           }}
+//         />
+//       </div>
+//       <div className="flex flex-col border-2">
+//         <div className="flex flex-col border-2">
+//           {/* Add your amenities rendering logic here */}
+//           {selectedHotel.amenities &&
+//             selectedHotel.amenities.map((amenity) => (
+//               <p key={amenity.machine_name}>{amenity.name}</p>
+//             ))}
+//         </div>
+//         <div>
+//           <span>
+//             <p>{selectedHotel.name}</p>
+//           </span>
+//           <span>
+//             {/* Access address properties individually */}
+//             <p>{selectedHotel.address && selectedHotel.address.address_line1}</p>
+//             <p>{selectedHotel.hotel_code}</p>
+//             <p>{selectedHotel.phone}</p>
+//             <p>Latitude: {selectedHotel.lat_lon && selectedHotel.lat_lon.lat}</p>
+//             <p>Longitude: {selectedHotel.lat_lon && selectedHotel.lat_lon.lon}</p>
+//           </span>
+//           <span>
+//             <p>Free Internet Access, Free Parking Amenities</p>
+//             <p>Fully Refundable Rates, Pay Later Available</p>
+//           </span>
+//           <span className="flex flex-row">
+//             <p>7.9</p>
+//             <p>291 Rating</p>
+//             <p>3-Star Hotel</p>
+//           </span>
+//         </div>
+//       </div>
+//       <div>
+//         <div>
+//           <p>₹11533</p>
+//           <p>₹123,066 for 2 nights</p>
+//           <button>Choose your room</button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default HotelDetailsComponent;
+
+// // HotelDetailsComponent.js
+// import React from "react";
+// import { useSelector } from "react-redux";
+// import room1 from "../../assets/room1.jpg";
+
+// const HotelDetailsComponent = () => {
+//     const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
+
+//   if (!filteredHotels) {
+//     return <div>No hotel selected</div>;
+//   }
+
+//   console.log("selectedHotel", filteredHotels); // Check if you see details in the console
+
+//   return (
+//     <div className="flex flex-row border-2">
+//       <div>
+//         <img
+//           src={room1}
+//           className=""
+//           style={{
+//             border: "2px solid red",
+//             width: "200px",
+//             height: "150px",
+//           }}
+//         />
+//       </div>
+//       <div className="flex flex-col border-2">
+//         <div className="flex flex-col border-2">
+//           {/* Add your amenities rendering logic here */}
+//           {selectedHotel.amenities &&
+//             selectedHotel.amenities.map((amenity) => (
+//               <p key={amenity.machine_name}>{amenity.name}</p>
+//             ))}
+//         </div>
+//         <div>
+//           <span>
+//             <p>{selectedHotel.name}</p>
+//           </span>
+//           <span>
+//             {/* Access address properties individually */}
+//             <p>{selectedHotel.address && selectedHotel.address.address_line1}</p>
+//             <p>{selectedHotel.hotel_code}</p>
+//             <p>{selectedHotel.phone}</p>
+//             <p>Latitude: {selectedHotel.lat_lon && selectedHotel.lat_lon.lat}</p>
+//             <p>Longitude: {selectedHotel.lat_lon && selectedHotel.lat_lon.lon}</p>
+//           </span>
+//           <span>
+//             <p>Free Internet Access, Free Parking Amenities</p>
+//             <p>Fully Refundable Rates, Pay Later Available</p>
+//           </span>
+//           <span className="flex flex-row">
+//             <p>7.9</p>
+//             <p>291 Rating</p>
+//             <p>3-Star Hotel</p>
+//           </span>
+//         </div>
+//       </div>
+//       <div>
+//         <div>
+//           <p>₹11533</p>
+//           <p>₹123,066 for 2 nights</p>
+//           <button>Choose your room</button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default HotelDetailsComponent;
 
 // HotelDetailsComponent.js
 import React from "react";
@@ -73,65 +212,68 @@ import { useSelector } from "react-redux";
 import room1 from "../../assets/room1.jpg";
 
 const HotelDetailsComponent = () => {
-  const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
+  const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
 
-  if (!selectedHotel) {
+  if (!filteredHotels || filteredHotels.length === 0) {
     return <div>No hotel selected</div>;
   }
 
-  console.log("selectedHotel", selectedHotel); // Check if you see details in the console
+  console.log("filteredHotels", filteredHotels); // Check if you see details in the console
 
   return (
-    <div className="flex flex-row border-2">
-      <div>
-        <img
-          src={room1}
-          className=""
-          style={{
-            border: "2px solid red",
-            width: "200px",
-            height: "150px",
-          }}
-        />
-      </div>
-      <div className="flex flex-col border-2">
-        <div className="flex flex-col border-2">
-          {/* Add your amenities rendering logic here */}
-          {selectedHotel.amenities &&
-            selectedHotel.amenities.map((amenity) => (
-              <p key={amenity.machine_name}>{amenity.name}</p>
-            ))}
+    <div className="flex flex-col border-2">
+      {filteredHotels.map((hotel) => (
+        <div key={hotel.id}>
+          <img
+            src={room1}
+            className=""
+            style={{
+              border: "2px solid red",
+              width: "200px",
+              height: "150px",
+            }}
+          />
+          <div className="flex flex-col border-2">
+            <div className="flex flex-col border-2">
+              {/* Add your amenities rendering logic here */}
+              {hotel.amenities &&
+                hotel.amenities.map((amenity) => (
+                  <p key={amenity.machine_name}>{amenity.name}</p>
+                ))}
+            </div>
+            <div>
+              <span>
+                <p>{hotel.name}</p>
+              </span>
+              <span>
+                {/* Access address properties individually */}
+                <p>{hotel.address && hotel.address.address_line1}</p>
+                <p>Locality: {hotel.address && hotel.address.locality}</p>
+                <p>{hotel.hotel_code}</p>
+                <p>{hotel.phone}</p>
+                <p>Latitude: {hotel.lat_lon && hotel.lat_lon.lat}</p>
+                <p>Longitude: {hotel.lat_lon && hotel.lat_lon.lon}</p>
+              </span>
+              <span>
+                <p>Free Internet Access, Free Parking Amenities</p>
+                <p>Fully Refundable Rates, Pay Later Available</p>
+              </span>
+              <span className="flex flex-row">
+                <p>7.9</p>
+                <p>291 Rating</p>
+                <p>3-Star Hotel</p>
+              </span>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>₹11533</p>
+              <p>₹123,066 for 2 nights</p>
+              <button>Choose your room</button>
+            </div>
+          </div>
         </div>
-        <div>
-          <span>
-            <p>{selectedHotel.name}</p>
-          </span>
-          <span>
-            {/* Access address properties individually */}
-            <p>{selectedHotel.address && selectedHotel.address.address_line1}</p>
-            <p>{selectedHotel.hotel_code}</p>
-            <p>{selectedHotel.phone}</p>
-            <p>Latitude: {selectedHotel.lat_lon && selectedHotel.lat_lon.lat}</p>
-            <p>Longitude: {selectedHotel.lat_lon && selectedHotel.lat_lon.lon}</p>
-          </span>
-          <span>
-            <p>Free Internet Access, Free Parking Amenities</p>
-            <p>Fully Refundable Rates, Pay Later Available</p>
-          </span>
-          <span className="flex flex-row">
-            <p>7.9</p>
-            <p>291 Rating</p>
-            <p>3-Star Hotel</p>
-          </span>
-        </div>
-      </div>
-      <div>
-        <div>
-          <p>₹11533</p>
-          <p>₹123,066 for 2 nights</p>
-          <button>Choose your room</button>
-        </div>
-      </div>
+      ))}
     </div>
   );
 };
