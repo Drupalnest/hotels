@@ -102,7 +102,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   };
 
   return (
-    <div className="w-1/ border-2 border border-red-500  flex flex-row">
+    <div className=" w-1/ h-20 border-2 border border-red-500  flex flex-row">
       <Search
         hotels={hotels}
         airports={airports}
@@ -136,13 +136,14 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
             endDate={dateRange[1]}
             selectsRange
             placeholderText="Check-in Check-out"
-            className="w-full p-3 border rounded focus:outline-none focus:border-blue-500"
+            className=" border-red-500 w-full p-3 border rounded focus:outline-none focus:border-blue-500"
             style={{
-              zIndex: 1000,
+              zIndex: 999999,
               width: "300px",
               backgroundColor: "#ffffff",
               boxShadow: "0 2px 5px rgba(0, 0, 0, 0.15)",
               borderRadius: "8px",
+             
             }}
             modifiers={{
               disabled: { before: today },
@@ -153,7 +154,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
 
       <div
         ref={dropdownRef}
-        className=" relative flex-grow mb-4 sm:mr-4 sm:mb-0"
+        className=" relative  mb-4 sm:mr-4 sm:mb-0 border-2 border-red-400"
       >
         <button
           className="w-full p-3 border rounded focus:outline-none focus:border-blue-500 text-blue-500 hover:bg-blue-50"
@@ -162,7 +163,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
           {rooms} Rooms, {children} Children, {adults} Adults
         </button>
         {isDropdownOpen && (
-          <div className="absolute top-10 right-0 p-4 bg-white border rounded shadow">
+          <div className="absolute top-10 right-0 p-4 bg-white border rounded shadow ">
             <div className="mb-4">
               <label className="block text-gray-700">Rooms:</label>
               <div className="flex">

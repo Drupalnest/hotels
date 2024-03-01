@@ -650,25 +650,30 @@
 // SearchAutocomplete.defaultProps = {
 //   id: null,
 // };
+// Search.js
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchTerm, setSelectedHotel, setHotelDetails } from "../../redux/actions";
+import {
+  setSearchTerm,
+  setSelectedHotel,
+  setHotelDetails,
+} from "../../redux/actions";
 import HotelDetailsComponent from "../HotelList/HotelDetailss";
-
-// Placeholder function to simulate fetching hotel details
-const fetchHotelDetails = (hotelId) => {
-  // Replace this with your actual logic to fetch hotel details
-  return {
-    id: hotelId,
-    name: "Hotel Name",
-    address: "Hotel Address",
-    // Add other details as needed
-  };
-};
 
 const Search = ({ hotels, airports, cruise, interest, city }) => {
   const dispatch = useDispatch();
+
+  const fetchHotelDetails = (hotelId, hotelName, addressLine) => {
+    // Replace this with your actual logic to fetch hotel details
+    return {
+      id: hotelId,
+      name: hotelName,
+      address: "Hotel Address",
+      // Add other details as needed
+    };
+  };
+
   const searchTerm = useSelector((state) => state.hotel.searchTerm);
   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
   const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
@@ -683,16 +688,19 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
     dispatch(setSelectedHotel(hotel));
 
     // Fetch detailed information for the selected hotel (replace with your logic)
-    const details = fetchHotelDetails(hotel.id,hotel.Name,hotel.address);
+    const details = fetchHotelDetails(
+      hotel.id,
+      hotel.Name,
+      hotel.address ? hotel.address.address_line1 : "Address not available"
+    );
 
-    console.log("detailsdfdfg",details)
     // Dispatch the action to store hotel details in Redux
     dispatch(setHotelDetails(details));
   };
 
   return (
     <div>
-      <div className="mb-4 sm:mr-4 sm:mb-0 border rounded focus:outline-none border-gray-500">
+      <div className="relative mb-4 sm:mr-4 sm:mb-0 border rounded focus:outline-none border-gray-500">
         <input
           type="text"
           className="w-full p-3 border rounded focus:outline-none focus:border-blue-500"
@@ -709,21 +717,20 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
                 onClick={() => handleHotelClick(item)}
               >
                 {item.name}
-                {/* {item.address.address_line1} */}
+                {item.address && (
+                  <div>
+                    <div>{item.address.address_line1}</div>
+                    <div>{item.address.locality}</div>
+                    {/* Add other address properties as needed */}
+                  </div>
+                )}
               </div>
             ))}
           </div>
         )}
       </div>
-
-      
-      {/* {selectedHotel && <HotelDetailsComponent hotel={selectedHotel} />}
-
-    
-      {hotelDetails && <HotelDetailsComponent hotel={hotelDetails} />} */}
     </div>
   );
 };
 
 export default Search;
-

@@ -48,7 +48,7 @@ const MapComponent = () => {
 
   const handleButtonClick = () => {
     
-    navigate('/map');
+    navigate('/mapview');
   };
 
   return (

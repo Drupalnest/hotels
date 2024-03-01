@@ -26,9 +26,11 @@
     "@mui/material": "^5.15.10",
     "@mui/system": "^5.15.9",
     "@okta/okta-auth-js": "^7.5.1",
+    "@reach/combobox": "^0.18.0",
     "@react-google-maps/api": "^2.19.3",
     "@reduxjs/toolkit": "^2.2.1",
     "autoprefixer": "^10.4.17",
+    "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "date-fns": "^3.3.1",
     "gatsby": "^5.13.2",
@@ -48,6 +50,9 @@
     "react-day-picker": "^8.10.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
+    "react-geocode": "^1.0.0-alpha.1",
+    "react-google-autocomplete": "^2.7.3",
+    "react-google-maps": "^9.4.5",
     "react-google-maps-api": "^1.0.8",
     "react-hook-form": "^7.50.1",
     "react-redux": "^9.1.0",
@@ -63,6 +68,13 @@
     "slugify": "^1.6.6",
     "styled-components": "^6.1.8",
     "tailwindcss": "^3.4.1",
-    "transliteration": "^2.3.5"
+    "transliteration": "^2.3.5",
+    "use-places-autocomplete": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.23.3"
   }
 }

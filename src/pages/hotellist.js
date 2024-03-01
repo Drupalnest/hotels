@@ -177,6 +177,35 @@ export const query = graphql`
       nodes {
         id
         name
+        phone
+        hotel_code
+        lat_lon {
+          value
+          geo_type
+          lat
+          lon
+          left
+          top
+          right
+          bottom
+          geohash
+          latlon
+        }
+        email
+        description
+        crs_code
+        crs_name
+        address {
+          address_line1
+          country_code
+          administrative_area
+          locality
+          postal_code
+        }
+        amenities {
+          machine_name
+          name
+        }
       }
     }
     allLocationAirport {
