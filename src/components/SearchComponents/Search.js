@@ -826,18 +826,19 @@
 
 // export default Search;
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSearchTerm,
   setSelectedHotel,
   setHotelDetails,
-  setFilteredHotels 
+  setFilteredHotels,
 } from "../../redux/actions";
 import HotelDetailsComponent from "../HotelList/HotelDetailss";
 
 const Search = ({ hotels, airports, cruise, interest, city }) => {
   const dispatch = useDispatch();
+  const inputRef = useRef(null);
 
   const fetchHotelDetails = (hotelId, hotelName, addressLine) => {
     // Replace this with your actual logic to fetch hotel details
@@ -853,6 +854,8 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
   const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
 
+  
+
   // Combine all data into a single array
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
 
@@ -861,8 +864,10 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
   const uniqueLocalities = new Set();
 
   const filteredData = allData.filter((item) => {
-    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      item.address && item.address.locality &&
+    const matchesSearch =
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      item.address &&
+      item.address.locality &&
       item.address.locality.toLowerCase().includes(searchTerm.toLowerCase());
 
     if (matchesSearch) {
@@ -872,7 +877,6 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
 
     return matchesSearch;
   });
-
 
   // Handle click on hotel item
   const handleHotelClick = (hotel) => {
@@ -889,7 +893,6 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
     dispatch(setHotelDetails(details));
 
     // Log filtered hotels based on locality
-   
 
     const filteredHotels = allData.filter(
       (item) =>
@@ -913,16 +916,17 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
           onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
         {searchTerm && (
-          <div className="z-50 bg-slate-50 mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
+          <div  className="z-50 bg-slate-50 mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
             {filteredData.map((item) => (
               <div
                 key={item.id}
                 className="mb-2 cursor-pointer"
                 onClick={() => handleHotelClick(item)}
+               
               >
                 {item.address && (
                   <div>
-                    <div>{item.address.locality}</div>
+                    <div  >{item.address.locality}</div>
                     {/* Add other address properties as needed */}
                   </div>
                 )}
