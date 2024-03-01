@@ -613,7 +613,10 @@ const CustomMarker = ({ position, onClick }) => {
         }}
         onClick={onClick}
       >
-        <div className="p-1 px-2 bg-blue-600 flex justify-center items-center rounded-full">
+        <div
+          className="p-1 px-2 bg-blue-600 flex justify-center items-center rounded-full border border-2 cursor-pointer transition-transform transform-gpu hover:scale-110"
+          onClick={onClick}
+        >
           <p className="text-sm text-white font-bold">₹25360</p>
         </div>
       </div>
