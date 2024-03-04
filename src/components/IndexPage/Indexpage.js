@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
+import FlightIcon from '@mui/icons-material/Flight';
+import LuggageIcon from '@mui/icons-material/Luggage';
+import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
+import DirectionsBoatIcon from '@mui/icons-material/DirectionsBoat';
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
@@ -31,7 +35,7 @@ const Indexpage = ({ index }) => {
               }`}
               onClick={handleClick}
             >
-              <div className="mr-2">
+              <div className="mr-2 border-2 rounded-full p-1 bg-gray-100 ">
                 <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
               </div>
               <div
@@ -52,14 +56,52 @@ const Indexpage = ({ index }) => {
               onClick={handleClick}
             >
               <div className="mr-2">
-                <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+                <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
               </div>
               <div
                 className={`${
                   isActive ? "font-semibold text-md" : "hover:underline"
                 } font-montserrat text-md leading-7 text-blue-800`}
               >
-                Hotels
+              Flights
+              </div>
+            </div>
+            <div
+              className={`flex p-2 ${
+                isActive
+                  ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+                  : ""
+              }`}
+              onClick={handleClick}
+            >
+              <div className="mr-2">
+                <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+              </div>
+              <div
+                className={`${
+                  isActive ? "font-semibold text-md" : "hover:underline"
+                } font-montserrat text-md leading-7 text-blue-800`}
+              >
+              Bundle & Save
+              </div>
+            </div>
+            <div
+              className={`flex p-2 ${
+                isActive
+                  ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+                  : ""
+              }`}
+              onClick={handleClick}
+            >
+              <div className="mr-2">
+                <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+              </div>
+              <div
+                className={`${
+                  isActive ? "font-semibold text-md" : "hover:underline"
+                } font-montserrat text-md leading-7 text-blue-800`}
+              >
+                Cars
               </div>
             </div>
             <div
@@ -78,59 +120,21 @@ const Indexpage = ({ index }) => {
                   isActive ? "font-semibold text-md" : "hover:underline"
                 } font-montserrat text-md leading-7 text-blue-800`}
               >
-                Hotels
-              </div>
-            </div>
-            <div
-              className={`flex p-2 ${
-                isActive
-                  ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
-                  : ""
-              }`}
-              onClick={handleClick}
-            >
-              <div className="mr-2">
-                <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
-              </div>
-              <div
-                className={`${
-                  isActive ? "font-semibold text-md" : "hover:underline"
-                } font-montserrat text-md leading-7 text-blue-800`}
-              >
-                Hotels
-              </div>
-            </div>
-            <div
-              className={`flex p-2 ${
-                isActive
-                  ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
-                  : ""
-              }`}
-              onClick={handleClick}
-            >
-              <div className="mr-2">
-                <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
-              </div>
-              <div
-                className={`${
-                  isActive ? "font-semibold text-md" : "hover:underline"
-                } font-montserrat text-md leading-7 text-blue-800`}
-              >
-                Hotels
+               Cruices
               </div>
             </div>
           </div>
-          <div className="sm:w-full border rounded-lg">
+          <div className="sm:w-full border-none rounded-3xl">
             <TextField
               placeholder="Where to?"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <SearchIcon />
+                    <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
                   </InputAdornment>
                 ),
               }}
-              className="w-full border-2 rounded-3xl border-blue-600"
+              className="w-full  border-2 rounded-lg border-blue-600"
             />
           </div>
 
@@ -199,10 +203,16 @@ const Indexpage = ({ index }) => {
               </div>
             </button>
           </div>
-          <div className="border-2 w-full sm:w-1/2 md:w-1/2  lg:w-1/2flex lg:justify-end ">
-            <p className="text-xs">
-              Book a hotel with free cancellation for flexibility
-            </p>
+          <div className="flex justify-end  border-b-2 p-2 ">
+            <div className="p-0 w-full sm:w-1/2 lg:w-1/2 flex justify-center">
+              <p className="text-xs text-center">
+                Book a hotel with free cancellation for flexibility
+              </p>
+            </div>
+          </div>
+
+          <div className="flex justify-center text-sm font-bold text-blue-600 ">
+            <a>Book all of your hotels at once and save up to $625</a>
           </div>
 
           <div>
