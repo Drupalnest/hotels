@@ -34,5 +34,16 @@ module.exports = {
       },
       __key: "pages",
     },
+
+    {
+      resolve: `gatsby-plugin-web-font-loader`,
+      options: {
+        google: {
+          families: [
+            'Montserrat:100,100i,400,400i,700,700i,800', // Thin, Thin Italic, Regular, Italic, Bold, Bold Italic, Extra Bold
+          ],
+        },
+      },
+    },
   ],
 };

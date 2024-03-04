@@ -11,6 +11,7 @@ import Image3 from "../assets/room3.jpg";
 import Image4 from "../assets/room4.jpg";
 import Image5 from "../assets/room5.jpg";
 import Image6 from "../assets/room6.jpg";
+import Indexpage from "../components/IndexPage/Indexpage";
 
 const MyPage = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
@@ -19,7 +20,11 @@ const MyPage = ({ data }) => {
   const imagePaths = [Image1, Image2, Image3, Image4, Image5, Image6];
 
   return (
+
     <div className="max-w-[1200] mx-auto bg-white p-6">
+    <div>
+      <Indexpage/>
+    </div>
       <h1 className="text-3xl font-semibold mt-8 mb-4">Hotel List</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {hotels.map((hotel, index) => (
