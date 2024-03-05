@@ -83,7 +83,7 @@
 
 // export default MapComponent;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LoadScript, GoogleMap, Marker } from "@react-google-maps/api";
 import MapIcon from "@mui/icons-material/Map";
 import { navigate } from "gatsby";
@@ -94,6 +94,7 @@ const MapComponent = () => {
 
   // Move the useState outside of the condition
   const [showMap, setShowMap] = useState(false);
+ 
 
   if (!filteredHotels || filteredHotels.length === 0) {
     return <div>No hotel selected</div>;

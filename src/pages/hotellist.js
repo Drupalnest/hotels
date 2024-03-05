@@ -90,6 +90,7 @@ import Header from "../components/Header";
 import HotelDetailss from "../components/HotelList/HotelDetailss";
 import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
 import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
+import Indexpage from "../components/IndexPage/Indexpage";
 
 const hotellist = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
@@ -115,6 +116,7 @@ const hotellist = ({ data }) => {
         cruise={cruise}
         interest={interest}
       />
+
       <div className="border border-blue-500 flex flex-row  w-full  justify-center">
         <div className="flex flex-col border-2 w-1/1 py-2 px-4">
           <div>

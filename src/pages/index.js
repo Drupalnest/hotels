@@ -12,6 +12,7 @@ import Image4 from "../assets/room4.jpg";
 import Image5 from "../assets/room5.jpg";
 import Image6 from "../assets/room6.jpg";
 import Indexpage from "../components/IndexPage/Indexpage";
+import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
 
 const MyPage = ({ data }) => {
  
@@ -41,6 +42,7 @@ const MyPage = ({ data }) => {
           interest={interest}
         />
       </div>
+      
       <h1 className="text-3xl font-semibold mt-8 mb-4">Hotel List</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {hotels.map((hotel, index) => (
