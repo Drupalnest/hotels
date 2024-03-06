@@ -143,7 +143,6 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
               backgroundColor: "#ffffff",
               boxShadow: "0 2px 5px rgba(0, 0, 0, 0.15)",
               borderRadius: "8px",
-             
             }}
             modifiers={{
               disabled: { before: today },

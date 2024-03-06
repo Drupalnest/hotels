@@ -283,7 +283,7 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import "../../styles/style.css";
 import { CheckBox } from "@mui/icons-material";
-import room1 from "../../assets/room1.jpg";
+import room5 from "../../assets/room5.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSearchTerm,
@@ -601,13 +601,11 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
             )}
           </div>
 
-          <div
-            onClick={handleDayPickerToggle}
-            className="flex flex-col sm:flex-row  justify-betwee text-blue-800 gap-3 "
-          >
+          <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
             <div
-              style={{ position: "relative" }}
-              className=" rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2"
+             ref={dropdownRef}
+              onClick={handleDayPickerToggle}
+              className=" relative  rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2  "
             >
               <div className="mr-2">
                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
@@ -627,48 +625,48 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                 </div>
               </div>
               {isCalendarOpen && (
-                <DayPicker
-                  numberOfMonths={2}
-                  pagedNavigation
-                  selected={dateRange[0]}
-                  onDayClick={handleDayClick}
-                  startDate={dateRange[0]}
-                  endDate={dateRange[1]}
-                  selectsRange
-                  placeholderText="Check-in Check-out"
-                  className=" border-red-500 w-full p-3 border rounded focus:outline-none focus:border-blue-500"
-                  style={{
-                    zIndex: 999999,
-                    width: "300px",
-                    backgroundColor: "#ffffff",
-                    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.15)",
-                    borderRadius: "8px",
-                  }}
-                  modifiers={{
-                    disabled: { before: today },
-                  }}
-                />
+                <div  className="w-auto absolute top-full left-0 bg-white border rounded shadow mt-2 ">
+                  <DayPicker
+                  onClick={handleDayPickerToggle}
+                    numberOfMonths={2}
+                    pagedNavigation
+                    selected={dateRange[0]}
+                    onDayClick={handleDayClick}
+                    startDate={dateRange[0]}
+                    endDate={dateRange[1]}
+                    selectsRange
+                    placeholderText="Check-in Check-out"
+                    className="  focus:outline-none focus:border-blue-500"
+                    modifiers={{
+                      disabled: { before: today },
+                    }}
+                  />
+                </div>
               )}
             </div>
 
             <button
               ref={dropdownRef}
-              className=" rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2"
+              onClick={handleToggleDropdown}
+              className="rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2 relative"
             >
-              <div onClick={handleToggleDropdown} className="flex items-center">
+              <div className="flex items-center">
                 <div className="mr-2">
                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
                 </div>
                 <div className="">
                   <p>
-                    {" "}
-                    {rooms} Rooms, {children} Children, {adults} Adults
+                    {rooms} Rooms, {adults} Adults ,{children} Children
                   </p>
                 </div>
               </div>
+
               {isDropdownOpen && (
-                <div className="absolute top-10 right-0 p-4 bg-white border rounded shadow ">
-                  <div className="mb-4">
+                <div
+                  ref={dropdownRef}
+                  className="py-2 w-full absolute top-full left-0 bg-white border rounded shadow mt-2"
+                >
+                  <div className="flex flex-row mb-4  justify-around ">
                     <label className="block text-gray-700">Rooms:</label>
                     <div className="flex">
                       <button
@@ -686,7 +684,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                       </button>
                     </div>
                   </div>
-                  <div className="mb-4">
+                  <div className="flex flex-row   justify-around mb-4">
                     <label className="block text-gray-700">Adults:</label>
                     <div className="flex">
                       <button
@@ -704,7 +702,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                       </button>
                     </div>
                   </div>
-                  <div>
+                  <div className="flex flex-row mb-4  justify-around">
                     <label className="block text-gray-700">Children:</label>
                     <div className="flex">
                       <button
@@ -778,17 +776,17 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
           </div>
         </div>
       </div>
-      {/* <div
-        className=" position-absolute  overflow-hidden grid place-items-center border-2"
+      <div
+        className=" relative   overflow-hidden grid place-items-center "
         style={containerStyle}
       >
         <img
-          src={room1}
+          src={room5}
           className="rounded-tl-full rounded-bl-full"
           alt="Room 1"
           style={imgStyle}
         />
-      </div> */}
+      </div>
     </div>
   );
 };
