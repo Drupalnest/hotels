@@ -2,15 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { DayPicker } from "react-day-picker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./DayPicker.css";
+import { FormControlLabel, FormGroup, TextField } from "@mui/material";
 import "react-day-picker/dist/style.css";
 import HotelDetailss from "../HotelList/HotelDetailss";
-import Search from "./Search";
+import { styled } from "@mui/material/styles";
+import Switch, { SwitchProps } from "@mui/material/Switch";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import { navigate } from "gatsby";
 
-const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
+const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
   const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
   const [selectedHotel, setSelectedHotel] = useState(null);
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
@@ -104,20 +105,68 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
     }
   };
 
-  const handleSearchBoxClick=()=>{
-    navigate("/hotellist")
-  }
+  const handleSearchBoxClick = () => {
+    navigate("/hotellist");
+  };
+
+  const IOSSwitch = styled((props) => (
+    <Switch
+      focusVisibleClassName=".Mui-focusVisible"
+      disableRipple
+      {...props}
+    />
+  ))(({ theme }) => ({
+    width: 42,
+    height: 26,
+    padding: 0,
+    "& .MuiSwitch-switchBase": {
+      padding: 0,
+      margin: 2,
+      transitionDuration: "300ms",
+      "&.Mui-checked": {
+        transform: "translateX(16px)",
+        color: "#fff",
+        "& + .MuiSwitch-track": {
+          backgroundColor:
+            theme.palette.mode === "dark" ? "#2ECA45" : "#0000FF",
+          opacity: 1,
+          border: 0,
+        },
+        "&.Mui-disabled + .MuiSwitch-track": {
+          opacity: 0.5,
+        },
+      },
+      "&.Mui-focusVisible .MuiSwitch-thumb": {
+        color: "#0000FF",
+        border: "6px solid #fff",
+      },
+      "&.Mui-disabled .MuiSwitch-thumb": {
+        color:
+          theme.palette.mode === "light"
+            ? theme.palette.grey[100]
+            : theme.palette.grey[600],
+      },
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
+      },
+    },
+    "& .MuiSwitch-thumb": {
+      boxSizing: "border-box",
+      width: 22,
+      height: 22,
+    },
+    "& .MuiSwitch-track": {
+      borderRadius: 26 / 2,
+      backgroundColor: theme.palette.mode === "light" ? "#808080" : "#0000FF",
+      opacity: 1,
+      transition: theme.transitions.create(["background-color"], {
+        duration: 500,
+      }),
+    },
+  }));
 
   return (
-    <div className=" relative z-50 w-1/ h-20  flex flex-row">
-      <Search
-        hotels={hotels}
-        airports={airports}
-        city={city}
-        cruise={cruise}
-        interest={interest}
-      />
-
+    <div className=" relative z-50 w-1/ h-20  flex flex-row justify-center item-center ">
       {/* <div
        ref={dropdownRef} 
         className=" relative  mb-4 sm:mr-4 sm:mb-0 border-2 border-red-400"
@@ -310,11 +359,29 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
       </div>
 
       <div className="ml-2  flex justify-center items-center">
-        <button onClick={handleSearchBoxClick} className="bg-green-500 hover:bg-green-600 text-white py-1 px-1 rounded transition duration-300 w-full sm:w-auto">
+        <button
+          onClick={handleSearchBoxClick}
+          className="bg-green-500 hover:bg-green-600 text-white py-1 px-1 rounded transition duration-300 w-full sm:w-auto"
+        >
           Update Search
         </button>
       </div>
+      {/* <div className="flex flex-col sm:flex-row bg-slate-500 border border-gray-900 rounded-xl ">
+        <div className="flex flex-col p-2  ">
+          <span className="text-sm sm:text-base font-semibold">
+            Show total prices
+          </span>
+          <span className="text-sm sm:text-base">
+            For 1 night, includes taxes & fees
+          </span>
+        </div>
+        <div className="">
+          <FormGroup>
+            <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} />} />
+          </FormGroup>
+        </div>
+      </div> */}
     </div>
   );
 };
-export default HeaderSearchBox;
+export default RoomSearch;

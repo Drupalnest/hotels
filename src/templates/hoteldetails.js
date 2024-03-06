@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { graphql } from "gatsby";
+import { Link, graphql } from "gatsby";
 import { Button, Card, Input, PopoverPaper } from "@mui/material";
 import Footer from "../components/Footer";
 //import Navbar from "../components/Header";
@@ -29,6 +29,11 @@ import RatingSection from "../components/HotelDetails/RatingBar";
 import Typography from "@mui/material/Typography";
 import GoogleMapComponent from "../components/HotelDetails/GoogleMapComponent";
 import Search from "../components/HotelDetails/Search";
+import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
+import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import SearchData from "../components/data/SearchData";
+import RoomSearch from "../components/HotelDetailsPage/RoomSearch";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
@@ -76,8 +81,48 @@ const HotelDetails = ({ data }) => {
     }
   };
 
+  const handleDataFetched = (fetchedData) => {
+    if (fetchedData && Array.isArray(fetchedData.hotels)) {
+      console.log("Fetched Hotels Data:", fetchedData.hotels);
+      // Do something with the fetched data, e.g., set it in the component state
+    } else {
+      console.error("Invalid or undefined data structure:", fetchedData);
+    }
+  };
+
+  const hotels = data?.allHotel?.nodes || [];
+  console.log("hotels", hotels);
+  const airports = data?.allLocationAirport?.nodes || [];
+  console.log("airports", airports);
+  const city = data?.allLocationCity?.nodes || [];
+  console.log("city", city);
+  const cruise = data?.allLocationCruise?.nodes || [];
+  console.log("cruise", cruise);
+  const interest = data?.allLocationPointOfInterest?.nodes || [];
+  console.log("interest", interest);
+  // console.log("hotelsdfdv",hotels)
+
   return (
-    <div className="container-fluid">
+    <div className="py-2 container-fluid flex flex-col justify-center">
+      <div className=" flex justify-center items-center">
+        <Link
+          className="flex mr-3 font-bold text-blue-600 hover:underline"
+          to="/hotellist"
+        >
+          <p>
+            <KeyboardArrowLeftIcon />
+          </p>
+          <p>Back to Listings</p>
+        </Link>
+        <HeaderSearchBox
+          hotels={hotels}
+          airports={airports}
+          city={city}
+          cruise={cruise}
+          interest={interest}
+        />
+      </div>
+
       {/* <Navbar /> */}
       <ImageSlider />
 
@@ -564,7 +609,15 @@ const HotelDetails = ({ data }) => {
                 </div>
               </div> */}
 
-              <Search />
+              {/* <Search /> */}
+
+              <RoomSearch
+                hotels={hotels}
+                airports={airports}
+                city={city}
+                cruise={cruise}
+                interest={interest}
+              />
             </div>
 
             <div className="">
@@ -799,6 +852,8 @@ export const query = graphql`
         node {
           id
           name
+          phone
+          hotel_code
           rlh_status
           description
           address {
@@ -830,7 +885,53 @@ export const query = graphql`
             postal_code
             country_code
           }
+          email
+          description
+          crs_code
+          crs_name
+          address {
+            address_line1
+            country_code
+            administrative_area
+            locality
+            postal_code
+          }
+          amenities {
+            machine_name
+            name
+          }
         }
+      }
+    }
+    allLocationAirport {
+      nodes {
+        id
+        name
+        field_address {
+          locality
+          country_code
+        }
+      }
+    }
+    allLocationCity {
+      nodes {
+        id
+        name
+        population
+      }
+    }
+    allLocationCruise {
+      nodes {
+        id
+        google_place_id
+        name
+      }
+    }
+    allLocationPointOfInterest {
+      nodes {
+        id
+        name
+        google_place_id
       }
     }
   }

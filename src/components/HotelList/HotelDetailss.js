@@ -319,7 +319,7 @@ const HotelDetailsComponent = () => {
               borderRadius: "10px 0 0 10px",
             }}
           />
-          <div className="flex flex-col border-r-2 p-3 w-2/3">
+          <div className="flex flex-col border-r-2 p-3 w-3/4">
             {/* <div className="flex flex-col border-2">
               {hotel.amenities &&
                 hotel.amenities.map((amenity) => (
@@ -365,7 +365,7 @@ const HotelDetailsComponent = () => {
               </div>
             </div>
           </div>
-          <div className="p-3 flex flex-col justify-end">
+          <div className="p-3 flex flex-col justify-end w-1/4">
             <div>
               <div className="flex">
                 <p className=" text-blue-600  font-bold">₹</p>
@@ -373,7 +373,7 @@ const HotelDetailsComponent = () => {
               </div>
               {/* <p>₹123,066 for 2 nights</p> */}
               <p>price per night</p>
-              <button className=" rounded-3xl p-2 text-white bg-green-600 font-bold ">
+              <button className=" text-sm rounded-3xl px-2 py-2 text-white bg-green-600 font-bold ">
                 Choose your room
               </button>
             </div>
