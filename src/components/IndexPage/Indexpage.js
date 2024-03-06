@@ -571,7 +571,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
               </div>
             </div>
           </div>
-          <div className="sm:w-full border-none rounded-3xl">
+          <div className="relative sm:w-full border-none rounded-3xl">
             <TextField
               placeholder="Where to?"
               value={searchTerm}
@@ -587,7 +587,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
             />
 
             {searchTerm && (
-              <div className="z-50 bg-slate-50 mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
+              <div className="z-50 bg-white w-full absolute top-full left-0 shadow  mt-2 h-24 overflow-y-auto border border-gray-300 rounded p-2 ">
                 {filteredData.map((item) => (
                   <div
                     key={item.id}
