@@ -20,9 +20,7 @@ const Navbar = () => {
         <Link className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">
           Bundle + Save
         </Link>
-        <Link className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">
-          Cruices
-        </Link>
+      
         <Link className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">
           Cruices
         </Link>
