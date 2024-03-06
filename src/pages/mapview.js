@@ -565,11 +565,13 @@ import {
   OverlayView,
 } from "@react-google-maps/api";
 import MapIcon from "@mui/icons-material/Map";
-import { navigate } from "gatsby";
+import { Link, navigate } from "gatsby";
 import { useSelector } from "react-redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Filter from "../components/HotelList/Filter";
 import Filterwithoutmap from "../components/HotelList/Filterwithoutmap";
+import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 const HotelPopup = ({ hotel, onClose }) => {
   return (
     <InfoWindow
@@ -624,7 +626,18 @@ const CustomMarker = ({ position, onClick }) => {
     </OverlayView>
   );
 };
-const MapComponent = () => {
+const MapComponent = ({ data }) => {
+  const hotels = data?.allHotel?.nodes || [];
+  console.log("hotels", hotels);
+  const airports = data?.allLocationAirport?.nodes || [];
+  console.log("airports", airports);
+  const city = data?.allLocationCity?.nodes || [];
+  console.log("city", city);
+  const cruise = data?.allLocationCruise?.nodes || [];
+  console.log("cruise", cruise);
+  const interest = data?.allLocationPointOfInterest?.nodes || [];
+  console.log("interest", interest);
+  // console.log("hotelsdfdv",hotels)
   const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
   const [selectedHotel, setSelectedHotel] = useState(null);
   const handleMarkerClick = (hotel) => {
@@ -641,11 +654,31 @@ const MapComponent = () => {
     lng: filteredHotels[0]?.lat_lon?.lon || 0,
   };
   return (
-    <div
-      style={{ position: "relative", height: "800px" }}
-      className="flex flex-row"
-    >
-      {/* <button
+    <div className="container-fluid">
+      <div className="flex justify-center items-center">
+        <Link
+          className="flex mr-3 font-bold text-blue-600 hover:underline"
+          to="/hotellist"
+        >
+          <p>
+            <KeyboardArrowLeftIcon />
+          </p>
+          <p>Classic View</p>
+        </Link>
+        <HeaderSearchBox
+          hotels={hotels}
+          airports={airports}
+          city={city}
+          cruise={cruise}
+          interest={interest}
+        />
+      </div>
+
+      <div
+        style={{ position: "relative", height: "835px" }}
+        className="flex flex-row py-2"
+      >
+        {/* <button
         className="border-2 hover:border-gray-500 bg-white font-bold p-2 rounded-xl text-blue-800 z-50 absolute top-32 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         style={{ zIndex: 1 }}
         onClick={handleButtonClick}
@@ -653,52 +686,124 @@ const MapComponent = () => {
         <MapIcon className="mr-2" />
         Classic View
       </button> */}
-      <div className="flex flex-col  ">
-        <button
-          className="border-2 hover:border-gray-500 bg-white font-bold p-2 rounded-xl text-blue-800 z-50 "
-          style={{ zIndex: 1 }}
-          onClick={handleButtonClick}
-        >
-          <MapIcon className="mr-2" />
-          Classic View
-        </button>
-        <Filterwithoutmap />
-      </div>
-      <div
-        className="border-2"
-        style={{ width: "100%", height: "800px", borderRadius: "4%" }}
-      >
-        <LoadScript googleMapsApiKey="AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ">
-          <GoogleMap
-            mapContainerStyle={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "4%",
-            }}
-            center={center}
-            zoom={10}
-            onClick={handleMapClick}
+        <div className="flex flex-col  ">
+          {/* <button
+            className="border-2 hover:border-gray-500 bg-white font-bold p-2 rounded-xl text-blue-800 z-50 "
+            style={{ zIndex: 1 }}
+            onClick={handleButtonClick}
           >
-            {filteredHotels.map((hotel) => (
-              <CustomMarker
-                key={hotel.id}
-                position={{
-                  lat: hotel.lat_lon?.lat || 0,
-                  lng: hotel.lat_lon?.lon || 0,
-                }}
-                onClick={() => handleMarkerClick(hotel)}
-              />
-            ))}
-            {selectedHotel && (
-              <HotelPopup
-                hotel={selectedHotel}
-                onClose={() => setSelectedHotel(null)}
-              />
-            )}
-          </GoogleMap>
-        </LoadScript>
+            <MapIcon className="mr-2" />
+            Classic View
+          </button> */}
+          <Filterwithoutmap />
+        </div>
+        <div
+          className="border-2"
+          style={{ width: "100%", height: "auto",}}
+        >
+          <LoadScript googleMapsApiKey="AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ">
+            <GoogleMap
+              mapContainerStyle={{
+                width: "100%",
+                height: "100%",
+                
+              }}
+              center={center}
+              zoom={10}
+              onClick={handleMapClick}
+            >
+              {filteredHotels.map((hotel) => (
+                <CustomMarker
+                  key={hotel.id}
+                  position={{
+                    lat: hotel.lat_lon?.lat || 0,
+                    lng: hotel.lat_lon?.lon || 0,
+                  }}
+                  onClick={() => handleMarkerClick(hotel)}
+                />
+              ))}
+              {selectedHotel && (
+                <HotelPopup
+                  hotel={selectedHotel}
+                  onClose={() => setSelectedHotel(null)}
+                />
+              )}
+            </GoogleMap>
+          </LoadScript>
+        </div>
       </div>
     </div>
   );
 };
+
+export const query = graphql`
+  query MyQuery {
+    allHotel {
+      nodes {
+        id
+        name
+        phone
+        hotel_code
+        lat_lon {
+          value
+          geo_type
+          lat
+          lon
+          left
+          top
+          right
+          bottom
+          geohash
+          latlon
+        }
+        email
+        description
+        crs_code
+        crs_name
+        address {
+          address_line1
+          country_code
+          administrative_area
+          locality
+          postal_code
+        }
+        amenities {
+          machine_name
+          name
+        }
+      }
+    }
+    allLocationAirport {
+      nodes {
+        id
+        name
+        field_address {
+          locality
+          country_code
+        }
+      }
+    }
+    allLocationCity {
+      nodes {
+        id
+        name
+        population
+      }
+    }
+    allLocationCruise {
+      nodes {
+        id
+        google_place_id
+        name
+      }
+    }
+    allLocationPointOfInterest {
+      nodes {
+        id
+        name
+        google_place_id
+      }
+    }
+  }
+`;
 export default MapComponent;
