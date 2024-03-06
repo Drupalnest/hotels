@@ -20,6 +20,7 @@ import American_express from "../images/american-express.svg";
 import Discover from "../images/discover.svg";
 import Mastercard from "../images/mastercard.svg";
 import Visa from "../images/visa.svg";
+import Navbar from "../components/Navbar/Navbar";
 
 const steps = [
   "Select master blaster campaign settings",
@@ -31,6 +32,7 @@ export default function Cart() {
   const randomImage = "https://source.unsplash.com/?hotel,travel";
   return (
     <div className="container-fluid flex flex-col justify-center items-center">
+     <Navbar />
       <div className="flex container justify-between gap-4 flex-row md:flex-row sm:flex-col border border-green-500 p-2">
         <div>SECURE TRANSACTIONS</div>
         <div>SECURE TRANSACTIONS</div>

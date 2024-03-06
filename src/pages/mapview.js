@@ -572,6 +572,7 @@ import Filter from "../components/HotelList/Filter";
 import Filterwithoutmap from "../components/HotelList/Filterwithoutmap";
 import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import Navbar from "../components/Navbar/Navbar";
 const HotelPopup = ({ hotel, onClose }) => {
   return (
     <InfoWindow
@@ -655,6 +656,7 @@ const MapComponent = ({ data }) => {
   };
   return (
     <div className="container-fluid">
+     <Navbar />
       <div className="flex justify-center items-center">
         <Link
           className="flex mr-3 font-bold text-blue-600 hover:underline"

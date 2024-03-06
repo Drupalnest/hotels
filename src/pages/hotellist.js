@@ -91,6 +91,7 @@ import HotelDetailss from "../components/HotelList/HotelDetailss";
 import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
 import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 import Indexpage from "../components/IndexPage/Indexpage";
+import Navbar from "../components/Navbar/Navbar";
 
 const hotellist = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
@@ -104,11 +105,10 @@ const hotellist = ({ data }) => {
   const interest = data?.allLocationPointOfInterest?.nodes || [];
   console.log("interest", interest);
   return (
-    <div className="flex flex-col gap-2 items-center justify-center border-2 border-red-500 ">
-      <PreHeader />
-      {/* <Header /> */}
+    <div className="flex flex-col gap-2 items-center justify-center ">
+      {/* <PreHeader /> */}
+      <Navbar />
 
-      <div className="w-full container-fluid h-10 border-2">Navbar</div>
       <HeaderSearchBox
         hotels={hotels}
         airports={airports}

@@ -34,6 +34,7 @@ import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import SearchData from "../components/data/SearchData";
 import RoomSearch from "../components/HotelDetailsPage/RoomSearch";
+import Navbar from "../components/Navbar/Navbar";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
@@ -104,6 +105,7 @@ const HotelDetails = ({ data }) => {
 
   return (
     <div className="py-2 container-fluid flex flex-col justify-center">
+      <Navbar />
       <div className=" flex justify-center items-center">
         <Link
           className="flex mr-3 font-bold text-blue-600 hover:underline"
