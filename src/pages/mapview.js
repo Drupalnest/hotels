@@ -568,6 +568,8 @@ import MapIcon from "@mui/icons-material/Map";
 import { navigate } from "gatsby";
 import { useSelector } from "react-redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Filter from "../components/HotelList/Filter";
+import Filterwithoutmap from "../components/HotelList/Filterwithoutmap";
 const HotelPopup = ({ hotel, onClose }) => {
   return (
     <InfoWindow
@@ -598,7 +600,6 @@ const HotelPopup = ({ hotel, onClose }) => {
     </InfoWindow>
   );
 };
-
 const CustomMarker = ({ position, onClick }) => {
   return (
     <OverlayView
@@ -623,39 +624,46 @@ const CustomMarker = ({ position, onClick }) => {
     </OverlayView>
   );
 };
-
 const MapComponent = () => {
   const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
-
   const [selectedHotel, setSelectedHotel] = useState(null);
-
   const handleMarkerClick = (hotel) => {
     setSelectedHotel(hotel);
   };
-
   const handleMapClick = () => {
     setSelectedHotel(null);
   };
-
   const handleButtonClick = () => {
     navigate("/hotellist");
   };
-
   const center = {
     lat: filteredHotels[0]?.lat_lon?.lat || 0,
     lng: filteredHotels[0]?.lat_lon?.lon || 0,
   };
-
   return (
-    <div style={{ position: "relative", height: "800px" }}>
-      <button
+    <div
+      style={{ position: "relative", height: "800px" }}
+      className="flex flex-row"
+    >
+      {/* <button
         className="border-2 hover:border-gray-500 bg-white font-bold p-2 rounded-xl text-blue-800 z-50 absolute top-32 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         style={{ zIndex: 1 }}
         onClick={handleButtonClick}
       >
         <MapIcon className="mr-2" />
         Classic View
-      </button>
+      </button> */}
+      <div className="flex flex-col  ">
+        <button
+          className="border-2 hover:border-gray-500 bg-white font-bold p-2 rounded-xl text-blue-800 z-50 "
+          style={{ zIndex: 1 }}
+          onClick={handleButtonClick}
+        >
+          <MapIcon className="mr-2" />
+          Classic View
+        </button>
+        <Filterwithoutmap />
+      </div>
       <div
         className="border-2"
         style={{ width: "100%", height: "800px", borderRadius: "4%" }}
@@ -681,7 +689,6 @@ const MapComponent = () => {
                 onClick={() => handleMarkerClick(hotel)}
               />
             ))}
-
             {selectedHotel && (
               <HotelPopup
                 hotel={selectedHotel}
@@ -694,5 +701,4 @@ const MapComponent = () => {
     </div>
   );
 };
-
 export default MapComponent;

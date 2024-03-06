@@ -4,10 +4,9 @@ import SortBy from "../FilterComponents/SortBy";
 import PropertyTypes from "../FilterComponents/PropertyTypes";
 import SetYourBudget from "../FilterComponents/SetYourBudget";
 
-const Filter = () => {
+const Filterwithoutmap = () => {
   return (
     <div className="w-1/ border-2">
-      <MapComponent />
       <div>
         <p>Sort by</p>
         <SortBy />
@@ -18,4 +17,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default Filterwithoutmap;

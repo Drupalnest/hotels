@@ -291,20 +291,18 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import room1 from "../../assets/room1.jpg";
 import { setFilteredHotels } from "../../redux/actions";
-
 const HotelDetailsComponent = () => {
-  const dispatch = useDispatch();
+ 
+  
+ 
   const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
-
   useEffect(() => {
     // This will run whenever hotels in Redux store changes
     console.log("Hotels in Redux store:", filteredHotels);
   }, [filteredHotels]);
-
   if (!filteredHotels || filteredHotels.length === 0) {
     return <div>No hotel selected</div>;
   }
-
   return (
     <div className="flex flex-col  gap-3 ">
       {filteredHotels.map((hotel) => (
@@ -321,7 +319,6 @@ const HotelDetailsComponent = () => {
           />
           <div className="flex flex-col border-2 p-3">
             {/* <div className="flex flex-col border-2">
-             
               {hotel.amenities &&
                 hotel.amenities.map((amenity) => (
                   <p key={amenity.machine_name}>{amenity.name}</p>
@@ -357,7 +354,6 @@ const HotelDetailsComponent = () => {
                       <p key={amenity.machine_name}> {amenity.name} ,&nbsp;</p>
                     ))}
               </div>
-
               <div className="flex gap-3 flex-row mt-3">
                 <p className="py-1 text-xs px-2 font-bold text-white rounded-lg bg-orange-400">
                   7.9
@@ -385,5 +381,4 @@ const HotelDetailsComponent = () => {
     </div>
   );
 };
-
 export default HotelDetailsComponent;
