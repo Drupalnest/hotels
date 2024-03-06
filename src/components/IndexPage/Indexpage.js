@@ -295,6 +295,7 @@ import {
 import { DayPicker } from "react-day-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-day-picker/dist/style.css";
+import { navigate } from "gatsby";
 
 const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   const [isActive, setIsActive] = useState(false);
@@ -460,6 +461,10 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
       setChildren(children - 1);
     }
   };
+
+  const handleSearchClick = (hotel) => {
+   navigate("/hotellist")
+  }
 
   return (
     <div className="border-2 relative container-fluid px-32  flex flex-row z-50 ">
@@ -757,7 +762,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
               </div>
             </div>
 
-            <button className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2">
+            <button onClick={handleSearchClick} className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2">
               <div className=" text-blue-800 font-bold flex items-center justify-center">
                 <p className="text-white">Find Your Hotel</p>
               </div>
