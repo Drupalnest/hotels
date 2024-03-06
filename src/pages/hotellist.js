@@ -104,7 +104,7 @@ const hotellist = ({ data }) => {
   const interest = data?.allLocationPointOfInterest?.nodes || [];
   console.log("interest", interest);
   return (
-    <div className="flex flex-col items-center justify-center border border-red-500 ">
+    <div className="flex flex-col gap-2 items-center justify-center border-2 border-red-500 ">
       <PreHeader />
       {/* <Header /> */}
 

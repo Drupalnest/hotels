@@ -825,19 +825,12 @@
 // };
 
 // export default Search;
-
-
-
-
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setSearchTerm,
-  setSelectedHotel,
-  setHotelDetails,
-  setFilteredHotels,
-} from "../../redux/actions";
+import { setSearchTerm, setSelectedHotel, setHotelDetails, setFilteredHotels } from "../../redux/actions";
+import SearchIcon from "@mui/icons-material/Search";
 import HotelDetailsComponent from "../HotelList/HotelDetailss";
+import { InputAdornment, TextField } from "@mui/material";
 
 const Search = ({ hotels, airports, cruise, interest, city }) => {
   const dispatch = useDispatch();
@@ -857,13 +850,10 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
   const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
 
-  
-
   // Combine all data into a single array
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
 
   // Filter hotels based on the selected locality
-
   const uniqueLocalities = new Set();
 
   const filteredData = allData.filter((item) => {
@@ -896,7 +886,6 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
     dispatch(setHotelDetails(details));
 
     // Log filtered hotels based on locality
-
     const filteredHotels = allData.filter(
       (item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -908,36 +897,48 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
     dispatch(setFilteredHotels(filteredHotels));
   };
 
+  const [isSearchBoxOpen, setIsSearchBoxOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const handleSearchBoxToggle = () => {
+    setIsSearchBoxOpen(!isSearchBoxOpen);
+  };
+
   return (
-    <div>
-      <div className="relative mb-4 sm:mr-4 sm:mb-0 border rounded focus:outline-none border-gray-500">
-        <input
-          type="text"
-          className="w-full p-3 border rounded focus:outline-none focus:border-blue-500"
-          placeholder="Search by Hotel Name"
-          value={searchTerm}
-          onChange={(e) => dispatch(setSearchTerm(e.target.value))}
-        />
-        {searchTerm && (
-          <div  className="z-50 bg-slate-50 mt-2 h-20 overflow-y-auto border border-gray-300 rounded p-2 z-10">
-            {filteredData.map((item) => (
-              <div
-                key={item.id}
-                className="mb-2 cursor-pointer"
-                onClick={() => handleHotelClick(item)}
-               
-              >
-                {item.address && (
-                  <div>
-                    <div  >{item.address.locality}</div>
-                    {/* Add other address properties as needed */}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+    <div className="flex flex-col relative justify-center items-center mr-2 h-full sm:w-full md:w-1/3 border-none rounded-3xl">
+      <TextField
+        onClick={handleSearchBoxToggle}
+        placeholder="Where to?"
+        value={searchTerm}
+        onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+            </InputAdornment>
+          ),
+        }}
+        className="w-full border-2 rounded-lg border-blue-600"
+      />
+
+      {isSearchBoxOpen && searchTerm && (
+        <div className="absolute w-full top-full left-0 bg-white rounded shadow overflow-auto border h-32 border-gray-300 p-2">
+          {filteredData.map((item) => (
+            <div
+              key={item.id}
+              className="mb-2 cursor-pointer"
+              onClick={() => handleHotelClick(item)}
+            >
+              {item.address && (
+                <div>
+                  <div>{item.address.locality}</div>
+                  {/* Add other address properties as needed */}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

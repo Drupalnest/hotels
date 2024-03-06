@@ -603,7 +603,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
 
           <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
             <div
-             ref={dropdownRef}
+              ref={dropdownRef}
               onClick={handleDayPickerToggle}
               className=" relative  rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2  "
             >
@@ -625,9 +625,9 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                 </div>
               </div>
               {isCalendarOpen && (
-                <div  className="w-auto absolute top-full left-0 bg-white border rounded shadow mt-2 ">
+                <div className="w-auto absolute top-full left-0 bg-white border rounded shadow mt-2 ">
                   <DayPicker
-                  onClick={handleDayPickerToggle}
+                    onClick={handleDayPickerToggle}
                     numberOfMonths={2}
                     pagedNavigation
                     selected={dateRange[0]}

@@ -6,6 +6,8 @@ import "./DayPicker.css";
 import "react-day-picker/dist/style.css";
 import HotelDetailss from "../HotelList/HotelDetailss";
 import Search from "./Search";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import PersonIcon from "@mui/icons-material/Person";
 
 const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
@@ -102,7 +104,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   };
 
   return (
-    <div className=" relative z-50 w-1/ h-20 border-2 border border-red-500  flex flex-row">
+    <div className=" relative z-50 w-1/ h-20  flex flex-row">
       <Search
         hotels={hotels}
         airports={airports}
@@ -110,49 +112,9 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
         cruise={cruise}
         interest={interest}
       />
-      <div
-        style={{ position: "relative" }}
-        className="flex-grow mb-4 sm:mr-4 sm:mb-0"
-      >
-        <input
-          type="text"
-          placeholder="Check-in Check-out"
-          onClick={handleDayPickerToggle}
-          value={`${dateRange[0]?.toLocaleDateString()}${
-            dateRange[0] && dateRange[1]
-              ? " - " + dateRange[1]?.toLocaleDateString()
-              : ""
-          }`}
-          readOnly
-          className="overflow-x-auto w-full p-3 border rounded focus:outline-none focus:border-blue-500"
-        />
-        {isCalendarOpen && (
-          <DayPicker
-            numberOfMonths={2}
-            pagedNavigation
-            selected={dateRange[0]}
-            onDayClick={handleDayClick}
-            startDate={dateRange[0]}
-            endDate={dateRange[1]}
-            selectsRange
-            placeholderText="Check-in Check-out"
-            className=" border-red-500 w-full p-3 border rounded focus:outline-none focus:border-blue-500"
-            style={{
-              zIndex: 999999,
-              width: "300px",
-              backgroundColor: "#ffffff",
-              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.15)",
-              borderRadius: "8px",
-            }}
-            modifiers={{
-              disabled: { before: today },
-            }}
-          />
-        )}
-      </div>
 
-      <div
-        ref={dropdownRef}
+      {/* <div
+       ref={dropdownRef} 
         className=" relative  mb-4 sm:mr-4 sm:mb-0 border-2 border-red-400"
       >
         <button
@@ -162,7 +124,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
           {rooms} Rooms, {children} Children, {adults} Adults
         </button>
         {isDropdownOpen && (
-          <div className="absolute top-10 right-0 p-4 bg-white border rounded shadow ">
+          <div   ref={dropdownRef} className="absolute top-10 right-0 p-4 bg-white border rounded shadow ">
             <div className="mb-4">
               <label className="block text-gray-700">Rooms:</label>
               <div className="flex">
@@ -219,10 +181,134 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
             </div>
           </div>
         )}
+      </div> */}
+
+      <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
+        <div
+          onClick={handleDayPickerToggle}
+          className=" relative  rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2  "
+        >
+          <div className="mr-2">
+            <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+          </div>
+          <div className="flex flex-col">
+            <div>
+              <p className="text-sm font-bold">Check-in - Check-out</p>
+            </div>
+            <div>
+              <p>
+                {`${dateRange[0]?.toLocaleDateString()}${
+                  dateRange[0] && dateRange[1]
+                    ? " - " + dateRange[1]?.toLocaleDateString()
+                    : ""
+                }`}
+              </p>
+            </div>
+          </div>
+          {isCalendarOpen && (
+            <div className="w-auto absolute top-full left-0 bg-white border rounded shadow mt-2 ">
+              <DayPicker
+                ref={dropdownRef}
+                onClick={handleDayPickerToggle}
+                numberOfMonths={2}
+                pagedNavigation
+                selected={dateRange[0]}
+                onDayClick={handleDayClick}
+                startDate={dateRange[0]}
+                endDate={dateRange[1]}
+                selectsRange
+                placeholderText="Check-in Check-out"
+                className="  focus:outline-none focus:border-blue-500"
+                modifiers={{
+                  disabled: { before: today },
+                }}
+              />
+            </div>
+          )}
+        </div>
+
+        <button
+          ref={dropdownRef}
+          onClick={handleToggleDropdown}
+          className="rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2 relative"
+        >
+          <div className="flex items-center">
+            <div className="mr-2">
+              <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+            </div>
+            <div className="">
+              <p>
+                {rooms} Rooms, {adults} Adults ,{children} Children
+              </p>
+            </div>
+          </div>
+
+          {isDropdownOpen && (
+            <div
+             
+              className="py-2 w-full absolute top-full left-0 bg-white border rounded shadow mt-2"
+            >
+              <div className="flex flex-row mb-4  justify-around ">
+                <label className="block text-gray-700">Rooms:</label>
+                <div className="flex">
+                  <button
+                    className="px-2 py-1 border rounded hover:bg-gray-200"
+                    onClick={() => handleDecrement("rooms")}
+                  >
+                    -
+                  </button>
+                  <span className="mx-2">{rooms}</span>
+                  <button
+                    className="px-2 py-1 border rounded hover:bg-gray-200"
+                    onClick={() => handleIncrement("rooms")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-row   justify-around mb-4">
+                <label className="block text-gray-700">Adults:</label>
+                <div className="flex">
+                  <button
+                    className="px-2 py-1 border rounded hover:bg-gray-200"
+                    onClick={() => handleDecrement("adults")}
+                  >
+                    -
+                  </button>
+                  <span className="mx-2">{adults}</span>
+                  <button
+                    className="px-2 py-1 border rounded hover:bg-gray-200"
+                    onClick={() => handleIncrement("adults")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-row mb-4  justify-around">
+                <label className="block text-gray-700">Children:</label>
+                <div className="flex">
+                  <button
+                    className="px-2 py-1 border rounded hover:bg-gray-200"
+                    onClick={() => handleDecrement("children")}
+                  >
+                    -
+                  </button>
+                  <span className="mx-2">{children}</span>
+                  <button
+                    className="px-2 py-1 border rounded hover:bg-gray-200"
+                    onClick={() => handleIncrement("children")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </button>
       </div>
 
-      <div className="flex-grow">
-        <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded transition duration-300 w-full sm:w-auto">
+      <div className="ml-2  flex justify-center items-center">
+        <button className="bg-green-500 hover:bg-green-600 text-white py-1 px-1 rounded transition duration-300 w-full sm:w-auto">
           Update Search
         </button>
       </div>

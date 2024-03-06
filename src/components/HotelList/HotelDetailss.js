@@ -291,10 +291,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import room1 from "../../assets/room1.jpg";
 import { setFilteredHotels } from "../../redux/actions";
+import { Link } from "gatsby";
 const HotelDetailsComponent = () => {
- 
-  
- 
   const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
   useEffect(() => {
     // This will run whenever hotels in Redux store changes
@@ -304,20 +302,24 @@ const HotelDetailsComponent = () => {
     return <div>No hotel selected</div>;
   }
   return (
-    <div className="flex flex-col  gap-3 ">
+    <div className="py-3 flex flex-col  gap-3 shadow ">
       {filteredHotels.map((hotel) => (
-        <div key={hotel.id} className="flex flex-row border rounded-3xl">
+        <Link
+          to={`/hotels/${hotel.id}`}
+          key={hotel.id}
+          className="flex flex-row shadow border rounded-3xl border-gray-500 "
+        >
           <img
             src={room1}
-            className="border rounded"
+            className=" "
             alt="Hotel Room"
             style={{
-              width: "230px",
-              height: "250px",
+              width: "240px",
+              height: "230px",
               borderRadius: "10px 0 0 10px",
             }}
           />
-          <div className="flex flex-col border-2 p-3">
+          <div className="flex flex-col border-r-2 p-3 w-2/3">
             {/* <div className="flex flex-col border-2">
               {hotel.amenities &&
                 hotel.amenities.map((amenity) => (
@@ -376,7 +378,7 @@ const HotelDetailsComponent = () => {
               </button>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
