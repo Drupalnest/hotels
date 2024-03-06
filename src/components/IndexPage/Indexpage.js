@@ -467,7 +467,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   }
 
   return (
-    <div className="border-2 relative container-fluid px-32  flex flex-row z-50 ">
+    <div className=" relative container-fluid px-32  flex flex-row z-50 ">
       <div className="w-9/12">
         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-blue-800">
           Save big on your next hotel

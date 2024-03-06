@@ -13,6 +13,7 @@ import Image5 from "../assets/room5.jpg";
 import Image6 from "../assets/room6.jpg";
 import Indexpage from "../components/IndexPage/Indexpage";
 import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
+import Navbar from "../components/Navbar/Navbar";
 
 const MyPage = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
@@ -31,6 +32,7 @@ const MyPage = ({ data }) => {
 
   return (
     <div className="max-w-[1200] mx-auto bg-white p-6">
+      <Navbar />
       <div>
         <Indexpage
           hotels={hotels}
