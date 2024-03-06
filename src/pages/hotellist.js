@@ -120,7 +120,13 @@ const hotellist = ({ data }) => {
       <div className="border border-blue-500 flex flex-row  w-full  justify-center">
         <div className="flex flex-col border-2 w-1/1 py-2 px-4">
           <div>
-            <Filter />
+            <Filter
+              hotels={hotels}
+              airports={airports}
+              city={city}
+              cruise={cruise}
+              interest={interest}
+            />
           </div>
         </div>
         {/* <div className="flex flex-row border-2">

@@ -290,6 +290,8 @@ import {
   setSelectedHotel,
   setHotelDetails,
   setFilteredHotels,
+  setCheckInDate,
+  setCheckOutDate,
 } from "../../redux/actions";
 
 import { DayPicker } from "react-day-picker";
@@ -316,6 +318,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   };
 
   const dispatch = useDispatch();
+
   const inputRef = useRef(null);
 
   const fetchHotelDetails = (hotelId, hotelName, addressLine) => {
@@ -393,9 +396,28 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
     setIsCalendarOpen(!isCalendarOpen);
   };
 
+  // const handleDayClick = (day) => {
+  //   const newDateRange = [...dateRange];
+
+  //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+  //     newDateRange[0] = day;
+  //     newDateRange[1] = null;
+  //   } else if (day > newDateRange[0]) {
+  //     newDateRange[1] = day;
+  //     setIsCalendarOpen(false);
+  //   } else {
+  //     // Swap dates if the selected date is before the check-in date
+  //     newDateRange[1] = newDateRange[0];
+  //     newDateRange[0] = day;
+  //     setIsCalendarOpen(false);
+  //   }
+
+  //   setDateRange(newDateRange);
+  // };
+
   const handleDayClick = (day) => {
     const newDateRange = [...dateRange];
-
+  
     if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
       newDateRange[0] = day;
       newDateRange[1] = null;
@@ -408,9 +430,19 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
       newDateRange[0] = day;
       setIsCalendarOpen(false);
     }
-
+  
     setDateRange(newDateRange);
+  
+    // Logic to determine if it's a check-in or check-out date
+    const isCheckInDate = !newDateRange[1];
+  
+    if (isCheckInDate) {
+      dispatch(setCheckInDate(day));
+    } else {
+      dispatch(setCheckOutDate(day));
+    }
   };
+  
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [rooms, setRooms] = useState(1);
@@ -463,8 +495,8 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   };
 
   const handleSearchClick = (hotel) => {
-   navigate("/hotellist")
-  }
+    navigate("/hotellist");
+  };
 
   return (
     <div className=" relative container-fluid px-32  flex flex-row z-50 ">
@@ -762,7 +794,10 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
               </div>
             </div>
 
-            <button onClick={handleSearchClick} className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2">
+            <button
+              onClick={handleSearchClick}
+              className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
+            >
               <div className=" text-blue-800 font-bold flex items-center justify-center">
                 <p className="text-white">Find Your Hotel</p>
               </div>
