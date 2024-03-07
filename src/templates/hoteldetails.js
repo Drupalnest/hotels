@@ -20,7 +20,7 @@ import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-import RoomCard from "../components/RoomCard";
+
 import Amenities from "../components/HotelDetails/Amenities ";
 import AboutHotel from "../components/HotelDetails/AboutHotel";
 import GuestPolicies from "../components/HotelDetails/GuestPolicies ";
@@ -35,12 +35,21 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import SearchData from "../components/data/SearchData";
 import RoomSearch from "../components/HotelDetailsPage/RoomSearch";
 import Navbar from "../components/Navbar/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { setCheckInDate, setCheckOutDate } from "../redux/actions";
+import RoomCard from "../components/HotelDetailsPage/RoomCard";
 
 const HotelDetails = ({ data }) => {
   const hotel = data.allHotel.edges[0]?.node;
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+
+  const dispatch = useDispatch();
+  const checkInDate = useSelector((state) => state.date.checkInDate);
+  const checkOutDate = useSelector((state) => state.date.checkOutDate);
+
+  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
 
   useEffect(() => {
     // Handle date changes
@@ -289,9 +298,21 @@ const HotelDetails = ({ data }) => {
             <p className="text-sm md:text-base text-gray-600">
               Price per night
             </p>
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 md:py-2 md:px-4 rounded-full mt-2 md:mt-2">
+            {/* <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 md:py-2 md:px-4 rounded-full mt-2 md:mt-2">
               Choose Your Room
-            </button>
+            </button> */}
+
+            <div className="ml-2 flex justify-end items-center">
+              {checkInDate && checkOutDate ? (
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 md:py-2 md:px-4 rounded-full mt-2 md:mt-2">
+                  Choose Your Room
+                </button>
+              ) : (
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 md:py-2 md:px-4 rounded-full mt-2 md:mt-2">
+                  Select the date
+                </button>
+              )}
+            </div>
           </div>
         </div>
 

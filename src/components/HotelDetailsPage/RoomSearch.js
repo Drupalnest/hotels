@@ -10,12 +10,22 @@ import Switch, { SwitchProps } from "@mui/material/Switch";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import { navigate } from "gatsby";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSearchTerm,
+  setSelectedHotel,
+  setHotelDetails,
+  setFilteredHotels,
+  setCheckInDate,
+  setCheckOutDate,
+} from "../../redux/actions";
 
 const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
   const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
   const [selectedHotel, setSelectedHotel] = useState(null);
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
 
+  const dispatch = useDispatch();
   // Filter based on the entered search term
   const filteredData = allData.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -36,20 +46,68 @@ const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
     setIsCalendarOpen(!isCalendarOpen);
   };
 
+  const checkInDate = useSelector((state) => state.date.checkInDate);
+  const checkOutDate = useSelector((state) => state.date.checkOutDate);
+
+  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
+
+  const [localCheckInDate, setLocalCheckInDate] = useState(today);
+  const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
+
+  // const handleDayClick = (day) => {
+  //   const newDateRange = [...dateRange];
+
+  //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+  //     newDateRange[0] = day;
+  //     newDateRange[1] = null;
+  //   } else if (day > newDateRange[0]) {
+  //     newDateRange[1] = day;
+  //     setIsCalendarOpen(false);
+  //   } else {
+  //     // Swap dates if the selected date is before the check-in date
+  //     newDateRange[1] = newDateRange[0];
+  //     newDateRange[0] = day;
+  //     setIsCalendarOpen(false);
+  //   }
+
+  //   setDateRange(newDateRange);
+  // };
+
   const handleDayClick = (day) => {
     const newDateRange = [...dateRange];
 
     if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+      const today = new Date();
+
+      if (day < today) {
+        return;
+      }
+
+      // Set time to noon (12:00 PM) to avoid timezone issues
+      day.setHours(12, 0, 0, 0);
+
       newDateRange[0] = day;
       newDateRange[1] = null;
+
+      // Dispatch check-in date to Redux
+      dispatch(setCheckInDate(newDateRange[0]));
     } else if (day > newDateRange[0]) {
-      newDateRange[1] = day;
       setIsCalendarOpen(false);
+      // Set time to noon (12:00 PM) to avoid timezone issues
+      day.setHours(12, 0, 0, 0);
+      newDateRange[1] = day;
+
+      // Dispatch check-out date to Redux
+      dispatch(setCheckOutDate(newDateRange[1]));
     } else {
       // Swap dates if the selected date is before the check-in date
       newDateRange[1] = newDateRange[0];
       newDateRange[0] = day;
       setIsCalendarOpen(false);
+
+      // Dispatch both check-in and check-out dates to Redux
+      dispatch(setCheckInDate(newDateRange[0]));
+      dispatch(setCheckOutDate(newDateRange[1]));
     }
 
     setDateRange(newDateRange);
@@ -251,9 +309,9 @@ const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
             </div>
             <div>
               <p>
-                {`${dateRange[0]?.toLocaleDateString()}${
-                  dateRange[0] && dateRange[1]
-                    ? " - " + dateRange[1]?.toLocaleDateString()
+                {`${checkInDate?.toLocaleDateString() || ""}${
+                  checkInDate && checkOutDate
+                    ? " - " + (checkOutDate?.toLocaleDateString() || "")
                     : ""
                 }`}
               </p>

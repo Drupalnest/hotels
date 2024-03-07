@@ -9,11 +9,19 @@ import Search from "./Search";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import { navigate } from "gatsby";
+import { useDispatch, useSelector } from "react-redux";
+import { setCheckInDate, setCheckOutDate } from "../../redux/actions";
 
 const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
   const [selectedHotel, setSelectedHotel] = useState(null);
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
+
+  const dispatch = useDispatch();
+  const checkInDate = useSelector((state) => state.date.checkInDate);
+  const checkOutDate = useSelector((state) => state.date.checkOutDate);
+
+  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
 
   // Filter based on the entered search term
   const filteredData = allData.filter((item) =>
@@ -35,20 +43,107 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
     setIsCalendarOpen(!isCalendarOpen);
   };
 
+  // const handleDayClick = (day) => {
+  //   const newDateRange = [...dateRange];
+
+  //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+  //     newDateRange[0] = day;
+  //     newDateRange[1] = null;
+  //   } else if (day > newDateRange[0]) {
+  //     newDateRange[1] = day;
+  //     setIsCalendarOpen(false);
+  //   } else {
+  //     // Swap dates if the selected date is before the check-in date
+  //     newDateRange[1] = newDateRange[0];
+  //     newDateRange[0] = day;
+  //     setIsCalendarOpen(false);
+  //   }
+
+  //   setDateRange(newDateRange);
+  // };
+
+  const [localCheckInDate, setLocalCheckInDate] = useState(today);
+  const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
+
+  // const handleDayClick = (day) => {
+  //   const newDateRange = [...dateRange];
+
+  //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+  //     const today = new Date();
+
+  //     if (day < today) {
+  //       return;
+  //     }
+
+  //     // Set time to noon (12:00 PM) to avoid timezone issues
+  //     day.setHours(12, 0, 0, 0);
+
+  //     newDateRange[0] = day;
+  //     newDateRange[1] = null;
+
+  //     // Update local state for check-in date
+  //     setLocalCheckInDate(newDateRange[0]);
+  //   } else if (day > newDateRange[0]) {
+  //     setIsCalendarOpen(false);
+  //     // Set time to noon (12:00 PM) to avoid timezone issues
+  //     day.setHours(12, 0, 0, 0);
+  //     newDateRange[1] = day;
+
+  //     // Update local state for check-out date
+  //     setLocalCheckOutDate(newDateRange[1]);
+  //   } else {
+  //     // Swap dates if the selected date is before the check-in date
+  //     newDateRange[1] = newDateRange[0];
+  //     newDateRange[0] = day;
+  //     setIsCalendarOpen(false);
+
+  //     // Update local state for both check-in and check-out dates
+  //     setLocalCheckInDate(newDateRange[0]);
+  //     setLocalCheckOutDate(newDateRange[1]);
+  //   }
+
+  //   setDateRange(newDateRange);
+
+  //   // Dispatch both check-in and check-out dates to Redux
+  //   dispatch(setCheckInDate(newDateRange[0]));
+  //   dispatch(setCheckOutDate(newDateRange[1]));
+  // };
+
   const handleDayClick = (day) => {
     const newDateRange = [...dateRange];
 
     if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+      const today = new Date();
+
+      if (day < today) {
+        return;
+      }
+
+      // Set time to noon (12:00 PM) to avoid timezone issues
+      day.setHours(12, 0, 0, 0);
+
       newDateRange[0] = day;
       newDateRange[1] = null;
+
+      // Dispatch check-in date to Redux
+      dispatch(setCheckInDate(newDateRange[0]));
     } else if (day > newDateRange[0]) {
-      newDateRange[1] = day;
       setIsCalendarOpen(false);
+      // Set time to noon (12:00 PM) to avoid timezone issues
+      day.setHours(12, 0, 0, 0);
+      newDateRange[1] = day;
+
+      // Dispatch check-out date to Redux
+      dispatch(setCheckOutDate(newDateRange[1]));
     } else {
       // Swap dates if the selected date is before the check-in date
       newDateRange[1] = newDateRange[0];
       newDateRange[0] = day;
       setIsCalendarOpen(false);
+
+      // Dispatch both check-in and check-out dates to Redux
+      dispatch(setCheckInDate(newDateRange[0]));
+      dispatch(setCheckOutDate(newDateRange[1]));
     }
 
     setDateRange(newDateRange);
@@ -104,9 +199,9 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
     }
   };
 
-  const handleSearchBoxClick=()=>{
-    navigate("/hotellist")
-  }
+  const handleSearchBoxClick = () => {
+    navigate("/hotellist");
+  };
 
   return (
     <div className=" relative z-50 w-1/ h-20  flex flex-row">
@@ -202,9 +297,14 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
             </div>
             <div>
               <p>
-                {`${dateRange[0]?.toLocaleDateString()}${
+                {/* {`${dateRange[0]?.toLocaleDateString()}${
                   dateRange[0] && dateRange[1]
                     ? " - " + dateRange[1]?.toLocaleDateString()
+                    : ""
+                }`} */}
+                {`${checkInDate?.toLocaleDateString() || ""}${
+                  checkInDate && checkOutDate
+                    ? " - " + (checkOutDate?.toLocaleDateString() || "")
                     : ""
                 }`}
               </p>
@@ -310,7 +410,10 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
       </div>
 
       <div className="ml-2  flex justify-center items-center">
-        <button onClick={handleSearchBoxClick} className="bg-green-500 hover:bg-green-600 text-white py-1 px-1 rounded transition duration-300 w-full sm:w-auto">
+        <button
+          onClick={handleSearchBoxClick}
+          className="bg-green-500 hover:bg-green-600 text-white py-1 px-1 rounded transition duration-300 w-full sm:w-auto"
+        >
           Update Search
         </button>
       </div>
