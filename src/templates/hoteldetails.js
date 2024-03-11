@@ -1555,11 +1555,6 @@
 
 // export default HotelDetails;
 
-
-
-
-
- 
 import React, { useEffect, useState } from "react";
 import { Link, graphql } from "gatsby";
 import { Button, Card, Input, PopoverPaper } from "@mui/material";
@@ -1582,7 +1577,7 @@ import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
- 
+
 import Amenities from "../components/HotelDetails/Amenities ";
 import AboutHotel from "../components/HotelDetails/AboutHotel";
 import GuestPolicies from "../components/HotelDetails/GuestPolicies ";
@@ -1600,27 +1595,43 @@ import Navbar from "../components/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { setCheckInDate, setCheckOutDate } from "../redux/actions";
 import RoomCard from "../components/HotelDetailsPage/RoomCard";
- 
-import { setCheckOutData } from '../redux/actions';
- 
+
+import { setCheckOutData } from "../redux/actions";
+
 const HotelDetails = ({ data }) => {
-  const hotel = data.allHotel.edges[0]?.node;
+  // const hotel = data.allHotel.edges?.[0]?.node;
+  // console.log("hotel", hotel);
+
+  const hotel = data.specificHotel.edges?.[0]?.node;
+
+  console.log("hotel", hotel);
+
+  const hotels = data?.allHotels?.nodes || [];
+  console.log("hotels", hotels);
+  const airports = data?.allLocationAirport?.nodes || [];
+  console.log("airports", airports);
+  const city = data?.allLocationCity?.nodes || [];
+  console.log("city", city);
+  const cruise = data?.allLocationCruise?.nodes || [];
+  console.log("cruise", cruise);
+  const interest = data?.allLocationPointOfInterest?.nodes || [];
+  console.log("interest", interest);
+  // console.log("hotelsdfdv",hotels)
   const dispatch = useDispatch();
- 
- 
+
   useEffect(() => {
     // Set the selected hotel when the component mounts
     dispatch(setCheckOutData(hotel));
   }, [dispatch, hotel]);
- 
+
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
- 
+
   const checkInDate = useSelector((state) => state.date.checkInDate);
   const checkOutDate = useSelector((state) => state.date.checkOutDate);
- 
+
   console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
- 
+
   useEffect(() => {
     // Handle date changes
     console.log("Selected Date:", selectedDate);
@@ -1628,24 +1639,24 @@ const HotelDetails = ({ data }) => {
   const handleItemClick = (index) => {
     setSelectedItem(index);
   };
- 
+
   if (!hotel) {
     return <p>No hotel details found.</p>;
   }
- 
+
   const containerStyle = {
     width: "100%",
     height: "400px",
   };
- 
+
   const scrollLeft = () => {
     document.getElementById("image-gallery").scrollLeft -= 300;
   };
- 
+
   const scrollRight = () => {
     document.getElementById("image-gallery").scrollLeft += 300;
   };
- 
+
   const getAmenityIcon = (amenityName) => {
     switch (amenityName) {
       case "Wifi":
@@ -1660,7 +1671,7 @@ const HotelDetails = ({ data }) => {
         return <FiberManualRecordIcon className="mr-2" />; // Default icon
     }
   };
- 
+
   const handleDataFetched = (fetchedData) => {
     if (fetchedData && Array.isArray(fetchedData.hotels)) {
       console.log("Fetched Hotels Data:", fetchedData.hotels);
@@ -1669,25 +1680,7 @@ const HotelDetails = ({ data }) => {
       console.error("Invalid or undefined data structure:", fetchedData);
     }
   };
- 
-  const hotels = data?.allHotel?.nodes || [];
-  console.log("hotels", hotels);
-  const airports = data?.allLocationAirport?.nodes || [];
-  console.log("airports", airports);
-  const city = data?.allLocationCity?.nodes || [];
-  console.log("city", city);
-  const cruise = data?.allLocationCruise?.nodes || [];
-  console.log("cruise", cruise);
-  const interest = data?.allLocationPointOfInterest?.nodes || [];
-  console.log("interest", interest);
-  // console.log("hotelsdfdv",hotels)
- 
- 
- 
- 
- 
- 
- 
+
   return (
     <div className="py-2 container-fluid flex flex-col justify-center">
       <Navbar />
@@ -1709,11 +1702,10 @@ const HotelDetails = ({ data }) => {
           interest={interest}
         />
       </div>
- 
+
       {/* <Navbar /> */}
       <ImageSlider />
- 
-     
+
       <div className="container-fluid  flex  justify-center border-b border-gray-500">
         <div className="container ">
           <div className="hidden md:flex flex-wrap list-none">
@@ -1768,15 +1760,14 @@ const HotelDetails = ({ data }) => {
           </div>
         </div>
       </div>
- 
+
       <div className="container p-0 mx-auto flex flex-col justify-center border border-red-500">
-        
         <div className="flex flex-wrap p-4 border-b border-gray-500">
           <div className="w-full md:w-8/12 mb-4 md:mb-0">
             <p className="text-2xl font-bold mb-2 text-gray-800">
               {hotel.name}
             </p>
- 
+
             <div className="flex items-center mb-2">
               <p className="text-gray-600 font-bold text-sm">
                 5-STAR HOTEL Luxury
@@ -1788,7 +1779,7 @@ const HotelDetails = ({ data }) => {
                 View Map
               </p>
             </div>
- 
+
             <div className="flex items-center mb-4">
               <p className="text-pink-600 text-sm font-bold bg-gray-300 px-1  rounded-full mr-2">
                 TOP BOOKED HOTEL
@@ -1797,20 +1788,20 @@ const HotelDetails = ({ data }) => {
                 30 people are looking at this hotel
               </p>
             </div>
- 
+
             <div className="flex gap-3">
               <button className="bg-white text-blue-700 hover:bg-blue-700 hover:text-white font-bold py-1 px-2 rounded-full flex items-center text-xs underline">
                 <IosShareIcon className="text-md mr-1" />
                 Share
               </button>
- 
+
               <button className="bg-white text-blue-700 hover:bg-blue-700 hover:text-white font-bold py-1 px-2 rounded-full flex items-center text-xs underline">
                 <FavoriteBorderIcon className="text-md mr-1" />
                 Save
               </button>
             </div>
           </div>
- 
+
           <div className="w-full md:w-4/12 text-left md:text-right">
             <h1 className="text-2xl md:text-4xl font-bold mb-2 text-blue-700">
               {/* ${hotel.price} */}
@@ -1819,7 +1810,7 @@ const HotelDetails = ({ data }) => {
             <p className="text-sm md:text-base text-gray-600">
               Price per night
             </p>
-           
+
             <div className="ml-2 flex justify-end items-center">
               {checkInDate && checkOutDate ? (
                 <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 md:py-2 md:px-4 rounded-full mt-2 md:mt-2">
@@ -1833,8 +1824,7 @@ const HotelDetails = ({ data }) => {
             </div>
           </div>
         </div>
- 
-       
+
         <div className=" border border-yellow-500 flex flex-wrap justify-center ">
           <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 ">
             <div className="h-full bg-white ">
@@ -1903,7 +1893,7 @@ const HotelDetails = ({ data }) => {
                     </span>
                     <h1 className="text-xl font-bold">Guest Rating</h1>
                   </div>
- 
+
                   <div className="">
                     <span className="flex justify-between">
                       <p className="text-sm font-semibold">CLEANLINESS</p>
@@ -1911,7 +1901,7 @@ const HotelDetails = ({ data }) => {
                     </span>
                     <span className="w-full border rounded h-1.5 bg-orange-600 block"></span>
                   </div>
- 
+
                   <div className="">
                     <span className="flex justify-between">
                       <p className="text-sm font-semibold">CLEANLINESS</p>
@@ -1935,7 +1925,7 @@ const HotelDetails = ({ data }) => {
               </div>
             </div>
           </div>
-        
+
           <div className="w-full sm:w-full md:w-full lg:w-1/3 xl:w-1/3">
             <div className="h-full bg-white">
               <div className="p-4 border-l r">
@@ -1960,7 +1950,7 @@ const HotelDetails = ({ data }) => {
             </div>
           </div>
         </div>
- 
+
         {/* Room Options */}
         <div className="  border border-yellow-700">
           <div className="flex flex-col  md:justify-between ">
@@ -1982,9 +1972,7 @@ const HotelDetails = ({ data }) => {
                   </p>
                 </span>
               </div>
- 
-            
- 
+
               <RoomSearch
                 hotels={hotels}
                 airports={airports}
@@ -1993,25 +1981,23 @@ const HotelDetails = ({ data }) => {
                 interest={interest}
               />
             </div>
- 
+
             <div className="">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[...Array(6)].map((_, index) => (
-                  <RoomCard key={index} imageIndex={index}  />
+                  <RoomCard key={index} imageIndex={index} />
                 ))}
               </div>
             </div>
           </div>
         </div>
- 
-     
+
         <Amenities amenities={hotel.amenities} />
- 
+
         <AboutHotel description={hotel.description} />
- 
-       
+
         <GuestPolicies />
- 
+
         <div className=" m-2 py-4  border-b  border-gray-500">
           <h3 className="text-2xl font-bold mb-4">Important Info</h3>
           <span className="text-xl  mb-4 ">
@@ -2020,11 +2006,10 @@ const HotelDetails = ({ data }) => {
             availability and additional charges may apply.
           </span>
         </div>
- 
-       
+
         <RatingSection />
         <ReviewBox />
- 
+
         <div className=" py-4  border-b  border-gray-500">
           <h1 className="text-2xl  font-bold ">Location</h1>
           <span className="text-lg p-0 flex flex-row gap-2">
@@ -2034,24 +2019,169 @@ const HotelDetails = ({ data }) => {
             <p>{hotel.address.postal_code}</p>
             <p>{hotel.address.country_code}</p>
           </span>
- 
-          
+
           <GoogleMapComponent lat_lon={hotel.lat_lon} address={hotel.address} />
         </div>
- 
+
         <div>
           <Footer />
         </div>
- 
-        
       </div>
     </div>
   );
 };
- 
+
+// export const query = graphql`
+//   query MyQuery($id: String!) {
+//     allHotel(filter: { id: { eq: $id } }) {
+//       edges {
+//         node {
+//           id
+//           name
+//           phone
+//           hotel_code
+//           rlh_status
+//           description
+//           address {
+//             address_line1
+//             locality
+//             administrative_area
+//             postal_code
+//             country_code
+//           }
+//           amenities {
+//             machine_name
+//             name
+//           }
+//           lat_lon {
+//             bottom
+//             geo_type
+//             geohash
+//             lat
+//             latlon
+//             left
+//             lon
+//             right
+//             top
+//             value
+//           }
+//           address {
+//             address_line1
+//             locality
+//             postal_code
+//             country_code
+//           }
+//           email
+//           description
+//           crs_code
+//           crs_name
+//           address {
+//             address_line1
+//             country_code
+//             administrative_area
+//             locality
+//             postal_code
+//           }
+//           amenities {
+//             machine_name
+//             name
+//           }
+//         }
+//       }
+//     }
+
+//     allHotel {
+//       nodes {
+//         id
+//         name
+//         phone
+//         hotel_code
+//         rlh_status
+//         description
+//         address {
+//           address_line1
+//           locality
+//           administrative_area
+//           postal_code
+//           country_code
+//         }
+//         amenities {
+//           machine_name
+//           name
+//         }
+//         lat_lon {
+//           bottom
+//           geo_type
+//           geohash
+//           lat
+//           latlon
+//           left
+//           lon
+//           right
+//           top
+//           value
+//         }
+//         address {
+//           address_line1
+//           locality
+//           postal_code
+//           country_code
+//         }
+//         email
+//         description
+//         crs_code
+//         crs_name
+//         address {
+//           address_line1
+//           country_code
+//           administrative_area
+//           locality
+//           postal_code
+//         }
+//         amenities {
+//           machine_name
+//           name
+//         }
+//       }
+//     }
+
+//     allLocationAirport {
+//       nodes {
+//         id
+//         name
+//         field_address {
+//           locality
+//           country_code
+//         }
+//       }
+//     }
+//     allLocationCity {
+//       nodes {
+//         id
+//         name
+//         population
+//       }
+//     }
+//     allLocationCruise {
+//       nodes {
+//         id
+//         google_place_id
+//         name
+//       }
+//     }
+//     allLocationPointOfInterest {
+//       nodes {
+//         id
+//         name
+//         google_place_id
+//       }
+//     }
+//   }
+// `;
+
 export const query = graphql`
   query MyQuery($id: String!) {
-    allHotel(filter: { id: { eq: $id } }) {
+    specificHotel: allHotel(filter: { id: { eq: $id } }) {
       edges {
         node {
           id
@@ -2083,30 +2213,58 @@ export const query = graphql`
             top
             value
           }
-          address {
-            address_line1
-            locality
-            postal_code
-            country_code
-          }
           email
           description
           crs_code
           crs_name
-          address {
-            address_line1
-            country_code
-            administrative_area
-            locality
-            postal_code
-          }
-          amenities {
-            machine_name
-            name
-          }
         }
       }
     }
+
+    allHotels: allHotel {
+      nodes {
+        id
+        name
+        phone
+        hotel_code
+        rlh_status
+        description
+        address {
+          address_line1
+          locality
+          administrative_area
+          postal_code
+          country_code
+        }
+        amenities {
+          machine_name
+          name
+        }
+        lat_lon {
+          bottom
+          geo_type
+          geohash
+          lat
+          latlon
+          left
+          lon
+          right
+          top
+          value
+        }
+        address {
+          address_line1
+          locality
+          postal_code
+          country_code
+        }
+        email
+        description
+        crs_code
+        crs_name
+      }
+    }
+
     allLocationAirport {
       nodes {
         id
@@ -2140,5 +2298,5 @@ export const query = graphql`
     }
   }
 `;
- 
+
 export default HotelDetails;

@@ -573,6 +573,8 @@ import Filterwithoutmap from "../components/HotelList/Filterwithoutmap";
 import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Navbar from "../components/Navbar/Navbar";
+import { graphql } from "gatsby";
+
 const HotelPopup = ({ hotel, onClose }) => {
   return (
     <InfoWindow
@@ -638,7 +640,6 @@ const MapComponent = ({ data }) => {
   console.log("cruise", cruise);
   const interest = data?.allLocationPointOfInterest?.nodes || [];
   console.log("interest", interest);
-  // console.log("hotelsdfdv",hotels)
   const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
   const [selectedHotel, setSelectedHotel] = useState(null);
   const handleMarkerClick = (hotel) => {
@@ -656,7 +657,7 @@ const MapComponent = ({ data }) => {
   };
   return (
     <div className="container-fluid">
-     <Navbar />
+      <Navbar />
       <div className="flex justify-center items-center">
         <Link
           className="flex mr-3 font-bold text-blue-600 hover:underline"
@@ -699,16 +700,12 @@ const MapComponent = ({ data }) => {
           </button> */}
           <Filterwithoutmap />
         </div>
-        <div
-          className="border-2"
-          style={{ width: "100%", height: "auto",}}
-        >
+        <div className="border-2" style={{ width: "100%", height: "auto" }}>
           <LoadScript googleMapsApiKey="AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ">
             <GoogleMap
               mapContainerStyle={{
                 width: "100%",
                 height: "100%",
-                
               }}
               center={center}
               zoom={10}
@@ -808,4 +805,5 @@ export const query = graphql`
     }
   }
 `;
+
 export default MapComponent;
