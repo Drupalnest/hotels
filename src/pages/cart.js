@@ -530,8 +530,6 @@
 //   }
 // `;
 
-
-
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
@@ -555,26 +553,32 @@ import Discover from "../images/discover.svg";
 import Mastercard from "../images/mastercard.svg";
 import Visa from "../images/visa.svg";
 import Navbar from "../components/Navbar/Navbar";
- 
+
 import { useSelector } from "react-redux";
- 
+import { navigate } from "gatsby";
+
 const steps = [
   "Select master blaster campaign settings",
   "Create an ad group",
   "Create an ad",
 ];
- 
+
 export default function Cart() {
   const randomImage = "https://source.unsplash.com/?hotel,travel";
- 
+
   const checkoutData = useSelector((state) => state.checkoutData.checkoutData);
   console.log("checkoutData", checkoutData);
- 
+
   const hotelName = checkoutData.name || "Default Hotel Name";
   const addressLine1 = checkoutData.address.address_line1;
- 
+
   const amenities = checkoutData.amenities;
- 
+
+
+  const bookinConfirmationClcik = () => {
+    navigate("/bookingconfirm");
+  };
+
   return (
     <div className="container-fluid flex flex-col justify-center items-center">
       <Navbar />
@@ -583,7 +587,7 @@ export default function Cart() {
         <div>SECURE TRANSACTIONS</div>
         <div>SECURE TRANSACTIONS</div>
       </div>
- 
+
       <div className="container p-4 sm:p-2 border border-gray-500">
         <Box>
           <Stepper activeStep={1} alternativeLabel>
@@ -595,7 +599,7 @@ export default function Cart() {
           </Stepper>
         </Box>
       </div>
- 
+
       <div className="flex flex-row border border-green-600">
         <div
           className="border-2 border-gray-400  overflow-auto h-screen "
@@ -624,7 +628,7 @@ export default function Cart() {
                 </p>
               </div>
             </div>
- 
+
             <div className="flex flex-row  justify-around m-4 border rounded-2xl bg-slate-200">
               <span className="flex flex-col text-center p-2 ">
                 <p>CHECK-IN</p>
@@ -643,10 +647,10 @@ export default function Cart() {
                 <p>1</p>
               </span>
             </div>
- 
+
             <div className="m-4 w-96">
               <h1 className="font-bold py-3">Deluxe Suite with King Bed</h1>
- 
+
               {/* <span className="flex flex-row justify-between">
                 <ul>
                   <li>
@@ -681,7 +685,7 @@ export default function Cart() {
                   </li>
                 </ul>
               </span> */}
- 
+
               <div className="flex flex-col justify-between">
                 {amenities.map((amenity, index) => (
                   <ul className="flex flex-col" key={index}>
@@ -694,7 +698,7 @@ export default function Cart() {
               </div>
             </div>
           </div>
- 
+
           <div className="p-4 m-4 border  border-gray-500 rounded-2xl ">
             <div className="p-2 border bg-slate-200 rounded-2xl">
               The guest checking into each hotel room must be 21 or older,
@@ -728,7 +732,7 @@ export default function Cart() {
               <p>Guest name and name on card are the same</p>
             </span>
           </div>
- 
+
           <div className="p-4 m-4 border  border-gray-500 rounded-2xl flex flex-col">
             <h1 className="font-bold">Payment Method</h1>
             <div className="border m-2 p-2  border-gray-500 rounded-2xl flex flex-col">
@@ -741,7 +745,7 @@ export default function Cart() {
                   </p>
                 </span>
               </span>
- 
+
               <div className="p-3 bg-gray-200 rounded-2xl flex flex-col">
                 <span className="flex flex-row gap-3 py-2">
                   <img
@@ -783,7 +787,7 @@ export default function Cart() {
                     marginBottom: "1rem",
                   }}
                 />
- 
+
                 <TextField
                   id="outlined-basic"
                   label="MM/YYYY*"
@@ -805,7 +809,7 @@ export default function Cart() {
               </div>
             </div>
           </div>
- 
+
           {/* <div>
             <CheckBox />
           </div>
@@ -814,7 +818,7 @@ export default function Cart() {
           </div> */}
           <div className="p-4 m-4 border border-gray-500 rounded-2xl flex flex-col">
             <h1 className="font-bold py-2">Billing</h1>
- 
+
             <TextField
               id="outlined-basic"
               label="Street address*"
@@ -824,7 +828,7 @@ export default function Cart() {
                 marginBottom: "1rem",
               }}
             />
- 
+
             <TextField
               id="outlined-basic"
               label="Country*"
@@ -834,7 +838,7 @@ export default function Cart() {
                 marginBottom: "1rem",
               }}
             />
- 
+
             <TextField
               id="outlined-basic"
               label="State*"
@@ -844,7 +848,7 @@ export default function Cart() {
                 marginBottom: "1rem",
               }}
             />
- 
+
             <TextField
               id="outlined-basic"
               label="Postal Code*"
@@ -854,7 +858,7 @@ export default function Cart() {
                 marginBottom: "1rem",
               }}
             />
- 
+
             <TextField
               id="outlined-basic"
               label="Email address*"
@@ -864,7 +868,7 @@ export default function Cart() {
                 marginBottom: "1rem",
               }}
             />
- 
+
             <span className="flex flex-row gap-2">
               <TextField
                 id="outlined-basic"
@@ -887,7 +891,7 @@ export default function Cart() {
               />
             </span>
           </div>
- 
+
           <div className="p-4 m-4 border border-gray-500 rounded-2xl flex flex-col">
             <p className="font-bold text-xl py-2">Important Information</p>
             <ul className="list-disc pl-6">
@@ -905,14 +909,17 @@ export default function Cart() {
               </li>
             </ul>
           </div>
- 
+
           <div className="p-4 m-4 border border-gray-500 rounded-2xl flex flex-col">
-            <button className="p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300 ease-in-out focus:outline-none">
+            <button
+                 onClick={bookinConfirmationClcik}
+              className="p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300 ease-in-out focus:outline-none"
+            >
               Book & Pay
             </button>
           </div>
         </div>
- 
+
         <div className="border border-red-500 w-6/12 ">
           <div className="p-3 m-3 border border-gray-500 rounded-2xl">
             <span className="flex flex-row justify-between py-1">
@@ -988,4 +995,3 @@ export default function Cart() {
     </div>
   );
 }
- 
