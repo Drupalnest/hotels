@@ -11,41 +11,41 @@ import PersonIcon from "@mui/icons-material/Person";
 import { navigate } from "gatsby";
 import { useDispatch, useSelector } from "react-redux";
 import { setCheckInDate, setCheckOutDate } from "../../redux/actions";
-
+ 
 const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
   const [selectedHotel, setSelectedHotel] = useState(null);
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
-
+ 
   const dispatch = useDispatch();
   const checkInDate = useSelector((state) => state.date.checkInDate);
   const checkOutDate = useSelector((state) => state.date.checkOutDate);
-
+ 
   console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
-
+ 
   // Filter based on the entered search term
   const filteredData = allData.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+ 
   const handleHotelClick = (hotel) => {
     setSelectedHotel(hotel);
   };
-
+ 
   const today = new Date(); // Get the current date
   const tomorrow = new Date(today); // Get tomorrow's date
   tomorrow.setDate(tomorrow.getDate() + 1);
-
+ 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [dateRange, setDateRange] = useState([today, tomorrow]);
-
+ 
   const handleDayPickerToggle = () => {
     setIsCalendarOpen(!isCalendarOpen);
   };
-
+ 
   // const handleDayClick = (day) => {
   //   const newDateRange = [...dateRange];
-
+ 
   //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
   //     newDateRange[0] = day;
   //     newDateRange[1] = null;
@@ -58,29 +58,29 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   //     newDateRange[0] = day;
   //     setIsCalendarOpen(false);
   //   }
-
+ 
   //   setDateRange(newDateRange);
   // };
-
+ 
   const [localCheckInDate, setLocalCheckInDate] = useState(today);
   const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
-
+ 
   // const handleDayClick = (day) => {
   //   const newDateRange = [...dateRange];
-
+ 
   //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
   //     const today = new Date();
-
+ 
   //     if (day < today) {
   //       return;
   //     }
-
+ 
   //     // Set time to noon (12:00 PM) to avoid timezone issues
   //     day.setHours(12, 0, 0, 0);
-
+ 
   //     newDateRange[0] = day;
   //     newDateRange[1] = null;
-
+ 
   //     // Update local state for check-in date
   //     setLocalCheckInDate(newDateRange[0]);
   //   } else if (day > newDateRange[0]) {
@@ -88,7 +88,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   //     // Set time to noon (12:00 PM) to avoid timezone issues
   //     day.setHours(12, 0, 0, 0);
   //     newDateRange[1] = day;
-
+ 
   //     // Update local state for check-out date
   //     setLocalCheckOutDate(newDateRange[1]);
   //   } else {
@@ -96,35 +96,35 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   //     newDateRange[1] = newDateRange[0];
   //     newDateRange[0] = day;
   //     setIsCalendarOpen(false);
-
+ 
   //     // Update local state for both check-in and check-out dates
   //     setLocalCheckInDate(newDateRange[0]);
   //     setLocalCheckOutDate(newDateRange[1]);
   //   }
-
+ 
   //   setDateRange(newDateRange);
-
+ 
   //   // Dispatch both check-in and check-out dates to Redux
   //   dispatch(setCheckInDate(newDateRange[0]));
   //   dispatch(setCheckOutDate(newDateRange[1]));
   // };
-
+ 
   const handleDayClick = (day) => {
     const newDateRange = [...dateRange];
-
+ 
     if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
       const today = new Date();
-
+ 
       if (day < today) {
         return;
       }
-
+ 
       // Set time to noon (12:00 PM) to avoid timezone issues
       day.setHours(12, 0, 0, 0);
-
+ 
       newDateRange[0] = day;
       newDateRange[1] = null;
-
+ 
       // Dispatch check-in date to Redux
       dispatch(setCheckInDate(newDateRange[0]));
     } else if (day > newDateRange[0]) {
@@ -132,7 +132,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
       // Set time to noon (12:00 PM) to avoid timezone issues
       day.setHours(12, 0, 0, 0);
       newDateRange[1] = day;
-
+ 
       // Dispatch check-out date to Redux
       dispatch(setCheckOutDate(newDateRange[1]));
     } else {
@@ -140,39 +140,39 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
       newDateRange[1] = newDateRange[0];
       newDateRange[0] = day;
       setIsCalendarOpen(false);
-
+ 
       // Dispatch both check-in and check-out dates to Redux
       dispatch(setCheckInDate(newDateRange[0]));
       dispatch(setCheckOutDate(newDateRange[1]));
     }
-
+ 
     setDateRange(newDateRange);
   };
-
+ 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [rooms, setRooms] = useState(1);
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const dropdownRef = useRef(null);
-
+ 
   const handleToggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-
+ 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsDropdownOpen(false);
     }
   };
-
+ 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-
+ 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+ 
   const handleIncrement = (type) => {
     switch (type) {
       case "rooms":
@@ -188,7 +188,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
         break;
     }
   };
-
+ 
   const handleDecrement = (type) => {
     if (type === "rooms" && rooms > 1) {
       setRooms(rooms - 1);
@@ -198,11 +198,11 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
       setChildren(children - 1);
     }
   };
-
+ 
   const handleSearchBoxClick = () => {
     navigate("/hotellist");
   };
-
+ 
   return (
     <div className=" relative z-50 w-1/ h-20  flex flex-row">
       <Search
@@ -212,9 +212,9 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
         cruise={cruise}
         interest={interest}
       />
-
+ 
       {/* <div
-       ref={dropdownRef} 
+       ref={dropdownRef}
         className=" relative  mb-4 sm:mr-4 sm:mb-0 border-2 border-red-400"
       >
         <button
@@ -282,7 +282,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
           </div>
         )}
       </div> */}
-
+ 
       <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
         <div
           onClick={handleDayPickerToggle}
@@ -331,7 +331,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
             </div>
           )}
         </div>
-
+ 
         <button
           ref={dropdownRef}
           onClick={handleToggleDropdown}
@@ -347,7 +347,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
               </p>
             </div>
           </div>
-
+ 
           {isDropdownOpen && (
             <div className="py-2 w-full absolute top-full left-0 bg-white border rounded shadow mt-2">
               <div className="flex flex-row mb-4  justify-around ">
@@ -408,7 +408,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
           )}
         </button>
       </div>
-
+ 
       <div className="ml-2  flex justify-center items-center">
         <button
           onClick={handleSearchBoxClick}

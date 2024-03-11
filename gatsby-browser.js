@@ -8,6 +8,24 @@ export const wrapRootElement = ({ element }) => {
   return <Provider store={store}>{element}</Provider>;
 };
 
+
+// import React from 'react';
+// import "./src/styles/global.css";
+// import { Provider } from 'react-redux';
+// import { PersistGate } from 'redux-persist/integration/react';
+// import { store, persistor } from './src/redux/store';
+// import "bootstrap/dist/css/bootstrap.min.css";
+
+// export const wrapRootElement = ({ element }) => {
+//   return (
+//     <Provider store={store}>
+//       <PersistGate loading={null} persistor={persistor}>
+//         {element}
+//       </PersistGate>
+//     </Provider>
+//   );
+// };
+
 // /**
 //  * Implement Gatsby's Browser APIs in this file.
 //  *

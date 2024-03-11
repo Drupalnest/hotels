@@ -1,13 +1,13 @@
 import React from "react";
 import { graphql } from "gatsby";
-
+ 
 const SearchData = ({ data, onDataFetched }) => {
   const hotels = data?.allHotel?.nodes || [];
   const airports = data?.allLocationAirport?.nodes || [];
   const city = data?.allLocationCity?.nodes || [];
   const cruise = data?.allLocationCruise?.nodes || [];
   const interest = data?.allLocationPointOfInterest?.nodes || [];
-
+ 
   // Pass the fetched data to the parent component
   onDataFetched({
     hotels,
@@ -16,11 +16,11 @@ const SearchData = ({ data, onDataFetched }) => {
     cruise,
     interest,
   });
-
+ 
   // Return null as the component doesn't render anything
   return null;
 };
-
+ 
 export const query = graphql`
   query MyQuery {
     allHotel {
@@ -91,5 +91,5 @@ export const query = graphql`
     }
   }
 `;
-
+ 
 export default SearchData;

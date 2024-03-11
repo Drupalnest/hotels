@@ -18,7 +18,7 @@
 // import { createStore, combineReducers, applyMiddleware } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 // import reducer from './reducer';
-// import dateReducer from './dateReducer'; 
+// import dateReducer from './reducer'; 
 
 
 // // Combine reducers if you have multiple reducers
@@ -39,14 +39,43 @@
 
 
 
+
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducer'; // Updated import
-
+ 
 // Apply middleware for Redux DevTools Extension
 const middleware = composeWithDevTools(applyMiddleware(/* any middleware you want to add */));
-
+ 
 // Create the Redux store with the combined reducer and DevTools Extension
 const store = createStore(rootReducer, middleware);
-
+ 
 export default store;
+
+
+
+// import { createStore, applyMiddleware } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+// import rootReducer from './reducer';
+// import { persistStore, persistReducer } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
+
+// // Apply middleware for Redux DevTools Extension
+// const middleware = composeWithDevTools(applyMiddleware(/* any middleware you want to add */));
+
+// // Create the Redux store with the combined reducer and DevTools Extension
+// const store = createStore(rootReducer, middleware);
+
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+// };
+
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// // Create the Redux store
+// const storeWithPersistor = createStore(persistedReducer);
+// const persistor = persistStore(storeWithPersistor);
+
+// export { storeWithPersistor as store, persistor };
+

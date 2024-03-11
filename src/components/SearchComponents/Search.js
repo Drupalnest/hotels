@@ -831,11 +831,11 @@ import { setSearchTerm, setSelectedHotel, setHotelDetails, setFilteredHotels } f
 import SearchIcon from "@mui/icons-material/Search";
 import HotelDetailsComponent from "../HotelList/HotelDetailss";
 import { InputAdornment, TextField } from "@mui/material";
-
+ 
 const Search = ({ hotels, airports, cruise, interest, city }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-
+ 
   const fetchHotelDetails = (hotelId, hotelName, addressLine) => {
     // Replace this with your actual logic to fetch hotel details
     return {
@@ -845,46 +845,46 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
       // Add other details as needed
     };
   };
-
+ 
   const searchTerm = useSelector((state) => state.hotel.searchTerm);
   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
   const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
-
+ 
   // Combine all data into a single array
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
-
+ 
   // Filter hotels based on the selected locality
   const uniqueLocalities = new Set();
-
+ 
   const filteredData = allData.filter((item) => {
     const matchesSearch =
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       item.address &&
       item.address.locality &&
       item.address.locality.toLowerCase().includes(searchTerm.toLowerCase());
-
+ 
     if (matchesSearch) {
       // Add the locality to the set if it matches the search
       uniqueLocalities.add(item.address.locality);
     }
-
+ 
     return matchesSearch;
   });
-
+ 
   // Handle click on hotel item
   const handleHotelClick = (hotel) => {
     dispatch(setSelectedHotel(hotel));
-
+ 
     // Fetch detailed information for the selected hotel (replace with your logic)
     const details = fetchHotelDetails(
       hotel.id,
       hotel.Name,
       hotel.address ? hotel.address.address_line1 : "Address not available"
     );
-
+ 
     // Dispatch the action to store hotel details in Redux
     dispatch(setHotelDetails(details));
-
+ 
     // Log filtered hotels based on locality
     const filteredHotels = allData.filter(
       (item) =>
@@ -896,14 +896,14 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
     console.log("Filtered Hotels based on Locality:", filteredHotels);
     dispatch(setFilteredHotels(filteredHotels));
   };
-
+ 
   const [isSearchBoxOpen, setIsSearchBoxOpen] = useState(false);
   const dropdownRef = useRef(null);
-
+ 
   const handleSearchBoxToggle = () => {
     setIsSearchBoxOpen(!isSearchBoxOpen);
   };
-
+ 
   return (
     <div className="flex flex-col relative justify-center items-center mr-2 h-full sm:w-full md:w-1/3 border-none rounded-3xl">
       <TextField
@@ -920,7 +920,7 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
         }}
         className="w-full border-2 rounded-lg border-blue-600"
       />
-
+ 
       {isSearchBoxOpen && searchTerm && (
         <div className="absolute w-full top-full left-0 bg-white rounded shadow overflow-auto border h-32 border-gray-300 p-2">
           {filteredData.map((item) => (
@@ -942,5 +942,6 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
     </div>
   );
 };
-
+ 
 export default Search;
+ 
