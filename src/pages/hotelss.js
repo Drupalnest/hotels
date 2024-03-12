@@ -1,5 +1,5 @@
-import React from 'react';
-import { graphql } from 'gatsby';
+import React from "react";
+import { graphql } from "gatsby";
 
 const HotelDetails = ({ data }) => {
   const hotels = data?.allHotel?.edges || [];
@@ -10,6 +10,7 @@ const HotelDetails = ({ data }) => {
         <div key={node.id}>
           <h1>{node.name}</h1>
           <p>{node.hotel_code}</p>
+          <p>{node.drupal_id}</p>
           <p>{node.phone}</p>
           <p>{node.rlh_status}</p>
           <p>{node.status}</p>
@@ -30,6 +31,7 @@ export const query = graphql`
       edges {
         node {
           id
+          drupal_id
           hotel_code
           name
           phone
@@ -46,5 +48,3 @@ export const query = graphql`
 `;
 
 export default HotelDetails;
-
-

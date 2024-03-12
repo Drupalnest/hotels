@@ -1985,7 +1985,7 @@ const HotelDetails = ({ data }) => {
             <div className="">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[...Array(6)].map((_, index) => (
-                  <RoomCard key={index} imageIndex={index} />
+                  <RoomCard key={index} imageIndex={index}  rooms={hotel} />
                 ))}
               </div>
             </div>
@@ -2018,6 +2018,9 @@ const HotelDetails = ({ data }) => {
             <p>{hotel.address.administrative_area}</p>
             <p>{hotel.address.postal_code}</p>
             <p>{hotel.address.country_code}</p>
+            {/* <p className="text-lg text-green-700 font-bold">
+              {hotel.drupal_id}
+            </p> */}
           </span>
 
           <GoogleMapComponent lat_lon={hotel.lat_lon} address={hotel.address} />
@@ -2185,11 +2188,15 @@ export const query = graphql`
       edges {
         node {
           id
+          drupal_id
           name
           phone
           hotel_code
           rlh_status
           description
+          field_rooms_ajay {
+            drupal_internal__target_id
+          }
           address {
             address_line1
             locality
@@ -2224,11 +2231,15 @@ export const query = graphql`
     allHotels: allHotel {
       nodes {
         id
+        drupal_id
         name
         phone
         hotel_code
         rlh_status
         description
+        field_rooms_ajay {
+          drupal_internal__target_id
+        }
         address {
           address_line1
           locality

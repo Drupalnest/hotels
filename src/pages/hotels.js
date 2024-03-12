@@ -20,6 +20,7 @@ export const query = graphql`
     allHotel {
       nodes {
         id
+        drupal_id
         name
         phone 
         status
