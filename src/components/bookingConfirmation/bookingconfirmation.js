@@ -1,216 +1,209 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import room1 from "../../assets/room1.jpg";
-
 const BookingConfirmation = ({ bookingDetails, success }) => {
   return (
     <div>
       <Navbar />
       <div className="container-lg">
-        <div className="flex flex-col p-4">
-          <p className="font-bold text-lg text-blue-600 ">Booking Complete</p>
+        <div className="flex flex-col py-4 ">
+          <p className="px-2 font-bold text-lg text-blue-600 ">
+            Booking Complete
+          </p>
         </div>
-
         <div>
-          <p>Trip Number</p>
-          <div className="flex flex-row">
-            <div className="border-2 w-3/4 border-red-500">
+          <p className="p-2 ">Trip Number</p>
+          <div className="flex flex-row gap-3">
+            <div className="border-2 w-3/4 ">
               <div className="p-3 bg-blue-500">
                 <p className="text-lg font-medium text-white">
-                  At&t Hotel And Conference Center{" "}
+                  At&t Hotel And Conference Center
                 </p>
               </div>
-
-              <div className="flex flex-row  justify-between p-3 bg-gray-100 rounded-md shadow-md">
-                {/* Check-in and Check-out */}
-                <div className="flex flex-col">
-                  <p className="text-md  mb-2">Check-in</p>
-                  <p className="text-md ">Check-out</p>
-                </div>
-
-                {/* Check-in Time, Check-out Time, Change dates, and Book again */}
-                <div className="flex flex-col items-center">
-                  <p className="text-md font-bold mb-2">
-                    Fri Jul 1, 2016 - After 03:00 PM
-                  </p>
-                  <p className="text-md font-bold mb-2">
-                    Fri Jul 2, 2016 - After 12:00 PM
-                  </p>
-
-                  <div className="flex flex-row gap-2 items-center space-y-2">
-                    <button className="text-blue-500 hover:underline">
-                      Change dates
-                    </button>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                      Book again
-                    </button>
+              <div className="flex flex-row border-2 ">
+                <div className="border-3  w-3/4">
+                  <div className="flex flex-row  justify-between p-3 bg-white rounded-md shadow-md">
+                    <div className="flex flex-col w-2/4  ">
+                      <p className="text-sm  mb-2">Check-in</p>
+                      <p className="text-sm ">Check-out</p>
+                    </div>
+                    <div className="flex flex-col w-2/4  ">
+                      <p className="text-sm  mb-2">
+                        Fri Jul 1, 2016 - After 03:00 PM
+                      </p>
+                      <p className="text-sm  mb-2">
+                        Fri Jul 2, 2016 - After 12:00 PM
+                      </p>
+                      <div className="flex flex-row  gap-2  space-y-2">
+                        <button className="text-sm text-blue-500 hover:underline">
+                          Change dates
+                        </button>
+                        <button className="text-sm bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                          Book again
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row  justify-between p-3 bg-white rounded-md shadow-md">
+                    <div className="flex flex-col  w-2/4">
+                      <p className="text-sm  mb-2">Address</p>
+                      <p className="text-sm ">Phone number</p>
+                    </div>
+                    <div className="flex flex-col   w-2/4 ">
+                      <p className="text-sm  mb-2">
+                        1900 University Avenue Austin TX
+                      </p>
+                      <p className="text-sm mb-2">512-435-987-1245</p>
+                    </div>
+                  </div>
+                  <div className=" flex flex-row  justify-between p-3 bg-white rounded-md shadow-md">
+                    <div className="flex flex-col w-2/4 ">
+                      <p className="text-sm  mb-2">Number of rooms:</p>
+                      <p className="text-sm mb-2 ">Reservation Number</p>
+                      <p className="text-sm mb-2">Confirmation Number</p>
+                    </div>
+                    <div className="flex flex-col w-2/4  ">
+                      <p className="text-sm  mb-2">1 room</p>
+                      <p className="text-sm mb-2">Lisa Simpson</p>
+                      <p className="text-sm mb-2">CONFO</p>
+                    </div>
+                  </div>
+                  <div className=" flex flex-row  justify-between p-3 bg-white rounded-md shadow-md">
+                    <div className="flex flex-col w-2/4">
+                      <p className="text-sm  mb-2">Ammenities</p>
+                    </div>
+                    <div className="flex flex-col w-2/4">
+                      <p className="text-sm  mb-2">Free Internet</p>
+                      <p className="text-sm mb-2">Outdoor Pool</p>
+                      <p className="text-sm mb-2">Non-smoking</p>
+                      <p className="text-sm mb-2">Gym</p>
+                      <p className="text-sm mb-2">Hancap Accessible </p>
+                      <p className="text-sm mb-2">Bussiness Center</p>
+                    </div>
+                  </div>
+                  <div className=" flex flex-row  justify-between p-3 bg-white rounded-md shadow-md">
+                    <div className="flex flex-col w-2/4">
+                      <p className="text-sm  mb-2">Room Type</p>
+                    </div>
+                    <div className="flex flex-col w-2/4">
+                      <p className="text-sm  mb-2">deluxe</p>
+                      <p className="text-sm mb-2">Hotel</p>
+                    </div>
+                  </div>
+                  <div className="w-full flex flex-row  justify-between p-3 bg-white  shadow-md">
+                    <div className="flex flex-col w-2/4">
+                      <p>Important Information</p>
+                      <p>Your Reservation May be</p>
+                    </div>
                   </div>
                 </div>
-
-                {/* Room Image */}
-                <div>
-                  <img src={room1} className="w-44 rounded-md" alt="Room" />
-                </div>
-              </div>
-
-              <div className="flex flex-row  justify-between p-3 bg-gray-100 rounded-md shadow-md">
-                {/* Check-in and Check-out */}
-                <div className="flex flex-col">
-                  <p className="text-md  mb-2">Address</p>
-                  <p className="text-md ">Phone number</p>
-                </div>
-
-                {/* Check-in Time, Check-out Time, Change dates, and Book again */}
-                <div className="flex flex-col items-center">
-                  <p className="text-md font-bold mb-2">
-                    1900 University Avenue Austin TX
-                  </p>
-                  <p className="text-md font-bold mb-2">512-435-987-1245</p>
-                </div>
-
-                {/* Room Image */}
-                <div>
-                  <img src={room1} className="w-44 rounded-md" alt="Room" />
-                </div>
-              </div>
-
-              <div className="flex flex-row">
-                <div>
-                  <p>Number of rooms:</p>
-                  <p>Reservarion name</p>
-                  <p>Confirmation number </p>
-                </div>
-                <div>
-                  <p>1 room</p>
-                  <p>Lisa Simpson</p>
-                  <p>CONFO</p>
-                </div>
-              </div>
-
-              <div className="flex flex-row">
-                <div className="flex flex-row">
+                <div className="w-1/4 flex flex-col p-3  border-2  border-3 ">
                   <div>
-                    <p>Ammenities</p>
+                    <img
+                      src={room1}
+                      className="w-44 rounded-md mb-3"
+                      alt="Room"
+                    />
                   </div>
                   <div>
-                    <p>Ammenities</p>
-                    <p>Ammenities</p>
-                    <p>Ammenities</p>
-                    <p>Ammenities</p>
-                    <p>Ammenities</p>
-                    <p>Ammenities</p>
+                    <img src={room1} className="w-44 rounded-md" alt="Room" />
                   </div>
-                </div>
-                <div className="flex flex-row">
-                  <div>
-                    <p>Room Types</p>
-                  </div>
-                  <div>
-                    <p>deluxe</p>
-                  </div>
-                </div>
-                <div>
-                  <p>Important Information</p>
-                  <p>Your Reservation May be</p>
                 </div>
               </div>
             </div>
-            <div className="border-2 w-1/4 border-blue-500">
+            <div className="border-2 w-1/4 ">
               <div>
-                <div className="flex flex-row">
-                  <p>Summary of Charges</p>
-                  <p>Total cost: $1664</p>
+                <div className="flex flex-col p-2 bg-blue-500">
+                  <p className="text-white text-lg">Summary of Charges</p>
+                  <p className="text-white text-md">Total cost: $1664</p>
                 </div>
-
-                <div className="flex flex-row">
-                  <p>Purchase date</p>
-                  <p>July 1 2016</p>
-                </div>
-
-                <div className="flex flex-row">
-                  <p>Payment method</p>
-                  <p>Mastercard</p>
-                </div>
-                <div className="flex flex-row">
-                  <p>Billing Name </p>
-                  <p>Taraya</p>
-                </div>
-                <div className="flex flex-row">
-                  <p>Payment method</p>
-                  <p>Mastercard</p>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex flex-row">
-                  <p>Room Price</p>
-                  <p>$206</p>
-                </div>
-                <div className="flex flex-row">
-                  <p>Number of rooms</p>
-                  <p>1 room</p>
-                </div>
-                <div className="flex flex-row">
-                  <p>Number of nights</p>
-                  <p>7 nights</p>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex flex-row">
-                  <p>Room Subtotal</p>
-                  <p>$1,447</p>
-                </div>
-                <div className="flex flex-row">
-                  <p>Taxes</p>
-                  <p>$ 217</p>
-                </div>
-                <div className="flex flex-row">
-                  <p>Total Cost</p>
-                  <p>$ 1234</p>
-                </div>
-              </div>
-
-              <div>
-                <div>
-                  <p>Need Help?</p>
-                </div>
-
-                <div>
-                  <p>Can I cancle this reservation?</p>
-                  <p>Can I change my dates?</p>
-                  <p>How do I print a recipt?</p>
-                  <p>See all FAQs</p>
-                </div>
-
-                <div>
-                  <p>Customer Care</p>
-                  <p>Give us a call</p>
-                  <div>
-                    <p>From United States?</p>
-                    <p>1800657444022</p>
+                <div className="p-2">
+                  <div className="flex flex-row justify-between  ">
+                    <p className="text-sm ">Purchase date</p>
+                    <p className="text-sm">July 1 2016</p>
                   </div>
-
-                  <div>
-                    <p>From United States?</p>
-                    <p>1800657444022</p>
+                  <div className="flex flex-row justify-between  ">
+                    <p className="text-sm">Payment method</p>
+                    <p className="text-sm">Mastercard</p>
                   </div>
-
-                  <p>You will need this information</p>
-
-                  <div>
-                    <p>Trip Number</p>
-                    <p>1800657444022</p>
+                  <div className="flex flex-row justify-between  ">
+                    <p className="text-sm">Billing Name </p>
+                    <p className="text-sm text-start">Taraya</p>
                   </div>
-
-                  <div>
-                    <p>Confirmation Number</p>
-                    <p>1800657444022</p>
+                  <div className="flex flex-row justify-between  ">
+                    <p className="text-sm">Payment method</p>
+                    <p className="text-sm">Mastercard</p>
                   </div>
-
-                  <div>
-                    <p>Phone Number used:</p>
-                    <p>1800657444022</p>
+                </div>
+                <div className="p-2 mt-2">
+                  <div className="flex flex-row justify-between ">
+                    <p className="text-sm text-green-600">Room Price</p>
+                    <p className="text-sm text-green-600">$206</p>
+                  </div>
+                  <div className="flex flex-row justify-between ">
+                    <p className="text-sm">Number of rooms</p>
+                    <p className="text-sm">1 room</p>
+                  </div>
+                  <div className="flex flex-row justify-between ">
+                    <p className="text-sm">Number of nights</p>
+                    <p className="text-sm">7 nights</p>
+                  </div>
+                </div>
+                <div className="p-2 mt-2">
+                  <div className="flex flex-row justify-between">
+                    <p className="text-sm">Room Subtotal</p>
+                    <p className="text-sm">$1,447</p>
+                  </div>
+                  <div className="flex flex-row justify-between">
+                    <p className="text-sm">Taxes</p>
+                    <p className="text-sm">$ 217</p>
+                  </div>
+                  <div className="flex flex-row justify-between">
+                    <p className="text-sm text-green-600">Total Cost</p>
+                    <p className="text-sm text-green-600">$ 1234</p>
+                  </div>
+                </div>
+                <div className="p-2 mt-5">
+                  <div className="p-2 bg-blue-500">
+                    <p className="text-white text-md">Need Help?</p>
+                  </div>
+                  <div className="p-2 ">
+                    <p className=" text-md border-b border-black">Top FAQ</p>
+                  </div>
+                  <div className="p-2">
+                    <p className="text-blue-500  ">
+                      Can I cancle this reservation?
+                    </p>
+                    <p className="text-blue-500  ">Can I change my dates?</p>
+                    <p className="text-blue-500 "> How do I print a recipt?</p>
+                    <p className="text-blue-500  ">See all FAQs</p>
+                  </div>
+                  <div className="p-2 mt-3 space-y-4">
+                    <p className="text-md border-b border-black">
+                      Customer Care
+                    </p>
+                    <p className="font-bold mt-3">Give us a call</p>
+                    <div>
+                      <p className="text-sm">From United States?</p>
+                      <p className="text-sm">1800657444022</p>
+                    </div>
+                    <div>
+                      <p className="text-sm">From United States?</p>
+                      <p className="text-sm">1800657444022</p>
+                    </div>
+                    <p className="text-sm"> You will need this information</p>
+                    <div>
+                      <p className="text-sm">Trip Number</p>
+                      <p className="text-sm">1800657444022</p>
+                    </div>
+                    <div>
+                      <p className="text-sm">Confirmation Number</p>
+                      <p className="text-sm">1800657444022</p>
+                    </div>
+                    <div>
+                      <p className="text-sm">Phone Number used:</p>
+                      <p className="text-sm">1800657444022</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -221,5 +214,4 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
     </div>
   );
 };
-
 export default BookingConfirmation;
