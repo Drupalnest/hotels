@@ -1620,42 +1620,49 @@ import {
   setFilteredHotels,
   setCheckInDate,
   setCheckOutDate,
+  incrementRooms,
+  decrementRooms,
+  incrementAdults,
+  decrementAdults,
+  incrementChildren,
+  decrementChildren,
+  setRoomCount,
+  setAdultCount,
+  setChildrenCount,
 } from "../../redux/actions";
- 
+
 import { DayPicker } from "react-day-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-day-picker/dist/style.css";
 import { navigate } from "gatsby";
- 
- 
+
 const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   const [isActive, setIsActive] = useState(false);
- 
+
   const handleClick = () => {
     setIsActive((prevIsActive) => !prevIsActive);
   };
- 
+
   const checkInDate = useSelector((state) => state.date.checkInDate);
   const checkOutDate = useSelector((state) => state.date.checkOutDate);
- 
+
   console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
- 
- 
+
   const containerStyle = {
     width: "3/12",
     position: "relative",
     overflow: "hidden",
   };
- 
+
   const imgStyle = {
     width: "500px",
     height: "400px",
   };
- 
+
   const dispatch = useDispatch();
- 
+
   const inputRef = useRef(null);
- 
+
   const fetchHotelDetails = (hotelId, hotelName, addressLine) => {
     // Replace this with your actual logic to fetch hotel details
     return {
@@ -1665,50 +1672,50 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
       // Add other details as needed
     };
   };
- 
+
   const searchTerm = useSelector((state) => state.hotel.searchTerm);
   const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
   const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
- 
+
   // Combine all data into a single array
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
   console.log("allData", allData);
- 
+
   // Filter hotels based on the selected locality
- 
+
   const uniqueLocalities = new Set();
- 
+
   const filteredData = allData.filter((item) => {
     const matchesSearch =
       item.name.toLowerCase().includes(searchTerm) &&
       item.address &&
       item.address.locality &&
       item.address.locality.toLowerCase().includes(searchTerm.toLowerCase());
- 
+
     if (matchesSearch) {
       // Add the locality to the set if it matches the search
       uniqueLocalities.add(item.address.locality);
     }
- 
+
     return matchesSearch;
   });
- 
+
   // Handle click on hotel item
   const handleHotelClick = (hotel) => {
     dispatch(setSelectedHotel(hotel));
- 
+
     // Fetch detailed information for the selected hotel (replace with your logic)
     const details = fetchHotelDetails(
       hotel.id,
       hotel.Name,
       hotel.address ? hotel.address.address_line1 : "Address not available"
     );
- 
+
     // Dispatch the action to store hotel details in Redux
     dispatch(setHotelDetails(details));
- 
+
     // Log filtered hotels based on locality
- 
+
     const filteredHotels = allData.filter(
       (item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -1719,23 +1726,64 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
     console.log("Filtered Hotels based on Locality:", filteredHotels);
     dispatch(setFilteredHotels(filteredHotels));
   };
- 
+
+  // // Filter hotels based on the selected locality
+  // const filteredData = allData.filter((item) => {
+  //   const matchesSearch =
+  //     (!searchTerm || // If no search term is provided, display all data
+  //       (item.address && // Otherwise, filter based on locality if search term is provided
+  //         item.address.locality &&
+  //         item.address.locality
+  //           .toLowerCase()
+  //           .includes(searchTerm.toLowerCase()))) &&
+  //     (!item.field_rooms_ajay || // Filter out items with non-empty field_rooms_ajay
+  //       item.field_rooms_ajay.drupal_internal__target_id === "");
+
+  //   return matchesSearch;
+  // });
+
+  //   const handleHotelClick = (hotel) => {
+  //     dispatch(setSelectedHotel(hotel));
+
+  //     // Fetch detailed information for the selected hotel (replace with your logic)
+  //     const details = fetchHotelDetails(
+  //       hotel.id,
+  //       hotel.Name,
+  //       hotel.address ? hotel.address.address_line1 : "Address not available"
+  //     );
+
+  //     // Dispatch the action to store hotel details in Redux
+  //     dispatch(setHotelDetails(details));
+
+  //     // Filter hotels based on the selected locality
+  //     const filteredHotels = filteredData.filter(
+  //       (item) =>
+  //         item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+  //         item.address &&
+  //         item.address.locality &&
+  //         item.address.locality.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+
+  //     console.log("Filtered Hotels based on Locality:", filteredHotels);
+  //     dispatch(setFilteredHotels(filteredHotels));
+  //   };
+
   const today = new Date(); // Get the current date
   const tomorrow = new Date(today); // Get tomorrow's date
   tomorrow.setDate(tomorrow.getDate() + 1);
- 
+
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [dateRange, setDateRange] = useState([today, tomorrow]);
- 
+
   const handleDayPickerToggle = () => {
     setIsCalendarOpen(!isCalendarOpen);
   };
- 
+
   const [localCheckInDate, setLocalCheckInDate] = useState(today);
   const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
   // const handleDayClick = (day) => {
   //   const newDateRange = [...dateRange];
- 
+
   //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
   //     newDateRange[0] = day;
   //     newDateRange[1] = null;
@@ -1748,25 +1796,25 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   //     newDateRange[0] = day;
   //     setIsCalendarOpen(false);
   //   }
- 
+
   //   setDateRange(newDateRange);
   // };
- 
+
   // const handleDayClick = (day) => {
   //   const newDateRange = [...dateRange];
- 
+
   //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
   //     const today = new Date();
- 
+
   //     // Set check-in date, adjusting for time zone
   //     if (day < today) {
   //       // Prevent setting check-in date before today
   //       return;
   //     }
- 
+
   //     // Adjust time part to prevent timezone issues
   //     day.setHours(12, 0, 0, 0);
- 
+
   //     newDateRange[0] = day;
   //     newDateRange[1] = null;
   //   } else if (day > newDateRange[0]) {
@@ -1779,30 +1827,30 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   //     newDateRange[0] = day;
   //     setIsCalendarOpen(false);
   //   }
- 
+
   //   setDateRange(newDateRange);
- 
+
   //   // Dispatch both check-in and check-out dates to Redux
   //   dispatch(setCheckInDate(newDateRange[0]));
   //   dispatch(setCheckOutDate(newDateRange[1]));
   // };
- 
+
   // const handleDayClick = (day) => {
   //   const newDateRange = [...dateRange];
- 
+
   //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
   //     const today = new Date();
- 
+
   //     if (day < today) {
   //       return;
   //     }
- 
+
   //     // Set time to noon (12:00 PM) to avoid timezone issues
   //     day.setHours(12, 0, 0, 0);
- 
+
   //     newDateRange[0] = day;
   //     newDateRange[1] = null;
- 
+
   //     // Update local state for check-in date
   //     setLocalCheckInDate(newDateRange[0]);
   //   } else if (day > newDateRange[0]) {
@@ -1810,7 +1858,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   //     // Set time to noon (12:00 PM) to avoid timezone issues
   //     day.setHours(12, 0, 0, 0);
   //     newDateRange[1] = day;
- 
+
   //     // Update local state for check-out date
   //     setLocalCheckOutDate(newDateRange[1]);
   //   } else {
@@ -1818,35 +1866,35 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   //     newDateRange[1] = newDateRange[0];
   //     newDateRange[0] = day;
   //     setIsCalendarOpen(false);
- 
+
   //     // Update local state for both check-in and check-out dates
   //     setLocalCheckInDate(newDateRange[0]);
   //     setLocalCheckOutDate(newDateRange[1]);
   //   }
- 
+
   //   setDateRange(newDateRange);
- 
+
   //   // Dispatch both check-in and check-out dates to Redux
   //   dispatch(setCheckInDate(newDateRange[0]));
   //   dispatch(setCheckOutDate(newDateRange[1]));
   // };
- 
+
   const handleDayClick = (day) => {
     const newDateRange = [...dateRange];
- 
+
     if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
       const today = new Date();
- 
+
       if (day < today) {
         return;
       }
- 
+
       // Set time to noon (12:00 PM) to avoid timezone issues
       day.setHours(12, 0, 0, 0);
- 
+
       newDateRange[0] = day;
       newDateRange[1] = null;
- 
+
       // Dispatch check-in date to Redux
       dispatch(setCheckInDate(newDateRange[0]));
     } else if (day > newDateRange[0]) {
@@ -1854,7 +1902,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
       // Set time to noon (12:00 PM) to avoid timezone issues
       day.setHours(12, 0, 0, 0);
       newDateRange[1] = day;
- 
+
       // Dispatch check-out date to Redux
       dispatch(setCheckOutDate(newDateRange[1]));
     } else {
@@ -1862,69 +1910,115 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
       newDateRange[1] = newDateRange[0];
       newDateRange[0] = day;
       setIsCalendarOpen(false);
- 
+
       // Dispatch both check-in and check-out dates to Redux
       dispatch(setCheckInDate(newDateRange[0]));
       dispatch(setCheckOutDate(newDateRange[1]));
     }
- 
+
     setDateRange(newDateRange);
   };
- 
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [rooms, setRooms] = useState(1);
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(0);
+
   const dropdownRef = useRef(null);
- 
+
   const handleToggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
- 
+
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsDropdownOpen(false);
     }
   };
- 
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
- 
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
- 
+
+  // const [rooms, setRooms] = useState(1);
+  // const [adults, setAdults] = useState(1);
+  // const [children, setChildren] = useState(0);
+
+  // const handleIncrement = (type) => {
+  //   switch (type) {
+  //     case "rooms":
+  //       setRooms(rooms + 1);
+  //       break;
+  //     case "adults":
+  //       setAdults(adults + 1);
+  //       break;
+  //     case "children":
+  //       setChildren(children + 1);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
+
+  // const handleDecrement = (type) => {
+  //   if (type === "rooms" && rooms > 1) {
+  //     setRooms(rooms - 1);
+  //   } else if (type === "adults" && adults > 1) {
+  //     setAdults(adults - 1);
+  //   } else if (type === "children" && children > 0) {
+  //     setChildren(children - 1);
+  //   }
+  // };
+
+  const { rooms, adults, children } = useSelector((state) => state.countData);
   const handleIncrement = (type) => {
     switch (type) {
       case "rooms":
-        setRooms(rooms + 1);
+        dispatch(setRoomCount(rooms + 1));
         break;
       case "adults":
-        setAdults(adults + 1);
+        dispatch(setAdultCount(adults + 1));
         break;
       case "children":
-        setChildren(children + 1);
+        dispatch(setChildrenCount(children + 1));
         break;
       default:
         break;
     }
   };
- 
+
   const handleDecrement = (type) => {
-    if (type === "rooms" && rooms > 1) {
-      setRooms(rooms - 1);
-    } else if (type === "adults" && adults > 1) {
-      setAdults(adults - 1);
-    } else if (type === "children" && children > 0) {
-      setChildren(children - 1);
+    switch (type) {
+      case "rooms":
+        if (rooms > 1) {
+          dispatch(setRoomCount(rooms - 1));
+        }
+        break;
+      case "adults":
+        if (adults > 1) {
+          dispatch(setAdultCount(adults - 1));
+        }
+        break;
+      case "children":
+        if (children > 0) {
+          dispatch(setChildrenCount(children - 1));
+        }
+        break;
+      default:
+        break;
     }
   };
- 
+  useEffect(() => {
+    console.log("Rooms:", rooms, "Adults:", adults, "Children:", children);
+  });
+
   const handleSearchClick = (hotel) => {
     navigate("/hotellist");
   };
+
  
+
   return (
     <div className=" relative container-fluid px-32  flex flex-row z-50 ">
       <div className="w-9/12">
@@ -2030,6 +2124,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
               </div>
             </div>
           </div>
+
           <div className="relative sm:w-full border-none rounded-3xl">
             <TextField
               placeholder="Where to?"
@@ -2044,7 +2139,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
               }}
               className="w-full  border-2 rounded-lg border-blue-600"
             />
- 
+
             {searchTerm && (
               <div className="z-50 bg-white w-full absolute top-full left-0 shadow  mt-2 h-24 overflow-y-auto border border-gray-300 rounded p-2 ">
                 {filteredData.map((item) => (
@@ -2056,15 +2151,22 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                     {item.address && (
                       <div>
                         <div>{item.address.locality}</div>
-                        {/* Add other address properties as needed */}
                       </div>
                     )}
+                    {/* {!item.field_rooms_ajay ||
+                    item.field_rooms_ajay.drupal_internal__target_id ===
+                      "" ? null : (
+                      <div>
+                        <div>{item.address.locality}</div>
+                      
+                      </div>
+                    )} */}
                   </div>
                 ))}
               </div>
             )}
           </div>
- 
+
           <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
             <div
               ref={dropdownRef}
@@ -2108,7 +2210,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                 </div>
               )}
             </div>
- 
+
             <button
               ref={dropdownRef}
               onClick={handleToggleDropdown}
@@ -2124,7 +2226,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                   </p>
                 </div>
               </div>
- 
+
               {isDropdownOpen && (
                 <div
                   ref={dropdownRef}
@@ -2188,7 +2290,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
               )}
             </button>
           </div>
- 
+
           <div className="flex flex-col sm:flex-row w-full text-green-800 gap-3">
             <div className="bg-green-100 rounded-xl p-2 flex items-center border-2 w-full sm:w-1/2 overflow-x-auto">
               <div className="mr-3">
@@ -2220,7 +2322,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                 </div>
               </div>
             </div>
- 
+
             <button
               onClick={handleSearchClick}
               className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
@@ -2237,7 +2339,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
               </p>
             </div>
           </div>
- 
+
           <div className="flex justify-center text-sm font-bold text-blue-600 ">
             <a>Book all of your hotels at once and save up to $625</a>
           </div>
@@ -2257,5 +2359,5 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
     </div>
   );
 };
- 
+
 export default Indexpage;

@@ -18,6 +18,15 @@ import {
   setFilteredHotels,
   setCheckInDate,
   setCheckOutDate,
+  incrementRooms,
+  decrementRooms,
+  incrementAdults,
+  decrementAdults,
+  incrementChildren,
+  decrementChildren,
+  setRoomCount,
+  setAdultCount,
+  setChildrenCount,
 } from "../../redux/actions";
 
 const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
@@ -114,9 +123,7 @@ const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [rooms, setRooms] = useState(1);
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(0);
+  
   const dropdownRef = useRef(null);
 
   const handleToggleDropdown = () => {
@@ -137,16 +144,17 @@ const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
     };
   }, []);
 
+  const { rooms, adults, children } = useSelector((state) => state.countData);
   const handleIncrement = (type) => {
     switch (type) {
       case "rooms":
-        setRooms(rooms + 1);
+        dispatch(setRoomCount(rooms + 1));
         break;
       case "adults":
-        setAdults(adults + 1);
+        dispatch(setAdultCount(adults + 1));
         break;
       case "children":
-        setChildren(children + 1);
+        dispatch(setChildrenCount(children + 1));
         break;
       default:
         break;
@@ -154,14 +162,29 @@ const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
   };
 
   const handleDecrement = (type) => {
-    if (type === "rooms" && rooms > 1) {
-      setRooms(rooms - 1);
-    } else if (type === "adults" && adults > 1) {
-      setAdults(adults - 1);
-    } else if (type === "children" && children > 0) {
-      setChildren(children - 1);
+    switch (type) {
+      case "rooms":
+        if (rooms > 1) {
+          dispatch(setRoomCount(rooms - 1));
+        }
+        break;
+      case "adults":
+        if (adults > 1) {
+          dispatch(setAdultCount(adults - 1));
+        }
+        break;
+      case "children":
+        if (children > 0) {
+          dispatch(setChildrenCount(children - 1));
+        }
+        break;
+      default:
+        break;
     }
   };
+  useEffect(() => {
+    console.log("Rooms:", rooms, "Adults:", adults, "Children:", children);
+  });
 
   const handleSearchBoxClick = () => {
     navigate("/hotellist");

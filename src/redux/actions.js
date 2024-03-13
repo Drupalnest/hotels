@@ -116,3 +116,48 @@ export const setExchangeRates = (exchangeRates) => ({
   type: 'SET_EXCHANGE_RATES',
   payload: exchangeRates,
 });
+
+
+
+// actions.js
+export const incrementRooms = () => ({
+  type: 'INCREMENT_ROOMS',
+});
+
+export const decrementRooms = () => ({
+  type: 'DECREMENT_ROOMS',
+});
+
+export const incrementAdults = () => ({
+  type: 'INCREMENT_ADULTS',
+});
+
+export const decrementAdults = () => ({
+  type: 'DECREMENT_ADULTS',
+});
+
+export const incrementChildren = () => ({
+  type: 'INCREMENT_CHILDREN',
+});
+
+export const decrementChildren = () => ({
+  type: 'DECREMENT_CHILDREN',
+});
+
+
+
+// actions.js
+export const setRoomCount = (count) => ({
+  type: 'SET_ROOM_COUNT',
+  payload: count,
+});
+
+export const setAdultCount = (count) => ({
+  type: 'SET_ADULT_COUNT',
+  payload: count,
+});
+
+export const setChildrenCount = (count) => ({
+  type: 'SET_CHILDREN_COUNT',
+  payload: count,
+});

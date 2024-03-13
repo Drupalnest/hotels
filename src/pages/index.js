@@ -93,9 +93,13 @@ export const query = graphql`
     allHotel {
       nodes {
         id
+        drupal_id
         name
         phone
         hotel_code
+        field_rooms_ajay {
+          drupal_internal__target_id
+        }
         lat_lon {
           value
           geo_type
