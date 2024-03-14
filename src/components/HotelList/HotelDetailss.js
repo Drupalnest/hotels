@@ -384,3 +384,50 @@ const HotelDetailsComponent = () => {
   );
 };
 export default HotelDetailsComponent;
+
+
+
+// import React, { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import room1 from "../../assets/room1.jpg";
+// import { setFilteredHotels } from "../../redux/actions";
+// import { Link } from "gatsby";
+
+// const HotelDetailsComponent = () => {
+//   const dispatch = useDispatch();
+//   const filteredAmenity = useSelector((state) => state.hotel.filteredAmenity);
+//   const allHotels = useSelector((state) => state.hotel.hotels);
+//   const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
+
+//   useEffect(() => {
+//     // Filter hotels based on selected amenity
+//     const filteredHotels = allHotels.filter((hotel) => {
+//       return (
+//         filteredAmenity === null ||
+//         hotel.amenities.some((amenity) => amenity.name === filteredAmenity)
+//       );
+//     });
+//     // Dispatch action to update filtered hotels in Redux store
+//     dispatch(setFilteredHotels(filteredHotels));
+//   }, [filteredAmenity, allHotels, dispatch]);
+
+//   if (!filteredHotels || filteredHotels.length === 0) {
+//     return <div>No hotels matching the selected amenity</div>;
+//   }
+
+//   return (
+//     <div className="py-3 flex flex-col gap-3 shadow">
+//       {filteredHotels.map((hotel) => (
+//         <Link
+//           to={`/hotels/${hotel.id}`}
+//           key={hotel.id}
+//           className="flex flex-row shadow border rounded-3xl border-gray-500"
+//         >
+//           {/* Render hotel details */}
+//         </Link>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default HotelDetailsComponent;

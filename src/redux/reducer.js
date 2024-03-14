@@ -141,6 +141,11 @@ const currencyReducer = (state = initialCurrencyState, action) => {
   }
 };
 
+
+
+
+
+
 const initialExchangeState = {
   exchangeRates: null,
   // ... other initial state properties
@@ -204,3 +209,4 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+

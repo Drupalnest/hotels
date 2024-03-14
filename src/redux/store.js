@@ -54,6 +54,34 @@ export default store;
 
 
 
+
+// // store.js
+// import { createStore, applyMiddleware } from "redux";
+// import { composeWithDevTools } from "redux-devtools-extension";
+// import { persistStore, persistReducer } from "redux-persist";
+// import storage from "redux-persist/lib/storage";
+// import rootReducer from "./reducers";
+
+// // Redux Persist configuration
+// const persistConfig = {
+//   key: "root",
+//   storage,
+//   // whitelist: ['hotel'], // optional: specify which reducers to persist
+// };
+
+// // Create persisted reducer
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// // Create Redux store
+// const middleware = composeWithDevTools(applyMiddleware(/* any middleware you want to add */));
+// const store = createStore(persistedReducer, middleware);
+// const persistor = persistStore(store);
+
+// export { store, persistor };
+
+
+
+
 // import { createStore, applyMiddleware } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 // import rootReducer from './reducer';
