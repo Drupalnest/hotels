@@ -2368,7 +2368,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
-
+import MyLocationIcon from "@mui/icons-material/MyLocation";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
@@ -2639,7 +2639,11 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
             />
 
             {searchTerm && (
-              <div className="z-50 bg-white w-full absolute top-full left-0 shadow  mt-2 h-24 overflow-y-auto border border-gray-300 rounded p-2 ">
+              <div className="z-50 bg-white w-full absolute top-full left-0 shadow  mt-2 h-56 overflow-y-auto border border-gray-300 rounded p-2 ">
+                <div className="py-3 px-1 flex flex-row gap-2 hover:bg-slate-100  rounded-2xl">
+                  <MyLocationIcon onClick={() => initMap()} />
+                  <p>Use current location</p>
+                </div>
                 {filteredData.map((item) => (
                   <div
                     key={item.id}
@@ -2648,7 +2652,11 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                   >
                     {item.address && (
                       <div>
-                        <div>{item.address.locality}</div>
+                        {/* <MyLocationIcon onClick={() => initMap()} /> */}
+
+                        <div className="py-2 px-1 flex flex-row  hover:bg-slate-100  rounded-2xl">
+                          {item.address.locality}
+                        </div>
                       </div>
                     )}
                     {/* {!item.field_rooms_ajay ||
