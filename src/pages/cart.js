@@ -566,6 +566,9 @@ import {
   setLastName,
 } from "../redux/actions";
 import { useState } from "react";
+import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const steps = [
   "Select master blaster campaign settings",
@@ -591,50 +594,34 @@ export default function Cart() {
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
-  const bookinConfirmationClcik = () => {
-    // const reservationData = {
-    //   type: "reservations_new",
-    //   title: "My New Articlessssss",
-    //   field_booking_id: "22",
-    //   field_lastname: "gadhavnaa",
-    //   field_name: "ajay",
-    //   field_checkin: checkInDate ? formatDate(checkInDate) : "",
-    //   field_checkout: checkOutDate ? formatDate(checkOutDate) : "",
-    //   first_name: firstName,
-    //   last_name: lastName,
-    // };
 
+  const bookinConfirmationClcik = () => {
     const postData = {
       type: "reservations_new",
-      title: "My New xfg",
+      title: hotelName || "",
       field_booking_id: "22",
-      field_lastname: "gadhavnaa",
-      $schema: "ajay",
-      field_checkin: "2024-03-18"
+      field_lastname: "lastName",
+      $schema: "firstName",
+      field_checkin: checkInDate ? formatDate(checkInDate) : "",
+      field_checkout: checkOutDate ? formatDate(checkOutDate) : "",
     };
-    
-    fetch('https://api.example.com/reservations', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(postData)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-    
-
-    navigate("/bookingconfirm");
+  
+    axios
+      .post("http://165.227.127.224/api/create-booking", postData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        console.log("Success:", response.data);
+        console.log("postData:", postData); 
+        toast.success("Booking created successfully"); 
+        navigate("/bookingconfirm");
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
+        toast.error("Failed to create booking"); 
+      });
   };
 
   const checkInDate = useSelector((state) => state.date.checkInDate);

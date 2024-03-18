@@ -3,12 +3,15 @@ import React from "react";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ToastContainer } from "react-toastify";
 
 export const wrapRootElement = ({ element }) => {
-  return <Provider store={store}>{element}</Provider>;
+  return (
+    <Provider store={store}>
+      <ToastContainer /> {element}
+    </Provider>
+  );
 };
-
-
 
 // import React from "react";
 // import { Provider } from "react-redux";
@@ -22,13 +25,6 @@ export const wrapRootElement = ({ element }) => {
 //     </PersistGate>
 //   </Provider>
 // );
-
-
-
-
-
-
-
 
 // import React from 'react';
 // import "./src/styles/global.css";

@@ -465,12 +465,138 @@
 
 // export default Amenities;
 
+// import React, { useState, useEffect, useRef } from "react";
+// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// import Checkbox from "@mui/material/Checkbox";
+// import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
+// import LocalParkingIcon from "@mui/icons-material/LocalParking";
+// import PetsIcon from "@mui/icons-material/Pets";
+// import PoolIcon from "@mui/icons-material/Pool";
+// import WifiIcon from "@mui/icons-material/Wifi";
+// import { useDispatch, useSelector } from "react-redux";
+// import { setFilteredHotels } from "../../redux/actions";
 
+// const Amenities = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const dropdownRef = useRef(null);
+//   const dispatch = useDispatch();
 
+//   const storedFilteredHotels =
+//     JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
 
+//   // useEffect(() => {
+//   //   // Dispatch filtered hotels to Redux when component mounts
+//   //   dispatch(setFilteredHotels(storedFilteredHotels));
+//   // }, []); // Empty dependency array ensures this effect runs only once when the component mounts
 
+//   useEffect(() => {
+//     // This will run whenever hotels in Redux store changes
+//     console.log(
+//       "storedFilteredHotels Hotels in session store:",
+//       storedFilteredHotels
+//     );
+//   }, [storedFilteredHotels]);
 
+//   const handleToggle = () => {
+//     setIsOpen((prev) => !prev);
+//   };
 
+//   const handleClose = () => {
+//     setIsOpen(false);
+//   };
+
+//   const handleAmenityChange = (amenity) => {
+//     const allHotels = useSelector((state) => state.hotel.hotels); // Get all hotels from Redux store
+//     const updatedHotels = allHotels.filter((hotel) => {
+//       // Check if hotel is not null and has the amenities property and is an array
+//       if (hotel && hotel.amenities && Array.isArray(hotel.amenities)) {
+//         return hotel.amenities.includes(amenity);
+//       }
+//       return false; // Exclude null or invalid hotels
+//     });
+//     dispatch(setFilteredHotels(updatedHotels)); // Dispatch updated hotels to Redux
+
+//     console.log("updatedHotels Hotels in Redux store:", updatedHotels);
+//   };
+
+//   useEffect(() => {
+//     const handleClickOutside = (event) => {
+//       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+//         setIsOpen(false);
+//       }
+//     };
+
+//     document.addEventListener("click", handleClickOutside);
+
+//     return () => {
+//       document.removeEventListener("click", handleClickOutside);
+//     };
+//   }, []);
+
+//   const allAmenities = [
+//     "Wireless Internet",
+//     "Breakfast",
+//     "Parking",
+//     "Pet Friendly",
+//     "Swimming Pool",
+//   ];
+
+//   return (
+//     <div className="relative" ref={dropdownRef}>
+//       <button
+//         className="w-full transition duration-300 rounded-t-lg hover:bg-gray-200 p-2 border border-b-slate-800"
+//         onClick={handleToggle}
+//       >
+//         <div className="flex justify-between items-center">
+//           <span className="font-bold text-lg">Amenities</span>
+//           <ExpandMoreIcon
+//             style={{
+//               transform: isOpen ? "rotate(180deg)" : "rotate(360deg)",
+//             }}
+//             className="text-blue-600 text-3xl rounded-full hover:bg-gray-300 transition duration-300"
+//           />
+//         </div>
+//       </button>
+
+//       {isOpen && (
+//         <div className="absolute top-full left-0 w-full flex flex-col bg-white border border-t-0 p-4 rounded shadow-md">
+//           {allAmenities.map((amenity, index) => (
+//             <label
+//               key={index}
+//               className="flex items-center cursor-pointer hover:bg-gray-100 transition duration-300 py-2"
+//             >
+//               <Checkbox
+//                 className="mr-3"
+//                 color="primary"
+//                 onChange={() => handleAmenityChange(amenity)}
+//               />
+//               <div className="flex flex-row items-center justify-between w-full">
+//                 <div className="flex items-center">
+//                   {amenity === "Wireless Internet" && (
+//                     <WifiIcon className="mr-2" />
+//                   )}
+//                   {amenity === "Breakfast" && (
+//                     <BreakfastDiningIcon className="mr-2" />
+//                   )}
+//                   {amenity === "Parking" && (
+//                     <LocalParkingIcon className="mr-2" />
+//                   )}
+//                   {amenity === "Pet Friendly" && <PetsIcon className="mr-2" />}
+//                   {amenity === "Swimming Pool" && <PoolIcon className="mr-2" />}
+//                   <p className="text-sm">{amenity}</p>
+//                 </div>
+//               </div>
+//             </label>
+//           ))}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Amenities;
+
+// Amenities.js
 import React, { useState, useEffect, useRef } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Checkbox from "@mui/material/Checkbox";
@@ -479,51 +605,10 @@ import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import PetsIcon from "@mui/icons-material/Pets";
 import PoolIcon from "@mui/icons-material/Pool";
 import WifiIcon from "@mui/icons-material/Wifi";
-import { useDispatch, useSelector } from "react-redux";
-import { setFilteredHotels } from "../../redux/actions";
 
-const Amenities = () => {
+const Amenities = ({ onAmenityChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const dispatch = useDispatch();
-
-  const storedFilteredHotels =
-    JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
-
-  // useEffect(() => {
-  //   // Dispatch filtered hotels to Redux when component mounts
-  //   dispatch(setFilteredHotels(storedFilteredHotels));
-  // }, []); // Empty dependency array ensures this effect runs only once when the component mounts
-
-  useEffect(() => {
-    // This will run whenever hotels in Redux store changes
-    console.log(
-      "storedFilteredHotels Hotels in session store:",
-      storedFilteredHotels
-    );
-  }, [storedFilteredHotels]);
-
-  const handleToggle = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  const handleAmenityChange = (amenity) => {
-    const allHotels = useSelector((state) => state.hotel.hotels); // Get all hotels from Redux store
-    const updatedHotels = allHotels.filter((hotel) => {
-      // Check if hotel is not null and has the amenities property and is an array
-      if (hotel && hotel.amenities && Array.isArray(hotel.amenities)) {
-        return hotel.amenities.includes(amenity);
-      }
-      return false; // Exclude null or invalid hotels
-    });
-    dispatch(setFilteredHotels(updatedHotels)); // Dispatch updated hotels to Redux
-
-    console.log("updatedHotels Hotels in Redux store:", updatedHotels);
-  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -538,6 +623,14 @@ const Amenities = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  const handleToggle = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   const allAmenities = [
     "Wireless Internet",
@@ -574,7 +667,7 @@ const Amenities = () => {
               <Checkbox
                 className="mr-3"
                 color="primary"
-                onChange={() => handleAmenityChange(amenity)}
+                onChange={() => onAmenityChange(amenity)}
               />
               <div className="flex flex-row items-center justify-between w-full">
                 <div className="flex items-center">
@@ -601,21 +694,6 @@ const Amenities = () => {
 };
 
 export default Amenities;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState, useEffect, useRef } from "react";
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
