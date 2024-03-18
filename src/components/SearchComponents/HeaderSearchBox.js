@@ -24,13 +24,21 @@ import {
   setChildrenCount,
 } from "../../redux/actions";
 
-const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
+const HeaderSearchBox = ({
+  hotels,
+  airports,
+  cruise,
+  interest,
+  city,
+  onButtonClick,
+  isMapViewPage,
+}) => {
   const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
   const [selectedHotel, setSelectedHotel] = useState(null);
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
 
   const dispatch = useDispatch();
- 
+
   // Filter based on the entered search term
   const filteredData = allData.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -179,14 +187,10 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   //   };
   // }, []);
 
-
-
-
   const checkInDate = useSelector((state) => state.date.checkInDate);
   const checkOutDate = useSelector((state) => state.date.checkOutDate);
   console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
 
-  
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -200,8 +204,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
 
   const [localCheckInDate, setLocalCheckInDate] = useState(today);
   const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
- 
- 
+
   const handleDayClick = (day) => {
     const newDateRange = [...dateRange];
 
@@ -267,11 +270,6 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
     setLocalCheckInDate(today);
   }, []);
 
-
-
-
-
-
   const { rooms, adults, children } = useSelector((state) => state.countData);
   const handleIncrement = (type) => {
     switch (type) {
@@ -316,6 +314,16 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
 
   const handleSearchBoxClick = () => {
     navigate("/hotellist");
+  };
+
+
+
+  const handleClick = () => {
+    if (isMapViewPage) {
+      onButtonClick(); // Call onButtonClick if it's the map view page
+    } else {
+      handleSearchBoxClick(); // Call handleSearchBoxClick for other pages
+    }
   };
 
   return (
@@ -418,30 +426,30 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
                     : ""
                 }`} */}
                 {`${checkInDate?.toLocaleDateString() || ""}${
-              checkInDate && checkOutDate
-                ? " - " + (checkOutDate?.toLocaleDateString() || "")
-                : ""
-            }`}
+                  checkInDate && checkOutDate
+                    ? " - " + (checkOutDate?.toLocaleDateString() || "")
+                    : ""
+                }`}
               </p>
             </div>
           </div>
           {isCalendarOpen && (
             <div className="w-auto absolute top-full left-0 bg-white border rounded shadow mt-2 ">
-            <DayPicker
-            onClick={handleDayPickerToggle}
-            numberOfMonths={2}
-            pagedNavigation
-            selected={localCheckInDate} // Set the selected date to localCheckInDate
-            onDayClick={handleDayClick}
-            startDate={dateRange[0]}
-            endDate={dateRange[1]}
-            selectsRange
-            placeholderText="Check-in Check-out"
-            className="focus:outline-none focus:border-blue-500"
-            modifiers={{
-              disabled: { before: today },
-            }}
-          />
+              <DayPicker
+                onClick={handleDayPickerToggle}
+                numberOfMonths={2}
+                pagedNavigation
+                selected={localCheckInDate} // Set the selected date to localCheckInDate
+                onDayClick={handleDayClick}
+                startDate={dateRange[0]}
+                endDate={dateRange[1]}
+                selectsRange
+                placeholderText="Check-in Check-out"
+                className="focus:outline-none focus:border-blue-500"
+                modifiers={{
+                  disabled: { before: today },
+                }}
+              />
             </div>
           )}
         </div>
@@ -524,12 +532,12 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
       </div>
 
       <div className="ml-2  flex justify-center items-center">
-        <button
-          onClick={handleSearchBoxClick}
-          className="bg-green-500 hover:bg-green-600 text-white py-1 px-1 rounded transition duration-300 w-full sm:w-auto"
-        >
-          Update Search
-        </button>
+      <button
+        onClick={handleClick}
+        className="bg-green-500 hover:bg-green-600 text-white py-1 px-1 rounded transition duration-300 w-full sm:w-auto"
+      >
+        {isMapViewPage ? "Update Search" : "Update Search"}
+      </button>
       </div>
     </div>
   );

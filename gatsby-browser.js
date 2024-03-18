@@ -4,11 +4,14 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer } from "react-toastify";
+import { LoadScript } from "@react-google-maps/api";
 
 export const wrapRootElement = ({ element }) => {
   return (
     <Provider store={store}>
-      <ToastContainer /> {element}
+      <LoadScript googleMapsApiKey="AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ">
+        <ToastContainer /> {element}
+      </LoadScript>
     </Provider>
   );
 };

@@ -554,21 +554,31 @@ const Hotellist = ({ data }) => {
 
   const [filteredHotels, setFilteredHotels] = useState([]);
 
+
+
   const storedFilteredHotels =
     JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
 
-  useEffect(() => {
-    // Set the initial filtered hotels
-    setFilteredHotels(storedFilteredHotels);
-  }, []); // Remove filteredHotels from the dependency array
-
+    useEffect(() => {
+      // Check if the storedFilteredHotels have changed
+      const isFilteredHotelsChanged = JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
+  
+      // If filtered hotels have changed, update the state
+      if (isFilteredHotelsChanged) {
+          setFilteredHotels(storedFilteredHotels);
+      }
+  }, [filteredHotels, storedFilteredHotels]); 
+   
+  
   const handleAmenityChange = (amenity) => {
     // Filter hotels based on selected amenity
-    const updatedHotels = storedFilteredHotels.filter(
-      (hotel) => hotel.amenities?.some((a) => a.machine_name === amenity) // Added a null check for hotel.amenities
+    const updatedHotels = storedFilteredHotels.filter((hotel) =>
+      hotel.amenities?.some((a) => a.machine_name === amenity)
     );
     setFilteredHotels(updatedHotels);
   };
+
+  console.log("filter hotels",filteredHotels)
 
   return (
     <div className="flex flex-col gap-2 items-center justify-center">
@@ -583,12 +593,13 @@ const Hotellist = ({ data }) => {
       <div className="border border-blue-500 flex flex-row w-full justify-center">
         <div className="flex flex-col border-2 w-1/1 py-2 px-4">
           <Filter
-            hotels={hotels}
+            //hotels={hotels}
             airports={airports}
             city={city}
             cruise={cruise}
             interest={interest}
             onAmenityChange={handleAmenityChange}
+            hotels={filteredHotels}
           />
         </div>
         <HotelDetailsComponent hotels={filteredHotels} />

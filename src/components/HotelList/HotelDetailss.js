@@ -314,7 +314,6 @@
 //     );
 //   }
 
-
 //   const [selectedCategory, setSelectedCategory] = useState("All");
 //   const handleCategoryChange = (event) => {
 //     setSelectedCategory(event.target.value);
@@ -408,11 +407,6 @@
 // };
 // export default HotelDetailsComponent;
 
-
-
-
-
-
 // // HotelDetailsComponent.js
 // import React, { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -440,7 +434,6 @@
 //       </div>
 //     );
 //   }
-
 
 //   const [selectedCategory, setSelectedCategory] = useState("All");
 //   const handleCategoryChange = (event) => {
@@ -536,7 +529,103 @@
 // export default HotelDetailsComponent;
 
 // HotelDetailsComponent.js
-import React from "react";
+
+// import React from "react";
+// import { Link } from "gatsby";
+// import room1 from "../../assets/room1.jpg";
+
+// const HotelDetailsComponent = ({ hotels }) => {
+//   if (!hotels || hotels.length === 0) {
+//     return (
+//       <div>
+//         No hotel selected,
+//         <p>Please search hotels..</p>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="py-3 flex flex-col gap-3 shadow">
+//       {hotels.map((hotel) => (
+//         <Link
+//           to={`/hotels/${hotel.id}`}
+//           key={hotel.id}
+//           className="flex flex-row shadow border rounded-3xl border-gray-500"
+//         >
+//           <img
+//             src={room1}
+//             className=""
+//             alt="Hotel Room"
+//             style={{
+//               width: "240px",
+//               height: "230px",
+//               borderRadius: "10px 0 0 10px",
+//             }}
+//           />
+//           <div className="flex flex-col border-r-2 p-3 w-3/4">
+//             <div>
+//               <span>
+//                 <p className="text-lg font-bold">{hotel.name}</p>
+//               </span>
+//               <span>
+//                 {hotel.address && (
+//                   <div className="py-2">
+//                     <p className="text-blue-500">
+//                       {hotel.address.address_line1}
+//                     </p>
+//                     <p>Locality: {hotel.address.locality}</p>
+//                   </div>
+//                 )}
+//               </span>
+//               <div className="flex">
+//                 {hotel.amenities &&
+//                   hotel.amenities
+//                     .slice(0, 2)
+//                     .map((amenity) => (
+//                       <p key={amenity.machine_name}> {amenity.name},&nbsp;</p>
+//                     ))}
+//               </div>
+//               <div className="flex">
+//                 {hotel.amenities &&
+//                   hotel.amenities
+//                     .slice(2, 4)
+//                     .map((amenity) => (
+//                       <p key={amenity.machine_name}> {amenity.name} ,&nbsp;</p>
+//                     ))}
+//               </div>
+//               <div className="flex gap-3 flex-row mt-3">
+//                 <p className="py-1 text-xs px-2 font-bold text-white rounded-lg bg-orange-400">
+//                   7.9
+//                 </p>
+//                 <p className=" ">291 Rating</p>
+//                 <p>3-Star Hotel</p>
+//               </div>
+//             </div>
+//           </div>
+//           <div className="p-3 flex flex-col justify-end w-1/4">
+//             <div>
+//               <div className="flex">
+//                 <p className=" text-blue-600  font-bold">₹</p>
+//                 <p className="text-4xl font-bold text-blue-600 ">11533</p>
+//               </div>
+//               <p>price per night</p>
+//               <button className=" text-sm rounded-3xl px-2 py-2 text-white bg-green-600 font-bold">
+//                 Choose your room
+//               </button>
+//             </div>
+//           </div>
+//         </Link>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default HotelDetailsComponent;
+
+
+
+// HotelDetailsComponent.js
+import React, { useEffect } from "react";
 import { Link } from "gatsby";
 import room1 from "../../assets/room1.jpg";
 
@@ -549,6 +638,8 @@ const HotelDetailsComponent = ({ hotels }) => {
       </div>
     );
   }
+
+  
 
   return (
     <div className="py-3 flex flex-col gap-3 shadow">
@@ -585,15 +676,19 @@ const HotelDetailsComponent = ({ hotels }) => {
               </span>
               <div className="flex">
                 {hotel.amenities &&
-                  hotel.amenities.slice(0, 2).map((amenity) => (
-                    <p key={amenity.machine_name}> {amenity.name},&nbsp;</p>
-                  ))}
+                  hotel.amenities
+                    .slice(0, 2)
+                    .map((amenity) => (
+                      <p key={amenity.machine_name}> {amenity.name},&nbsp;</p>
+                    ))}
               </div>
               <div className="flex">
                 {hotel.amenities &&
-                  hotel.amenities.slice(2, 4).map((amenity) => (
-                    <p key={amenity.machine_name}> {amenity.name} ,&nbsp;</p>
-                  ))}
+                  hotel.amenities
+                    .slice(2, 4)
+                    .map((amenity) => (
+                      <p key={amenity.machine_name}> {amenity.name} ,&nbsp;</p>
+                    ))}
               </div>
               <div className="flex gap-3 flex-row mt-3">
                 <p className="py-1 text-xs px-2 font-bold text-white rounded-lg bg-orange-400">
@@ -623,4 +718,3 @@ const HotelDetailsComponent = ({ hotels }) => {
 };
 
 export default HotelDetailsComponent;
-

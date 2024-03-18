@@ -606,9 +606,13 @@ import PetsIcon from "@mui/icons-material/Pets";
 import PoolIcon from "@mui/icons-material/Pool";
 import WifiIcon from "@mui/icons-material/Wifi";
 
-const Amenities = ({ onAmenityChange }) => {
+const Amenities = ({ onAmenityChange, hotels }) => {
+  // Pass hotels as props
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+
+  console.log("ammenities hotels", hotels)
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -667,7 +671,7 @@ const Amenities = ({ onAmenityChange }) => {
               <Checkbox
                 className="mr-3"
                 color="primary"
-                onChange={() => onAmenityChange(amenity)}
+                onChange={() => onAmenityChange(amenity, hotels)} // Pass hotels to onAmenityChange
               />
               <div className="flex flex-row items-center justify-between w-full">
                 <div className="flex items-center">
