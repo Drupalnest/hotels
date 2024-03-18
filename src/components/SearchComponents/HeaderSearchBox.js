@@ -30,11 +30,7 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
 
   const dispatch = useDispatch();
-  const checkInDate = useSelector((state) => state.date.checkInDate);
-  const checkOutDate = useSelector((state) => state.date.checkOutDate);
-
-  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
-
+ 
   // Filter based on the entered search term
   const filteredData = allData.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -44,16 +40,16 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
     setSelectedHotel(hotel);
   };
 
-  const today = new Date(); // Get the current date
-  const tomorrow = new Date(today); // Get tomorrow's date
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // const today = new Date(); // Get the current date
+  // const tomorrow = new Date(today); // Get tomorrow's date
+  // tomorrow.setDate(tomorrow.getDate() + 1);
 
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [dateRange, setDateRange] = useState([today, tomorrow]);
+  // const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  // const [dateRange, setDateRange] = useState([today, tomorrow]);
 
-  const handleDayPickerToggle = () => {
-    setIsCalendarOpen(!isCalendarOpen);
-  };
+  // const handleDayPickerToggle = () => {
+  //   setIsCalendarOpen(!isCalendarOpen);
+  // };
 
   // const handleDayClick = (day) => {
   //   const newDateRange = [...dateRange];
@@ -74,8 +70,8 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   //   setDateRange(newDateRange);
   // };
 
-  const [localCheckInDate, setLocalCheckInDate] = useState(today);
-  const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
+  // const [localCheckInDate, setLocalCheckInDate] = useState(today);
+  // const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
 
   // const handleDayClick = (day) => {
   //   const newDateRange = [...dateRange];
@@ -121,18 +117,103 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
   //   dispatch(setCheckOutDate(newDateRange[1]));
   // };
 
+  // const handleDayClick = (day) => {
+  //   const newDateRange = [...dateRange];
+
+  //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+  //     const today = new Date();
+
+  //     if (day < today) {
+  //       return;
+  //     }
+
+  //     // Set time to noon (12:00 PM) to avoid timezone issues
+  //     day.setHours(12, 0, 0, 0);
+
+  //     newDateRange[0] = day;
+  //     newDateRange[1] = null;
+
+  //     // Dispatch check-in date to Redux
+  //     dispatch(setCheckInDate(newDateRange[0]));
+  //   } else if (day > newDateRange[0]) {
+  //     setIsCalendarOpen(false);
+  //     // Set time to noon (12:00 PM) to avoid timezone issues
+  //     day.setHours(12, 0, 0, 0);
+  //     newDateRange[1] = day;
+
+  //     // Dispatch check-out date to Redux
+  //     dispatch(setCheckOutDate(newDateRange[1]));
+  //   } else {
+  //     // Swap dates if the selected date is before the check-in date
+  //     newDateRange[1] = newDateRange[0];
+  //     newDateRange[0] = day;
+  //     setIsCalendarOpen(false);
+
+  //     // Dispatch both check-in and check-out dates to Redux
+  //     dispatch(setCheckInDate(newDateRange[0]));
+  //     dispatch(setCheckOutDate(newDateRange[1]));
+  //   }
+
+  //   setDateRange(newDateRange);
+  // };
+
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // const dropdownRef = useRef(null);
+
+  // const handleToggleDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
+
+  // const handleClickOutside = (event) => {
+  //   if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //     setIsDropdownOpen(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutside);
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
+
+
+
+
+  const checkInDate = useSelector((state) => state.date.checkInDate);
+  const checkOutDate = useSelector((state) => state.date.checkOutDate);
+  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
+
+  
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [dateRange, setDateRange] = useState([today, tomorrow]);
+
+  const handleDayPickerToggle = () => {
+    setIsCalendarOpen(!isCalendarOpen);
+  };
+
+  const [localCheckInDate, setLocalCheckInDate] = useState(today);
+  const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
+ 
+ 
   const handleDayClick = (day) => {
     const newDateRange = [...dateRange];
 
-    if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
-      const today = new Date();
+    // Set time to noon (12:00 PM) to avoid timezone issues
+    day.setHours(12, 0, 0, 0);
 
+    if (!newDateRange[0] || newDateRange[1]) {
+      // Only check-in date is selected or both dates are selected
       if (day < today) {
+        // Prevent selection of past dates
         return;
       }
-
-      // Set time to noon (12:00 PM) to avoid timezone issues
-      day.setHours(12, 0, 0, 0);
 
       newDateRange[0] = day;
       newDateRange[1] = null;
@@ -140,9 +221,8 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
       // Dispatch check-in date to Redux
       dispatch(setCheckInDate(newDateRange[0]));
     } else if (day > newDateRange[0]) {
+      // Check-out date is selected
       setIsCalendarOpen(false);
-      // Set time to noon (12:00 PM) to avoid timezone issues
-      day.setHours(12, 0, 0, 0);
       newDateRange[1] = day;
 
       // Dispatch check-out date to Redux
@@ -160,7 +240,6 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
 
     setDateRange(newDateRange);
   };
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownRef = useRef(null);
@@ -182,6 +261,16 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // Ensure localCheckInDate is set to today's date on component mount
+  useEffect(() => {
+    setLocalCheckInDate(today);
+  }, []);
+
+
+
+
+
 
   const { rooms, adults, children } = useSelector((state) => state.countData);
   const handleIncrement = (type) => {
@@ -329,31 +418,30 @@ const HeaderSearchBox = ({ hotels, airports, cruise, interest, city }) => {
                     : ""
                 }`} */}
                 {`${checkInDate?.toLocaleDateString() || ""}${
-                  checkInDate && checkOutDate
-                    ? " - " + (checkOutDate?.toLocaleDateString() || "")
-                    : ""
-                }`}
+              checkInDate && checkOutDate
+                ? " - " + (checkOutDate?.toLocaleDateString() || "")
+                : ""
+            }`}
               </p>
             </div>
           </div>
           {isCalendarOpen && (
             <div className="w-auto absolute top-full left-0 bg-white border rounded shadow mt-2 ">
-              <DayPicker
-                ref={dropdownRef}
-                onClick={handleDayPickerToggle}
-                numberOfMonths={2}
-                pagedNavigation
-                selected={dateRange[0]}
-                onDayClick={handleDayClick}
-                startDate={dateRange[0]}
-                endDate={dateRange[1]}
-                selectsRange
-                placeholderText="Check-in Check-out"
-                className="  focus:outline-none focus:border-blue-500"
-                modifiers={{
-                  disabled: { before: today },
-                }}
-              />
+            <DayPicker
+            onClick={handleDayPickerToggle}
+            numberOfMonths={2}
+            pagedNavigation
+            selected={localCheckInDate} // Set the selected date to localCheckInDate
+            onDayClick={handleDayClick}
+            startDate={dateRange[0]}
+            endDate={dateRange[1]}
+            selectsRange
+            placeholderText="Check-in Check-out"
+            className="focus:outline-none focus:border-blue-500"
+            modifiers={{
+              disabled: { before: today },
+            }}
+          />
             </div>
           )}
         </div>

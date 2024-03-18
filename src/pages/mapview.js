@@ -641,6 +641,10 @@ const MapComponent = ({ data }) => {
   const interest = data?.allLocationPointOfInterest?.nodes || [];
   console.log("interest", interest);
   const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
+
+  const storedFilteredHotels =
+    JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+
   const [selectedHotel, setSelectedHotel] = useState(null);
   const handleMarkerClick = (hotel) => {
     setSelectedHotel(hotel);
@@ -652,8 +656,8 @@ const MapComponent = ({ data }) => {
     navigate("/hotellist");
   };
   const center = {
-    lat: filteredHotels[0]?.lat_lon?.lat || 0,
-    lng: filteredHotels[0]?.lat_lon?.lon || 0,
+    lat: storedFilteredHotels[0]?.lat_lon?.lat || 0,
+    lng: storedFilteredHotels[0]?.lat_lon?.lon || 0,
   };
   return (
     <div className="container-fluid">
@@ -711,7 +715,7 @@ const MapComponent = ({ data }) => {
               zoom={10}
               onClick={handleMapClick}
             >
-              {filteredHotels.map((hotel) => (
+              {storedFilteredHotels.map((hotel) => (
                 <CustomMarker
                   key={hotel.id}
                   position={{
@@ -743,6 +747,9 @@ export const query = graphql`
         name
         phone
         hotel_code
+        field_rooms_ajay {
+          drupal_internal__target_id
+        }
         lat_lon {
           value
           geo_type

@@ -836,6 +836,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import HotelDetailsComponent from "../HotelList/HotelDetailss";
 import { InputAdornment, TextField } from "@mui/material";
+import LiveLocation from "../IndexPage/LiveLocation";
 
 const Search = ({ hotels, airports, cruise, interest, city }) => {
   const dispatch = useDispatch();
@@ -858,20 +859,31 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
   // Combine all data into a single array
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
 
-  // Filter hotels based on the selected locality
+  const [isDropdownserachBoxOpen, setIsDropdownserachBoxOpen] = useState(false);
+
+  const handleInputBoxToggle = () => {
+    setIsDropdownserachBoxOpen(!isDropdownserachBoxOpen);
+  };
   const uniqueLocalities = new Set();
-
   const filteredData = allData.filter((item) => {
-    const matchesSearch =
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      item.address &&
-      item.address.locality &&
-      item.address.locality.toLowerCase().includes(searchTerm.toLowerCase());
+    const hasValidTargetId =
+      item.field_rooms_ajay &&
+      item.field_rooms_ajay[0] &&
+      item.field_rooms_ajay[0].drupal_internal__target_id;
 
-    if (matchesSearch) {
+    if (hasValidTargetId) {
       // Add the locality to the set if it matches the search
       uniqueLocalities.add(item.address.locality);
     }
+
+    // Check if field_rooms_ajay is not null and if the locality or postal code matches the search term
+    const matchesSearch =
+      hasValidTargetId &&
+      item.address &&
+      (item.address.locality.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.address.postal_code
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()));
 
     return matchesSearch;
   });
@@ -879,6 +891,7 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
   // Handle click on hotel item
   const handleHotelClick = (hotel) => {
     dispatch(setSelectedHotel(hotel));
+    setIsDropdownserachBoxOpen(false);
 
     // Fetch detailed information for the selected hotel (replace with your logic)
     const details = fetchHotelDetails(
@@ -891,30 +904,40 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
     dispatch(setHotelDetails(details));
 
     // Log filtered hotels based on locality
+    const localityName =
+      hotel.address && hotel.address.locality
+        ? hotel.address.locality.toLowerCase()
+        : "";
+    dispatch(setSearchTerm(localityName));
+
     const filteredHotels = allData.filter(
       (item) =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        item.field_rooms_ajay &&
+        item.field_rooms_ajay[0] &&
+        item.field_rooms_ajay[0].drupal_internal__target_id &&
         item.address &&
-        item.address.locality &&
-        item.address.locality.toLowerCase().includes(searchTerm.toLowerCase())
+        (item.address.locality
+          .toLowerCase()
+          .includes(localityName.toLowerCase()) ||
+          item.address.postal_code
+            .toLowerCase()
+            .includes(localityName.toLowerCase()))
     );
-    console.log("Filtered Hotels based on Locality:", filteredHotels);
+
+    console.log(
+      "Filtered Hotels based on Locality or Postal Code:",
+      filteredHotels
+    );
     dispatch(setFilteredHotels(filteredHotels));
-  };
-
-  const [isSearchBoxOpen, setIsSearchBoxOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  const handleSearchBoxToggle = () => {
-    setIsSearchBoxOpen(!isSearchBoxOpen);
+    sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
   };
 
   return (
     <div className="flex flex-col relative justify-center items-center mr-2 h-full sm:w-full md:w-1/3 border-none rounded-3xl">
       <TextField
-        onClick={handleSearchBoxToggle}
-        placeholder="Where to?"
+        placeholder={`Where to? ${searchTerm}`}
         value={searchTerm}
+        onClick={handleInputBoxToggle}
         onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         InputProps={{
           startAdornment: (
@@ -926,25 +949,81 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
         className="w-full border-2 rounded-lg border-blue-600"
       />
 
-      {isSearchBoxOpen && searchTerm && (
-        <div className="absolute w-full top-full left-0 bg-white rounded shadow overflow-auto border h-32 border-gray-300 p-2">
+      {isDropdownserachBoxOpen && searchTerm && (
+        <div className="z-50 bg-white w-full absolute top-full left-0 shadow  mt-2 h-56 overflow-y-auto border border-gray-300 rounded p-2 ">
+          <div className="py-3 px-1 flex flex-row gap-2 hover:bg-slate-100  rounded-2xl">
+            {/* <MyLocationIcon onClick={() => initMap()} /> */}
+            <LiveLocation allData={allData} />
+            {/* <p>Use current location</p> */}
+          </div>
+          {/* {filteredData.map((item) => (
+                  <div
+                    key={item.id}
+                    className="mb-2 cursor-pointer"
+                    onClick={() => handleHotelClick(item)}
+                  >
+                    {item.address && (
+                      <div>
+                     
+
+                        <div className="py-2 px-1 flex flex-row  hover:bg-slate-100  rounded-2xl">
+                          {item.address.locality}
+                        </div>
+                      </div>
+                    )}
+                   
+                  </div>
+                ))} */}
+
+          {/* {filteredData.map((item) => (
+                  <div
+                    key={item.id}
+                    className="mb-2 cursor-pointer"
+                    onClick={() => handleHotelClick(item)}
+                  >
+                    {item.address && (
+                      <div>
+                        <div className="py-2 px-1 flex flex-row hover:bg-slate-100 rounded-2xl">
+                          <div>{item.address.locality}</div>
+                          <div>{item.address.postal_code}</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))} */}
+
           {filteredData.map((item) => (
             <div
               key={item.id}
               className="mb-2 cursor-pointer"
-              onClick={() => handleHotelClick(item)}
+              // onClick={() => handleHotelClick(item)}
+              onClick={() => {
+                handleHotelClick(item);
+                setIsDropdownserachBoxOpen(false); // Close the dropdown
+              }}
             >
-              {/* {item.address && (
+              {item.address && (
                 <div>
-                  <div>{item.address.locality}</div>
-                 
-                </div>
-              )} */}
-              {!item.field_rooms_ajay ||
-              item.field_rooms_ajay.drupal_internal__target_id === "" ? null : (
-                <div>
-                  <div>{item.address.locality}</div>
-                  {/* Add other address properties as needed */}
+                  {/* <MyLocationIcon onClick={() => inreitMap()} /> */}
+                  <div className="py-2 px-1 flex flex-row hover:bg-slate-100 rounded-2xl">
+                    {/* Display the locality if it matches the search term, otherwise display the postal code */}
+                    <div>
+                      {searchTerm &&
+                        item.address.locality &&
+                        item.address.locality
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase()) && (
+                          <div>{item.address.locality}</div>
+                        )}
+                      {searchTerm &&
+                        item.address.postal_code &&
+                        item.address.postal_code
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase()) && (
+                          <div>{item.address.postal_code}</div>
+                        )}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>

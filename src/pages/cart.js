@@ -553,9 +553,16 @@ import Discover from "../images/discover.svg";
 import Mastercard from "../images/mastercard.svg";
 import Visa from "../images/visa.svg";
 import Navbar from "../components/Navbar/Navbar";
-
 import { useSelector } from "react-redux";
 import { navigate } from "gatsby";
+import {
+  setSearchTerm,
+  setSelectedHotel,
+  setHotelDetails,
+  setFilteredHotels,
+  setCheckInDate,
+  setCheckOutDate,
+} from "../redux/actions";
 
 const steps = [
   "Select master blaster campaign settings",
@@ -574,11 +581,19 @@ export default function Cart() {
 
   const amenities = checkoutData.amenities;
 
-
   const bookinConfirmationClcik = () => {
     navigate("/bookingconfirm");
   };
 
+  const checkInDate = useSelector((state) => state.date.checkInDate);
+  const checkOutDate = useSelector((state) => state.date.checkOutDate);
+
+  // Calculate the number of nights
+  const diffTime = Math.abs(checkOutDate - checkInDate);
+  const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  //Assuming rooms count is obtained from somewhere else in the state
+  const { rooms, adults, children } = useSelector((state) => state.countData);
   return (
     <div className="container-fluid flex flex-col justify-center items-center">
       <Navbar />
@@ -632,23 +647,23 @@ export default function Cart() {
             <div className="flex flex-row  justify-around m-4 border rounded-2xl bg-slate-200">
               <span className="flex flex-col text-center p-2 ">
                 <p>CHECK-IN</p>
-                <p>Fri, Mar 1, 2024</p>
+                <p>{checkInDate?.toDateString()}</p>
               </span>
               <span className="flex flex-col p-2 text-center">
                 <p>CHECK-OUT</p>
-                <p>Tue, Mar 5, 2024</p>
+                <p>{checkOutDate?.toDateString()}</p>
               </span>
               <span className="flex flex-col p-2 text-center">
                 <p>NIGHTS</p>
-                <p>4</p>
+                <p>{nights}</p>
               </span>
               <span className="flex flex-col p-2 text-center">
                 <p>ROOMS</p>
-                <p>1</p>
+                <p>{rooms}</p>
               </span>
             </div>
 
-            <div className="m-4 w-96">
+            <div className="m-4 w-auto ">
               <h1 className="font-bold py-3">Deluxe Suite with King Bed</h1>
 
               {/* <span className="flex flex-row justify-between">
@@ -686,15 +701,31 @@ export default function Cart() {
                 </ul>
               </span> */}
 
-              <div className="flex flex-col justify-between">
-                {amenities.map((amenity, index) => (
-                  <ul className="flex flex-col" key={index}>
-                    <li>
-                      <CheckIcon sx={{ fontSize: 16, color: "green" }} />
-                      {amenity.name}
-                    </li>
-                  </ul>
-                ))}
+              <div className="  w-full flex flex-row justify-start">
+                <div className="col-2  w-1/4">
+                  {amenities
+                    .slice(0, Math.ceil(amenities.length / 2))
+                    .map((amenity, index) => (
+                      <ul className="flex flex-col" key={index}>
+                        <li className="flex flex-row">
+                          <CheckIcon sx={{ fontSize: 16, color: "green" }} />
+                          {amenity.name}
+                        </li>
+                      </ul>
+                    ))}
+                </div>
+                <div className="col-2 col-2 w-1/4">
+                  {amenities
+                    .slice(Math.ceil(amenities.length / 2))
+                    .map((amenity, index) => (
+                      <ul className="flex flex-col" key={index}>
+                        <li>
+                          <CheckIcon sx={{ fontSize: 16, color: "green" }} />
+                          {amenity.name}
+                        </li>
+                      </ul>
+                    ))}
+                </div>
               </div>
             </div>
           </div>
@@ -912,7 +943,7 @@ export default function Cart() {
 
           <div className="p-4 m-4 border border-gray-500 rounded-2xl flex flex-col">
             <button
-                 onClick={bookinConfirmationClcik}
+              onClick={bookinConfirmationClcik}
               className="p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300 ease-in-out focus:outline-none"
             >
               Book & Pay

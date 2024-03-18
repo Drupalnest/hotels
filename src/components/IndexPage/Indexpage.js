@@ -2399,13 +2399,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-day-picker/dist/style.css";
 import { navigate } from "gatsby";
 import ListBar from "./ListBar";
+import LiveLocation from "./LiveLocation";
 
 const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
-  const checkInDate = useSelector((state) => state.date.checkInDate);
-  const checkOutDate = useSelector((state) => state.date.checkOutDate);
-
-  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
-
   const containerStyle = {
     width: "3/12",
     position: "relative",
@@ -2439,21 +2435,196 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
   console.log("allData", allData);
 
-  // Filter hotels based on the selected locality
+  // // Filter hotels based on the selected locality
+
+  // const uniqueLocalities = new Set();
+
+  // const filteredData = allData.filter((item) => {
+  //   const matchesSearch =
+  //     item.name.toLowerCase().includes(searchTerm) &&
+  //     item.address &&
+  //     item.address.locality &&
+  //     item.address.locality.toLowerCase().includes(searchTerm.toLowerCase());
+
+  //   if (matchesSearch) {
+  //     // Add the locality to the set if it matches the search
+  //     uniqueLocalities.add(item.address.locality);
+  //   }
+
+  //   return matchesSearch;
+  // });
+
+  // // Handle click on hotel item
+  // const handleHotelClick = (hotel) => {
+  //   dispatch(setSelectedHotel(hotel));
+
+  //   // Fetch detailed information for the selected hotel (replace with your logic)
+  //   const details = fetchHotelDetails(
+  //     hotel.id,
+  //     hotel.Name,
+  //     hotel.address ? hotel.address.address_line1 : "Address not available"
+  //   );
+
+  //   // Dispatch the action to store hotel details in Redux
+  //   dispatch(setHotelDetails(details));
+
+  //   // Log filtered hotels based on locality
+
+  //   const localityName =
+  //     hotels.address && hotels.address.locality
+  //       ? hotels.address.locality.toLowerCase()
+  //       : "";
+  //   dispatch(setSearchTerm(localityName));
+
+  //   const filteredHotels = allData.filter(
+  //     (item) =>
+  //       item.name.toLowerCase().includes(localityName) &&
+  //       item.address &&
+  //       item.address.locality &&
+  //       item.address.locality.toLowerCase().includes(localityName)
+  //   );
+
+  //   console.log("Filtered Hotels based on Locality:", filteredHotels);
+  //   dispatch(setFilteredHotels(filteredHotels));
+  //   sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+  // };
+
+  // const uniqueLocalities = new Set();
+  // const filteredData = allData.filter((item) => {
+  //   const hasTargetId = item.field_rooms_ajay && item.field_rooms_ajay.drupal_internal__target_id;
+
+  //   if (hasTargetId) {
+  //     // Add the locality to the set if it matches the search
+  //     uniqueLocalities.add(item.address.locality);
+  //   }
+
+  //   const matchesSearch =
+  //     item.name.toLowerCase().includes(searchTerm) &&
+  //     item.address &&
+  //     item.address.locality &&
+  //     item.address.locality.toLowerCase().includes(searchTerm.toLowerCase());
+
+  //   return hasTargetId || matchesSearch;
+  // });
+
+  // // Handle click on hotel item
+  // const handleHotelClick = (hotel) => {
+  //   dispatch(setSelectedHotel(hotel));
+
+  //   // Fetch detailed information for the selected hotel (replace with your logic)
+  //   const details = fetchHotelDetails(
+  //     hotel.id,
+  //     hotel.Name,
+  //     hotel.address ? hotel.address.address_line1 : "Address not available"
+  //   );
+
+  //   // Dispatch the action to store hotel details in Redux
+  //   dispatch(setHotelDetails(details));
+
+  //   // Log filtered hotels based on locality
+  //   const localityName =
+  //     hotel.address && hotel.address.locality
+  //       ? hotel.address.locality.toLowerCase()
+  //       : "";
+  //   dispatch(setSearchTerm(localityName));
+
+  //   const filteredHotels = allData.filter(
+  //     (item) =>
+  //       item.name.toLowerCase().includes(localityName) &&
+  //       item.address &&
+  //       item.address.locality &&
+  //       item.address.locality.toLowerCase().includes(localityName)
+  //   );
+
+  //   console.log("Filtered Hotels based on Locality:", filteredHotels);
+  //   dispatch(setFilteredHotels(filteredHotels));
+  //   sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+  // };
+
+  // const uniqueLocalities = new Set();
+  // const filteredData = allData.filter((item) => {
+  //   const hasValidTargetId =
+  //     item.field_rooms_ajay &&
+  //     item.field_rooms_ajay[0] &&
+  //     item.field_rooms_ajay[0].drupal_internal__target_id;
+
+  //   if (hasValidTargetId) {
+  //     // Add the locality to the set if it matches the search
+  //     uniqueLocalities.add(item.address.locality);
+  //   }
+
+  //   // Check if field_rooms_ajay is not null and if the locality matches the search term
+  //   const matchesSearch =
+  //     hasValidTargetId &&
+  //     item.address &&
+  //     item.address.locality &&
+  //     item.address.locality.toLowerCase().includes(searchTerm.toLowerCase());
+
+  //   return matchesSearch;
+  // });
+
+  // // Handle click on hotel item
+  // const handleHotelClick = (hotel) => {
+  //   dispatch(setSelectedHotel(hotel));
+
+  //   // Fetch detailed information for the selected hotel (replace with your logic)
+  //   const details = fetchHotelDetails(
+  //     hotel.id,
+  //     hotel.Name,
+  //     hotel.address ? hotel.address.address_line1 : "Address not available"
+  //   );
+
+  //   // Dispatch the action to store hotel details in Redux
+  //   dispatch(setHotelDetails(details));
+
+  //   // Log filtered hotels based on locality
+  //   const localityName =
+  //     hotel.address && hotel.address.locality
+  //       ? hotel.address.locality.toLowerCase()
+  //       : "";
+  //   dispatch(setSearchTerm(localityName));
+
+  //   const filteredHotels = allData.filter(
+  //     (item) =>
+  //       item.field_rooms_ajay &&
+  //       item.field_rooms_ajay[0] &&
+  //       item.field_rooms_ajay[0].drupal_internal__target_id &&
+  //       item.address &&
+  //       item.address.locality &&
+  //       item.address.locality.toLowerCase().includes(localityName.toLowerCase()) // Make sure to convert both to lowercase for case-insensitive comparison
+  //   );
+
+  //   console.log("Filtered Hotels based on Locality:", filteredHotels);
+  //   dispatch(setFilteredHotels(filteredHotels));
+  //   sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+  // };
+
+  const [isDropdownserachBoxOpen, setIsDropdownserachBoxOpen] = useState(false);
+
+  const handleInputBoxToggle = () => {
+    setIsDropdownserachBoxOpen(!isDropdownserachBoxOpen);
+  };
 
   const uniqueLocalities = new Set();
-
   const filteredData = allData.filter((item) => {
-    const matchesSearch =
-      item.name.toLowerCase().includes(searchTerm) &&
-      item.address &&
-      item.address.locality &&
-      item.address.locality.toLowerCase().includes(searchTerm.toLowerCase());
+    const hasValidTargetId =
+      item.field_rooms_ajay &&
+      item.field_rooms_ajay[0] &&
+      item.field_rooms_ajay[0].drupal_internal__target_id;
 
-    if (matchesSearch) {
+    if (hasValidTargetId) {
       // Add the locality to the set if it matches the search
       uniqueLocalities.add(item.address.locality);
     }
+
+    // Check if field_rooms_ajay is not null and if the locality or postal code matches the search term
+    const matchesSearch =
+      hasValidTargetId &&
+      item.address &&
+      (item.address.locality.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.address.postal_code
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()));
 
     return matchesSearch;
   });
@@ -2461,6 +2632,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   // Handle click on hotel item
   const handleHotelClick = (hotel) => {
     dispatch(setSelectedHotel(hotel));
+    setIsDropdownserachBoxOpen(false);
 
     // Fetch detailed information for the selected hotel (replace with your logic)
     const details = fetchHotelDetails(
@@ -2473,26 +2645,160 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
     dispatch(setHotelDetails(details));
 
     // Log filtered hotels based on locality
-
     const localityName =
-      hotels.address && hotels.address.locality
-        ? hotels.address.locality.toLowerCase()
+      hotel.address && hotel.address.locality
+        ? hotel.address.locality.toLowerCase()
         : "";
     dispatch(setSearchTerm(localityName));
 
     const filteredHotels = allData.filter(
       (item) =>
-        item.name.toLowerCase().includes(localityName) &&
+        item.field_rooms_ajay &&
+        item.field_rooms_ajay[0] &&
+        item.field_rooms_ajay[0].drupal_internal__target_id &&
         item.address &&
-        item.address.locality &&
-        item.address.locality.toLowerCase().includes(localityName)
+        (item.address.locality
+          .toLowerCase()
+          .includes(localityName.toLowerCase()) ||
+          item.address.postal_code
+            .toLowerCase()
+            .includes(localityName.toLowerCase()))
     );
-    console.log("Filtered Hotels based on Locality:", filteredHotels);
+
+    console.log(
+      "Filtered Hotels based on Locality or Postal Code:",
+      filteredHotels
+    );
     dispatch(setFilteredHotels(filteredHotels));
+    sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
   };
 
-  const today = new Date(); // Get the current date
-  const tomorrow = new Date(today); // Get tomorrow's date
+  // const checkInDate = useSelector((state) => state.date.checkInDate);
+  // const checkOutDate = useSelector((state) => state.date.checkOutDate);
+
+  // console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
+
+  // const today = new Date();
+  // const tomorrow = new Date(today);
+  // tomorrow.setDate(tomorrow.getDate() + 1);
+
+  // const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  // const [dateRange, setDateRange] = useState([today, tomorrow]);
+
+  // const handleDayPickerToggle = () => {
+  //   setIsCalendarOpen(!isCalendarOpen);
+  // };
+
+  // const [localCheckInDate, setLocalCheckInDate] = useState(today);
+  // const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
+
+  // // const handleDayClick = (day) => {
+  // //   const newDateRange = [...dateRange];
+
+  // //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+  // //     const today = new Date();
+
+  // //     if (day < today) {
+  // //       return;
+  // //     }
+
+  // //     // Set time to noon (12:00 PM) to avoid timezone issues
+  // //     day.setHours(12, 0, 0, 0);
+
+  // //     newDateRange[0] = day;
+  // //     newDateRange[1] = null;
+
+  // //     // Dispatch check-in date to Redux
+  // //     dispatch(setCheckInDate(newDateRange[0]));
+  // //   } else if (day > newDateRange[0]) {
+  // //     setIsCalendarOpen(false);
+  // //     // Set time to noon (12:00 PM) to avoid timezone issues
+  // //     day.setHours(12, 0, 0, 0);
+  // //     newDateRange[1] = day;
+
+  // //     // Dispatch check-out date to Redux
+  // //     dispatch(setCheckOutDate(newDateRange[1]));
+  // //   } else {
+  // //     // Swap dates if the selected date is before the check-in date
+  // //     newDateRange[1] = newDateRange[0];
+  // //     newDateRange[0] = day;
+  // //     setIsCalendarOpen(false);
+
+  // //     // Dispatch both check-in and check-out dates to Redux
+  // //     dispatch(setCheckInDate(newDateRange[0]));
+  // //     dispatch(setCheckOutDate(newDateRange[1]));
+  // //   }
+
+  // //   setDateRange(newDateRange);
+  // // };
+
+  // const handleDayClick = (day) => {
+  //   const newDateRange = [...dateRange];
+
+  //   // Set time to noon (12:00 PM) to avoid timezone issues
+  //   day.setHours(12, 0, 0, 0);
+
+  //   if (!newDateRange[0] || newDateRange[1]) {
+  //     // Only check-in date is selected or both dates are selected
+  //     if (day < today) {
+  //       // Prevent selection of past dates
+  //       return;
+  //     }
+
+  //     newDateRange[0] = day;
+  //     newDateRange[1] = null;
+
+  //     // Dispatch check-in date to Redux
+  //     dispatch(setCheckInDate(newDateRange[0]));
+  //   } else if (day > newDateRange[0]) {
+  //     // Check-out date is selected
+  //     setIsCalendarOpen(false);
+  //     newDateRange[1] = day;
+
+  //     // Dispatch check-out date to Redux
+  //     dispatch(setCheckOutDate(newDateRange[1]));
+  //   } else {
+  //     // Swap dates if the selected date is before the check-in date
+  //     newDateRange[1] = newDateRange[0];
+  //     newDateRange[0] = day;
+  //     setIsCalendarOpen(false);
+
+  //     // Dispatch both check-in and check-out dates to Redux
+  //     dispatch(setCheckInDate(newDateRange[0]));
+  //     dispatch(setCheckOutDate(newDateRange[1]));
+  //   }
+
+  //   setDateRange(newDateRange);
+  // };
+
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // const dropdownRef = useRef(null);
+
+  // const handleToggleDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
+
+  // const handleClickOutside = (event) => {
+  //   if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //     setIsDropdownOpen(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutside);
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
+
+  const checkInDate = useSelector((state) => state.date.checkInDate);
+  const checkOutDate = useSelector((state) => state.date.checkOutDate);
+  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
+
+  const today = new Date();
+  const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -2508,15 +2814,15 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   const handleDayClick = (day) => {
     const newDateRange = [...dateRange];
 
-    if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
-      const today = new Date();
+    // Set time to noon (12:00 PM) to avoid timezone issues
+    day.setHours(12, 0, 0, 0);
 
+    if (!newDateRange[0] || newDateRange[1]) {
+      // Only check-in date is selected or both dates are selected
       if (day < today) {
+        // Prevent selection of past dates
         return;
       }
-
-      // Set time to noon (12:00 PM) to avoid timezone issues
-      day.setHours(12, 0, 0, 0);
 
       newDateRange[0] = day;
       newDateRange[1] = null;
@@ -2524,9 +2830,8 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
       // Dispatch check-in date to Redux
       dispatch(setCheckInDate(newDateRange[0]));
     } else if (day > newDateRange[0]) {
+      // Check-out date is selected
       setIsCalendarOpen(false);
-      // Set time to noon (12:00 PM) to avoid timezone issues
-      day.setHours(12, 0, 0, 0);
       newDateRange[1] = day;
 
       // Dispatch check-out date to Redux
@@ -2544,7 +2849,6 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
 
     setDateRange(newDateRange);
   };
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownRef = useRef(null);
@@ -2565,6 +2869,11 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+
+  // Ensure localCheckInDate is set to today's date on component mount
+  useEffect(() => {
+    setLocalCheckInDate(today);
   }, []);
 
   const { rooms, adults, children } = useSelector((state) => state.countData);
@@ -2625,6 +2934,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
           <div className="relative sm:w-full border-none rounded-3xl">
             <TextField
               ref={dropdownRef}
+              onClick={handleInputBoxToggle}
               placeholder={`Where to? ${searchTerm}`} // Concatenate the locality name with the placeholder
               value={searchTerm}
               onChange={(e) => dispatch(setSearchTerm(e.target.value))}
@@ -2638,13 +2948,14 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
               className="w-full  border-2 rounded-lg border-blue-600"
             />
 
-            {searchTerm && (
+            {isDropdownserachBoxOpen && searchTerm && (
               <div className="z-50 bg-white w-full absolute top-full left-0 shadow  mt-2 h-56 overflow-y-auto border border-gray-300 rounded p-2 ">
                 <div className="py-3 px-1 flex flex-row gap-2 hover:bg-slate-100  rounded-2xl">
-                  <MyLocationIcon onClick={() => initMap()} />
-                  <p>Use current location</p>
+                  {/* <MyLocationIcon onClick={() => initMap()} /> */}
+                  <LiveLocation allData={allData} />
+                  {/* <p>Use current location</p> */}
                 </div>
-                {filteredData.map((item) => (
+                {/* {filteredData.map((item) => (
                   <div
                     key={item.id}
                     className="mb-2 cursor-pointer"
@@ -2652,21 +2963,68 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                   >
                     {item.address && (
                       <div>
-                        {/* <MyLocationIcon onClick={() => initMap()} /> */}
+                     
 
                         <div className="py-2 px-1 flex flex-row  hover:bg-slate-100  rounded-2xl">
                           {item.address.locality}
                         </div>
                       </div>
                     )}
-                    {/* {!item.field_rooms_ajay ||
-                    item.field_rooms_ajay.drupal_internal__target_id ===
-                      "" ? null : (
+                   
+                  </div>
+                ))} */}
+
+                {/* {filteredData.map((item) => (
+                  <div
+                    key={item.id}
+                    className="mb-2 cursor-pointer"
+                    onClick={() => handleHotelClick(item)}
+                  >
+                    {item.address && (
                       <div>
-                        <div>{item.address.locality}</div>
-                      
+                        <div className="py-2 px-1 flex flex-row hover:bg-slate-100 rounded-2xl">
+                          <div>{item.address.locality}</div>
+                          <div>{item.address.postal_code}</div>
+                        </div>
                       </div>
-                    )} */}
+                    )}
+                  </div>
+                ))} */}
+
+                {filteredData.map((item) => (
+                  <div
+                    key={item.id}
+                    className="mb-2 cursor-pointer"
+                    // onClick={() => handleHotelClick(item)}
+                    onClick={() => {
+                      handleHotelClick(item);
+                      // Close the dropdown
+                    }}
+                  >
+                    {item.address && (
+                      <div>
+                        {/* <MyLocationIcon onClick={() => inreitMap()} /> */}
+                        <div className="py-2 px-1 flex flex-row hover:bg-slate-100 rounded-2xl">
+                          {/* Display the locality if it matches the search term, otherwise display the postal code */}
+                          <div>
+                            {searchTerm &&
+                              item.address.locality &&
+                              item.address.locality
+                                .toLowerCase()
+                                .includes(searchTerm.toLowerCase()) && (
+                                <div>{item.address.locality}</div>
+                              )}
+                            {searchTerm &&
+                              item.address.postal_code &&
+                              item.address.postal_code
+                                .toLowerCase()
+                                .includes(searchTerm.toLowerCase()) && (
+                                <div>{item.address.postal_code}</div>
+                              )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -2674,7 +3032,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
           </div>
 
           <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
-            <div
+            {/* <div
               ref={dropdownRef}
               onClick={handleDayPickerToggle}
               className=" relative  rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2  "
@@ -2709,6 +3067,49 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                     selectsRange
                     placeholderText="Check-in Check-out"
                     className="  focus:outline-none focus:border-blue-500"
+                    modifiers={{
+                      disabled: { before: today },
+                    }}
+                  />
+                </div>
+              )}
+            </div> */}
+
+            <div
+              ref={dropdownRef}
+              onClick={handleDayPickerToggle}
+              className="relative rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2"
+            >
+              <div className="mr-2">
+                <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+              </div>
+              <div className="flex flex-col">
+                <div>
+                  <p className="text-sm font-bold">Check-in - Check-out</p>
+                </div>
+                <div>
+                  <p>
+                    {`${checkInDate?.toLocaleDateString() || ""}${
+                      checkInDate && checkOutDate
+                        ? " - " + (checkOutDate?.toLocaleDateString() || "")
+                        : ""
+                    }`}
+                  </p>
+                </div>
+              </div>
+              {isCalendarOpen && (
+                <div className="w-auto absolute top-full left-0 bg-white border rounded shadow mt-2">
+                  <DayPicker
+                    onClick={handleDayPickerToggle}
+                    numberOfMonths={2}
+                    pagedNavigation
+                    selected={localCheckInDate} // Set the selected date to localCheckInDate
+                    onDayClick={handleDayClick}
+                    startDate={dateRange[0]}
+                    endDate={dateRange[1]}
+                    selectsRange
+                    placeholderText="Check-in Check-out"
+                    className="focus:outline-none focus:border-blue-500"
                     modifiers={{
                       disabled: { before: today },
                     }}

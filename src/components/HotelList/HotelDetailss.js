@@ -294,16 +294,28 @@ import { setFilteredHotels } from "../../redux/actions";
 import { Link } from "gatsby";
 const HotelDetailsComponent = () => {
   const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
+  const storedFilteredHotels =
+    JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
   useEffect(() => {
     // This will run whenever hotels in Redux store changes
     console.log("Hotels in Redux store:", filteredHotels);
   }, [filteredHotels]);
-  if (!filteredHotels || filteredHotels.length === 0) {
-    return <div>No hotel selected</div>;
+
+  useEffect(() => {
+    // This will run whenever hotels in Redux store changes
+    console.log("Hotels in session store:", storedFilteredHotels);
+  }, [storedFilteredHotels]);
+  if (!storedFilteredHotels || storedFilteredHotels.length === 0) {
+    return (
+      <div>
+        No hotel selected,
+        <p>Please serach hotels..</p>
+      </div>
+    );
   }
   return (
     <div className="py-3 flex flex-col  gap-3 shadow ">
-      {filteredHotels.map((hotel) => (
+      {storedFilteredHotels.map((hotel) => (
         <Link
           to={`/hotels/${hotel.id}`}
           key={hotel.id}
@@ -384,8 +396,6 @@ const HotelDetailsComponent = () => {
   );
 };
 export default HotelDetailsComponent;
-
-
 
 // import React, { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";

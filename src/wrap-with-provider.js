@@ -1,16 +1,19 @@
-import React from "react"
+import React from "react";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/lib/integration/react";
-import reducers from "./redux/reducers";
+import persistReducer from "./redux/reducer";
 import thunk from "redux-thunk";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+const composeEnhancers =
+  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose;
 
 const store = createStore(
-  reducers,
+  persistReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
 const persistor = persistStore(store);
@@ -25,11 +28,5 @@ export default ({ element }) => {
         {element}
       </PersistGate>
     </Provider>
-  )
-
-
-
-
-}
-
-
+  );
+};
