@@ -73,7 +73,14 @@ import {
   SET_CHECKOUT_DATA,
   SET_CURRENCY,
   SET_EXCHANGE_RATES,
+  SET_FIRST_NAME, 
+  SET_LAST_NAME
 } from "./actions";
+
+
+
+
+
 
 const initialHotelState = {
   searchTerm: "",
@@ -231,6 +238,32 @@ const countRoomsReducer = (state = initialCountState, action) => {
   }
 };
 
+
+
+const initialNameState = {
+  firstName: '',
+  lastName: '',
+};
+
+const nameReducer = (state = initialNameState, action) => {
+  switch (action.type) {
+    case SET_FIRST_NAME:
+      return {
+        ...state,
+        firstName: action.payload,
+      };
+    case SET_LAST_NAME:
+      return {
+        ...state,
+        lastName: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+
+
 const rootPersistConfig = {
   key: 'root',
   storage: localforage,
@@ -244,6 +277,7 @@ const rootReducer = combineReducers({
   currency: currencyReducer,
   exchangeRates: exchangeReducer,
   countData: countRoomsReducer,
+  name:nameReducer,
 });
 
  export default rootReducer;

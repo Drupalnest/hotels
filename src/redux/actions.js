@@ -53,8 +53,10 @@ export const SET_CHECK_OUT_DATE='SET_CHECK_OUT_DATE'
 export const SET_CHECKOUT_DATA='SET_CHECKOUT_DATA'
 export const SET_CURRENCY='SET_CURRENCY'
 export const SET_EXCHANGE_RATES='SET_EXCHANGE_RATES'
- 
- 
+ export const SET_FIRST_NAME = 'SET_FIRST_NAME';
+export const SET_LAST_NAME = 'SET_LAST_NAME';
+
+
  
  
 export const setSearchTerm = (searchTerm) => ({
@@ -160,4 +162,18 @@ export const setAdultCount = (count) => ({
 export const setChildrenCount = (count) => ({
   type: 'SET_CHILDREN_COUNT',
   payload: count,
+});
+
+
+
+
+// Action creators
+export const setFirstName = (firstName) => ({
+  type: SET_FIRST_NAME,
+  payload: firstName,
+});
+
+export const setLastName = (lastName) => ({
+  type: SET_LAST_NAME,
+  payload: lastName,
 });

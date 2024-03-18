@@ -553,7 +553,7 @@ import Discover from "../images/discover.svg";
 import Mastercard from "../images/mastercard.svg";
 import Visa from "../images/visa.svg";
 import Navbar from "../components/Navbar/Navbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { navigate } from "gatsby";
 import {
   setSearchTerm,
@@ -562,7 +562,10 @@ import {
   setFilteredHotels,
   setCheckInDate,
   setCheckOutDate,
+  setFirstName,
+  setLastName,
 } from "../redux/actions";
+import { useState } from "react";
 
 const steps = [
   "Select master blaster campaign settings",
@@ -571,6 +574,7 @@ const steps = [
 ];
 
 export default function Cart() {
+  const dispatch = useDispatch();
   const randomImage = "https://source.unsplash.com/?hotel,travel";
 
   const checkoutData = useSelector((state) => state.checkoutData.checkoutData);
@@ -581,7 +585,55 @@ export default function Cart() {
 
   const amenities = checkoutData.amenities;
 
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
   const bookinConfirmationClcik = () => {
+    // const reservationData = {
+    //   type: "reservations_new",
+    //   title: "My New Articlessssss",
+    //   field_booking_id: "22",
+    //   field_lastname: "gadhavnaa",
+    //   field_name: "ajay",
+    //   field_checkin: checkInDate ? formatDate(checkInDate) : "",
+    //   field_checkout: checkOutDate ? formatDate(checkOutDate) : "",
+    //   first_name: firstName,
+    //   last_name: lastName,
+    // };
+
+    const postData = {
+      type: "reservations_new",
+      title: "My New xfg",
+      field_booking_id: "22",
+      field_lastname: "gadhavnaa",
+      $schema: "ajay",
+      field_checkin: "2024-03-18"
+    };
+    
+    fetch('https://api.example.com/reservations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+    
+
     navigate("/bookingconfirm");
   };
 
@@ -594,6 +646,30 @@ export default function Cart() {
 
   //Assuming rooms count is obtained from somewhere else in the state
   const { rooms, adults, children } = useSelector((state) => state.countData);
+
+  // Get the first name and last name from Redux state
+  const firstName = useSelector((state) => state.firstName);
+  const lastName = useSelector((state) => state.lastName);
+
+  // Local state to hold the input values
+  const [localFirstName, setLocalFirstName] = useState(firstName || "");
+  const [localLastName, setLocalLastName] = useState(lastName || "");
+
+  // Function to handle changes in the first name field
+  const handleFirstNameChange = (event) => {
+    const { value } = event.target;
+    setLocalFirstName(value);
+    // Dispatch action to update first name in Redux
+    dispatch(setFirstName(value));
+  };
+
+  // Function to handle changes in the last name field
+  const handleLastNameChange = (event) => {
+    const { value } = event.target;
+    setLocalLastName(value);
+    // Dispatch action to update last name in Redux
+    dispatch(setLastName(value));
+  };
   return (
     <div className="container-fluid flex flex-col justify-center items-center">
       <Navbar />
@@ -738,24 +814,28 @@ export default function Cart() {
             <div className="font-bold py-2">
               <h1>Guest Name</h1>
             </div>
-            <span class="flex flex-row gap-2 ">
+            <span className="flex flex-row gap-2">
               <TextField
-                id="outlined-basic"
+                id="first-name"
                 label="First Name*"
                 variant="outlined"
                 sx={{
                   width: "50%",
                   height: "2rem",
                 }}
+                value={localFirstName}
+                onChange={handleFirstNameChange}
               />
               <TextField
-                id="outlined-basic"
+                id="last-name"
                 label="Last Name*"
                 variant="outlined"
                 sx={{
                   width: "50%",
                   height: "2rem",
                 }}
+                value={localLastName}
+                onChange={handleLastNameChange}
               />
             </span>
             <span className="flex flex-row mt-3 py-5">
