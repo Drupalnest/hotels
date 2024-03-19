@@ -556,7 +556,7 @@
 
 // export default MapComponent;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LoadScript,
   GoogleMap,
@@ -606,7 +606,6 @@ const HotelPopup = ({ hotel, onClose }) => {
   );
 };
 
-
 const CustomMarker = ({ position, onClick }) => {
   return (
     <OverlayView
@@ -646,6 +645,8 @@ const MapComponent = ({ data }) => {
 
   const storedFilteredHotels =
     JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+
+    console.log("storedFilteredHotels",storedFilteredHotels)
 
   const [selectedHotel, setSelectedHotel] = useState(null);
   const handleMarkerClick = (hotel) => {
@@ -818,225 +819,3 @@ export const query = graphql`
 `;
 
 export default MapComponent;
-
-
-// import React, { useState } from "react";
-// import { LoadScript, GoogleMap, Marker, InfoWindow, OverlayView } from "@react-google-maps/api";
-// import MapIcon from "@mui/icons-material/Map";
-// import { Link, navigate } from "gatsby";
-// import { useSelector } from "react-redux";
-// import FavoriteIcon from "@mui/icons-material/Favorite";
-// import Filter from "../components/HotelList/Filter";
-// import Filterwithoutmap from "../components/HotelList/Filterwithoutmap";
-// import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
-// import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-// import Navbar from "../components/Navbar/Navbar";
-// import { graphql } from "gatsby";
-
-// const HotelPopup = ({ hotel, onClose }) => {
-//   return (
-//     <InfoWindow
-//       position={{ lat: hotel.lat_lon?.lat || 0, lng: hotel.lat_lon?.lon || 0 }}
-//       onCloseClick={onClose}
-//     >
-//       <div className="w-64 p-4 bg-white border rounded shadow-md">
-//         <div className="mb-4">
-//           <img
-//             src={hotel.image} // Add the image source for the hotel
-//             alt={hotel.name}
-//             className="w-full h-32 object-cover rounded"
-//           />
-//         </div>
-//         <div className="flex items-center justify-between mb-2">
-//           <div className="flex items-center">
-//             <span className="text-green-500 mr-1">
-//               <FavoriteIcon />
-//               {/* Replace with the actual AddLoveMaterialUIIcon component */}
-//             </span>
-//             <p className="text-gray-700">9.3</p>
-//           </div>
-//           <p className="text-gray-700">{hotel.location}</p>
-//           <p className="text-gray-700">5-Star Hotel</p>
-//         </div>
-//         <h2 className="text-xl font-semibold mb-2">{hotel.name}</h2>
-//       </div>
-//     </InfoWindow>
-//   );
-// };
-
-// const CustomMarker = ({ position, hotel, onClick }) => {
-//   return (
-//     <Marker
-//       position={position}
-//       onClick={onClick}
-//     />
-//   );
-// };
-
-// const MapComponent = ({ data }) => {
-//     const hotels = data?.allHotel?.nodes || [];
-//   console.log("hotels", hotels);
-//   const airports = data?.allLocationAirport?.nodes || [];
-//   console.log("airports", airports);
-//   const city = data?.allLocationCity?.nodes || [];
-//   console.log("city", city);
-//   const cruise = data?.allLocationCruise?.nodes || [];
-//   console.log("cruise", cruise);
-//   const interest = data?.allLocationPointOfInterest?.nodes || [];
-//   console.log("interest", interest);
-//   const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
-//   const storedFilteredHotels =
-//     JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
-
-//   const [selectedHotel, setSelectedHotel] = useState(null);
-//   const handleMarkerClick = (hotel) => {
-//     setSelectedHotel(hotel);
-//   };
-//   const handleMapClick = () => {
-//     setSelectedHotel(null);
-//   };
-//   const handleButtonClick = () => {
-//     navigate("/hotellist");
-//   };
-//   const center = {
-//     lat: storedFilteredHotels[0]?.lat_lon?.lat || 0,
-//     lng: storedFilteredHotels[0]?.lat_lon?.lon || 0,
-//   };
-//   return (
-//     <div className="container-fluid">
-//       <Navbar />
-//       <div className="flex justify-center items-center">
-//         <Link
-//           className="flex mr-3 font-bold text-blue-600 hover:underline"
-//           to="/hotellist"
-//         >
-//           <p>
-//             <KeyboardArrowLeftIcon />
-//           </p>
-//           <p>Classic View</p>
-//         </Link>
-//         <HeaderSearchBox
-//           hotels={hotels}
-//           airports={airports}
-//           city={city}
-//           cruise={cruise}
-//           interest={interest}
-//         />
-//       </div>
-
-//       <div
-//         style={{ position: "relative", height: "835px" }}
-//         className="flex flex-row py-2"
-//       >
-//         <div className="flex flex-col  ">
-//           <Filterwithoutmap />
-//         </div>
-//         <div className="border-2" style={{ width: "100%", height: "auto" }}>
-//           <GoogleMap
-//             mapContainerStyle={{
-//               width: "100%",
-//               height: "100%",
-//             }}
-//             center={center}
-//             zoom={10}
-//             onClick={handleMapClick}
-//           >
-//             {storedFilteredHotels.map((hotel) => (
-//               <CustomMarker
-//                 key={hotel.id}
-//                 position={{
-//                   lat: hotel.lat_lon?.lat || 0,
-//                   lng: hotel.lat_lon?.lon || 0,
-//                 }}
-//                 hotel={hotel}
-//                 onClick={() => handleMarkerClick(hotel)}
-//               />
-//             ))}
-//             {selectedHotel && (
-//               <HotelPopup
-//                 hotel={selectedHotel}
-//                 onClose={() => setSelectedHotel(null)}
-//               />
-//             )}
-//           </GoogleMap>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export const query = graphql`
-//   query MyQuery {
-//     allHotel {
-//       nodes {
-//         id
-//         name
-//         phone
-//         hotel_code
-//         field_rooms_ajay {
-//           drupal_internal__target_id
-//         }
-//         lat_lon {
-//           value
-//           geo_type
-//           lat
-//           lon
-//           left
-//           top
-//           right
-//           bottom
-//           geohash
-//           latlon
-//         }
-//         email
-//         description
-//         crs_code
-//         crs_name
-//         address {
-//           address_line1
-//           country_code
-//           administrative_area
-//           locality
-//           postal_code
-//         }
-//         amenities {
-//           machine_name
-//           name
-//         }
-//       }
-//     }
-//     allLocationAirport {
-//       nodes {
-//         id
-//         name
-//         field_address {
-//           locality
-//           country_code
-//         }
-//       }
-//     }
-//     allLocationCity {
-//       nodes {
-//         id
-//         name
-//         population
-//       }
-//     }
-//     allLocationCruise {
-//       nodes {
-//         id
-//         google_place_id
-//         name
-//       }
-//     }
-//     allLocationPointOfInterest {
-//       nodes {
-//         id
-//         name
-//         google_place_id
-//       }
-//     }
-//   }
-// `;
-
-// export default MapComponent;
