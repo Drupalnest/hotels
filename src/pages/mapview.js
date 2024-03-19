@@ -606,10 +606,15 @@ const HotelPopup = ({ hotel, onClose }) => {
   );
 };
 
-const CustomMarker = ({ position, onClick }) => {
+const CustomMarker = ({ onClick }) => {
+  // const [markerPosition, setMarkerPosition] = useState(position);
+  // useEffect(() => {
+  //   setMarkerPosition(position);
+  // }, [position]);
+
   return (
     <OverlayView
-      position={position}
+      // position={markerPosition}
       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
     >
       <div
@@ -617,8 +622,8 @@ const CustomMarker = ({ position, onClick }) => {
           position: "absolute",
           cursor: "pointer",
           transform: "translate(-50%, -50%)",
+          border: "2px solid red",
         }}
-        onClick={onClick}
       >
         <div
           className="p-1 px-2 bg-blue-600 flex justify-center items-center rounded-full border border-2 cursor-pointer transition-transform transform-gpu hover:scale-110"
@@ -630,40 +635,74 @@ const CustomMarker = ({ position, onClick }) => {
     </OverlayView>
   );
 };
+
 const MapComponent = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
-  console.log("hotels", hotels);
   const airports = data?.allLocationAirport?.nodes || [];
-  console.log("airports", airports);
   const city = data?.allLocationCity?.nodes || [];
-  console.log("city", city);
   const cruise = data?.allLocationCruise?.nodes || [];
-  console.log("cruise", cruise);
   const interest = data?.allLocationPointOfInterest?.nodes || [];
-  console.log("interest", interest);
-  const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
+  // const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
+  const [isMapViewPage, setIsMapViewPage] = useState(true);
+
+  const [filteredHotels, setFilteredHotels] = useState([]);
+  const [mapKey, setMapKey] = useState(0); // State for key attribute
 
   const storedFilteredHotels =
     JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
 
-    console.log("storedFilteredHotels",storedFilteredHotels)
+  useEffect(() => {
+    const isFilteredHotelsChanged =
+      JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
 
-  const [selectedHotel, setSelectedHotel] = useState(null);
+    if (isFilteredHotelsChanged) {
+      setFilteredHotels(storedFilteredHotels);
+      // Update map key to force re-render
+      setMapKey((prevKey) => prevKey + 1);
+    }
+  }, [filteredHotels, storedFilteredHotels]);
+
+  if (!storedFilteredHotels || storedFilteredHotels.length === 0) {
+    return <div>No hotel selected</div>;
+  }
+
+  const center = {
+    lat: filteredHotels[0]?.lat_lon?.lat || 0,
+    lng: filteredHotels[0]?.lat_lon?.lon || 0,
+  };
+  // const storedFilteredHotels =
+  //   JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+
+  //   const [mapKey, setMapKey] = useState(0); // State for key attribute
+  // const [selectedHotel, setSelectedHotel] = useState(null);
+
   const handleMarkerClick = (hotel) => {
-    setSelectedHotel(hotel);
+    setFilteredHotels(hotel);
   };
+
   const handleMapClick = () => {
-    setSelectedHotel(null);
+    setFilteredHotels(null);
   };
-  const [isMapViewPage, setIsMapViewPage] = useState(true);
+
+  // useEffect(() => {
+  //   setMapKey((prevKey) => prevKey + 1);
+  // }, []);
 
   const handleButtonMapClick = () => {
     navigate("/mapview");
   };
-  const center = {
-    lat: storedFilteredHotels[0]?.lat_lon?.lat || 0,
-    lng: storedFilteredHotels[0]?.lat_lon?.lon || 0,
-  };
+
+  // const center = {
+  //   lat:
+  //     storedFilteredHotels.length > 0
+  //       ? storedFilteredHotels[0]?.lat_lon?.lat || 0
+  //       : 0,
+  //   lng:
+  //     storedFilteredHotels.length > 0
+  //       ? storedFilteredHotels[0]?.lat_lon?.lon || 0
+  //       : 0,
+  // };
+
   return (
     <div className="container-fluid">
       <Navbar />
@@ -692,27 +731,12 @@ const MapComponent = ({ data }) => {
         style={{ position: "relative", height: "835px" }}
         className="flex flex-row py-2"
       >
-        {/* <button
-        className="border-2 hover:border-gray-500 bg-white font-bold p-2 rounded-xl text-blue-800 z-50 absolute top-32 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        style={{ zIndex: 1 }}
-        onClick={handleButtonClick}
-      >
-        <MapIcon className="mr-2" />
-        Classic View
-      </button> */}
-        <div className="flex flex-col  ">
-          {/* <button
-            className="border-2 hover:border-gray-500 bg-white font-bold p-2 rounded-xl text-blue-800 z-50 "
-            style={{ zIndex: 1 }}
-            onClick={handleButtonClick}
-          >
-            <MapIcon className="mr-2" />
-            Classic View
-          </button> */}
+        <div className="flex flex-col">
           <Filterwithoutmap />
         </div>
         <div className="border-2" style={{ width: "100%", height: "auto" }}>
           <GoogleMap
+            key={mapKey}
             mapContainerStyle={{
               width: "100%",
               height: "100%",
@@ -725,16 +749,22 @@ const MapComponent = ({ data }) => {
               <CustomMarker
                 key={hotel.id}
                 position={{
-                  lat: hotel.lat_lon?.lat || 0,
-                  lng: hotel.lat_lon?.lon || 0,
+                  lat:
+                    typeof hotel.lat_lon?.lat === "number"
+                      ? hotel.lat_lon?.lat
+                      : 0,
+                  lng:
+                    typeof hotel.lat_lon?.lon === "number"
+                      ? hotel.lat_lon?.lon
+                      : 0,
                 }}
                 onClick={() => handleMarkerClick(hotel)}
               />
             ))}
-            {selectedHotel && (
+            {filteredHotels && (
               <HotelPopup
-                hotel={selectedHotel}
-                onClose={() => setSelectedHotel(null)}
+                hotel={filteredHotels}
+                onClose={() => setFilteredHotels(null)}
               />
             )}
           </GoogleMap>

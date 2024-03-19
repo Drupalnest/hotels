@@ -3,7 +3,7 @@ import React from "react";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import Hotel from "../../images/hotel.png";
 import Currency from "../currency/Currency";
- 
+
 const Navbar = () => {
   return (
     <div className=" py-2 container-fluid   flex justify-around border-b border-b-slate-400 ">
@@ -14,14 +14,14 @@ const Navbar = () => {
         <Link to="/" className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">
           Hotels
         </Link>
-        <Link  className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">Cars</Link>
+        <Link className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">Cars</Link>
         <Link className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">
           Flights
         </Link>
         <Link className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">
           Bundle + Save
         </Link>
-      
+
         <Link className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">
           Cruices
         </Link>
@@ -29,10 +29,10 @@ const Navbar = () => {
           Experiences
         </Link>
       </div>
- 
+
       <div className=" flex flex-row gap-2">
-      <Link className="p-2 border-1 hover:bg-slate-300 border rounded-2xl hover:cursor-pointer">
-         <Currency/>
+        <Link className="p-2 border-1 hover:bg-slate-300 border rounded-2xl hover:cursor-pointer">
+          <Currency />
         </Link>
         <Link className="p-2 border-1 hover:bg-slate-300 border rounded-2xl hover:cursor-pointer">
           Help
@@ -43,7 +43,7 @@ const Navbar = () => {
         <Link className="p-2 border-1 hover:bg-slate-300 border rounded-2xl hover:cursor-pointer">
           Sign In
         </Link>
- 
+
         <Link className="p-2 border-1 hover:bg-slate-300 border rounded-2xl hover:cursor-pointer">
           $234
         </Link>
@@ -51,21 +51,21 @@ const Navbar = () => {
     </div>
   );
 };
- 
+
 export default Navbar;
- 
+
 // import { Link } from "gatsby";
 // import React, { useState } from "react";
 // import ApartmentIcon from "@mui/icons-material/Apartment";
 // import Hotel from "../../images/hotel.png";
- 
+
 // const Navbar = () => {
 //   const [isMenuOpen, setMenuOpen] = useState(false);
- 
+
 //   const handleMenuToggle = () => {
 //     setMenuOpen(!isMenuOpen);
 //   };
- 
+
 //   return (
 //     <div className="py-2 container-fluid flex flex-col items-center sm:flex-row justify-between border-b border-b-slate-400">
 //       <div className="flex items-center ">
@@ -79,7 +79,7 @@ export default Navbar;
 //           ☰
 //         </button>
 //       </div>
- 
+
 //       <div
 //         className={`${
 //           isMenuOpen ? "flex" : "hidden"
@@ -119,7 +119,7 @@ export default Navbar;
 //           Experiences
 //         </Link>
 //       </div>
- 
+
 //       <div className="flex gap-2">
 //         <Link
 //           to="/help"
@@ -143,6 +143,5 @@ export default Navbar;
 //     </div>
 //   );
 // };
- 
+
 // export default Navbar;
- 
