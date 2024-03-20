@@ -1,2 +1,2 @@
 [build]
-command = "npm run force-install && gatsby build"
+  command = "npm run force-install -- --force && gatsby build"
