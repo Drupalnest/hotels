@@ -421,7 +421,7 @@
 
 // export default MapComponent;
 
-// AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ
+// // AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ
 // import React, { useState } from "react";
 // import { LoadScript, GoogleMap, Marker } from "@react-google-maps/api";
 // import MapIcon from "@mui/icons-material/Map";
@@ -487,7 +487,7 @@
 
 // export default MapComponent;
 
-//AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ
+// AIzaSyCzA00pEwAVjWLJ2tIMbNJY7tZjGfZeHWQ
 // import React, { useState } from "react";
 // import { LoadScript, GoogleMap, Marker } from "@react-google-maps/api";
 // import MapIcon from "@mui/icons-material/Map";
@@ -556,87 +556,344 @@
 
 // export default MapComponent;
 
+// import React, { useEffect, useState } from "react";
+// import {
+//   LoadScript,
+//   GoogleMap,
+//   Marker,
+//   InfoWindow,
+//   OverlayView,
+// } from "@react-google-maps/api";
+// import MapIcon from "@mui/icons-material/Map";
+// import { Link, navigate } from "gatsby";
+// import { useSelector } from "react-redux";
+// import FavoriteIcon from "@mui/icons-material/Favorite";
+// import Filter from "../components/HotelList/Filter";
+// import Filterwithoutmap from "../components/HotelList/Filterwithoutmap";
+// import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
+// import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+// import Navbar from "../components/Navbar/Navbar";
+// import { graphql } from "gatsby";
+
+// const HotelPopup = ({ hotel, onClose }) => {
+//   return (
+//     <InfoWindow onCloseClick={onClose}>
+//       <div className="w-64 p-4 bg-white border rounded shadow-md">
+//         <div className="mb-4">
+//           <img
+//             src={hotel.image} // Add the image source for the hotel
+//             alt={hotel.name}
+//             className="w-full h-32 object-cover rounded"
+//           />
+//         </div>
+//         <div className="flex items-center justify-between mb-2">
+//           <div className="flex items-center">
+//             <span className="text-green-500 mr-1">
+//               <FavoriteIcon />
+//               {/* Replace with the actual AddLoveMaterialUIIcon component */}
+//             </span>
+//             <p className="text-gray-700">9.3</p>
+//           </div>
+//           <p className="text-gray-700">{hotel.location}</p>
+//           <p className="text-gray-700">5-Star Hotel</p>
+//         </div>
+//         <h2 className="text-xl font-semibold mb-2">{hotel.name}</h2>
+//       </div>
+//     </InfoWindow>
+//   );
+// };
+
+// // const CustomMarker = ({ onClick }) => {
+// //   return (
+// //     <OverlayView mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
+// //       <div
+// //         style={{
+// //           position: "absolute",
+// //           cursor: "pointer",
+// //           transform: "translate(-50%, -50%)",
+// //           border: "2px solid red",
+// //         }}
+// //       >
+// //         <div
+// //           className="p-1 px-2 bg-blue-600 flex justify-center items-center rounded-full border border-2 cursor-pointer transition-transform transform-gpu hover:scale-110"
+// //           onClick={onClick}
+// //         >
+// //           <p className="text-sm text-white font-bold">₹25360</p>
+// //         </div>
+// //       </div>
+// //     </OverlayView>
+// //   );
+// // };
+
+// const CustomMarker = ({ onClick }) => {
+//   return (
+//     <OverlayView mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
+//       <div
+//         style={{
+//           position: "absolute",
+//           cursor: "pointer",
+//           transform: "translate(-50%, -50%)",
+//           border: "2px solid red",
+//         }}
+//       >
+//         <div
+//           className="p-1 px-2 bg-blue-600 flex justify-center items-center rounded-full border border-2 cursor-pointer transition-transform transform-gpu hover:scale-110"
+//           onClick={onClick}
+//         >
+//           <p className="text-sm text-white font-bold">₹25360</p>
+//         </div>
+//       </div>
+//     </OverlayView>
+//   );
+// };
+
+// const MapComponent = ({ data }) => {
+//   const hotels = data?.allHotel?.nodes || [];
+//   const airports = data?.allLocationAirport?.nodes || [];
+//   const city = data?.allLocationCity?.nodes || [];
+//   const cruise = data?.allLocationCruise?.nodes || [];
+//   const interest = data?.allLocationPointOfInterest?.nodes || [];
+//   // const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
+//   const [isMapViewPage, setIsMapViewPage] = useState(true);
+
+//   const [filteredHotels, setFilteredHotels] = useState([]);
+//   const [mapKey, setMapKey] = useState(0); // State for key attribute
+
+//   const storedFilteredHotels =
+//     JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+
+//   useEffect(() => {
+//     const isFilteredHotelsChanged =
+//       JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
+
+//     if (isFilteredHotelsChanged) {
+//       setFilteredHotels(storedFilteredHotels);
+//       // Update map key to force re-render
+//       setMapKey((prevKey) => prevKey + 1);
+//     }
+//   }, [filteredHotels, storedFilteredHotels]);
+
+//   if (!storedFilteredHotels || storedFilteredHotels.length === 0) {
+//     return <div>No hotel selected</div>;
+//   }
+
+//   const handleMarkerClick = (hotel) => {
+//     setFilteredHotels(hotel);
+//   };
+
+//   const handleMapClick = () => {
+//     setFilteredHotels(null);
+//   };
+
+//   // useEffect(() => {
+//   //   setMapKey((prevKey) => prevKey + 1);
+//   // }, []);
+
+//   const handleButtonMapClick = () => {
+//     navigate("/mapview");
+//   };
+
+//   // const center = {
+//   //   lat:
+//   //     storedFilteredHotels.length > 0
+//   //       ? storedFilteredHotels[0]?.lat_lon?.lat || 0
+//   //       : 0,
+//   //   lng:
+//   //     storedFilteredHotels.length > 0
+//   //       ? storedFilteredHotels[0]?.lat_lon?.lon || 0
+//   //       : 0,
+//   // };
+
+//   const center = {
+//     lat: filteredHotels[0]?.lat_lon?.lat || 0,
+//     lng: filteredHotels[0]?.lat_lon?.lon || 0,
+//   };
+
+//   return (
+//     <div className="container-fluid">
+//       <Navbar />
+//       <div className="flex justify-center items-center">
+//         <Link
+//           className="flex mr-3 font-bold text-blue-600 hover:underline"
+//           to="/hotellist"
+//         >
+//           <p>
+//             <KeyboardArrowLeftIcon />
+//           </p>
+//           <p>Classic View</p>
+//         </Link>
+//         <HeaderSearchBox
+//           hotels={hotels}
+//           airports={airports}
+//           city={city}
+//           cruise={cruise}
+//           interest={interest}
+//           onButtonClick={handleButtonMapClick}
+//           isMapViewPage={isMapViewPage}
+//         />
+//       </div>
+
+//       <div
+//         style={{ position: "relative", height: "835px" }}
+//         className="flex flex-row py-2"
+//       >
+//         <div className="flex flex-col">
+//           <Filterwithoutmap />
+//         </div>
+//         <div className="border-2" style={{ width: "100%", height: "auto" }}>
+//           <GoogleMap
+//             key={mapKey}
+//             mapContainerStyle={{
+//               width: "100%",
+//               height: "100%",
+//             }}
+//             center={center}
+//             zoom={10}
+//             onClick={handleMapClick}
+//           >
+//             {/* {filteredHotels.map((hotel) => (
+//               <CustomMarker
+//                 key={hotel.id}
+//                 position={{
+//                   lat: hotel.lat_lon?.lat || 0,
+//                   lng: hotel.lat_lon?.lon || 0,
+//                 }}
+//                 onClick={() => handleMarkerClick(hotel)}
+//               />
+//             ))}
+//             {filteredHotels && (
+//               <HotelPopup
+//                 hotel={filteredHotels}
+//                 onClose={() => setFilteredHotels(null)}
+//               />
+//             )} */}
+
+//             {filteredHotels.map((hotel) => (
+//               <Marker
+//                 key={hotel.id}
+//                 position={{
+//                   lat: hotel.lat_lon?.lat || 0,
+//                   lng: hotel.lat_lon?.lon || 0,
+//                 }}
+//                 onClick={() => handleMarkerClick(hotel)}
+//               />
+//             ))}
+//             {/* {storedFilteredHotels.map((hotel) => (
+//               <HotelPopup
+//                 key={hotel.id}
+//                 hotel={hotel}
+//                 //hotel={filteredHotels}
+//                 onClose={() => setFilteredHotels([])}
+//               />
+//             ))} */}
+//           </GoogleMap>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export const query = graphql`
+//   query MyQuery {
+//     allHotel {
+//       nodes {
+//         id
+//         name
+//         phone
+//         hotel_code
+//         field_rooms_ajay {
+//           drupal_internal__target_id
+//         }
+//         lat_lon {
+//           value
+//           geo_type
+//           lat
+//           lon
+//           left
+//           top
+//           right
+//           bottom
+//           geohash
+//           latlon
+//         }
+//         email
+//         description
+//         crs_code
+//         crs_name
+//         address {
+//           address_line1
+//           country_code
+//           administrative_area
+//           locality
+//           postal_code
+//         }
+//         amenities {
+//           machine_name
+//           name
+//         }
+//       }
+//     }
+//     allLocationAirport {
+//       nodes {
+//         id
+//         name
+//         field_address {
+//           locality
+//           country_code
+//         }
+//       }
+//     }
+//     allLocationCity {
+//       nodes {
+//         id
+//         name
+//         population
+//       }
+//     }
+//     allLocationCruise {
+//       nodes {
+//         id
+//         google_place_id
+//         name
+//       }
+//     }
+//     allLocationPointOfInterest {
+//       nodes {
+//         id
+//         name
+//         google_place_id
+//       }
+//     }
+//   }
+// `;
+
+// export default MapComponent;
+
 import React, { useEffect, useState } from "react";
 import {
   LoadScript,
   GoogleMap,
   Marker,
-  InfoWindow,
   OverlayView,
+  InfoWindow,
 } from "@react-google-maps/api";
-import MapIcon from "@mui/icons-material/Map";
 import { Link, navigate } from "gatsby";
-import { useSelector } from "react-redux";
+import { graphql } from "gatsby";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import Filter from "../components/HotelList/Filter";
-import Filterwithoutmap from "../components/HotelList/Filterwithoutmap";
-import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Navbar from "../components/Navbar/Navbar";
-import { graphql } from "gatsby";
-
-const HotelPopup = ({ hotel, onClose }) => {
-  return (
-    <InfoWindow
-      position={{ lat: hotel.lat_lon?.lat || 0, lng: hotel.lat_lon?.lon || 0 }}
-      onCloseClick={onClose}
-    >
-      <div className="w-64 p-4 bg-white border rounded shadow-md">
-        <div className="mb-4">
-          <img
-            src={hotel.image} // Add the image source for the hotel
-            alt={hotel.name}
-            className="w-full h-32 object-cover rounded"
-          />
-        </div>
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center">
-            <span className="text-green-500 mr-1">
-              <FavoriteIcon />
-              {/* Replace with the actual AddLoveMaterialUIIcon component */}
-            </span>
-            <p className="text-gray-700">9.3</p>
-          </div>
-          <p className="text-gray-700">{hotel.location}</p>
-          <p className="text-gray-700">5-Star Hotel</p>
-        </div>
-        <h2 className="text-xl font-semibold mb-2">{hotel.name}</h2>
-      </div>
-    </InfoWindow>
-  );
-};
-
-const CustomMarker = ({ onClick }) => {
-  // const [markerPosition, setMarkerPosition] = useState(position);
-  // useEffect(() => {
-  //   setMarkerPosition(position);
-  // }, [position]);
-
-  return (
-    <OverlayView
-      // position={markerPosition}
-      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-    >
-      <div
-        style={{
-          position: "absolute",
-          cursor: "pointer",
-          transform: "translate(-50%, -50%)",
-          border: "2px solid red",
-        }}
-      >
-        <div
-          className="p-1 px-2 bg-blue-600 flex justify-center items-center rounded-full border border-2 cursor-pointer transition-transform transform-gpu hover:scale-110"
-          onClick={onClick}
-        >
-          <p className="text-sm text-white font-bold">₹25360</p>
-        </div>
-      </div>
-    </OverlayView>
-  );
-};
+import Filterwithoutmap from "../components/HotelList/Filterwithoutmap";
+import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
+import CloseIcon from "@mui/icons-material/Close";
+import room3 from "../assets/room3.jpg";
 
 const MapComponent = ({ data }) => {
+  const [filteredHotels, setFilteredHotels] = useState([]);
+  const [mapKey, setMapKey] = useState(0);
+  const storedFilteredHotels =
+    JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+  const [selectedHotel, setSelectedHotel] = useState(null);
+
   const hotels = data?.allHotel?.nodes || [];
   const airports = data?.allLocationAirport?.nodes || [];
   const city = data?.allLocationCity?.nodes || [];
@@ -645,64 +902,105 @@ const MapComponent = ({ data }) => {
   // const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
   const [isMapViewPage, setIsMapViewPage] = useState(true);
 
-  const [filteredHotels, setFilteredHotels] = useState([]);
-  const [mapKey, setMapKey] = useState(0); // State for key attribute
-
-  const storedFilteredHotels =
-    JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
-
   useEffect(() => {
     const isFilteredHotelsChanged =
       JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
 
     if (isFilteredHotelsChanged) {
       setFilteredHotels(storedFilteredHotels);
-      // Update map key to force re-render
       setMapKey((prevKey) => prevKey + 1);
     }
   }, [filteredHotels, storedFilteredHotels]);
 
-  if (!storedFilteredHotels || storedFilteredHotels.length === 0) {
-    return <div>No hotel selected</div>;
-  }
-
-  const center = {
-    lat: filteredHotels[0]?.lat_lon?.lat || 0,
-    lng: filteredHotels[0]?.lat_lon?.lon || 0,
-  };
-  // const storedFilteredHotels =
-  //   JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
-
-  //   const [mapKey, setMapKey] = useState(0); // State for key attribute
-  // const [selectedHotel, setSelectedHotel] = useState(null);
-
   const handleMarkerClick = (hotel) => {
-    setFilteredHotels(hotel);
+    setSelectedHotel(hotel);
   };
 
   const handleMapClick = () => {
-    setFilteredHotels(null);
+    setSelectedHotel(null);
   };
-
-  // useEffect(() => {
-  //   setMapKey((prevKey) => prevKey + 1);
-  // }, []);
 
   const handleButtonMapClick = () => {
     navigate("/mapview");
   };
+  const handleClosePopup = (event) => {
+    event.stopPropagation(); // Prevent event bubbling
 
-  // const center = {
-  //   lat:
-  //     storedFilteredHotels.length > 0
-  //       ? storedFilteredHotels[0]?.lat_lon?.lat || 0
-  //       : 0,
-  //   lng:
-  //     storedFilteredHotels.length > 0
-  //       ? storedFilteredHotels[0]?.lat_lon?.lon || 0
-  //       : 0,
+    // Implement the logic to close the popup
+    setSelectedHotel(null);
+  };
+
+  const center = {
+    lat:
+      filteredHotels && filteredHotels.length > 0
+        ? filteredHotels[0]?.lat_lon?.lat
+        : 0,
+    lng:
+      filteredHotels && filteredHotels.length > 0
+        ? filteredHotels[0]?.lat_lon?.lon
+        : 0,
+  };
+
+  //   const CustomMarker = ({ onClick }) => {
+  //   return (
+  //     <div >
+  //       <div
+  //         style={{
+  //           position: "absolute",
+  //           cursor: "pointer",
+  //           //transform: "translate(-50%, -50%)",
+  //           border: "2px solid red",
+  //         }}
+  //       >
+  //         <div
+  //           className="p-1 px-2 bg-blue-600 flex justify-center items-center rounded-full border border-2 cursor-pointer transition-transform transform-gpu hover:scale-110"
+  //           onClick={onClick}
+  //         >
+  //           <p className="text-sm text-white font-bold">₹25360</p>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
   // };
 
+  // const CustomMarker = ({ position, onClick }) => {
+  //   return (
+  //     <OverlayView
+  //       position={position}
+  //       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+  //       getPixelPositionOffset={(width, height) => ({
+  //         x: -(width / 2),
+  //         y: -(height / 2),
+  //       })}
+  //     >
+  //       <div
+  //         style={{
+  //           cursor: "pointer",
+  //           border: "2px solid red",
+  //           transform: "translate(-50%, -50%)",
+  //         }}
+  //         onClick={onClick}
+  //       >
+  //         <div className="p-1 px-2 bg-blue-600 flex justify-center items-center rounded-full border border-2 cursor-pointer transition-transform transform-gpu hover:scale-110">
+  //           <p className="text-sm text-white font-bold">₹25360</p>
+  //         </div>
+  //       </div>
+  //     </OverlayView>
+  //   );
+  // };
+
+  const CustomMarker = ({ position, onClick }) => {
+    return (
+      <Marker
+        position={position}
+        onClick={onClick}
+        icon={{
+          url: "https://path/to/your/custom-marker-icon.png",
+          scaledSize: new window.google.maps.Size(40, 40), // Adjust the size as needed
+        }}
+      />
+    );
+  };
   return (
     <div className="container-fluid">
       <Navbar />
@@ -737,37 +1035,81 @@ const MapComponent = ({ data }) => {
         <div className="border-2" style={{ width: "100%", height: "auto" }}>
           <GoogleMap
             key={mapKey}
-            mapContainerStyle={{
-              width: "100%",
-              height: "100%",
-            }}
+            mapContainerStyle={{ width: "100%", height: "100%" }}
             center={center}
             zoom={10}
             onClick={handleMapClick}
           >
-            {storedFilteredHotels.map((hotel) => (
-              <CustomMarker
+            {/* {filteredHotels.map((hotel) => (
+              <Marker
                 key={hotel.id}
                 position={{
-                  lat:
-                    typeof hotel.lat_lon?.lat === "number"
-                      ? hotel.lat_lon?.lat
-                      : 0,
-                  lng:
-                    typeof hotel.lat_lon?.lon === "number"
-                      ? hotel.lat_lon?.lon
-                      : 0,
+                  lat: hotel.lat_lon?.lat || 0,
+                  lng: hotel.lat_lon?.lon || 0,
                 }}
                 onClick={() => handleMarkerClick(hotel)}
               />
+            ))} */}
+            {filteredHotels.map((hotel) => (
+              <Marker
+                key={hotel.id}
+                position={{
+                  lat: hotel.lat_lon?.lat || 0,
+                  lng: hotel.lat_lon?.lon || 0,
+                }}
+                onClick={() => handleMarkerClick(hotel)}
+              ></Marker>
             ))}
-            {filteredHotels && (
-              <HotelPopup
-                hotel={filteredHotels}
-                onClose={() => setFilteredHotels(null)}
-              />
-            )}
           </GoogleMap>
+
+          {selectedHotel && (
+            <div
+              mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+              className="w-64 p-4 bg-white border rounded shadow-md"
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                cursor: "pointer",
+                border: "2px solid red",
+              }}
+            >
+              <CloseIcon
+                className="text-black text-2xl    hover:bg-red-500 rounded-full  "
+                style={{
+                  position: "absolute",
+                  top: "0px",
+                  right: "0px",
+                  cursor: "pointer",
+                  color: "#ffffff",
+                }}
+                onClick={(event) => handleClosePopup(event)}
+              />
+              <Link   to={`/hotels/${selectedHotel.id}`}>
+                <div className="mb-4">
+                  <img
+                    src={room3}
+                    alt={selectedHotel.name}
+                    className="w-full h-32 object-cover rounded"
+                  />
+                </div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center">
+                    <span className="text-green-500 mr-1">
+                      <FavoriteIcon />
+                    </span>
+                    <p className="text-gray-700">9.3</p>
+                  </div>
+                  <p className="text-gray-700">{selectedHotel.location}</p>
+                  <p className="text-gray-700">5-Star Hotel</p>
+                </div>
+                <h2 className="text-md font-semibold mb-2">
+                  {selectedHotel.name}
+                </h2>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
