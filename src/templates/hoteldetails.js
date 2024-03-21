@@ -1589,7 +1589,6 @@ import Search from "../components/HotelDetails/Search";
 import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
 import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import SearchData from "../components/data/SearchData";
 import RoomSearch from "../components/HotelDetailsPage/RoomSearch";
 import Navbar from "../components/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
@@ -2194,7 +2193,7 @@ export const query = graphql`
           hotel_code
           rlh_status
           description
-          field_rooms_ajay {
+          field_rooms {
             drupal_internal__target_id
           }
           address {
@@ -2237,7 +2236,7 @@ export const query = graphql`
         hotel_code
         rlh_status
         description
-        field_rooms_ajay {
+        field_rooms {
           drupal_internal__target_id
         }
         address {

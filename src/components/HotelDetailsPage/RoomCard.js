@@ -33,7 +33,7 @@ const RoomCard = ({ imageIndex, rooms }) => {
     amenities,
     lat_lon,
     email,
-    field_rooms_ajay,
+    field_rooms,
   } = rooms;
 
   const handleClickOpen = () => {
@@ -89,9 +89,9 @@ const RoomCard = ({ imageIndex, rooms }) => {
   return (
     <div className="mb-4">
       <div>
-        {field_rooms_ajay && field_rooms_ajay.length > 0 ? (
+        {field_rooms && field_rooms.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {field_rooms_ajay.map((room) => (
+            {field_rooms.map((room) => (
               <div key={room.drupal_internal__target_id}>
                 <p>{room.drupal_internal__target_id}</p>
               </div>

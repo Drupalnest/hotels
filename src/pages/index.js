@@ -97,7 +97,7 @@ export const query = graphql`
         name
         phone
         hotel_code
-        field_rooms_ajay {
+        field_rooms {
           drupal_internal__target_id
         }
         lat_lon {

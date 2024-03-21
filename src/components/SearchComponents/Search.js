@@ -867,9 +867,9 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
   const uniqueLocalities = new Set();
   const filteredData = allData.filter((item) => {
     const hasValidTargetId =
-      item.field_rooms_ajay &&
-      item.field_rooms_ajay[0] &&
-      item.field_rooms_ajay[0].drupal_internal__target_id;
+      item.field_rooms &&
+      item.field_rooms[0] &&
+      item.field_rooms[0].drupal_internal__target_id;
 
     if (hasValidTargetId) {
       // Add the locality to the set if it matches the search
@@ -912,9 +912,9 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
 
     const filteredHotels = allData.filter(
       (item) =>
-        item.field_rooms_ajay &&
-        item.field_rooms_ajay[0] &&
-        item.field_rooms_ajay[0].drupal_internal__target_id &&
+        item.field_rooms &&
+        item.field_rooms[0] &&
+        item.field_rooms[0].drupal_internal__target_id &&
         item.address &&
         (item.address.locality
           .toLowerCase()
