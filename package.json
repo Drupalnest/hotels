@@ -73,7 +73,6 @@
     "transliteration": "^2.3.5",
     "use-places-autocomplete": "^4.0.1"
   },
- 
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
