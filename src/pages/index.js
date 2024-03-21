@@ -43,7 +43,7 @@ const MyPage = ({ data }) => {
         />
       </div>
 
-      <h1 className="text-3xl font-semibold mt-8 mb-4">Hotel List</h1>
+      {/* <h1 className="text-3xl font-semibold mt-8 mb-4">Hotel List</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {hotels.map((hotel, index) => (
           <Link
@@ -63,7 +63,7 @@ const MyPage = ({ data }) => {
             </div>
 
             <div className="pt-4">
-              {/* Rest of your hotel information */}
+            
               <span className="block mt-2">
                 <h2 className="text-xl font-semibold mb-2">{hotel.name}</h2>
                 <h2 className="text-xl font-semibold mb-2">{hotel.id}</h2>
@@ -83,7 +83,7 @@ const MyPage = ({ data }) => {
             </div>
           </Link>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
