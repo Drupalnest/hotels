@@ -2,6 +2,9 @@ import React from "react";
 import Navbar from "../Navbar/Navbar";
 import room1 from "../../assets/room1.jpg";
 const BookingConfirmation = ({ bookingDetails, success }) => {
+  console.log("bookingDetails", bookingDetails);
+  const { hotelName, roomType, address, amenities } = bookingDetails;
+
   return (
     <div>
       <Navbar />
@@ -17,7 +20,7 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
             <div className="border-2 w-3/4 ">
               <div className="p-3 bg-blue-500">
                 <p className="text-lg font-medium text-white">
-                  At&t Hotel And Conference Center
+                  {hotelName}
                 </p>
               </div>
               <div className="flex flex-row border-2 ">
@@ -29,10 +32,11 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                     </div>
                     <div className="flex flex-col w-2/4  ">
                       <p className="text-sm  mb-2">
-                        Fri Jul 1, 2016 - After 03:00 PM
+                        {/* Fri Jul 1, 2016 - After 03:00 PM */}
+                        {bookingDetails.checkInDate?.toDateString()}
                       </p>
                       <p className="text-sm  mb-2">
-                        Fri Jul 2, 2016 - After 12:00 PM
+                        {bookingDetails.checkOutDate?.toDateString()}
                       </p>
                       <div className="flex flex-row  gap-2  space-y-2">
                         <button className="text-sm text-blue-500 hover:underline">
@@ -50,10 +54,11 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                       <p className="text-sm ">Phone number</p>
                     </div>
                     <div className="flex flex-col   w-2/4 ">
-                      <p className="text-sm  mb-2">
-                        1900 University Avenue Austin TX
+                      <p className="text-sm  mb-2">{bookingDetails.address}</p>
+                      <p className="text-sm mb-2">
+                        {" "}
+                        {bookingDetails.phoneNumber}
                       </p>
-                      <p className="text-sm mb-2">512-435-987-1245</p>
                     </div>
                   </div>
                   <div className=" flex flex-row  justify-between p-3 bg-white rounded-md shadow-md">
@@ -63,7 +68,7 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                       <p className="text-sm mb-2">Confirmation Number</p>
                     </div>
                     <div className="flex flex-col w-2/4  ">
-                      <p className="text-sm  mb-2">1 room</p>
+                      <p className="text-sm  mb-2">{bookingDetails.rooms}</p>
                       <p className="text-sm mb-2">Lisa Simpson</p>
                       <p className="text-sm mb-2">CONFO</p>
                     </div>
@@ -73,12 +78,11 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                       <p className="text-sm  mb-2">Ammenities</p>
                     </div>
                     <div className="flex flex-col w-2/4">
-                      <p className="text-sm  mb-2">Free Internet</p>
-                      <p className="text-sm mb-2">Outdoor Pool</p>
-                      <p className="text-sm mb-2">Non-smoking</p>
-                      <p className="text-sm mb-2">Gym</p>
-                      <p className="text-sm mb-2">Hancap Accessible </p>
-                      <p className="text-sm mb-2">Bussiness Center</p>
+                      {amenities.map((amenity, index) => (
+                        <p key={index} className="text-sm mb-2">
+                          {amenity.name}
+                        </p>
+                      ))}
                     </div>
                   </div>
                   <div className=" flex flex-row  justify-between p-3 bg-white rounded-md shadow-md">
@@ -86,7 +90,7 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                       <p className="text-sm  mb-2">Room Type</p>
                     </div>
                     <div className="flex flex-col w-2/4">
-                      <p className="text-sm  mb-2">deluxe</p>
+                      <p className="text-sm  mb-2">{bookingDetails.roomType}</p>
                       <p className="text-sm mb-2">Hotel</p>
                     </div>
                   </div>

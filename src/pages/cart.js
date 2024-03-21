@@ -567,8 +567,8 @@ import {
 } from "../redux/actions";
 import { useState } from "react";
 import axios from "axios";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const steps = [
   "Select master blaster campaign settings",
@@ -596,6 +596,11 @@ export default function Cart() {
   };
 
   const bookinConfirmationClcik = () => {
+    if (!localFirstName || !localLastName) {
+      // Show warning if inputs are empty
+      setIsWarningShown(true);
+      return; // Exit function if inputs are empty
+    }
     const postData = {
       type: "reservations_new",
       title: hotelName || "",
@@ -605,7 +610,7 @@ export default function Cart() {
       field_checkin: checkInDate ? formatDate(checkInDate) : "",
       field_checkout: checkOutDate ? formatDate(checkOutDate) : "",
     };
-  
+
     axios
       .post("http://165.227.127.224/api/create-booking", postData, {
         headers: {
@@ -614,13 +619,13 @@ export default function Cart() {
       })
       .then(function (response) {
         console.log("Success:", response.data);
-        console.log("postData:", postData); 
-        toast.success("Booking created successfully"); 
+        console.log("postData:", postData);
+        toast.success("Booking created successfully");
         navigate("/bookingconfirm");
       })
       .catch(function (error) {
         console.error("Error:", error);
-        toast.error("Failed to create booking"); 
+        toast.error("Failed to create booking");
       });
   };
 
@@ -641,6 +646,7 @@ export default function Cart() {
   // Local state to hold the input values
   const [localFirstName, setLocalFirstName] = useState(firstName || "");
   const [localLastName, setLocalLastName] = useState(lastName || "");
+  const [isWarningShown, setIsWarningShown] = useState(false);
 
   // Function to handle changes in the first name field
   const handleFirstNameChange = (event) => {
@@ -648,6 +654,7 @@ export default function Cart() {
     setLocalFirstName(value);
     // Dispatch action to update first name in Redux
     dispatch(setFirstName(value));
+    setIsWarningShown(false);
   };
 
   // Function to handle changes in the last name field
@@ -656,7 +663,9 @@ export default function Cart() {
     setLocalLastName(value);
     // Dispatch action to update last name in Redux
     dispatch(setLastName(value));
+    setIsWarningShown(false);
   };
+
   return (
     <div className="container-fluid flex flex-col justify-center items-center">
       <Navbar />
@@ -809,12 +818,22 @@ export default function Cart() {
                 sx={{
                   width: "50%",
                   height: "2rem",
+                  borderColor: localFirstName ? "initial" : "red",
                 }}
                 value={localFirstName}
                 onChange={handleFirstNameChange}
+                InputProps={{
+                  endAdornment: isWarningShown && !localFirstName && (
+                    <p className="w-full" style={{ color: "red", margin: 0 }}>
+                      First name is required!
+                    </p>
+                  ),
+                }}
               />
+
               <TextField
                 id="last-name"
+                required
                 label="Last Name*"
                 variant="outlined"
                 sx={{
@@ -823,6 +842,13 @@ export default function Cart() {
                 }}
                 value={localLastName}
                 onChange={handleLastNameChange}
+                InputProps={{
+                  endAdornment: isWarningShown && !localLastName && (
+                    <p className="w-full" style={{ color: "red", margin: 0 }}>
+                      Last name is required!
+                    </p>
+                  ),
+                }}
               />
             </span>
             <span className="flex flex-row mt-3 py-5">
