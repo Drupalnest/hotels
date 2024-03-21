@@ -28,7 +28,7 @@ const steps = [
   "Create an ad",
 ];
  
-export default function Cart() {
+export default function checkout() {
   const randomImage = "https://source.unsplash.com/?hotel,travel";
   return (
     <div className="container-fluid flex flex-col justify-center items-center">

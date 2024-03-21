@@ -59,7 +59,7 @@
 //   return (
 //     <div className="border-2 relative container-fluid px-32  flex flex-row z-50 ">
 //       <div className="w-9/12">
-//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-blue-800">
+//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-orange-800">
 //           Save big on your next hotel
 //         </p>
 //         <div className=" space-y-4 border shadow-2xl rounded-3xl p-3 ">
@@ -67,19 +67,19 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2 border-2 rounded-full p-1 bg-gray-100 ">
-//                 <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 onClick={handleClick}
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat  leading-7 text-blue-800`}
+//                 } font-montserrat  leading-7 text-orange-800`}
 //               >
 //                 Hotels
 //               </div>
@@ -87,18 +87,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Flights
 //               </div>
@@ -106,18 +106,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Bundle & Save
 //               </div>
@@ -125,18 +125,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Cars
 //               </div>
@@ -144,18 +144,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Cruices
 //               </div>
@@ -167,18 +167,18 @@
 //               InputProps={{
 //                 startAdornment: (
 //                   <InputAdornment position="start">
-//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                   </InputAdornment>
 //                 ),
 //               }}
-//               className="w-full  border-2 rounded-lg border-blue-600"
+//               className="w-full  border-2 rounded-lg border-orange-600"
 //             />
 //           </div>
 
-//           <div className="flex flex-col sm:flex-row  justify-betwee text-blue-800 gap-3 ">
+//           <div className="flex flex-col sm:flex-row  justify-betwee text-orange-800 gap-3 ">
 //             <div className=" rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2">
 //               <div className="mr-2">
-//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div className="flex flex-col">
 //                 <div>
@@ -193,7 +193,7 @@
 //             <button className=" rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2">
 //               <div className="flex items-center">
 //                 <div className="mr-2">
-//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                 </div>
 //                 <div className="">
 //                   <p>2 Adults, 1 Room</p>
@@ -234,8 +234,8 @@
 //               </div>
 //             </div>
 
-//             <button className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2">
-//               <div className=" text-blue-800 font-bold flex items-center justify-center">
+//             <button className="bg-orange-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2">
+//               <div className=" text-orange-800 font-bold flex items-center justify-center">
 //                 <p className="text-white">Find Your Hotel</p>
 //               </div>
 //             </button>
@@ -248,7 +248,7 @@
 //             </div>
 //           </div>
 
-//           <div className="flex justify-center text-sm font-bold text-blue-600 ">
+//           <div className="flex justify-center text-sm font-bold text-orange-600 ">
 //             <a>Book all of your hotels at once and save up to $625</a>
 //           </div>
 //         </div>
@@ -601,7 +601,7 @@
 //   return (
 //     <div className=" relative container-fluid px-32  flex flex-row z-50 ">
 //       <div className="w-9/12">
-//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-blue-800">
+//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-orange-800">
 //           Save big on your next hotel
 //         </p>
 //         <div className=" space-y-4 border shadow-2xl rounded-3xl p-3 ">
@@ -609,19 +609,19 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2 border-2 rounded-full p-1 bg-gray-100 ">
-//                 <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 onClick={handleClick}
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat  leading-7 text-blue-800`}
+//                 } font-montserrat  leading-7 text-orange-800`}
 //               >
 //                 Hotels
 //               </div>
@@ -629,18 +629,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Flights
 //               </div>
@@ -648,18 +648,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Bundle & Save
 //               </div>
@@ -667,18 +667,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Cars
 //               </div>
@@ -686,18 +686,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Cruices
 //               </div>
@@ -711,11 +711,11 @@
 //               InputProps={{
 //                 startAdornment: (
 //                   <InputAdornment position="start">
-//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                   </InputAdornment>
 //                 ),
 //               }}
-//               className="w-full  border-2 rounded-lg border-blue-600"
+//               className="w-full  border-2 rounded-lg border-orange-600"
 //             />
 
 //             {searchTerm && (
@@ -738,14 +738,14 @@
 //             )}
 //           </div>
 
-//           <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
+//           <div className="flex flex-col sm:flex-row  justify-between text-orange-800 gap-3 ">
 //             <div
 //               ref={dropdownRef}
 //               onClick={handleDayPickerToggle}
 //               className=" relative  rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2  "
 //             >
 //               <div className="mr-2">
-//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div className="flex flex-col">
 //                 <div>
@@ -773,7 +773,7 @@
 //                     endDate={dateRange[1]}
 //                     selectsRange
 //                     placeholderText="Check-in Check-out"
-//                     className="  focus:outline-none focus:border-blue-500"
+//                     className="  focus:outline-none focus:border-orange-500"
 //                     modifiers={{
 //                       disabled: { before: today },
 //                     }}
@@ -789,7 +789,7 @@
 //             >
 //               <div className="flex items-center">
 //                 <div className="mr-2">
-//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                 </div>
 //                 <div className="">
 //                   <p>
@@ -896,9 +896,9 @@
 
 //             <button
 //               onClick={handleSearchClick}
-//               className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
+//               className="bg-orange-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
 //             >
-//               <div className=" text-blue-800 font-bold flex items-center justify-center">
+//               <div className=" text-orange-800 font-bold flex items-center justify-center">
 //                 <p className="text-white">Find Your Hotel</p>
 //               </div>
 //             </button>
@@ -911,7 +911,7 @@
 //             </div>
 //           </div>
 
-//           <div className="flex justify-center text-sm font-bold text-blue-600 ">
+//           <div className="flex justify-center text-sm font-bold text-orange-600 ">
 //             <a>Book all of your hotels at once and save up to $625</a>
 //           </div>
 //         </div>
@@ -1266,7 +1266,7 @@
 //   return (
 //     <div className=" relative container-fluid px-32  flex flex-row z-50 ">
 //       <div className="w-9/12">
-//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-blue-800">
+//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-orange-800">
 //           Save big on your next hotel
 //         </p>
 //         <div className=" space-y-4 border shadow-2xl rounded-3xl p-3 ">
@@ -1274,19 +1274,19 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2 border-2 rounded-full p-1 bg-gray-100 ">
-//                 <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 onClick={handleClick}
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat  leading-7 text-blue-800`}
+//                 } font-montserrat  leading-7 text-orange-800`}
 //               >
 //                 Hotels
 //               </div>
@@ -1294,18 +1294,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Flights
 //               </div>
@@ -1313,18 +1313,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Bundle & Save
 //               </div>
@@ -1332,18 +1332,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Cars
 //               </div>
@@ -1351,18 +1351,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Cruices
 //               </div>
@@ -1376,11 +1376,11 @@
 //               InputProps={{
 //                 startAdornment: (
 //                   <InputAdornment position="start">
-//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                   </InputAdornment>
 //                 ),
 //               }}
-//               className="w-full  border-2 rounded-lg border-blue-600"
+//               className="w-full  border-2 rounded-lg border-orange-600"
 //             />
 
 //             {searchTerm && (
@@ -1403,14 +1403,14 @@
 //             )}
 //           </div>
 
-//           <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
+//           <div className="flex flex-col sm:flex-row  justify-between text-orange-800 gap-3 ">
 //             <div
 //               ref={dropdownRef}
 //               onClick={handleDayPickerToggle}
 //               className=" relative  rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2  "
 //             >
 //               <div className="mr-2">
-//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div className="flex flex-col">
 //                 <div>
@@ -1438,7 +1438,7 @@
 //                     endDate={dateRange[1]}
 //                     selectsRange
 //                     placeholderText="Check-in Check-out"
-//                     className="  focus:outline-none focus:border-blue-500"
+//                     className="  focus:outline-none focus:border-orange-500"
 //                     modifiers={{
 //                       disabled: { before: today },
 //                     }}
@@ -1454,7 +1454,7 @@
 //             >
 //               <div className="flex items-center">
 //                 <div className="mr-2">
-//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                 </div>
 //                 <div className="">
 //                   <p>
@@ -1561,9 +1561,9 @@
 
 //             <button
 //               onClick={handleSearchClick}
-//               className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
+//               className="bg-orange-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
 //             >
-//               <div className=" text-blue-800 font-bold flex items-center justify-center">
+//               <div className=" text-orange-800 font-bold flex items-center justify-center">
 //                 <p className="text-white">Find Your Hotel</p>
 //               </div>
 //             </button>
@@ -1576,7 +1576,7 @@
 //             </div>
 //           </div>
 
-//           <div className="flex justify-center text-sm font-bold text-blue-600 ">
+//           <div className="flex justify-center text-sm font-bold text-orange-600 ">
 //             <a>Book all of your hotels at once and save up to $625</a>
 //           </div>
 //         </div>
@@ -2022,7 +2022,7 @@
 //   return (
 //     <div className=" relative container-fluid px-32  flex flex-row z-50 ">
 //       <div className="w-9/12">
-//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-blue-800">
+//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-orange-800">
 //           Save big on your next hotel
 //         </p>
 //         <div className=" space-y-4 border shadow-2xl rounded-3xl p-3 ">
@@ -2030,19 +2030,19 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2 border-2 rounded-full p-1 bg-gray-100 ">
-//                 <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 onClick={handleClick}
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat  leading-7 text-blue-800`}
+//                 } font-montserrat  leading-7 text-orange-800`}
 //               >
 //                 Hotels
 //               </div>
@@ -2050,18 +2050,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Flights
 //               </div>
@@ -2069,18 +2069,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Bundle & Save
 //               </div>
@@ -2088,18 +2088,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Cars
 //               </div>
@@ -2107,18 +2107,18 @@
 //             <div
 //               className={`flex p-2 ${
 //                 isActive
-//                   ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+//                   ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
 //                   : ""
 //               }`}
 //               onClick={handleClick}
 //             >
 //               <div className="mr-2">
-//                 <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div
 //                 className={`${
 //                   isActive ? "font-semibold text-md" : "hover:underline"
-//                 } font-montserrat text-md leading-7 text-blue-800`}
+//                 } font-montserrat text-md leading-7 text-orange-800`}
 //               >
 //                 Cruices
 //               </div>
@@ -2135,11 +2135,11 @@
 //               InputProps={{
 //                 startAdornment: (
 //                   <InputAdornment position="start">
-//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                   </InputAdornment>
 //                 ),
 //               }}
-//               className="w-full  border-2 rounded-lg border-blue-600"
+//               className="w-full  border-2 rounded-lg border-orange-600"
 //             />
 
 //             {searchTerm && (
@@ -2169,14 +2169,14 @@
 //             )}
 //           </div>
 
-//           <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
+//           <div className="flex flex-col sm:flex-row  justify-between text-orange-800 gap-3 ">
 //             <div
 //               ref={dropdownRef}
 //               onClick={handleDayPickerToggle}
 //               className=" relative  rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2  "
 //             >
 //               <div className="mr-2">
-//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div className="flex flex-col">
 //                 <div>
@@ -2204,7 +2204,7 @@
 //                     endDate={dateRange[1]}
 //                     selectsRange
 //                     placeholderText="Check-in Check-out"
-//                     className="  focus:outline-none focus:border-blue-500"
+//                     className="  focus:outline-none focus:border-orange-500"
 //                     modifiers={{
 //                       disabled: { before: today },
 //                     }}
@@ -2220,7 +2220,7 @@
 //             >
 //               <div className="flex items-center">
 //                 <div className="mr-2">
-//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                 </div>
 //                 <div className="">
 //                   <p>
@@ -2327,9 +2327,9 @@
 
 //             <button
 //               onClick={handleSearchClick}
-//               className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
+//               className="bg-orange-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
 //             >
-//               <div className=" text-blue-800 font-bold flex items-center justify-center">
+//               <div className=" text-orange-800 font-bold flex items-center justify-center">
 //                 <p className="text-white">Find Your Hotel</p>
 //               </div>
 //             </button>
@@ -2342,7 +2342,7 @@
 //             </div>
 //           </div>
 
-//           <div className="flex justify-center text-sm font-bold text-blue-600 ">
+//           <div className="flex justify-center text-sm font-bold text-orange-600 ">
 //             <a>Book all of your hotels at once and save up to $625</a>
 //           </div>
 //         </div>
@@ -2925,7 +2925,7 @@
 //   return (
 //     <div className=" relative container-fluid px-32  flex flex-row z-50 ">
 //       <div className="w-9/12">
-//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-blue-800">
+//         <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-orange-800">
 //           Save big on your next hotel
 //         </p>
 //         <div className=" space-y-4 border shadow-2xl rounded-3xl p-3 ">
@@ -2941,11 +2941,11 @@
 //               InputProps={{
 //                 startAdornment: (
 //                   <InputAdornment position="start">
-//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                     <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                   </InputAdornment>
 //                 ),
 //               }}
-//               className="w-full  border-2 rounded-lg border-blue-600"
+//               className="w-full  border-2 rounded-lg border-orange-600"
 //             />
 
 //             {isDropdownserachBoxOpen && searchTerm && (
@@ -3030,14 +3030,14 @@
 //             )}
 //           </div>
 
-//           <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
+//           <div className="flex flex-col sm:flex-row  justify-between text-orange-800 gap-3 ">
 //             {/* <div
 //               ref={dropdownRef}
 //               onClick={handleDayPickerToggle}
 //               className=" relative  rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2  "
 //             >
 //               <div className="mr-2">
-//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div className="flex flex-col">
 //                 <div>
@@ -3065,7 +3065,7 @@
 //                     endDate={dateRange[1]}
 //                     selectsRange
 //                     placeholderText="Check-in Check-out"
-//                     className="  focus:outline-none focus:border-blue-500"
+//                     className="  focus:outline-none focus:border-orange-500"
 //                     modifiers={{
 //                       disabled: { before: today },
 //                     }}
@@ -3080,7 +3080,7 @@
 //               className="relative rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2"
 //             >
 //               <div className="mr-2">
-//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                 <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //               </div>
 //               <div className="flex flex-col">
 //                 <div>
@@ -3108,7 +3108,7 @@
 //                     endDate={dateRange[1]}
 //                     selectsRange
 //                     placeholderText="Check-in Check-out"
-//                     className="focus:outline-none focus:border-blue-500"
+//                     className="focus:outline-none focus:border-orange-500"
 //                     modifiers={{
 //                       disabled: { before: today },
 //                     }}
@@ -3124,7 +3124,7 @@
 //             >
 //               <div className="flex items-center">
 //                 <div className="mr-2">
-//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+//                   <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
 //                 </div>
 //                 <div className="">
 //                   <p>
@@ -3231,9 +3231,9 @@
 
 //             <button
 //               onClick={handleSearchClick}
-//               className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
+//               className="bg-orange-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
 //             >
-//               <div className=" text-blue-800 font-bold flex items-center justify-center">
+//               <div className=" text-orange-800 font-bold flex items-center justify-center">
 //                 <p className="text-white">Find Your Hotel</p>
 //               </div>
 //             </button>
@@ -3246,7 +3246,7 @@
 //             </div>
 //           </div>
 
-//           <div className="flex justify-center text-sm font-bold text-blue-600 ">
+//           <div className="flex justify-center text-sm font-bold text-orange-600 ">
 //             <a>Book all of your hotels at once and save up to $625</a>
 //           </div>
 //         </div>
@@ -3556,7 +3556,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   return (
     <div className=" relative container-fluid px-32  flex flex-row z-50 ">
       <div className="w-9/12">
-        <p className="m-3 font-montserrat font-semibold text-3xl leading-10 text-blue-800">
+        <p className="m-3 font-montserrat font-semibold text-3xl leading-10 ">
           Save big on your next hotel
         </p>
         <div className=" space-y-4 border shadow-2xl rounded-3xl p-3 ">
@@ -3573,18 +3573,18 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+                    <SearchIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
                   </InputAdornment>
                 ),
               }}
-              className="w-full  border-2 rounded-lg border-blue-600"
+              className="w-full  border-2 rounded-lg border-orange-600"
             />
 
             {isDropdownserachBoxOpen && searchTerm && (
               <div className="z-50 bg-white w-full absolute top-full left-0 shadow  mt-2 h-56 overflow-y-auto border border-gray-300 rounded p-2 ">
                 <div className="py-3 px-1 flex flex-row gap-2 hover:bg-slate-100  rounded-2xl">
                   {/* <MyLocationIcon onClick={() => initMap()} /> */}
-                  <LiveLocation allData={allData} />
+                  {/* <LiveLocation allData={allData} /> */}
                   {/* <p>Use current location</p> */}
                 </div>
 
@@ -3628,14 +3628,14 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
             )}
           </div>
 
-          <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
+          <div className="flex flex-col sm:flex-row  justify-between text-orange-800 gap-3 ">
             <div
               ref={dropdownRef}
               onClick={handleDayPickerToggle}
               className="relative rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2"
             >
               <div className="mr-2">
-                <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+                <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
               </div>
               <div className="flex flex-col">
                 <div>
@@ -3663,7 +3663,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
                     endDate={dateRange[1]}
                     selectsRange
                     placeholderText="Check-in Check-out"
-                    className="focus:outline-none focus:border-blue-500"
+                    className="focus:outline-none focus:border-orange-500"
                     modifiers={{
                       disabled: { before: today },
                     }}
@@ -3679,7 +3679,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
             >
               <div className="flex items-center">
                 <div className="mr-2">
-                  <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+                  <PersonIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
                 </div>
                 <div className="">
                   <p>
@@ -3786,9 +3786,9 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
 
             <button
               onClick={handleSearchClick}
-              className="bg-blue-800 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
+              className="bg-orange-600 rounded-xl p-2 items-center border-2 w-full sm:w-1/2"
             >
-              <div className=" text-blue-800 font-bold flex items-center justify-center">
+              <div className=" bg-orange-600 font-bold flex items-center justify-center">
                 <p className="text-white">Find Your Hotel</p>
               </div>
             </button>
@@ -3801,7 +3801,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
             </div>
           </div>
 
-          <div className="flex justify-center text-sm font-bold text-blue-600 ">
+          <div className="flex justify-center text-sm font-bold text-orange-600 ">
             <a>Book all of your hotels at once and save up to $625</a>
           </div>
         </div>

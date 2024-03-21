@@ -15,19 +15,19 @@ const ListBar = () => {
       <div
         className={`flex p-2 ${
           isActive
-            ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+            ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
             : ""
         }`}
         onClick={handleClick}
       >
         <div className="mr-2 border-2 rounded-full p-1 bg-gray-100 ">
-          <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+          <ApartmentIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
         </div>
         <div
           onClick={handleClick}
           className={`${
             isActive ? "font-semibold text-md" : "hover:underline"
-          } font-montserrat  leading-7 text-blue-800`}
+          } font-montserrat  leading-7 text-orange-800`}
         >
           Hotels
         </div>
@@ -35,18 +35,18 @@ const ListBar = () => {
       <div
         className={`flex p-2 ${
           isActive
-            ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+            ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
             : ""
         }`}
         onClick={handleClick}
       >
         <div className="mr-2">
-          <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+          <FlightIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
         </div>
         <div
           className={`${
             isActive ? "font-semibold text-md" : "hover:underline"
-          } font-montserrat text-md leading-7 text-blue-800`}
+          } font-montserrat text-md leading-7 text-orange-800`}
         >
           Flights
         </div>
@@ -54,18 +54,18 @@ const ListBar = () => {
       <div
         className={`flex p-2 ${
           isActive
-            ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+            ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
             : ""
         }`}
         onClick={handleClick}
       >
         <div className="mr-2">
-          <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+          <LuggageIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
         </div>
         <div
           className={`${
             isActive ? "font-semibold text-md" : "hover:underline"
-          } font-montserrat text-md leading-7 text-blue-800`}
+          } font-montserrat text-md leading-7 text-orange-800`}
         >
           Bundle & Save
         </div>
@@ -73,18 +73,18 @@ const ListBar = () => {
       <div
         className={`flex p-2 ${
           isActive
-            ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+            ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
             : ""
         }`}
         onClick={handleClick}
       >
         <div className="mr-2">
-          <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+          <TimeToLeaveIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
         </div>
         <div
           className={`${
             isActive ? "font-semibold text-md" : "hover:underline"
-          } font-montserrat text-md leading-7 text-blue-800`}
+          } font-montserrat text-md leading-7 text-orange-800`}
         >
           Cars
         </div>
@@ -92,18 +92,18 @@ const ListBar = () => {
       <div
         className={`flex p-2 ${
           isActive
-            ? "active:bg-blue-200 border-blue-600 active:rounded-3xl active:border-2"
+            ? "active:bg-orange-200 border-orange-600 active:rounded-3xl active:border-2"
             : ""
         }`}
         onClick={handleClick}
       >
         <div className="mr-2">
-          <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-blue-800" />
+          <DirectionsBoatIcon className="font-montserrat font-bold text-2xl leading-10 text-red-500" />
         </div>
         <div
           className={`${
             isActive ? "font-semibold text-md" : "hover:underline"
-          } font-montserrat text-md leading-7 text-blue-800`}
+          } font-montserrat text-md leading-7 text-orange-800`}
         >
           Cruices
         </div>

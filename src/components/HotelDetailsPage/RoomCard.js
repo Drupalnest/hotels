@@ -22,7 +22,7 @@ const RoomCard = ({ imageIndex, rooms }) => {
   console.log("rooms", rooms);
 
   const handleButtonClick = () => {
-    navigate("/cart");
+    navigate("/checkout");
   };
 
   const {

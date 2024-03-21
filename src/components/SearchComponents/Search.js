@@ -953,7 +953,7 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
         <div className="z-50 bg-white w-full absolute top-full left-0 shadow  mt-2 h-56 overflow-y-auto border border-gray-300 rounded p-2 ">
           <div className="py-3 px-1 flex flex-row gap-2 hover:bg-slate-100  rounded-2xl">
             {/* <MyLocationIcon onClick={() => initMap()} /> */}
-            <LiveLocation allData={allData} />
+            {/* <LiveLocation allData={allData} /> */}
             {/* <p>Use current location</p> */}
           </div>
           {/* {filteredData.map((item) => (
