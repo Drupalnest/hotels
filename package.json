@@ -26,7 +26,6 @@
     "@mui/material": "^5.15.10",
     "@mui/system": "^5.15.9",
     "@okta/okta-auth-js": "^7.5.1",
-    "@reach/combobox": "^0.18.0",
     "@react-google-maps/api": "^2.19.3",
     "@reduxjs/toolkit": "^2.2.1",
     "autoprefixer": "^10.4.17",
@@ -74,8 +73,7 @@
     "transliteration": "^2.3.5",
     "use-places-autocomplete": "^4.0.1"
   },
-
-  
+ 
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
