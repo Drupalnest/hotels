@@ -1569,8 +1569,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import WifiIcon from "@mui/icons-material/Wifi";
-import PetsIcon from "@mui/icons-material/Pets";
+// import WifiIcon from "@mui/icons-material/Wifi";
+// import PetsIcon from "@mui/icons-material/Pets";
 import VapeFreeIcon from "@mui/icons-material/VapeFree";
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import TextField from "@mui/material/TextField";
@@ -1594,12 +1594,44 @@ import Navbar from "../components/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { setCheckInDate, setCheckOutDate } from "../redux/actions";
 import RoomCard from "../components/HotelDetailsPage/RoomCard";
-
+import {
+  Wifi as WifiIcon,
+  Pets as PetsIcon,
+  AcUnit as AcUnitIcon,
+  LocalParking as LocalParkingIcon,
+  BusinessCenter as BusinessCenterIcon,
+  Tv as TvIcon,
+  Pool as PoolIcon,
+  FitnessCenter as FitnessCenterIcon,
+  Refrigerator as RefrigeratorIcon,
+  Microwave as MicrowaveIcon,
+} from "@mui/icons-material";
 import { setCheckOutData } from "../redux/actions";
 
 const HotelDetails = ({ data }) => {
   // const hotel = data.allHotel.edges?.[0]?.node;
   // console.log("hotel", hotel);
+
+  // Define a mapping of amenities to icons
+  const amenityIconMap = {
+    "Accessibility Features": <AcUnitIcon />,
+    "Air Conditioning": <AcUnitIcon />,
+    "Pet Friendly": <PetsIcon />,
+    "Wireless Internet": <WifiIcon />,
+    "Parking": <LocalParkingIcon />,
+    "Business Center": <BusinessCenterIcon />,
+    "Flat Screen TV": <TvIcon />,
+    "Swimming Pool": <PoolIcon />,
+    "On Site Fitness Center": <FitnessCenterIcon />,
+    "Refrigerator": <RefrigeratorIcon />,
+    'Microwave': <MicrowaveIcon />,
+    // Add more amenities and their corresponding icons as needed
+  };
+
+  // Define a default icon or text
+  const DefaultIcon = <span>No Icon</span>;
+
+ 
 
   const hotel = data.specificHotel.edges?.[0]?.node;
 
@@ -1679,6 +1711,15 @@ const HotelDetails = ({ data }) => {
       console.error("Invalid or undefined data structure:", fetchedData);
     }
   };
+
+
+
+
+  const amenityList = hotel.amenities.map((amenity) => amenity.name);
+
+  const amenityIcons = hotel.amenities.map(
+    (amenity) => amenityIconMap[amenity.name] || DefaultIcon
+  );
 
   return (
     <div className="py-2 container-fluid flex flex-col justify-center">
@@ -1931,6 +1972,7 @@ const HotelDetails = ({ data }) => {
                 <h1 className="text-xl sm:text-2xl font-bold mb-5">
                   Top Amenities
                 </h1>
+                               
                 <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-3 gap-4">
                   {hotel.amenities.map((amenity) => (
                     <div
@@ -1942,6 +1984,8 @@ const HotelDetails = ({ data }) => {
                     </div>
                   ))}
                 </div>
+              
+
                 <p className="mt-5 text-blue-500 underline md:text-center sm:text-center">
                   Show All Amenities
                 </p>
@@ -1984,7 +2028,7 @@ const HotelDetails = ({ data }) => {
             <div className="">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[...Array(6)].map((_, index) => (
-                  <RoomCard key={index} imageIndex={index}  rooms={hotel} />
+                  <RoomCard key={index} imageIndex={index} rooms={hotel} />
                 ))}
               </div>
             </div>
@@ -2033,153 +2077,7 @@ const HotelDetails = ({ data }) => {
   );
 };
 
-// export const query = graphql`
-//   query MyQuery($id: String!) {
-//     allHotel(filter: { id: { eq: $id } }) {
-//       edges {
-//         node {
-//           id
-//           name
-//           phone
-//           hotel_code
-//           rlh_status
-//           description
-//           address {
-//             address_line1
-//             locality
-//             administrative_area
-//             postal_code
-//             country_code
-//           }
-//           amenities {
-//             machine_name
-//             name
-//           }
-//           lat_lon {
-//             bottom
-//             geo_type
-//             geohash
-//             lat
-//             latlon
-//             left
-//             lon
-//             right
-//             top
-//             value
-//           }
-//           address {
-//             address_line1
-//             locality
-//             postal_code
-//             country_code
-//           }
-//           email
-//           description
-//           crs_code
-//           crs_name
-//           address {
-//             address_line1
-//             country_code
-//             administrative_area
-//             locality
-//             postal_code
-//           }
-//           amenities {
-//             machine_name
-//             name
-//           }
-//         }
-//       }
-//     }
 
-//     allHotel {
-//       nodes {
-//         id
-//         name
-//         phone
-//         hotel_code
-//         rlh_status
-//         description
-//         address {
-//           address_line1
-//           locality
-//           administrative_area
-//           postal_code
-//           country_code
-//         }
-//         amenities {
-//           machine_name
-//           name
-//         }
-//         lat_lon {
-//           bottom
-//           geo_type
-//           geohash
-//           lat
-//           latlon
-//           left
-//           lon
-//           right
-//           top
-//           value
-//         }
-//         address {
-//           address_line1
-//           locality
-//           postal_code
-//           country_code
-//         }
-//         email
-//         description
-//         crs_code
-//         crs_name
-//         address {
-//           address_line1
-//           country_code
-//           administrative_area
-//           locality
-//           postal_code
-//         }
-//         amenities {
-//           machine_name
-//           name
-//         }
-//       }
-//     }
-
-//     allLocationAirport {
-//       nodes {
-//         id
-//         name
-//         field_address {
-//           locality
-//           country_code
-//         }
-//       }
-//     }
-//     allLocationCity {
-//       nodes {
-//         id
-//         name
-//         population
-//       }
-//     }
-//     allLocationCruise {
-//       nodes {
-//         id
-//         google_place_id
-//         name
-//       }
-//     }
-//     allLocationPointOfInterest {
-//       nodes {
-//         id
-//         name
-//         google_place_id
-//       }
-//     }
-//   }
-// `;
 
 export const query = graphql`
   query MyQuery($id: String!) {
