@@ -622,8 +622,6 @@
 
 // export default HotelDetailsComponent;
 
-
-
 // HotelDetailsComponent.js
 import React, { useEffect } from "react";
 import { Link } from "gatsby";
@@ -638,8 +636,12 @@ const HotelDetailsComponent = ({ hotels }) => {
       </div>
     );
   }
+  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+  console.log("roomData", roomData);
 
-  
+  if (!roomData) {
+    return <p>No room data available</p>;
+  }
 
   return (
     <div className="py-3 flex flex-col gap-3 shadow">
@@ -663,6 +665,9 @@ const HotelDetailsComponent = ({ hotels }) => {
             <div>
               <span>
                 <p className="text-lg font-bold">{hotel.name}</p>
+              </span>
+              <span>
+                <p className="text-md ">Room type: {roomData.room_type}</p>
               </span>
               <span>
                 {hotel.address && (
@@ -702,8 +707,10 @@ const HotelDetailsComponent = ({ hotels }) => {
           <div className="p-3 flex flex-col justify-end w-1/4">
             <div>
               <div className="flex">
-                <p className=" text-blue-600  font-bold">₹</p>
-                <p className="text-4xl font-bold text-blue-600 ">11533</p>
+                <p className=" text-blue-600  font-bold">$</p>
+                <p className="text-4xl font-bold text-blue-600 ">
+                 {roomData.room_price}
+                </p>
               </div>
               <p>price per night</p>
               <button className=" text-sm rounded-3xl px-2 py-2 text-white bg-green-600 font-bold">

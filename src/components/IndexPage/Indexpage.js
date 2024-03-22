@@ -3269,7 +3269,7 @@
 // export default Indexpage;
 
 import React, { useEffect, useRef, useState } from "react";
-
+import axios from "axios";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
@@ -3370,49 +3370,126 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
     return matchesSearch;
   });
 
+  // // Handle click on hotel item
+  // const handleHotelClick = (hotel) => {
+  //   dispatch(setSelectedHotel(hotel));
+  //   setIsDropdownserachBoxOpen(false);
+
+  //   // Fetch detailed information for the selected hotel (replace with your logic)
+  //   const details = fetchHotelDetails(
+  //     hotel.id,
+  //     hotel.Name,
+  //     hotel.address ? hotel.address.address_line1 : "Address not available"
+  //   );
+
+  //   // Dispatch the action to store hotel details in Redux
+  //   dispatch(setHotelDetails(details));
+
+  //   // Log filtered hotels based on locality
+  //   const localityName =
+  //     hotel.address && hotel.address.locality
+  //       ? hotel.address.locality.toLowerCase()
+  //       : "";
+  //   dispatch(setSearchTerm(localityName));
+
+  //   const filteredHotels = allData.filter(
+  //     (item) =>
+  //       item.field_rooms &&
+  //       item.field_rooms[0] &&
+  //       item.field_rooms[0].drupal_internal__target_id &&
+  //       item.address &&
+  //       (item.address.locality
+  //         .toLowerCase()
+  //         .includes(localityName.toLowerCase()) ||
+  //         item.address.postal_code
+  //           .toLowerCase()
+  //           .includes(localityName.toLowerCase()))
+  //   );
+
+  //   console.log(
+  //     "Filtered Hotels based on Locality or Postal Code:",
+  //     filteredHotels
+  //   );
+  //   dispatch(setFilteredHotels(filteredHotels));
+  //   sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+
+    
+  // };
+
+
   // Handle click on hotel item
-  const handleHotelClick = (hotel) => {
-    dispatch(setSelectedHotel(hotel));
-    setIsDropdownserachBoxOpen(false);
-
-    // Fetch detailed information for the selected hotel (replace with your logic)
-    const details = fetchHotelDetails(
-      hotel.id,
-      hotel.Name,
-      hotel.address ? hotel.address.address_line1 : "Address not available"
-    );
-
-    // Dispatch the action to store hotel details in Redux
-    dispatch(setHotelDetails(details));
-
-    // Log filtered hotels based on locality
-    const localityName =
-      hotel.address && hotel.address.locality
-        ? hotel.address.locality.toLowerCase()
-        : "";
-    dispatch(setSearchTerm(localityName));
-
-    const filteredHotels = allData.filter(
-      (item) =>
-        item.field_rooms &&
-        item.field_rooms[0] &&
-        item.field_rooms[0].drupal_internal__target_id &&
-        item.address &&
-        (item.address.locality
-          .toLowerCase()
-          .includes(localityName.toLowerCase()) ||
-          item.address.postal_code
+  const handleHotelClick = async (hotel) => {
+    try {
+      dispatch(setSelectedHotel(hotel));
+      setIsDropdownserachBoxOpen(false);
+  
+      // Fetch detailed information for the selected hotel (replace with your logic)
+      const details = fetchHotelDetails(
+        hotel.id,
+        hotel.drupal_id,
+        hotel.Name,
+        hotel.address ? hotel.address.address_line1 : "Address not available"
+      );
+  
+      // Dispatch the action to store hotel details in Redux
+      dispatch(setHotelDetails(details));
+  
+      // Log filtered hotels based on locality
+      const localityName =
+        hotel.address && hotel.address.locality
+          ? hotel.address.locality.toLowerCase()
+          : "";
+      dispatch(setSearchTerm(localityName));
+  
+      const filteredHotels = allData.filter(
+        (item) =>
+          item.field_rooms &&
+          item.field_rooms[0] &&
+          item.field_rooms[0].drupal_internal__target_id &&
+          item.address &&
+          (item.address.locality
             .toLowerCase()
-            .includes(localityName.toLowerCase()))
-    );
-
-    console.log(
-      "Filtered Hotels based on Locality or Postal Code:",
-      filteredHotels
-    );
-    dispatch(setFilteredHotels(filteredHotels));
-    sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+            .includes(localityName.toLowerCase()) ||
+            item.address.postal_code
+              .toLowerCase()
+              .includes(localityName.toLowerCase()))
+      );
+  
+      console.log(
+        "Filtered Hotels based on Locality or Postal Code:",
+        filteredHotels
+      );
+      dispatch(setFilteredHotels(filteredHotels));
+      sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+  
+      // Fetch room data for the selected hotel and store in sessionStorage
+      const roomData = await fetchHotelRoomData(hotel.drupal_id);
+      sessionStorage.setItem("roomData", JSON.stringify(roomData));
+    } catch (error) {
+      console.error('Error handling hotel click:', error);
+    }
   };
+  
+  const fetchHotelRoomData = async (hotelId) => {
+    try {
+      const response = await axios.get(`http://165.227.127.224/jsonapi/hotels/${hotelId}`);
+      return response.data.data.relationships.field_rooms.room;
+    } catch (error) {
+      console.error('Error fetching room data:', error);
+      return null; // Return null or handle the error as needed
+    }
+  };
+  
+  
+  
+  
+  
+  
+
+
+
+
+
 
   const checkInDate = useSelector((state) => state.date.checkInDate);
   const checkOutDate = useSelector((state) => state.date.checkOutDate);

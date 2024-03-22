@@ -3,7 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import room1 from "../../assets/room1.jpg";
 const BookingConfirmation = ({ bookingDetails, success }) => {
   console.log("bookingDetails", bookingDetails);
-  const { hotelName, roomType, address, amenities } = bookingDetails;
+  const { hotelName, roomType, address, amenities,totalPrice } = bookingDetails;
 
   return (
     <div>

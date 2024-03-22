@@ -1618,20 +1618,18 @@ const HotelDetails = ({ data }) => {
     "Air Conditioning": <AcUnitIcon />,
     "Pet Friendly": <PetsIcon />,
     "Wireless Internet": <WifiIcon />,
-    "Parking": <LocalParkingIcon />,
+    Parking: <LocalParkingIcon />,
     "Business Center": <BusinessCenterIcon />,
     "Flat Screen TV": <TvIcon />,
     "Swimming Pool": <PoolIcon />,
     "On Site Fitness Center": <FitnessCenterIcon />,
-    "Refrigerator": <RefrigeratorIcon />,
-    'Microwave': <MicrowaveIcon />,
+    Refrigerator: <RefrigeratorIcon />,
+    Microwave: <MicrowaveIcon />,
     // Add more amenities and their corresponding icons as needed
   };
 
   // Define a default icon or text
   const DefaultIcon = <span>No Icon</span>;
-
- 
 
   const hotel = data.specificHotel.edges?.[0]?.node;
 
@@ -1712,14 +1710,18 @@ const HotelDetails = ({ data }) => {
     }
   };
 
-
-
-
   const amenityList = hotel.amenities.map((amenity) => amenity.name);
 
   const amenityIcons = hotel.amenities.map(
     (amenity) => amenityIconMap[amenity.name] || DefaultIcon
   );
+
+  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+  console.log("roomData", roomData);
+
+  if (!roomData) {
+    return <p>No room data available</p>;
+  }
 
   return (
     <div className="py-2 container-fluid flex flex-col justify-center">
@@ -1844,8 +1846,7 @@ const HotelDetails = ({ data }) => {
 
           <div className="w-full md:w-4/12 text-left md:text-right">
             <h1 className="text-2xl md:text-4xl font-bold mb-2 text-blue-700">
-              {/* ${hotel.price} */}
-              ₹13075
+              {/* ${hotel.price} */}$ {roomData.room_price}
             </h1>
             <p className="text-sm md:text-base text-gray-600">
               Price per night
@@ -1972,7 +1973,7 @@ const HotelDetails = ({ data }) => {
                 <h1 className="text-xl sm:text-2xl font-bold mb-5">
                   Top Amenities
                 </h1>
-                               
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-3 gap-4">
                   {hotel.amenities.map((amenity) => (
                     <div
@@ -1984,7 +1985,6 @@ const HotelDetails = ({ data }) => {
                     </div>
                   ))}
                 </div>
-              
 
                 <p className="mt-5 text-blue-500 underline md:text-center sm:text-center">
                   Show All Amenities
@@ -2027,7 +2027,7 @@ const HotelDetails = ({ data }) => {
 
             <div className="">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[...Array(6)].map((_, index) => (
+                {[...Array(1)].map((_, index) => (
                   <RoomCard key={index} imageIndex={index} rooms={hotel} />
                 ))}
               </div>
@@ -2076,8 +2076,6 @@ const HotelDetails = ({ data }) => {
     </div>
   );
 };
-
-
 
 export const query = graphql`
   query MyQuery($id: String!) {

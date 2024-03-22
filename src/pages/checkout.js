@@ -677,6 +677,38 @@ export default function Cart() {
     }
   };
 
+  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+  console.log("roomData", roomData);
+
+  if (!roomData) {
+    return <p>No room data available</p>;
+  }
+
+  const roomPricePerNight = parseFloat(roomData.room_price); // Convert to float if necessary
+  const numberOfRooms = rooms; // Replace with actual number of rooms
+  const numberOfNights = nights; // Replace with actual number of nights
+
+  // Constants for taxes, discounts, and property fee
+  const taxPerRoom = 8;
+  const discountPerRoom = 1;
+  const propertyFeePerRoom = 5;
+
+  // Calculate subtotal before taxes and fees
+  const subtotal = roomPricePerNight * numberOfRooms * numberOfNights;
+  
+  const totalPay =
+    roomPricePerNight * numberOfRooms * numberOfNights + taxPerRoom;
+  // Calculate total taxes
+  const totalTaxes = taxPerRoom * numberOfRooms;
+
+  // Calculate total discounts
+  const totalDiscounts = discountPerRoom * numberOfRooms;
+
+  // Calculate total property fee
+  const totalPropertyFee = propertyFeePerRoom * numberOfRooms;
+  // Calculate total cost
+  const totalCost = subtotal + totalTaxes + totalPropertyFee - totalDiscounts;
+
   return (
     <div>
       {!hotelName || !addressLine1 || amenities.length === 0 ? (
@@ -1103,39 +1135,74 @@ export default function Cart() {
               <div className="p-3 m-3 border border-gray-500 rounded-2xl">
                 <span className="flex flex-row justify-between py-1">
                   <p>Price per night</p>
-                  <p>$340.55</p>
+                  <p>${roomPricePerNight}</p>
                 </span>
                 <span className="flex flex-row justify-between py-1">
-                  <p>1 room</p>
+                  <p>Number of rooms</p>
+                  <p>{numberOfRooms}</p>
                 </span>
                 <span className="flex flex-row justify-between py-1">
                   <p>Number of nights</p>
-                  <p>4</p>
+                  <p>{numberOfNights}</p>
                 </span>
                 <span className="flex flex-row justify-between py-1 border-b border-gray-500 ">
                   <p>Taxes and fees</p>
-                  <p>$224.69</p>
+                  <p>${totalTaxes}</p>
                 </span>
                 <span className="flex flex-row justify-between pt-4">
                   <p className="text-bold text-green-500">You pay today</p>
-                  <p>$1,586.89</p>
+                  <p>${totalPay}</p>
                 </span>
-                <span className="text-end border-b border-gray-500  ">
+                <span className="flex flex-row justify-between pt-4">
+                  <p>Total discounts</p>
+                  <p>${totalDiscounts}</p>
+                </span>
+                {/* <span className="text-end border-b border-gray-500  ">
                   <p className="text-blue">as low as $144/month</p>
-                </span>
-                <span className="flex flex-row justify-between">
+                </span> */}
+                {/* <span className="py-1 flex flex-row justify-between">
                   <p>You pay today</p>
                   <p>$1,586.89</p>
-                </span>
+                </span> */}
                 <span className="flex flex-row  justify-between border-b border-gray-500 py-3">
-                  <p>Property Fee*</p>
-                  <p>$100.00</p>
+                  <p>Total property fee</p>
+                  <p>${totalPropertyFee}</p>
                 </span>
                 <span className="flex flex-row justify-between border-b border-gray-500 py-3">
                   <p>Total Cost</p>
-                  <p>$1,686.89</p>
+                  <p>${totalCost.toFixed(2)}</p>
                 </span>
               </div>
+              {/* <div className="p-3 m-3 border border-gray-500 rounded-2xl">
+                <span className="flex flex-row justify-between py-1">
+                  <p>Price per night</p>
+                  <p>${roomPricePerNight}</p>
+                </span>
+                <span className="flex flex-row justify-between py-1">
+                  <p>Number of rooms</p>
+                  <p>{numberOfRooms}</p>
+                </span>
+                <span className="flex flex-row justify-between py-1">
+                  <p>Number of nights</p>
+                  <p>{numberOfNights}</p>
+                </span>
+                <span className="flex flex-row justify-between py-1 border-b border-gray-500 ">
+                  <p>Taxes and fees</p>
+                  <p>${totalTaxes}</p>
+                </span>
+                <span className="flex flex-row justify-between py-1">
+                  <p>Total discounts</p>
+                  <p>${totalDiscounts}</p>
+                </span>
+                <span className="flex flex-row justify-between py-1">
+                  <p>Total property fee</p>
+                  <p>${totalPropertyFee}</p>
+                </span>
+                <span className="flex flex-row justify-between py-1">
+                  <p className="text-bold text-green-500">Total cost</p>
+                  <p>${totalCost.toFixed(2)}</p>
+                </span>
+              </div> */}
               <div className="p-3 m-3 border border-gray-500 rounded-2xl">
                 <span className="flex flex-row justify-between">
                   <p>Have a promo code?</p>

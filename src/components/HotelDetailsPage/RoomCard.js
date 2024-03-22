@@ -86,6 +86,13 @@ const RoomCard = ({ imageIndex, rooms }) => {
     ],
   };
 
+  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+  console.log("roomData", roomData);
+
+  if (!roomData) {
+    return <p>No room data available</p>;
+  }
+
   return (
     <div className="mb-4">
       <div>
@@ -110,17 +117,19 @@ const RoomCard = ({ imageIndex, rooms }) => {
           // Use the actual image paths
           image={require(`../../assets/room${imageIndex + 1}.jpg`).default}
         />
+        <p className="p-2 text-sm font-semibold">{roomData.room_title}</p>
         <CardContent className="flex flex-col">
           <div className="flex items-center mb-2">
             <WifiIcon sx={{ color: green[500], marginRight: 1 }} />
             <p className="text-green-500">Free WIFI</p>
           </div>
           <p
-            className="mb-4 text-blue-500 cursor-pointer group hover:underline hover:font-semibold"
+            className="mb-2 text-blue-500 cursor-pointer group hover:underline hover:font-semibold"
             onClick={handleClickOpen}
           >
             View Room Details and Photos
           </p>
+          <span className="flex p-2  text-xl font-bold text-blue-600">$ {roomData.room_price}</span>
           <RoomDetails
             open={open}
             handleClose={handleClose}

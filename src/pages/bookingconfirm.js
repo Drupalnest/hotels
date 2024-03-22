@@ -45,10 +45,45 @@ const YourBookingComponent = () => {
   const firstName = useSelector((state) => state.firstName);
   const lastName = useSelector((state) => state.lastName);
 
+
+  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+  console.log("roomData", roomData);
+
+  if (!roomData) {
+    return <p>No room data available</p>;
+  }
+
+  const roomType=roomData.room_type
+
+  const roomPricePerNight = parseFloat(roomData.room_price); // Convert to float if necessary
+  const numberOfRooms = rooms; // Replace with actual number of rooms
+  const numberOfNights = nights; // Replace with actual number of nights
+
+  // Constants for taxes, discounts, and property fee
+  const taxPerRoom = 8;
+  const discountPerRoom = 1;
+  const propertyFeePerRoom = 5;
+
+  // Calculate subtotal before taxes and fees
+  const subtotal = roomPricePerNight * numberOfRooms * numberOfNights;
+  
+  const totalPay =
+    roomPricePerNight * numberOfRooms * numberOfNights + taxPerRoom;
+  // Calculate total taxes
+  const totalTaxes = taxPerRoom * numberOfRooms;
+
+  // Calculate total discounts
+  const totalDiscounts = discountPerRoom * numberOfRooms;
+
+  // Calculate total property fee
+  const totalPropertyFee = propertyFeePerRoom * numberOfRooms;
+  // Calculate total cost
+  const totalCost = subtotal + totalTaxes + totalPropertyFee - totalDiscounts;
+
   // Mock booking details (replace with actual data)
   const bookingDetails = {
     hotelName: hotelName,
-    roomType: 'Deluxe Room',
+    roomType: roomType,
     address:addressLine1,
     amenities:amenities,
     rooms:rooms,
@@ -56,7 +91,7 @@ const YourBookingComponent = () => {
     checkInDate: checkInDate,
     checkOutDate: checkOutDate,
     totalGuests: 2,
-    totalPrice: '$500.00',
+    totalPrice: totalCost,
   };
 
   return (
