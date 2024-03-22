@@ -3,7 +3,31 @@ import Navbar from "../Navbar/Navbar";
 import room1 from "../../assets/room1.jpg";
 const BookingConfirmation = ({ bookingDetails, success }) => {
   console.log("bookingDetails", bookingDetails);
-  const { hotelName, roomType, address, amenities,totalPrice } = bookingDetails;
+  const {
+    taxes,
+    hotelName,
+    subtotal,
+    rooms,
+    nights,
+    todayDate,
+    roomType,
+    totalTaxes,
+    address,
+    firstName,
+    lastName,
+    amenities,
+    totalPrice,
+    totalDiscounts
+  } = bookingDetails;
+
+
+  console.log("bookingDetails",bookingDetails)
+  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+  console.log("roomData", roomData);
+
+  if (!roomData) {
+    return <p>No room data available</p>;
+  }
 
   return (
     <div>
@@ -19,9 +43,7 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
           <div className="flex flex-row gap-3">
             <div className="border-2 w-3/4 ">
               <div className="p-3 bg-blue-500">
-                <p className="text-lg font-medium text-white">
-                  {hotelName}
-                </p>
+                <p className="text-lg font-medium text-white">{hotelName}</p>
               </div>
               <div className="flex flex-row border-2 ">
                 <div className="border-3  w-3/4">
@@ -90,7 +112,7 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                       <p className="text-sm  mb-2">Room Type</p>
                     </div>
                     <div className="flex flex-col w-2/4">
-                      <p className="text-sm  mb-2">{bookingDetails.roomType}</p>
+                      <p className="text-sm  mb-2">{roomType}</p>
                       <p className="text-sm mb-2">Hotel</p>
                     </div>
                   </div>
@@ -119,12 +141,14 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
               <div>
                 <div className="flex flex-col p-2 bg-blue-500">
                   <p className="text-white text-lg">Summary of Charges</p>
-                  <p className="text-white text-md">Total cost: $1664</p>
+                  <p className="text-white text-md">
+                    Total cost: ${totalPrice}
+                  </p>
                 </div>
                 <div className="p-2">
                   <div className="flex flex-row justify-between  ">
                     <p className="text-sm ">Purchase date</p>
-                    <p className="text-sm">July 1 2016</p>
+                    <p className="text-sm">{todayDate}</p>
                   </div>
                   <div className="flex flex-row justify-between  ">
                     <p className="text-sm">Payment method</p>
@@ -132,7 +156,9 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                   </div>
                   <div className="flex flex-row justify-between  ">
                     <p className="text-sm">Billing Name </p>
-                    <p className="text-sm text-start">Taraya</p>
+                    <p className="text-sm text-start">
+                      {firstName} {lastName}
+                    </p>
                   </div>
                   <div className="flex flex-row justify-between  ">
                     <p className="text-sm">Payment method</p>
@@ -142,29 +168,36 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                 <div className="p-2 mt-2">
                   <div className="flex flex-row justify-between ">
                     <p className="text-sm text-green-600">Room Price</p>
-                    <p className="text-sm text-green-600">$206</p>
+                    <p className="text-sm text-green-600">
+                      {roomData.room_price}
+                    </p>
                   </div>
                   <div className="flex flex-row justify-between ">
                     <p className="text-sm">Number of rooms</p>
-                    <p className="text-sm">1 room</p>
+                    <p className="text-sm">{rooms}</p>
                   </div>
                   <div className="flex flex-row justify-between ">
                     <p className="text-sm">Number of nights</p>
-                    <p className="text-sm">7 nights</p>
+                    <p className="text-sm">{nights}</p>
                   </div>
                 </div>
                 <div className="p-2 mt-2">
                   <div className="flex flex-row justify-between">
                     <p className="text-sm">Room Subtotal</p>
-                    <p className="text-sm">$1,447</p>
+                    <p className="text-sm">$ {subtotal}</p>
                   </div>
                   <div className="flex flex-row justify-between">
                     <p className="text-sm">Taxes</p>
-                    <p className="text-sm">$ 217</p>
+                    <p className="text-sm">$ {taxes}</p>
                   </div>
                   <div className="flex flex-row justify-between">
+                    <p className="text-sm text-green-600">Discount</p>
+                    <p className="text-sm text-green-600">$ {totalDiscounts}</p>
+                  </div>
+
+                  <div className="flex flex-row justify-between">
                     <p className="text-sm text-green-600">Total Cost</p>
-                    <p className="text-sm text-green-600">$ 1234</p>
+                    <p className="text-sm text-green-600">$ {totalPrice}</p>
                   </div>
                 </div>
                 <div className="p-2 mt-5">
@@ -189,16 +222,16 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                     <p className="font-bold mt-3">Give us a call</p>
                     <div>
                       <p className="text-sm">From United States?</p>
-                      <p className="text-sm">1800657444022</p>
+                      <p className="text-sm">18003657444022</p>
                     </div>
                     <div>
                       <p className="text-sm">From United States?</p>
-                      <p className="text-sm">1800657444022</p>
+                      <p className="text-sm">18006537444022</p>
                     </div>
                     <p className="text-sm"> You will need this information</p>
                     <div>
                       <p className="text-sm">Trip Number</p>
-                      <p className="text-sm">1800657444022</p>
+                      <p className="text-sm">18006537444022</p>
                     </div>
                     <div>
                       <p className="text-sm">Confirmation Number</p>
@@ -206,7 +239,7 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                     </div>
                     <div>
                       <p className="text-sm">Phone Number used:</p>
-                      <p className="text-sm">1800657444022</p>
+                      <p className="text-sm">18006537444022</p>
                     </div>
                   </div>
                 </div>

@@ -21,7 +21,7 @@ const YourBookingComponent = () => {
   const diffTime = Math.abs(checkOutDate - checkInDate);
   const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-
+  
   const checkoutData = useSelector((state) => state.checkoutData.checkoutData);
   console.log("checkoutData", checkoutData);
 
@@ -31,6 +31,7 @@ const YourBookingComponent = () => {
   const amenities = checkoutData.amenities;
   const phoneNumber = checkoutData.phone;
 
+  
 
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -42,10 +43,10 @@ const YourBookingComponent = () => {
   const { rooms, adults, children } = useSelector((state) => state.countData);
 
   // Get the first name and last name from Redux state
-  const firstName = useSelector((state) => state.firstName);
-  const lastName = useSelector((state) => state.lastName);
+  const firstName = useSelector((state) => state.name.firstName);
+  const lastName = useSelector((state) => state.name.lastName);
 
-
+console.log("firstName",firstName)
   const roomData = JSON.parse(sessionStorage.getItem("roomData"));
   console.log("roomData", roomData);
 
@@ -64,6 +65,8 @@ const YourBookingComponent = () => {
   const discountPerRoom = 1;
   const propertyFeePerRoom = 5;
 
+  const propertyTax=propertyFeePerRoom*numberOfRooms
+
   // Calculate subtotal before taxes and fees
   const subtotal = roomPricePerNight * numberOfRooms * numberOfNights;
   
@@ -80,6 +83,19 @@ const YourBookingComponent = () => {
   // Calculate total cost
   const totalCost = subtotal + totalTaxes + totalPropertyFee - totalDiscounts;
 
+  const taxes= totalTaxes + propertyTax
+
+  const today = new Date();
+
+const year = today.getFullYear();
+const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is zero-based, so add 1
+const day = String(today.getDate()).padStart(2, '0');
+
+const todayDate = `${year}-${month}-${day}`;
+console.log(todayDate); // Output format: YYYY-MM-DD
+
+
+
   // Mock booking details (replace with actual data)
   const bookingDetails = {
     hotelName: hotelName,
@@ -92,6 +108,14 @@ const YourBookingComponent = () => {
     checkOutDate: checkOutDate,
     totalGuests: 2,
     totalPrice: totalCost,
+    todayDate:todayDate,
+    firstName:firstName,
+    lastName:lastName,
+    nights:nights,
+    totalTaxes:totalTaxes,
+    subtotal:subtotal,
+    taxes:taxes,
+    totalDiscounts:totalDiscounts
   };
 
   return (

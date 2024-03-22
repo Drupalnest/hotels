@@ -640,8 +640,8 @@ export default function Cart() {
   const { rooms, adults, children } = useSelector((state) => state.countData);
 
   // Get the first name and last name from Redux state
-  const firstName = useSelector((state) => state.firstName);
-  const lastName = useSelector((state) => state.lastName);
+  const firstName = useSelector((state) => state.name.firstName);
+  const lastName = useSelector((state) => state.name.lastName);
 
   // Local state to hold the input values
   const [localFirstName, setLocalFirstName] = useState(firstName || "");
