@@ -1,23 +1,28 @@
 import React from "react";
 import Slider from "react-slick";
 import { IconButton } from "@mui/material";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import room1 from "../../assets/room1.jpg";
+import room2 from "../../assets/room2.jpg";
+import room3 from "../../assets/room3.jpg";
+import room4 from "../../assets/room4.jpg";
+import room5 from "../../assets/room5.jpg";
+import room6 from "../../assets/room6.jpg";
+
 const ImageSlider = () => {
   const images = [
-    "https://via.placeholder.com/800x600?text=Image1",
-    "https://via.placeholder.com/800x600?text=Image2",
-    "https://via.placeholder.com/800x600?text=Image3",
-    "https://via.placeholder.com/800x600?text=Image1",
-    "https://via.placeholder.com/800x600?text=Image2",
-    "https://via.placeholder.com/800x600?text=Image3",
-    "https://via.placeholder.com/800x600?text=Image1",
-    "https://via.placeholder.com/800x600?text=Image2",
-    "https://via.placeholder.com/800x600?text=Image3",
-    // Add more image URLs as needed
+    room1,
+    room2,
+    room3,
+    room4,
+    room5,
+    room6,
+    room1,
+    room2,
+    room3,
   ];
 
   const PrevArrow = (props) => {
@@ -30,12 +35,14 @@ const ImageSlider = () => {
           left: "20px",
           transform: "translate(-50%, -50%)",
           zIndex: 1,
-          backgroundColor:"white"
+          backgroundColor: "white",
         }}
         onClick={onClick}
         aria-label="previous"
       >
-        <ArrowForwardIosIcon sx={{ fontSize: "40px", color: "gray",transform: "scaleX(-1)" }} />
+        <ArrowForwardIosIcon
+          sx={{ fontSize: "40px", color: "gray", transform: "scaleX(-1)" }}
+        />
       </IconButton>
     );
   };
@@ -50,12 +57,12 @@ const ImageSlider = () => {
           right: "20px",
           transform: "translate(50%, -50%)",
           zIndex: 1,
-          backgroundColor:"white"
+          backgroundColor: "white",
         }}
         onClick={onClick}
         aria-label="next"
       >
-        <ArrowForwardIosIcon sx={{ fontSize: "40px", color: "gray"}} />
+        <ArrowForwardIosIcon sx={{ fontSize: "40px", color: "gray" }} />
       </IconButton>
     );
   };

@@ -1560,7 +1560,7 @@ import { Link, graphql } from "gatsby";
 import { Button, Card, Input, PopoverPaper } from "@mui/material";
 import Footer from "../components/Footer";
 //import Navbar from "../components/Header";
-import ImageSlider from "../components/ImageSlider";
+import ImageSlider from "../components/HotelDetails/ImageSlider";
 import PlaceIcon from "@mui/icons-material/Place";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -1618,13 +1618,13 @@ const HotelDetails = ({ data }) => {
     "Air Conditioning": <AcUnitIcon />,
     "Pet Friendly": <PetsIcon />,
     "Wireless Internet": <WifiIcon />,
-    Parking: <LocalParkingIcon />,
+    "Parking": <LocalParkingIcon />,
     "Business Center": <BusinessCenterIcon />,
     "Flat Screen TV": <TvIcon />,
     "Swimming Pool": <PoolIcon />,
     "On Site Fitness Center": <FitnessCenterIcon />,
-    Refrigerator: <RefrigeratorIcon />,
-    Microwave: <MicrowaveIcon />,
+    "Refrigerator": <RefrigeratorIcon />,
+    "Microwave": <MicrowaveIcon />,
     // Add more amenities and their corresponding icons as needed
   };
 

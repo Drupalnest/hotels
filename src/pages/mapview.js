@@ -1001,6 +1001,21 @@ const MapComponent = ({ data }) => {
       />
     );
   };
+
+  const [isGoogleLoaded, setIsGoogleLoaded] = useState(false);
+
+  useEffect(() => {
+    // Check if the google object is available
+    if (window.google) {
+      setIsGoogleLoaded(true);
+    } else {
+      // Listen for the load event of the Google Maps API script
+      window.addEventListener("google-loaded", () => {
+        setIsGoogleLoaded(true);
+      });
+    }
+  }, []);
+
   return (
     <div className="container-fluid">
       <Navbar />
@@ -1033,14 +1048,16 @@ const MapComponent = ({ data }) => {
           <Filterwithoutmap />
         </div>
         <div className="border-2" style={{ width: "100%", height: "auto" }}>
-          <GoogleMap
-            key={mapKey}
-            mapContainerStyle={{ width: "100%", height: "100%" }}
-            center={center}
-            zoom={10}
-            onClick={handleMapClick}
-          >
-            {/* {filteredHotels.map((hotel) => (
+          
+            {isGoogleLoaded && (
+              <GoogleMap
+                key={mapKey}
+                mapContainerStyle={{ width: "100%", height: "100%" }}
+                center={center}
+                zoom={10}
+                onClick={handleMapClick}
+              >
+                {/* {filteredHotels.map((hotel) => (
               <Marker
                 key={hotel.id}
                 position={{
@@ -1050,17 +1067,19 @@ const MapComponent = ({ data }) => {
                 onClick={() => handleMarkerClick(hotel)}
               />
             ))} */}
-            {filteredHotels.map((hotel) => (
-              <Marker
-                key={hotel.id}
-                position={{
-                  lat: hotel.lat_lon?.lat || 0,
-                  lng: hotel.lat_lon?.lon || 0,
-                }}
-                onClick={() => handleMarkerClick(hotel)}
-              ></Marker>
-            ))}
-          </GoogleMap>
+                {filteredHotels.map((hotel) => (
+                  <Marker
+                    key={hotel.id}
+                    position={{
+                      lat: hotel.lat_lon?.lat || 0,
+                      lng: hotel.lat_lon?.lon || 0,
+                    }}
+                    onClick={() => handleMarkerClick(hotel)}
+                  ></Marker>
+                ))}
+              </GoogleMap>
+            )}
+         
 
           {selectedHotel && (
             <div
@@ -1086,7 +1105,7 @@ const MapComponent = ({ data }) => {
                 }}
                 onClick={(event) => handleClosePopup(event)}
               />
-              <Link   to={`/hotels/${selectedHotel.id}`}>
+              <Link to={`/hotels/${selectedHotel.id}`}>
                 <div className="mb-4">
                   <img
                     src={room3}
@@ -1121,6 +1140,7 @@ export const query = graphql`
     allHotel {
       nodes {
         id
+        drupal_id
         name
         phone
         hotel_code
