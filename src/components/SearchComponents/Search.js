@@ -826,6 +826,7 @@
 
 // export default Search;
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSearchTerm,
