@@ -169,7 +169,7 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                   <div className="flex flex-row justify-between ">
                     <p className="text-sm text-green-600">Room Price</p>
                     <p className="text-sm text-green-600">
-                      {roomData.room_price}
+                    ${roomData.room_price}
                     </p>
                   </div>
                   <div className="flex flex-row justify-between ">
