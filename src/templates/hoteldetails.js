@@ -1557,7 +1557,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, graphql } from "gatsby";
-import { Button, Card, Input, PopoverPaper } from "@mui/material";
+//import { Button, Card, Input, PopoverPaper } from "@mui/material";
 import Footer from "../components/Footer";
 //import Navbar from "../components/Header";
 import ImageSlider from "../components/HotelDetails/ImageSlider";
@@ -1573,26 +1573,26 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 // import PetsIcon from "@mui/icons-material/Pets";
 import VapeFreeIcon from "@mui/icons-material/VapeFree";
 import AccessibleIcon from "@mui/icons-material/Accessible";
-import TextField from "@mui/material/TextField";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DatePicker from "@mui/lab/DatePicker";
+// import TextField from "@mui/material/TextField";
+// import AdapterDateFns from "@mui/lab/AdapterDateFns";
+// import LocalizationProvider from "@mui/lab/LocalizationProvider";
+// import DatePicker from "@mui/lab/DatePicker";
 
 import Amenities from "../components/HotelDetails/Amenities ";
 import AboutHotel from "../components/HotelDetails/AboutHotel";
 import GuestPolicies from "../components/HotelDetails/GuestPolicies ";
 import ReviewBox from "../components/HotelDetails/ReviewBox";
 import RatingSection from "../components/HotelDetails/RatingBar";
-import Typography from "@mui/material/Typography";
+//import Typography from "@mui/material/Typography";
 import GoogleMapComponent from "../components/HotelDetails/GoogleMapComponent";
-import Search from "../components/HotelDetails/Search";
-import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
+//import Search from "../components/HotelDetails/Search";
+//import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
 import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import RoomSearch from "../components/HotelDetailsPage/RoomSearch";
 import Navbar from "../components/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { setCheckInDate, setCheckOutDate } from "../redux/actions";
+//import { setCheckInDate, setCheckOutDate } from "../redux/actions";
 import RoomCard from "../components/HotelDetailsPage/RoomCard";
 import {
   Wifi as WifiIcon,
@@ -1618,13 +1618,13 @@ const HotelDetails = ({ data }) => {
     "Air Conditioning": <AcUnitIcon />,
     "Pet Friendly": <PetsIcon />,
     "Wireless Internet": <WifiIcon />,
-    "Parking": <LocalParkingIcon />,
+    Parking: <LocalParkingIcon />,
     "Business Center": <BusinessCenterIcon />,
     "Flat Screen TV": <TvIcon />,
     "Swimming Pool": <PoolIcon />,
     "On Site Fitness Center": <FitnessCenterIcon />,
-    "Refrigerator": <RefrigeratorIcon />,
-    "Microwave": <MicrowaveIcon />,
+    Refrigerator: <RefrigeratorIcon />,
+    Microwave: <MicrowaveIcon />,
     // Add more amenities and their corresponding icons as needed
   };
 
