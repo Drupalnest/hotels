@@ -40,31 +40,31 @@
 
 
 
-// import { createStore, applyMiddleware } from 'redux';
-// import { composeWithDevTools } from 'redux-devtools-extension';
-// import rootReducer from './reducer'; // Updated import
- 
-// // Apply middleware for Redux DevTools Extension
-// const middleware = composeWithDevTools(applyMiddleware(/* any middleware you want to add */));
- 
-// // Create the Redux store with the combined reducer and DevTools Extension
-// const store = createStore(rootReducer, middleware);
- 
-// export default store;
-
-
-
-
 import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducer'; // Updated import
-
-// Apply middleware without Redux DevTools Extension
-const middleware = applyMiddleware(/* any middleware you want to add */);
-
-// Create the Redux store with the combined reducer and middleware
+ 
+// Apply middleware for Redux DevTools Extension
+const middleware = composeWithDevTools(applyMiddleware(/* any middleware you want to add */));
+ 
+// Create the Redux store with the combined reducer and DevTools Extension
 const store = createStore(rootReducer, middleware);
-
+ 
 export default store;
+
+
+
+
+// import { createStore, applyMiddleware } from 'redux';
+// import rootReducer from './reducer'; // Updated import
+
+// // Apply middleware without Redux DevTools Extension
+// const middleware = applyMiddleware(/* any middleware you want to add */);
+
+// // Create the Redux store with the combined reducer and middleware
+// const store = createStore(rootReducer, middleware);
+
+// export default store;
 
 
 
