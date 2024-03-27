@@ -22,7 +22,7 @@ module.exports = {
       resolve: `gatsby-source-drupal`,
       options: {
         baseUrl: `http://165.227.127.224/`,
-        apiBase: `jsonapi`,
+        apiBase: `jsonapi/hotels`,
         skipFileDownloads: true,
       },
     },

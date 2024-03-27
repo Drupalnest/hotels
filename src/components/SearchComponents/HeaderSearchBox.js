@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import DatePicker from "react-datepicker";
+//import DatePicker from "react-datepicker";
 import { DayPicker } from "react-day-picker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./DayPicker.css";
 import "react-day-picker/dist/style.css";
-import HotelDetailss from "../HotelList/HotelDetailss";
+//import HotelDetailss from "../HotelList/HotelDetailss";
 import Search from "./Search";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
@@ -13,12 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setCheckInDate,
   setCheckOutDate,
-  incrementRooms,
-  decrementRooms,
-  incrementAdults,
-  decrementAdults,
-  incrementChildren,
-  decrementChildren,
+  // incrementRooms,
+  //decrementRooms,
+  //incrementAdults,
+  // decrementAdults,
+  // incrementChildren,
+  // decrementChildren,
   setRoomCount,
   setAdultCount,
   setChildrenCount,
@@ -26,16 +25,12 @@ import {
 
 const HeaderSearchBox = ({
   hotels,
-  airports,
-  cruise,
-  interest,
-  city,
   onButtonClick,
   isMapViewPage,
 }) => {
   const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
   const [selectedHotel, setSelectedHotel] = useState(null);
-  const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
+  const allData = [...hotels];
 
   const dispatch = useDispatch();
 
@@ -316,8 +311,6 @@ const HeaderSearchBox = ({
     navigate("/hotellist");
   };
 
-
-
   const handleClick = () => {
     if (isMapViewPage) {
       onButtonClick(); // Call onButtonClick if it's the map view page
@@ -330,10 +323,7 @@ const HeaderSearchBox = ({
     <div className=" relative z-50 w-1/ h-20  flex flex-row">
       <Search
         hotels={hotels}
-        airports={airports}
-        city={city}
-        cruise={cruise}
-        interest={interest}
+        
       />
 
       {/* <div
@@ -532,12 +522,12 @@ const HeaderSearchBox = ({
       </div>
 
       <div className="ml-2  flex justify-center items-center">
-      <button
-        onClick={handleClick}
-        className="bg-green-500 hover:bg-green-600 text-white py-1 px-1 rounded transition duration-300 w-full sm:w-auto"
-      >
-        {isMapViewPage ? "Update Search" : "Update Search"}
-      </button>
+        <button
+          onClick={handleClick}
+          className="bg-green-500 hover:bg-green-600 text-white py-1 px-1 rounded transition duration-300 w-full sm:w-auto"
+        >
+          {isMapViewPage ? "Update Search" : "Update Search"}
+        </button>
       </div>
     </div>
   );

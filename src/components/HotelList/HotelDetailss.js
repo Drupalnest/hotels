@@ -623,11 +623,38 @@
 // export default HotelDetailsComponent;
 
 // HotelDetailsComponent.js
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "gatsby";
 import room1 from "../../assets/room1.jpg";
 
 const HotelDetailsComponent = ({ hotels }) => {
+  const [roomData, setRoomData] = useState(null);
+
+  useEffect(() => {
+    // Define a function to fetch room data and set it using useState
+    const fetchRoomData = () => {
+      // Check if sessionStorage is available
+      if (typeof sessionStorage !== 'undefined') {
+        // Access sessionStorage
+        const storedData = JSON.parse(sessionStorage.getItem('roomData'));
+        console.log('roomData', storedData);
+        setRoomData(storedData);
+      } else {
+        console.error('sessionStorage is not available.');
+      }
+    };
+
+    // Call the function to fetch room data
+    fetchRoomData();
+
+    // Empty dependency array ensures useEffect runs only once after component mounts
+  }, []);
+
+  // Render the component based on the roomData state
+  if (!roomData) {
+    return <p>No room data available</p>;
+  }
+
   if (!hotels || hotels.length === 0) {
     return (
       <div>
@@ -635,12 +662,6 @@ const HotelDetailsComponent = ({ hotels }) => {
         <p>Please search hotels..</p>
       </div>
     );
-  }
-  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
-  console.log("roomData", roomData);
-
-  if (!roomData) {
-    return <p>No room data available</p>;
   }
 
   return (

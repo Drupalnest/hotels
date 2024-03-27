@@ -547,29 +547,73 @@ import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
 
 const Hotellist = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
-  const airports = data?.allLocationAirport?.nodes || [];
-  const city = data?.allLocationCity?.nodes || [];
-  const cruise = data?.allLocationCruise?.nodes || [];
-  const interest = data?.allLocationPointOfInterest?.nodes || [];
+ 
+  // const [filteredHotels, setFilteredHotels] = useState([]);
+
+
+
+  // const storedFilteredHotels =
+  //   JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+    
+    
+    
+
+  //   useEffect(() => {
+  //     // Check if the storedFilteredHotels have changed
+  //     const isFilteredHotelsChanged = JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
+  
+  //     // If filtered hotels have changed, update the state
+  //     if (isFilteredHotelsChanged) {
+  //         setFilteredHotels(storedFilteredHotels);
+  //     }
+  // }, [filteredHotels, storedFilteredHotels]); 
+   
+
+  // const [filteredHotels, setFilteredHotels] = useState([]);
+  // const storedFilteredHotels =
+  //   JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+
+  // useEffect(() => {
+  //   // Check if the storedFilteredHotels have changed
+  //   const isFilteredHotelsChanged =
+  //     JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
+
+  //   // If filtered hotels have changed, update the state
+  //   if (isFilteredHotelsChanged) {
+  //     setFilteredHotels(storedFilteredHotels);
+  //   }
+  // }, [filteredHotels, storedFilteredHotels]);
+
+  
+  // const handleAmenityChange = (amenity) => {
+  //   // Filter hotels based on selected amenity
+  //   const updatedHotels = storedFilteredHotels.filter((hotel) =>
+  //     hotel.amenities?.some((a) => a.machine_name === amenity)
+  //   );
+  //   setFilteredHotels(updatedHotels);
+  // };
+
+  // console.log("filter hotels",filteredHotels)
+
+
 
   const [filteredHotels, setFilteredHotels] = useState([]);
-
-
-
   const storedFilteredHotels =
-    JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+    typeof window !== "undefined" && window.sessionStorage
+      ? JSON.parse(sessionStorage.getItem("filteredHotels")) || []
+      : [];
 
-    useEffect(() => {
-      // Check if the storedFilteredHotels have changed
-      const isFilteredHotelsChanged = JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
-  
-      // If filtered hotels have changed, update the state
-      if (isFilteredHotelsChanged) {
-          setFilteredHotels(storedFilteredHotels);
-      }
-  }, [filteredHotels, storedFilteredHotels]); 
-   
-  
+  useEffect(() => {
+    // Check if the storedFilteredHotels have changed
+    const isFilteredHotelsChanged =
+      JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
+
+    // If filtered hotels have changed, update the state
+    if (isFilteredHotelsChanged) {
+      setFilteredHotels(storedFilteredHotels);
+    }
+  }, [filteredHotels, storedFilteredHotels]);
+
   const handleAmenityChange = (amenity) => {
     // Filter hotels based on selected amenity
     const updatedHotels = storedFilteredHotels.filter((hotel) =>
@@ -578,26 +622,20 @@ const Hotellist = ({ data }) => {
     setFilteredHotels(updatedHotels);
   };
 
-  console.log("filter hotels",filteredHotels)
+  console.log("filter hotels", filteredHotels);
 
   return (
     <div className="flex flex-col gap-2 items-center justify-center">
       <Navbar />
       <HeaderSearchBox
         hotels={hotels}
-        airports={airports}
-        city={city}
-        cruise={cruise}
-        interest={interest}
+        
       />
       <div className="border border-blue-500 flex flex-row w-full justify-center">
         <div className="flex flex-col border-2 w-1/1 py-2 px-4">
           <Filter
             //hotels={hotels}
-            airports={airports}
-            city={city}
-            cruise={cruise}
-            interest={interest}
+            
             onAmenityChange={handleAmenityChange}
             hotels={filteredHotels}
           />
@@ -649,37 +687,7 @@ export const query = graphql`
         }
       }
     }
-    allLocationAirport {
-      nodes {
-        id
-        name
-        field_address {
-          locality
-          country_code
-        }
-      }
-    }
-    allLocationCity {
-      nodes {
-        id
-        name
-        population
-      }
-    }
-    allLocationCruise {
-      nodes {
-        id
-        google_place_id
-        name
-      }
-    }
-    allLocationPointOfInterest {
-      nodes {
-        id
-        name
-        google_place_id
-      }
-    }
+   
   }
 `;
 

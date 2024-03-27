@@ -476,12 +476,12 @@
 
 
 import React, { useEffect, useRef, useState } from "react";
-import DatePicker from "react-datepicker";
+//import DatePicker from "react-datepicker";
 import { DayPicker } from "react-day-picker";
 import "react-datepicker/dist/react-datepicker.css";
 //import { FormControlLabel, FormGroup, TextField } from "@mui/material";
 import "react-day-picker/dist/style.css";
-import HotelDetailss from "../HotelList/HotelDetailss";
+//import HotelDetailss from "../HotelList/HotelDetailss";
 //import { styled } from "@mui/material/styles";
 //import Switch, { SwitchProps } from "@mui/material/Switch";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -489,27 +489,27 @@ import PersonIcon from "@mui/icons-material/Person";
 import { navigate } from "gatsby";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setSearchTerm,
-  setSelectedHotel,
-  setHotelDetails,
-  setFilteredHotels,
+  //setSearchTerm,
+ // setSelectedHotel,
+ // setHotelDetails,
+  //setFilteredHotels,
   setCheckInDate,
   setCheckOutDate,
-  incrementRooms,
-  decrementRooms,
-  incrementAdults,
-  decrementAdults,
-  incrementChildren,
-  decrementChildren,
+  //incrementRooms,
+  //decrementRooms,
+  //incrementAdults,
+  //decrementAdults,
+  //incrementChildren,
+  //decrementChildren,
   setRoomCount,
   setAdultCount,
   setChildrenCount,
 } from "../../redux/actions";
 
-const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
+const RoomSearch = ({ hotels  }) => {
   const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
   const [selectedHotel, setSelectedHotel] = useState(null);
-  const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
+  const allData = [...hotels];
 
   const dispatch = useDispatch();
   // Filter based on the entered search term
@@ -517,9 +517,9 @@ const RoomSearch = ({ hotels, airports, cruise, interest, city }) => {
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleHotelClick = (hotel) => {
-    setSelectedHotel(hotel);
-  };
+  // const handleHotelClick = (hotel) => {
+  //   setSelectedHotel(hotel);
+  // };
 
   const today = new Date(); // Get the current date
   const tomorrow = new Date(today); // Get tomorrow's date

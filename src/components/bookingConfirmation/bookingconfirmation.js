@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import room1 from "../../assets/room1.jpg";
+import { useState } from "react";
+import { useEffect } from "react";
 const BookingConfirmation = ({ bookingDetails, success }) => {
   console.log("bookingDetails", bookingDetails);
   const {
@@ -20,10 +22,23 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
     totalDiscounts
   } = bookingDetails;
 
+ 
 
   console.log("bookingDetails",bookingDetails)
-  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
-  console.log("roomData", roomData);
+  
+  const [roomData, setRoomData] = useState(null);
+
+  useEffect(() => {
+    // Check if sessionStorage is available
+    if (typeof sessionStorage !== 'undefined') {
+      // Access sessionStorage
+      const storedData = JSON.parse(sessionStorage.getItem('roomData'));
+      console.log('roomData', storedData);
+      setRoomData(storedData);
+    } else {
+      console.error('sessionStorage is not available.');
+    }
+  }, []); // Empty dependency array ensures useEffect runs only once after component mounts
 
   if (!roomData) {
     return <p>No room data available</p>;

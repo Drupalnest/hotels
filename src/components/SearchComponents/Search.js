@@ -835,11 +835,11 @@ import {
   setFilteredHotels,
 } from "../../redux/actions";
 import SearchIcon from "@mui/icons-material/Search";
-import HotelDetailsComponent from "../HotelList/HotelDetailss";
+//import HotelDetailsComponent from "../HotelList/HotelDetailss";
 import { InputAdornment, TextField } from "@mui/material";
-import LiveLocation from "../IndexPage/LiveLocation";
+//import LiveLocation from "../IndexPage/LiveLocation";
 
-const Search = ({ hotels, airports, cruise, interest, city }) => {
+const Search = ({ hotels}) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
 
@@ -858,7 +858,7 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
   const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
 
   // Combine all data into a single array
-  const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
+  const allData = [...hotels];
 
   const [isDropdownserachBoxOpen, setIsDropdownserachBoxOpen] = useState(false);
 
@@ -934,13 +934,69 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
   // };
 
 
+  // const handleHotelClick = async (hotel) => {
+  //   try {
+  //     dispatch(setSelectedHotel(hotel));
+  //     setIsDropdownserachBoxOpen(false);
+  
+  //     // Fetch detailed information for the selected hotel (replace with your logic)
+  //     const details = fetchHotelDetails(
+  //       hotel.id,
+  //       hotel.drupal_id,
+  //       hotel.Name,
+  //       hotel.address ? hotel.address.address_line1 : "Address not available"
+  //     );
+  
+  //     // Dispatch the action to store hotel details in Redux
+  //     dispatch(setHotelDetails(details));
+  
+  //     // Log filtered hotels based on locality
+  //     const localityName =
+  //       hotel.address && hotel.address.locality
+  //         ? hotel.address.locality.toLowerCase()
+  //         : "";
+  //     dispatch(setSearchTerm(localityName));
+  
+  //     const filteredHotels = allData.filter(
+  //       (item) =>
+  //         item.field_rooms &&
+  //         item.field_rooms[0] &&
+  //         item.field_rooms[0].drupal_internal__target_id &&
+  //         item.address &&
+  //         (item.address.locality
+  //           .toLowerCase()
+  //           .includes(localityName.toLowerCase()) ||
+  //           item.address.postal_code
+  //             .toLowerCase()
+  //             .includes(localityName.toLowerCase()))
+  //     );
+  
+  //     console.log(
+  //       "Filtered Hotels based on Locality or Postal Code:",
+  //       filteredHotels
+  //     );
+  //     dispatch(setFilteredHotels(filteredHotels));
+  //     sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+
+
+  
+  //     // Fetch room data for the selected hotel and store in sessionStorage
+  //     const roomData = await fetchHotelRoomData(hotel.drupal_id);
+  //     sessionStorage.setItem("roomData", JSON.stringify(roomData));
+  //   } catch (error) {
+  //     console.error('Error handling hotel click:', error);
+  //   }
+  // };
+
+  
+
   const handleHotelClick = async (hotel) => {
     try {
       dispatch(setSelectedHotel(hotel));
       setIsDropdownserachBoxOpen(false);
   
       // Fetch detailed information for the selected hotel (replace with your logic)
-      const details = fetchHotelDetails(
+      const details = await fetchHotelDetails(
         hotel.id,
         hotel.drupal_id,
         hotel.Name,
@@ -976,15 +1032,27 @@ const Search = ({ hotels, airports, cruise, interest, city }) => {
         filteredHotels
       );
       dispatch(setFilteredHotels(filteredHotels));
-      sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+  
+      // Check if sessionStorage is available
+      if (typeof window !== "undefined" && window.sessionStorage) {
+        // Store filtered hotels in sessionStorage
+        sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+      }
   
       // Fetch room data for the selected hotel and store in sessionStorage
       const roomData = await fetchHotelRoomData(hotel.drupal_id);
-      sessionStorage.setItem("roomData", JSON.stringify(roomData));
+  
+      // Check if sessionStorage is available
+      if (typeof window !== "undefined" && window.sessionStorage) {
+        // Store room data in sessionStorage
+        sessionStorage.setItem("roomData", JSON.stringify(roomData));
+      }
     } catch (error) {
-      console.error('Error handling hotel click:', error);
+      console.error("Error handling hotel click:", error);
     }
   };
+  
+
   
   const fetchHotelRoomData = async (hotelId) => {
     try {

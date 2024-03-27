@@ -7,10 +7,6 @@ import Amenties from "../FilterComponents/Amenties";
 
 const Filter = ({
   hotels,
-  airports,
-  cruise,
-  interest,
-  city,
   onAmenityChange,
   
 }) => {
@@ -24,10 +20,7 @@ const Filter = ({
         {/* <PropertyTypes /> */}
         <Amenties
           //hotels={hotels}
-          airports={airports}
-          cruise={cruise}
-          interest={interest}
-          city={city}
+          
           onAmenityChange={onAmenityChange}
           hotels={hotels}
         />

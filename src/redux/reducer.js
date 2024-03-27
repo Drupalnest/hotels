@@ -2,8 +2,8 @@
 
 // Reducer.js
 import { combineReducers } from "redux";
-import { persistReducer } from "redux-persist";
-import localforage from "localforage";
+//import { persistReducer } from "redux-persist";
+//import localforage from "localforage";
 
 import {
   SET_FILTERED_HOTELS,
@@ -14,7 +14,7 @@ import {
   SET_CHECK_OUT_DATE,
   SET_CHECKOUT_DATA,
   SET_CURRENCY,
-  SET_EXCHANGE_RATES,
+  //SET_EXCHANGE_RATES,
   SET_FIRST_NAME, 
   SET_LAST_NAME
 } from "./actions";
@@ -26,8 +26,8 @@ import {
 
 const initialHotelState = {
   searchTerm: "",
-  selectedHotel: null,
-  hotelDetails: null,
+  selectedHotel: [],
+  hotelDetails: [],
   filteredHotels: [],
 };
 
@@ -192,11 +192,11 @@ const nameReducer = (state = initialNameState, action) => {
 
 
 
-const rootPersistConfig = {
-  key: 'root',
-  storage: localforage,
-  //blacklist: ['form']
-};
+// const rootPersistConfig = {
+//   key: 'root',
+//   storage: localforage,
+//   //blacklist: ['form']
+// };
 
 const rootReducer = combineReducers({
   hotel: hotelReducer,

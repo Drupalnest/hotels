@@ -18,14 +18,7 @@ import Navbar from "../components/Navbar/Navbar";
 const MyPage = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
   console.log("hotels", hotels);
-  const airports = data?.allLocationAirport?.nodes || [];
-  console.log("airports", airports);
-  const city = data?.allLocationCity?.nodes || [];
-  console.log("city", city);
-  const cruise = data?.allLocationCruise?.nodes || [];
-  console.log("cruise", cruise);
-  const interest = data?.allLocationPointOfInterest?.nodes || [];
-  console.log("interest", interest);
+ 
   // console.log("hotelsdfdv",hotels)
 
   const imagePaths = [Image1, Image2, Image3, Image4, Image5, Image6];
@@ -36,10 +29,7 @@ const MyPage = ({ data }) => {
       <div>
         <Indexpage
           hotels={hotels}
-          airports={airports}
-          city={city}
-          cruise={cruise}
-          interest={interest}
+          
         />
       </div>
 
@@ -129,37 +119,7 @@ export const query = graphql`
         }
       }
     }
-    allLocationAirport {
-      nodes {
-        id
-        name
-        field_address {
-          locality
-          country_code
-        }
-      }
-    }
-    allLocationCity {
-      nodes {
-        id
-        name
-        population
-      }
-    }
-    allLocationCruise {
-      nodes {
-        id
-        google_place_id
-        name
-      }
-    }
-    allLocationPointOfInterest {
-      nodes {
-        id
-        name
-        google_place_id
-      }
-    }
+   
   }
 `;
 

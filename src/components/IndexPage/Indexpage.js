@@ -3272,7 +3272,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
+//import MyLocationIcon from "@mui/icons-material/MyLocation";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
@@ -3287,12 +3287,12 @@ import {
   setFilteredHotels,
   setCheckInDate,
   setCheckOutDate,
-  incrementRooms,
-  decrementRooms,
-  incrementAdults,
-  decrementAdults,
-  incrementChildren,
-  decrementChildren,
+ // incrementRooms,
+  //decrementRooms,
+  //incrementAdults,
+  //decrementAdults,
+  //incrementChildren,
+  //decrementChildren,
   setRoomCount,
   setAdultCount,
   setChildrenCount,
@@ -3301,11 +3301,11 @@ import {
 import { DayPicker } from "react-day-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-day-picker/dist/style.css";
-import { navigate } from "gatsby";
+import { Link, navigate } from "gatsby";
 import ListBar from "./ListBar";
-import LiveLocation from "./LiveLocation";
+//import LiveLocation from "./LiveLocation";
 
-const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
+const Indexpage = ({ hotels}) => {
   const containerStyle = {
     width: "3/12",
     position: "relative",
@@ -3319,7 +3319,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
 
   const dispatch = useDispatch();
 
-  const inputRef = useRef(null);
+  //const inputRef = useRef(null);
 
   const fetchHotelDetails = (hotelId, hotelName, addressLine) => {
     // Replace this with your actual logic to fetch hotel details
@@ -3332,11 +3332,11 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
   };
 
   const searchTerm = useSelector((state) => state.hotel.searchTerm);
-  const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
-  const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
+  //const selectedHotel = useSelector((state) => state.hotel.selectedHotel);
+  //const hotelDetails = useSelector((state) => state.hotel.hotelDetails);
 
   // Combine all data into a single array
-  const allData = [...hotels, ...airports, ...cruise, ...interest, ...city];
+  const allData = [...hotels];
   console.log("allData", allData);
 
   const [isDropdownserachBoxOpen, setIsDropdownserachBoxOpen] = useState(false);
@@ -3418,13 +3418,68 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
 
 
   // Handle click on hotel item
+  // const handleHotelClick = async (hotel) => {
+  //   try {
+  //     dispatch(setSelectedHotel(hotel));
+  //     setIsDropdownserachBoxOpen(false);
+  
+  //     // Fetch detailed information for the selected hotel (replace with your logic)
+  //     const details = fetchHotelDetails(
+  //       hotel.id,
+  //       hotel.drupal_id,
+  //       hotel.Name,
+  //       hotel.address ? hotel.address.address_line1 : "Address not available"
+  //     );
+  
+  //     // Dispatch the action to store hotel details in Redux
+  //     dispatch(setHotelDetails(details));
+  
+  //     // Log filtered hotels based on locality
+  //     const localityName =
+  //       hotel.address && hotel.address.locality
+  //         ? hotel.address.locality.toLowerCase()
+  //         : "";
+  //     dispatch(setSearchTerm(localityName));
+  
+  //     const filteredHotels = allData.filter(
+  //       (item) =>
+  //         item.field_rooms &&
+  //         item.field_rooms[0] &&
+  //         item.field_rooms[0].drupal_internal__target_id &&
+  //         item.address &&
+  //         (item.address.locality
+  //           .toLowerCase()
+  //           .includes(localityName.toLowerCase()) ||
+  //           item.address.postal_code
+  //             .toLowerCase()
+  //             .includes(localityName.toLowerCase()))
+  //     );
+  
+  //     console.log(
+  //       "Filtered Hotels based on Locality or Postal Code:",
+  //       filteredHotels
+  //     );
+  //     dispatch(setFilteredHotels(filteredHotels));
+  //     sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+
+     
+  
+  //     // Fetch room data for the selected hotel and store in sessionStorage
+  //     const roomData = await fetchHotelRoomData(hotel.drupal_id);
+  //     sessionStorage.setItem("roomData", JSON.stringify(roomData));
+  //   } catch (error) {
+  //     console.error('Error handling hotel click:', error);
+  //   }
+  // };
+
+
   const handleHotelClick = async (hotel) => {
     try {
       dispatch(setSelectedHotel(hotel));
       setIsDropdownserachBoxOpen(false);
   
       // Fetch detailed information for the selected hotel (replace with your logic)
-      const details = fetchHotelDetails(
+      const details = await fetchHotelDetails(
         hotel.id,
         hotel.drupal_id,
         hotel.Name,
@@ -3460,15 +3515,27 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
         filteredHotels
       );
       dispatch(setFilteredHotels(filteredHotels));
-      sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+  
+      // Check if sessionStorage is available
+      if (typeof window !== "undefined" && window.sessionStorage) {
+        // Store filtered hotels in sessionStorage
+        sessionStorage.setItem("filteredHotels", JSON.stringify(filteredHotels));
+      }
   
       // Fetch room data for the selected hotel and store in sessionStorage
       const roomData = await fetchHotelRoomData(hotel.drupal_id);
-      sessionStorage.setItem("roomData", JSON.stringify(roomData));
+  
+      // Check if sessionStorage is available
+      if (typeof window !== "undefined" && window.sessionStorage) {
+        // Store room data in sessionStorage
+        sessionStorage.setItem("roomData", JSON.stringify(roomData));
+      }
     } catch (error) {
-      console.error('Error handling hotel click:', error);
+      console.error("Error handling hotel click:", error);
     }
   };
+  
+
   
   const fetchHotelRoomData = async (hotelId) => {
     try {
@@ -3879,7 +3946,7 @@ const Indexpage = ({ hotels, airports, cruise, interest, city }) => {
           </div>
 
           <div className="flex justify-center text-sm font-bold text-orange-600 ">
-            <a>Book all of your hotels at once and save up to $625</a>
+            <Link to="/">Book all of your hotels at once and save up to $625</Link>
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@
 
 import React from "react";
 import CheckIcon from "@mui/icons-material/Check";
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 
 const Amenities = ({ amenities }) => (
   <div className="container mx-auto p-4 border border-b border-gray-700">

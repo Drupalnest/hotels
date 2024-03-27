@@ -1568,11 +1568,11 @@ import CachedIcon from "@mui/icons-material/Cached";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-// import WifiIcon from "@mui/icons-material/Wifi";
+//import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+ import WifiIcon from "@mui/icons-material/Wifi";
 // import PetsIcon from "@mui/icons-material/Pets";
-import VapeFreeIcon from "@mui/icons-material/VapeFree";
-import AccessibleIcon from "@mui/icons-material/Accessible";
+//import VapeFreeIcon from "@mui/icons-material/VapeFree";
+//import AccessibleIcon from "@mui/icons-material/Accessible";
 // import TextField from "@mui/material/TextField";
 // import AdapterDateFns from "@mui/lab/AdapterDateFns";
 // import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -1594,18 +1594,18 @@ import Navbar from "../components/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 //import { setCheckInDate, setCheckOutDate } from "../redux/actions";
 import RoomCard from "../components/HotelDetailsPage/RoomCard";
-import {
-  Wifi as WifiIcon,
-  Pets as PetsIcon,
-  AcUnit as AcUnitIcon,
-  LocalParking as LocalParkingIcon,
-  BusinessCenter as BusinessCenterIcon,
-  Tv as TvIcon,
-  Pool as PoolIcon,
-  FitnessCenter as FitnessCenterIcon,
-  Refrigerator as RefrigeratorIcon,
-  Microwave as MicrowaveIcon,
-} from "@mui/icons-material";
+// import {
+//   Wifi as WifiIcon,
+//   Pets as PetsIcon,
+//   AcUnit as AcUnitIcon,
+//   LocalParking as LocalParkingIcon,
+//   BusinessCenter as BusinessCenterIcon,
+//   Tv as TvIcon,
+//   Pool as PoolIcon,
+//   FitnessCenter as FitnessCenterIcon,
+//   Refrigerator as RefrigeratorIcon,
+//   Microwave as MicrowaveIcon,
+// } from "@mui/icons-material";
 import { setCheckOutData } from "../redux/actions";
 
 const HotelDetails = ({ data }) => {
@@ -1613,23 +1613,23 @@ const HotelDetails = ({ data }) => {
   // console.log("hotel", hotel);
 
   // Define a mapping of amenities to icons
-  const amenityIconMap = {
-    "Accessibility Features": <AcUnitIcon />,
-    "Air Conditioning": <AcUnitIcon />,
-    "Pet Friendly": <PetsIcon />,
-    "Wireless Internet": <WifiIcon />,
-    Parking: <LocalParkingIcon />,
-    "Business Center": <BusinessCenterIcon />,
-    "Flat Screen TV": <TvIcon />,
-    "Swimming Pool": <PoolIcon />,
-    "On Site Fitness Center": <FitnessCenterIcon />,
-    Refrigerator: <RefrigeratorIcon />,
-    Microwave: <MicrowaveIcon />,
-    // Add more amenities and their corresponding icons as needed
-  };
+  // const amenityIconMap = {
+  //   "Accessibility Features": <AcUnitIcon />,
+  //   "Air Conditioning": <AcUnitIcon />,
+  //   "Pet Friendly": <PetsIcon />,
+  //   "Wireless Internet": <WifiIcon />,
+  //   Parking: <LocalParkingIcon />,
+  //   "Business Center": <BusinessCenterIcon />,
+  //   "Flat Screen TV": <TvIcon />,
+  //   "Swimming Pool": <PoolIcon />,
+  //   "On Site Fitness Center": <FitnessCenterIcon />,
+  //   Refrigerator: <RefrigeratorIcon />,
+  //   Microwave: <MicrowaveIcon />,
+  //   // Add more amenities and their corresponding icons as needed
+  // };
 
   // Define a default icon or text
-  const DefaultIcon = <span>No Icon</span>;
+  //const DefaultIcon = <span>No Icon</span>;
 
   const hotel = data.specificHotel.edges?.[0]?.node;
 
@@ -1637,14 +1637,7 @@ const HotelDetails = ({ data }) => {
 
   const hotels = data?.allHotels?.nodes || [];
   console.log("hotels", hotels);
-  const airports = data?.allLocationAirport?.nodes || [];
-  console.log("airports", airports);
-  const city = data?.allLocationCity?.nodes || [];
-  console.log("city", city);
-  const cruise = data?.allLocationCruise?.nodes || [];
-  console.log("cruise", cruise);
-  const interest = data?.allLocationPointOfInterest?.nodes || [];
-  console.log("interest", interest);
+
   // console.log("hotelsdfdv",hotels)
   const dispatch = useDispatch();
 
@@ -1686,20 +1679,20 @@ const HotelDetails = ({ data }) => {
     document.getElementById("image-gallery").scrollLeft += 300;
   };
 
-  const getAmenityIcon = (amenityName) => {
-    switch (amenityName) {
-      case "Wifi":
-        return <WifiIcon className="mr-2" />;
-      case "Pets":
-        return <PetsIcon className="mr-2" />;
-      case "VapeFree":
-        return <VapeFreeIcon className="mr-2" />;
-      case "Accessible":
-        return <AccessibleIcon className="mr-2" />;
-      default:
-        return <FiberManualRecordIcon className="mr-2" />; // Default icon
-    }
-  };
+  // const getAmenityIcon = (amenityName) => {
+  //   switch (amenityName) {
+  //     case "Wifi":
+  //       return <WifiIcon className="mr-2" />;
+  //     case "Pets":
+  //       return <PetsIcon className="mr-2" />;
+  //     case "VapeFree":
+  //       return <VapeFreeIcon className="mr-2" />;
+  //     case "Accessible":
+  //       return <AccessibleIcon className="mr-2" />;
+  //     default:
+  //       return <FiberManualRecordIcon className="mr-2" />; // Default icon
+  //   }
+  // };
 
   const handleDataFetched = (fetchedData) => {
     if (fetchedData && Array.isArray(fetchedData.hotels)) {
@@ -1710,18 +1703,37 @@ const HotelDetails = ({ data }) => {
     }
   };
 
-  const amenityList = hotel.amenities.map((amenity) => amenity.name);
+  //const amenityList = hotel.amenities.map((amenity) => amenity.name);
 
-  const amenityIcons = hotel.amenities.map(
-    (amenity) => amenityIconMap[amenity.name] || DefaultIcon
-  );
+  // const amenityIcons = hotel.amenities.map(
+  //   (amenity) => amenityIconMap[amenity.name] || DefaultIcon
+  // );
 
-  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
-  console.log("roomData", roomData);
+  // const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+  // console.log("roomData", roomData);
+
+  // if (!roomData) {
+  //   return <p>No room data available</p>;
+  // }
+
+
+
+  const [roomData, setRoomData] = useState(null);
+
+  useEffect(() => {
+    // Retrieve room data from sessionStorage
+    const storedRoomData = JSON.parse(sessionStorage.getItem("roomData"));
+    console.log("roomData", storedRoomData);
+
+    // Set roomData state
+    setRoomData(storedRoomData);
+  }, []); // Empty dependency array ensures useEffect runs only once after component mounts
 
   if (!roomData) {
     return <p>No room data available</p>;
   }
+
+ 
 
   return (
     <div className="py-2 container-fluid flex flex-col justify-center">
@@ -1738,10 +1750,7 @@ const HotelDetails = ({ data }) => {
         </Link>
         <HeaderSearchBox
           hotels={hotels}
-          airports={airports}
-          city={city}
-          cruise={cruise}
-          interest={interest}
+          
         />
       </div>
 
@@ -2018,10 +2027,7 @@ const HotelDetails = ({ data }) => {
 
               <RoomSearch
                 hotels={hotels}
-                airports={airports}
-                city={city}
-                cruise={cruise}
-                interest={interest}
+               
               />
             </div>
 
@@ -2171,37 +2177,7 @@ export const query = graphql`
       }
     }
 
-    allLocationAirport {
-      nodes {
-        id
-        name
-        field_address {
-          locality
-          country_code
-        }
-      }
-    }
-    allLocationCity {
-      nodes {
-        id
-        name
-        population
-      }
-    }
-    allLocationCruise {
-      nodes {
-        id
-        google_place_id
-        name
-      }
-    }
-    allLocationPointOfInterest {
-      nodes {
-        id
-        name
-        google_place_id
-      }
-    }
+    
   }
 `;
 

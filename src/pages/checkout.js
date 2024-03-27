@@ -495,6 +495,8 @@
 //           }
 //         }
 //       }
+
+
 //     }
 //     allLocationAirport {
 //       nodes {
@@ -569,6 +571,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 const steps = [
   "Select master blaster campaign settings",
@@ -677,12 +680,36 @@ export default function Cart() {
     }
   };
 
-  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
-  console.log("roomData", roomData);
+  // const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+  // console.log("roomData", roomData);
 
+  // if (!roomData) {
+  //   return <p>No room data available</p>;
+  // }
+
+
+  const [roomData, setRoomData] = useState(null);
+
+  useEffect(() => {
+    // Check if sessionStorage is available
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      // Access sessionStorage to retrieve room data
+      const storedRoomData = JSON.parse(sessionStorage.getItem('roomData'));
+      console.log('roomData', storedRoomData);
+      // Update roomData state with retrieved data
+      setRoomData(storedRoomData);
+    } else {
+      // Handle cases where sessionStorage is not available
+      console.error('sessionStorage is not available.');
+    }
+  }, []); // Empty dependency array ensures useEffect runs only once after component mounts
+
+  // Render message if roomData is not available
   if (!roomData) {
     return <p>No room data available</p>;
   }
+
+
 
   const roomPricePerNight = parseFloat(roomData.room_price); // Convert to float if necessary
   const numberOfRooms = rooms; // Replace with actual number of rooms

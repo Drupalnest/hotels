@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BookingConfirmation from '../components/bookingConfirmation/bookingconfirmation';
 import {
   setSearchTerm,
@@ -26,7 +26,16 @@ const YourBookingComponent = () => {
   console.log("checkoutData", checkoutData);
 
   const hotelName = checkoutData.name || "Default Hotel Name";
-  const addressLine1 = checkoutData.address.address_line1;
+  // Make sure to check if checkoutData and checkoutData.address are defined
+  let addressLine1;
+  if (checkoutData && checkoutData.address && checkoutData.address.address_line1) {
+    addressLine1 = checkoutData.address.address_line1;
+  } else {
+    // Handle the case where address_line1 is undefined
+    console.error('Address line 1 is not available.');
+  }
+  
+
 
   const amenities = checkoutData.amenities;
   const phoneNumber = checkoutData.phone;
@@ -47,12 +56,37 @@ const YourBookingComponent = () => {
   const lastName = useSelector((state) => state.name.lastName);
 
 console.log("firstName",firstName)
-  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
-  console.log("roomData", roomData);
+ 
+// const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+//   console.log("roomData", roomData);
 
-  if (!roomData) {
-    return <p>No room data available</p>;
+//   if (!roomData) {
+//     return <p>No room data available</p>;
+//   }
+
+
+const [roomData, setRoomData] = useState(null);
+
+useEffect(() => {
+  // Check if sessionStorage is available
+  if (typeof window !== 'undefined' && window.sessionStorage) {
+    // Access sessionStorage to retrieve room data
+    const storedRoomData = JSON.parse(sessionStorage.getItem('roomData'));
+    console.log('roomData', storedRoomData);
+    // Update roomData state with retrieved data
+    setRoomData(storedRoomData);
+  } else {
+    // Handle cases where sessionStorage is not available
+    console.error('sessionStorage is not available.');
   }
+}, []); // Empty dependency array ensures useEffect runs only once after component mounts
+
+// Render message if roomData is not available
+if (!roomData) {
+  return <p>No room data available</p>;
+}
+
+ 
 
   const roomType=roomData.room_type
 

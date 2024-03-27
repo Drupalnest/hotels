@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 import WifiIcon from "@mui/icons-material/Wifi";
 import { green } from "@mui/material/colors";
-import { useDispatch, useSelector } from "react-redux";
-import { setCheckInDate, setCheckOutDate } from "../../redux/actions";
+import { useSelector } from "react-redux";
+//import { useDispatch } from "react-redux";
+//import { setCheckInDate, setCheckOutDate } from "../../redux/actions";
 import { navigate } from "gatsby";
-import { Dialog, DialogContent } from "@mui/material";
+//import { Dialog, DialogContent } from "@mui/material";
 import RoomDetails from "./RoomDetails";
 
 const RoomCard = ({ imageIndex, rooms }) => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const checkInDate = useSelector((state) => state.date.checkInDate);
   const checkOutDate = useSelector((state) => state.date.checkOutDate);
 
@@ -86,8 +87,28 @@ const RoomCard = ({ imageIndex, rooms }) => {
     ],
   };
 
-  const roomData = JSON.parse(sessionStorage.getItem("roomData"));
-  console.log("roomData", roomData);
+  // const roomData = JSON.parse(sessionStorage.getItem("roomData"));
+  // console.log("roomData", roomData);
+
+
+
+  // if (!roomData) {
+  //   return <p>No room data available</p>;
+  // }
+
+  const [roomData, setRoomData] = useState(null);
+
+  useEffect(() => {
+    // Check if sessionStorage is available
+    if (typeof sessionStorage !== 'undefined') {
+      // Access sessionStorage
+      const storedData = JSON.parse(sessionStorage.getItem('roomData'));
+      console.log('roomData', storedData);
+      setRoomData(storedData);
+    } else {
+      console.error('sessionStorage is not available.');
+    }
+  }, []); // Empty dependency array ensures useEffect runs only once after component mounts
 
   if (!roomData) {
     return <p>No room data available</p>;

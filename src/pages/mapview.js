@@ -888,19 +888,101 @@ import CloseIcon from "@mui/icons-material/Close";
 import room3 from "../assets/room3.jpg";
 
 const MapComponent = ({ data }) => {
+  // const [filteredHotels, setFilteredHotels] = useState([]);
+  // const [mapKey, setMapKey] = useState(0);
+  
+  
+  // const storedFilteredHotels =
+  //   JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+  // const [selectedHotel, setSelectedHotel] = useState(null);
+
+  
+  // const [filteredHotels, setFilteredHotels] = useState([]);
+  // const [mapKey, setMapKey] = useState(0);
+  // const [selectedHotel, setSelectedHotel] = useState(null);
+
+  // const storedFilteredHotels =
+  //   JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+
+    
+
+  // useEffect(() => {
+  //   // Check if the storedFilteredHotels have changed
+  //   const isFilteredHotelsChanged =
+  //     JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
+
+  //   // If filtered hotels have changed, update the state
+  //   if (isFilteredHotelsChanged) {
+  //     setFilteredHotels(storedFilteredHotels);
+  //   }
+  // }, [filteredHotels, storedFilteredHotels]);
+
+
+  // const [filteredHotels, setFilteredHotels] = useState([]);
+  // const [mapKey, setMapKey] = useState(0);
+  // const [selectedHotel, setSelectedHotel] = useState(null);
+
+  // useEffect(() => {
+  //   // Check if sessionStorage is available
+  //   if (typeof window !== "undefined" && window.sessionStorage) {
+  //     const storedFilteredHotels =
+  //       JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+
+  //     // Check if the storedFilteredHotels have changed
+  //     const isFilteredHotelsChanged =
+  //       JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
+
+  //     // If filtered hotels have changed, update the state
+  //     if (isFilteredHotelsChanged) {
+  //       setFilteredHotels(storedFilteredHotels);
+  //     }
+  //   }
+  // }, [filteredHotels]);
+
+  // const hotels = data?.allHotel?.nodes || [];
+  
+  // // const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
+  // const [isMapViewPage, setIsMapViewPage] = useState(true);
+
+  // useEffect(() => {
+  //   const isFilteredHotelsChanged =
+  //     JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
+
+  //   if (isFilteredHotelsChanged) {
+  //     setFilteredHotels(storedFilteredHotels);
+  //     setMapKey((prevKey) => prevKey + 1);
+  //   }
+  // }, [filteredHotels, storedFilteredHotels]);
+
+
+
   const [filteredHotels, setFilteredHotels] = useState([]);
   const [mapKey, setMapKey] = useState(0);
-  const storedFilteredHotels =
-    JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
   const [selectedHotel, setSelectedHotel] = useState(null);
 
-  const hotels = data?.allHotel?.nodes || [];
-  const airports = data?.allLocationAirport?.nodes || [];
-  const city = data?.allLocationCity?.nodes || [];
-  const cruise = data?.allLocationCruise?.nodes || [];
-  const interest = data?.allLocationPointOfInterest?.nodes || [];
-  // const filteredHotels = useSelector((state) => state.hotel.filteredHotels);
-  const [isMapViewPage, setIsMapViewPage] = useState(true);
+  // Define storedFilteredHotels here to ensure it's accessible
+  const storedFilteredHotels =
+    typeof window !== "undefined" && window.sessionStorage
+      ? JSON.parse(sessionStorage.getItem("filteredHotels")) || []
+      : [];
+
+  useEffect(() => {
+    // Check if sessionStorage is available
+    if (typeof window !== "undefined" && window.sessionStorage) {
+      // Fetch storedFilteredHotels only if sessionStorage is available
+      const storedFilteredHotels =
+        JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
+
+      // Check if the storedFilteredHotels have changed
+      const isFilteredHotelsChanged =
+        JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
+
+      // If filtered hotels have changed, update the state
+      if (isFilteredHotelsChanged) {
+        setFilteredHotels(storedFilteredHotels);
+      }
+    }
+  }, [filteredHotels]);
 
   useEffect(() => {
     const isFilteredHotelsChanged =
@@ -911,6 +993,14 @@ const MapComponent = ({ data }) => {
       setMapKey((prevKey) => prevKey + 1);
     }
   }, [filteredHotels, storedFilteredHotels]);
+ 
+
+  const hotels = data?.allHotel?.nodes || [];
+  const [isMapViewPage, setIsMapViewPage] = useState(true);
+
+
+
+
 
   const handleMarkerClick = (hotel) => {
     setSelectedHotel(hotel);
@@ -1031,10 +1121,7 @@ const MapComponent = ({ data }) => {
         </Link>
         <HeaderSearchBox
           hotels={hotels}
-          airports={airports}
-          city={city}
-          cruise={cruise}
-          interest={interest}
+         
           onButtonClick={handleButtonMapClick}
           isMapViewPage={isMapViewPage}
         />
@@ -1176,37 +1263,7 @@ export const query = graphql`
         }
       }
     }
-    allLocationAirport {
-      nodes {
-        id
-        name
-        field_address {
-          locality
-          country_code
-        }
-      }
-    }
-    allLocationCity {
-      nodes {
-        id
-        name
-        population
-      }
-    }
-    allLocationCruise {
-      nodes {
-        id
-        google_place_id
-        name
-      }
-    }
-    allLocationPointOfInterest {
-      nodes {
-        id
-        name
-        google_place_id
-      }
-    }
+    
   }
 `;
 
