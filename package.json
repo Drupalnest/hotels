@@ -61,6 +61,7 @@
     "react-slick": "^0.30.2",
     "react-slideshow-image": "^4.3.0",
     "react-sticky-el": "^2.1.0",
+    "react-stripe-elements": "^6.1.2",
     "react-text-mask": "^5.5.0",
     "react-toastify": "^10.0.5",
     "redux-devtools-extension": "^2.13.9",

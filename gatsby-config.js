@@ -2,7 +2,6 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 
-const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = {
   siteMetadata: {
     title: `hotel_site_neww`,
@@ -11,18 +10,7 @@ module.exports = {
 
 
 
-  developMiddleware: (app) => {
-    app.use(
-      '/proxy',
-      createProxyMiddleware({
-        target: 'http://165.227.127.224',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/proxy': '', // remove '/proxy' from the request path
-        },
-      })
-    );
-  },
+ 
   
  
 
@@ -39,7 +27,7 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: `http://165.227.127.224/`,
+        baseUrl: `https://hotelrepo.sastoo.com/`,
         apiBase: `jsonapi/hotels`,
         skipFileDownloads: true,
       },

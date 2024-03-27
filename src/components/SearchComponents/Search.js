@@ -1056,7 +1056,7 @@ const Search = ({ hotels}) => {
   
   const fetchHotelRoomData = async (hotelId) => {
     try {
-      const response = await axios.get(`http://165.227.127.224/jsonapi/hotels/${hotelId}`);
+      const response = await axios.get(`https://hotelrepo.sastoo.com/jsonapi/hotels/${hotelId}`);
       return response.data.data.relationships.field_rooms.room;
     } catch (error) {
       console.error('Error fetching room data:', error);

@@ -1641,10 +1641,25 @@ const HotelDetails = ({ data }) => {
   // console.log("hotelsdfdv",hotels)
   const dispatch = useDispatch();
 
+
+  const [roomData, setRoomData] = useState(null);
+
   useEffect(() => {
     // Set the selected hotel when the component mounts
     dispatch(setCheckOutData(hotel));
   }, [dispatch, hotel]);
+
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.sessionStorage) {
+      // Retrieve room data from sessionStorage
+      const storedRoomData = JSON.parse(sessionStorage.getItem("roomData"));
+      console.log("roomData", storedRoomData);
+
+      // Set roomData state
+      setRoomData(storedRoomData);
+    }
+  }, []); // Empty dependency array ensures useEffect runs only once after component mounts
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -1718,21 +1733,14 @@ const HotelDetails = ({ data }) => {
 
 
 
-  const [roomData, setRoomData] = useState(null);
 
-  useEffect(() => {
-    // Retrieve room data from sessionStorage
-    const storedRoomData = JSON.parse(sessionStorage.getItem("roomData"));
-    console.log("roomData", storedRoomData);
 
-    // Set roomData state
-    setRoomData(storedRoomData);
-  }, []); // Empty dependency array ensures useEffect runs only once after component mounts
 
+
+  // Conditional rendering based on roomData
   if (!roomData) {
     return <p>No room data available</p>;
   }
-
  
 
   return (
