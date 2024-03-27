@@ -1,11 +1,29 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+
+const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = {
   siteMetadata: {
     title: `hotel_site_neww`,
     siteUrl: `https://www.yourdomain.tld`,
   },
+
+
+
+  developMiddleware: (app) => {
+    app.use(
+      '/proxy',
+      createProxyMiddleware({
+        target: 'http://165.227.127.224',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/proxy': '', // remove '/proxy' from the request path
+        },
+      })
+    );
+  },
+  
  
 
   plugins: [

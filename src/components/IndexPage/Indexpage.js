@@ -3537,15 +3537,29 @@ const Indexpage = ({ hotels}) => {
   
 
   
+  // const fetchHotelRoomData = async (hotelId) => {
+  //   try {
+  //     const response = await axios.get(`http://165.227.127.224/jsonapi/hotels/${hotelId}`);
+  //     return response.data.data.relationships.field_rooms.room;
+  //   } catch (error) {
+  //     console.error('Error fetching room data:', error);
+  //     return null; // Return null or handle the error as needed
+  //   }
+  // };
+
+
   const fetchHotelRoomData = async (hotelId) => {
     try {
-      const response = await axios.get(`http://165.227.127.224/jsonapi/hotels/${hotelId}`);
+      // Use a proxy server to forward the request from HTTPS to HTTP
+      const response = await axios.get(`/proxy/jsonapi/hotels/${hotelId}`);
       return response.data.data.relationships.field_rooms.room;
     } catch (error) {
       console.error('Error fetching room data:', error);
       return null; // Return null or handle the error as needed
     }
   };
+  
+  
   
   
   
