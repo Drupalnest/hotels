@@ -1,51 +1,31 @@
-// import React from "react";
-// import { loadStripe } from "@stripe/stripe-js";
+// App.js
+import React, { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "../components/Payment/CheckoutForm";
 
-// import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
-// const PaymentForm = () => {
-//   const stripePromise = loadStripe("pk_test_wEfNm25VgswYweN4IK0JjMzQ");
-//   const stripe = useStripe();
-//   const elements = useElements();
+function Stripe() {
+  const [paymentIntentId, setPaymentIntentId] = useState(null);
 
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
+  const handlePaymentSuccess = (paymentIntentId) => {
+    setPaymentIntentId(paymentIntentId);
+  };
 
-//     if (!stripe || !elements) {
-//       // Stripe.js has not loaded yet. Make sure to disable
-//       // form submission until Stripe.js has loaded.
-//       return;
-//     }
-
-//     // Use elements.getElement to get a reference to the CardElement.
-//     const cardElement = elements.getElement(CardElement);
-
-//     // Use Stripe.js to create a token or a payment method
-//     // as an additional step for successful payment handling
-
-//     // Handle payment submission here
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <CardElement />
-//       <button type="submit" disabled={!stripe}>
-//         Pay
-//       </button>
-//     </form>
-//   );
-// };
-
-// export default PaymentForm;
-
-import React from 'react'
-
-const stripe = () => {
   return (
-    <div>
-      <h1>xfhfghfg</h1>
+    <div className="App">
+      <h1>Stripe Payment Demo</h1>
+      <Elements stripe={stripePromise}>
+        <CheckoutForm onSuccess={handlePaymentSuccess} />
+      </Elements>
+      {paymentIntentId && (
+        <div>
+          Payment successful! PaymentIntent ID: {paymentIntentId}
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default stripe
+export default Stripe;

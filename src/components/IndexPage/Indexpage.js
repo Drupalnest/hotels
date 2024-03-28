@@ -3537,15 +3537,28 @@ const Indexpage = ({ hotels}) => {
   
 
   
+  // const fetchHotelRoomData = async (hotelId) => {
+  //   try {
+  //     const response = await axios.get(`https://hotelrepo.sastoo.com/jsonapi/hotels/${hotelId}`);
+  //     return response.data.data.relationships.field_rooms.room;
+  //   } catch (error) {
+  //     console.error('Error fetching room data:', error);
+  //     return null; // Return null or handle the error as needed
+  //   }
+  // };
+
   const fetchHotelRoomData = async (hotelId) => {
     try {
-      const response = await axios.get(`https://hotelrepo.sastoo.com/jsonapi/hotels/${hotelId}`);
+      const response = await axios.get(`https://hotelrepo.sastoo.com/jsonapi/hotels/${hotelId}`, {
+       
+      });
       return response.data.data.relationships.field_rooms.room;
     } catch (error) {
       console.error('Error fetching room data:', error);
       return null; // Return null or handle the error as needed
     }
   };
+  
 
 
   // const fetchHotelRoomData = async (hotelId) => {

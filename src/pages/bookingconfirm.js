@@ -26,6 +26,8 @@ const YourBookingComponent = () => {
   console.log("checkoutData", checkoutData);
 
   const hotelName = checkoutData.name || "Default Hotel Name";
+
+  
   // Make sure to check if checkoutData and checkoutData.address are defined
   let addressLine1;
   if (checkoutData && checkoutData.address && checkoutData.address.address_line1) {
@@ -150,6 +152,7 @@ console.log(todayDate); // Output format: YYYY-MM-DD
     subtotal:subtotal,
     taxes:taxes,
     totalDiscounts:totalDiscounts
+
   };
 
   return (
