@@ -14,7 +14,7 @@ const Navbar = () => {
         <Link to="/" className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">
           Hotels
         </Link>
-        <Link className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">Cars</Link>
+        <Link to="/sss" className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">Cars</Link>
         <Link className="px-1 py-2 hover:bg-slate-200 rounded-2xl ">
           Flights
         </Link>
