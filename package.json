@@ -41,7 +41,6 @@
     "gatsby-source-drupal": "^6.13.1",
     "gatsby-source-filesystem": "^5.13.1",
     "google-map-react": "^2.2.1",
-    "http-proxy-middleware": "^2.0.6",
     "localforage": "^1.10.0",
     "moment-mini": "^2.29.4",
     "path": "^0.12.7",
