@@ -1339,12 +1339,17 @@ import StripePaymentForm from "../components/Payment/StripePaymentForm";
 import CloseIcon from "@mui/icons-material/Close";
 import "../components/Payment/checkoutform.css";
 
-
 const steps = [
   "Select master blaster campaign settings",
   "Create an ad group",
   "Create an ad",
 ];
+
+const generateRandomId = () => {
+  const randomNumber = Math.floor(Math.random() * 1000000);
+  const timestamp = Date.now();
+  return `id_${timestamp}_${randomNumber}`;
+};
 
 export default function Cart() {
   //const stripePromise = loadStripe("pk_test_wEfNm25VgswYweN4IK0JjMzQ");
@@ -1352,14 +1357,11 @@ export default function Cart() {
 
   const [paymentIntentId, setPaymentIntentId] = useState(null);
 
-
-
   const dispatch = useDispatch();
   const randomImage = "https://source.unsplash.com/?hotel,travel";
 
   // const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
 
   const checkoutData = useSelector((state) => state.checkoutData.checkoutData);
   console.log("checkoutData", checkoutData);
@@ -1377,8 +1379,7 @@ export default function Cart() {
   };
 
   // const bookinConfirmationClcik = () => {
-   
-   
+
   //   // const postData = {
   //   //   type: "reservations_new",
   //   //   title: hotelName || "",
@@ -1407,15 +1408,14 @@ export default function Cart() {
   //   //   });
   // };
 
-
   const handlePaymentSuccess = (paymentIntentId) => {
     setPaymentIntentId(paymentIntentId);
     setIsModalOpen(false); // Close modal after payment success
     // Call bookingConfirmationClick function here
-    bookingConfirmationClick(paymentIntentId);
+    //bookingConfirmationClick(paymentIntentId);
   };
 
-  const bookingConfirmationClick = (paymentIntentId) => {
+  const bookingConfirmationClick = () => {
     // Your booking confirmation logic here
     const postData = {
       type: "reservations_new",
@@ -1425,7 +1425,7 @@ export default function Cart() {
       $schema: "firstName",
       field_checkin: checkInDate ? formatDate(checkInDate) : "",
       field_checkout: checkOutDate ? formatDate(checkOutDate) : "",
-      payment_intent_id: paymentIntentId, // Include payment intent ID
+      
     };
 
     axios
@@ -1437,8 +1437,8 @@ export default function Cart() {
       .then(function (response) {
         console.log("Success:", response.data);
         console.log("postData:", postData);
-        toast.success("Booking created successfully");
-        navigate("/bookingconfirm");
+        //toast.success("Booking created successfully");
+        //navigate("/bookingconfirm");
       })
       .catch(function (error) {
         console.error("Error:", error);
@@ -1501,6 +1501,12 @@ export default function Cart() {
   };
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [roomData, setRoomData] = useState(null);
+  const [totalQty, setTotalQty] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [stripe, setStripe] = useState(null);
+  const [sessionId, setSessionId] = useState(null); // Add state to store sessionId
+
   const checkButtonState = (firstName, lastName) => {
     if (firstName.trim() !== "" && lastName.trim() !== "") {
       setIsButtonDisabled(false);
@@ -1509,14 +1515,99 @@ export default function Cart() {
     }
   };
 
+  const [productCartItem, setProductCartItem] = useState([]);
+
+  useEffect(() => {
+    // Update productCartItem whenever hotelName or rooms change
+    const random_id = generateRandomId();
+    setProductCartItem([
+      {
+        _id: random_id,
+        name: hotelName,
+        qty: rooms,
+        price: 100, // Assuming the price is fixed for each item
+      },
+    ]);
+  }, [hotelName, rooms]);
+
+  useEffect(() => {
+    // Load Stripe asynchronously
+    const loadStripePromise = async () => {
+      const stripe = await loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+      setStripe(stripe);
+    };
+    loadStripePromise();
+  }, []);
+
+  useEffect(() => {
+    let qty = rooms;
+    let price = 100;
+    productCartItem.forEach((item) => {
+      qty += item.qty;
+      price += item.qty * item.price;
+    });
+    setTotalQty(qty);
+    setTotalPrice(price);
+  }, [productCartItem]);
+
+  const handlePayment = async () => {
+    if (!stripe) {
+      console.error("Stripe is not yet loaded.");
+      return;
+    }
+
+    try {
+      // Create a checkout session
+      const response = await fetch(
+        "https://jolly-blue-stockings.cyclic.app/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(productCartItem),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          "Error creating checkout session: " + response.statusText
+        );
+      }
+
+      const sessionData = await response.json();
+      console.log("Session Data:", sessionData); // Log sessionData to check its structure
+
+      setSessionId(sessionData.sessionId); // Set sessionId in state
+    } catch (error) {
+      console.error("Payment Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (sessionId) {
+      // Redirect to Checkout if sessionId is available
+      stripe
+        .redirectToCheckout({
+          sessionId: sessionId,
+        })
+        .then((result) => {
+          if (result.error) {
+            console.error(
+              "Error redirecting to Checkout:",
+              result.error.message
+            );
+          }
+        });
+    }
+  }, [sessionId, stripe]);
+
   // const roomData = JSON.parse(sessionStorage.getItem("roomData"));
   // console.log("roomData", roomData);
 
   // if (!roomData) {
   //   return <p>No room data available</p>;
   // }
-
-  const [roomData, setRoomData] = useState(null);
 
   useEffect(() => {
     // Check if sessionStorage is available
@@ -1971,8 +2062,13 @@ export default function Cart() {
 
               <div className="p-4 m-4 border border-gray-500 rounded-2xl flex flex-col">
                 <button
+                  onClick={() => {
+                    handlePayment();
+                    bookingConfirmationClick();
+                  }}
+                  // onClick={handlePayment}
                   //onClick={bookinConfirmationClcik}
-                  onClick={handleBookingConfirmationClick}
+                  //onClick={handleBookingConfirmationClick}
                   className={`p-4 rounded-full transition duration-300 ease-in-out focus:outline-none ${
                     isButtonDisabled
                       ? "bg-gray-400 cursor-not-allowed"
@@ -2074,7 +2170,7 @@ export default function Cart() {
             </div>
           )} */}
 
-          {isModalOpen && (
+          {/* {isModalOpen && (
             <div className="modal-overlay">
               <div className="modal-content">
                 <span
@@ -2093,9 +2189,328 @@ export default function Cart() {
                 </div>
               )}
             </div>
-          )}
+          )} */}
         </div>
       )}
     </div>
   );
 }
+
+// import * as React from "react";
+// import Box from "@mui/material/Box";
+// import Stepper from "@mui/material/Stepper";
+// import Step from "@mui/material/Step";
+// import StepLabel from "@mui/material/StepLabel";
+// import Card from "@mui/material/Card";
+// import CardContent from "@mui/material/CardContent";
+// import CardMedia from "@mui/material/CardMedia";
+// import { Button } from "@mui/material";
+// import { Container, Typography, Paper, TextField } from "@mui/material";
+// import { shadows } from "@mui/system";
+// import DemoImage from "../assets/room1.jpg";
+// import { CheckBox, Radio } from "@mui/icons-material";
+// import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+// import CallIcon from "@mui/icons-material/Call";
+// import CheckIcon from "@mui/icons-material/Check";
+// import Checkbox from "@mui/material/Checkbox";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import American_express from "../images/american-express.svg";
+// import Discover from "../images/discover.svg";
+// import Mastercard from "../images/mastercard.svg";
+// import Visa from "../images/visa.svg";
+// import Navbar from "../components/Navbar/Navbar";
+// import { useDispatch, useSelector } from "react-redux";
+// import { Link, navigate } from "gatsby";
+// import {
+//   setSearchTerm,
+//   setSelectedHotel,
+//   setHotelDetails,
+//   setFilteredHotels,
+//   setCheckInDate,
+//   setCheckOutDate,
+//   setFirstName,
+//   setLastName,
+// } from "../redux/actions";
+// import { useState } from "react";
+// import axios from "axios";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// import { useEffect } from "react";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
+// import StripePaymentForm from "../components/Payment/StripePaymentForm";
+// import CloseIcon from "@mui/icons-material/Close";
+// import "../components/Payment/checkoutform.css";
+
+// const generateRandomId = () => {
+//   const randomNumber = Math.floor(Math.random() * 1000000); // Increased upper limit for more randomness
+//   const timestamp = Date.now();
+//   return `id_${timestamp}_${randomNumber}`;
+// };
+
+// export default function Cart() {
+//   //const stripePromise = loadStripe("pk_test_wEfNm25VgswYweN4IK0JjMzQ");
+
+//   const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+
+//   const [paymentIntentId, setPaymentIntentId] = useState(null);
+
+//   const dispatch = useDispatch();
+//   const randomImage = "https://source.unsplash.com/?hotel,travel";
+
+//   // const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+
+//   const checkoutData = useSelector((state) => state.checkoutData.checkoutData);
+//   console.log("checkoutData", checkoutData);
+
+//   const hotelName = checkoutData?.name || "Default Hotel Name";
+//   const addressLine1 =
+//     checkoutData?.address?.address_line1 || "Address Not Available";
+//   const amenities = checkoutData?.amenities || [];
+
+//   const formatDate = (date) => {
+//     const year = date.getFullYear();
+//     const month = String(date.getMonth() + 1).padStart(2, "0");
+//     const day = String(date.getDate()).padStart(2, "0");
+//     return `${year}-${month}-${day}`;
+//   };
+
+//   const checkInDate = useSelector((state) => state.date.checkInDate);
+//   const checkOutDate = useSelector((state) => state.date.checkOutDate);
+
+//   // Calculate the number of nights
+//   const diffTime = Math.abs(checkOutDate - checkInDate);
+//   const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+//   //Assuming rooms count is obtained from somewhere else in the state
+//   const { rooms, adults, children } = useSelector((state) => state.countData);
+
+//   // Get the first name and last name from Redux state
+//   const firstName = useSelector((state) => state.name.firstName);
+//   const lastName = useSelector((state) => state.name.lastName);
+
+//   // Local state to hold the input values
+//   const [localFirstName, setLocalFirstName] = useState(firstName || "");
+//   const [localLastName, setLocalLastName] = useState(lastName || "");
+//   const [isWarningShown, setIsWarningShown] = useState(false);
+
+//   // Function to handle changes in the first name field
+//   const handleFirstNameChange = (event) => {
+//     const { value } = event.target;
+//     setLocalFirstName(value);
+//     // Dispatch action to update first name in Redux
+//     dispatch(setFirstName(value));
+//     setIsWarningShown(false);
+//     checkButtonState(localFirstName, event.target.value);
+//   };
+
+//   // Function to handle changes in the last name field
+//   const handleLastNameChange = (event) => {
+//     const { value } = event.target;
+//     setLocalLastName(value);
+//     // Dispatch action to update last name in Redux
+//     dispatch(setLastName(value));
+//     setIsWarningShown(false);
+//     checkButtonState(event.target.value, localLastName);
+//   };
+
+//   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+//   const [roomData, setRoomData] = useState(null);
+//   const [totalQty, setTotalQty] = useState(0);
+//   const [totalPrice, setTotalPrice] = useState(0);
+//   const [stripe, setStripe] = useState(null);
+//   const [sessionId, setSessionId] = useState(null); // Add state to store sessionId
+
+//   const checkButtonState = (firstName, lastName) => {
+//     if (firstName.trim() !== "" && lastName.trim() !== "") {
+//       setIsButtonDisabled(false);
+//     } else {
+//       setIsButtonDisabled(true);
+//     }
+//   };
+
+//   // const [productCartItem] = useState(() => {
+//   //   const random_id = generateRandomId();
+//   //   return [
+//   //     {
+//   //       _id: random_id,
+//   //       hotelName: hotelName,
+//   //       rooms: rooms,
+//   //       price: 80,
+//   //     },
+//   //   ];
+//   // });
+
+//   const [productCartItem] = useState([
+//     { _id: 1, name: hotelName, qty: rooms, price: 100 },
+//   ]);
+
+//   useEffect(() => {
+//     // Load Stripe asynchronously
+//     const loadStripePromise = async () => {
+//       const stripe = await loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+//       setStripe(stripe);
+//     };
+//     loadStripePromise();
+//   }, []);
+
+//   useEffect(() => {
+//     let qty = rooms;
+//     let price = 100;
+//     productCartItem.forEach((item) => {
+//       qty += item.qty;
+//       price += item.qty * item.price;
+//     });
+//     setTotalQty(qty);
+//     setTotalPrice(price);
+//   }, [productCartItem]);
+
+//   const handlePayment = async () => {
+//     if (!stripe) {
+//       console.error("Stripe is not yet loaded.");
+//       return;
+//     }
+
+//     try {
+//       // Create a checkout session
+//       const response = await fetch(
+//         "http://localhost:8080/create-checkout-session",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify(productCartItem),
+//         }
+//       );
+
+//       if (!response.ok) {
+//         throw new Error(
+//           "Error creating checkout session: " + response.statusText
+//         );
+//       }
+
+//       const sessionData = await response.json();
+//       console.log("Session Data:", sessionData); // Log sessionData to check its structure
+
+//       setSessionId(sessionData.sessionId); // Set sessionId in state
+//     } catch (error) {
+//       console.error("Payment Error:", error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     if (sessionId) {
+//       // Redirect to Checkout if sessionId is available
+//       stripe
+//         .redirectToCheckout({
+//           sessionId: sessionId,
+//         })
+//         .then((result) => {
+//           if (result.error) {
+//             console.error(
+//               "Error redirecting to Checkout:",
+//               result.error.message
+//             );
+//           }
+//         });
+//     }
+//   }, [sessionId, stripe]);
+
+//   useEffect(() => {
+//     // Check if sessionStorage is available
+//     if (typeof window !== "undefined" && window.sessionStorage) {
+//       // Access sessionStorage to retrieve room data
+//       const storedRoomData = JSON.parse(sessionStorage.getItem("roomData"));
+//       console.log("roomData", storedRoomData);
+//       // Update roomData state with retrieved data
+//       setRoomData(storedRoomData);
+//     } else {
+//       // Handle cases where sessionStorage is not available
+//       console.error("sessionStorage is not available.");
+//     }
+//   }, []); // Empty dependency array ensures useEffect runs only once after component mounts
+
+//   // Render message if roomData is not available
+//   if (!roomData) {
+//     return <p>No room data available</p>;
+//   }
+
+//   const roomPricePerNight = parseFloat(roomData.room_price); // Convert to float if necessary
+//   const numberOfRooms = rooms; // Replace with actual number of rooms
+//   const numberOfNights = nights; // Replace with actual number of nights
+
+//   // Constants for taxes, discounts, and property fee
+//   const taxPerRoom = 8;
+//   const discountPerRoom = 1;
+//   const propertyFeePerRoom = 5;
+
+//   // Calculate subtotal before taxes and fees
+//   const subtotal = roomPricePerNight * numberOfRooms * numberOfNights;
+
+//   const totalPay =
+//     roomPricePerNight * numberOfRooms * numberOfNights + taxPerRoom;
+//   // Calculate total taxes
+//   const totalTaxes = taxPerRoom * numberOfRooms;
+
+//   // Calculate total discounts
+//   const totalDiscounts = discountPerRoom * numberOfRooms;
+
+//   // Calculate total property fee
+//   const totalPropertyFee = propertyFeePerRoom * numberOfRooms;
+//   // Calculate total cost
+//   const totalCost = subtotal + totalTaxes + totalPropertyFee - totalDiscounts;
+
+//   return (
+//     <div>
+//       {!hotelName || !addressLine1 || amenities.length === 0 ? (
+//         <div
+//           style={{
+//             display: "flex",
+//             justifyContent: "center",
+//             alignItems: "center",
+//             minHeight: "100vh", // Ensures the div takes up the full height of the viewport
+//           }}
+//         >
+//           <div style={{ textAlign: "center" }}>
+//             <p
+//               style={{ fontSize: "16px", color: "#333", marginBottom: "10px" }}
+//             >
+//               <Link
+//                 to="/"
+//                 style={{
+//                   textDecoration: "none",
+//                   color: "blue",
+//                   fontWeight: "bold",
+//                 }}
+//               >
+//                 Go back to main page
+//               </Link>
+//             </p>
+//           </div>
+//         </div>
+//       ) : (
+//         <div className="container-fluid flex flex-col justify-center items-center">
+//           <Navbar />
+
+//           <div className="flex flex-row border border-green-600">
+//             <div className="p-4 m-4 border border-gray-500 rounded-2xl flex flex-col">
+//               <button
+//                 onClick={handlePayment}
+//                 className={`p-4 rounded-full transition duration-300 ease-in-out focus:outline-none ${
+//                   isButtonDisabled
+//                     ? "bg-gray-400 cursor-not-allowed"
+//                     : "bg-blue-500 hover:bg-blue-600 text-white"
+//                 }`}
+//                 // disabled={isButtonDisabled}
+//               >
+//                 Book & Pay
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
