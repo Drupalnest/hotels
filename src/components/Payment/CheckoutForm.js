@@ -22,7 +22,7 @@ const CheckoutForm = ({ onSuccess }) => {
         // "http://localhost:4242/create-payment-intent",
 
         // "http://localhost:8888/.netlify/functions/createPaymentIntent",
-         "https://tense-zipper-pig.cyclic.app/createpaymentintent",
+         "https://tense-zipper-pig.cyclic.app/create-payment-intent",
         {
           method: "POST",
           headers: {

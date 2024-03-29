@@ -25,13 +25,15 @@ const PaymentForm = () => {
       setLoading(false);
       return;
     }
-  
+    //https://tense-zipper-pig.cyclic.app/create-payment-intent
+    //http://localhost:3333/create-payment-intent
     try {
       // Retrieve client secret from your backend
-      const response = await fetch('https://tense-zipper-pig.cyclic.app/create-payment-intent', {
+      const response = await fetch('https://tense-zipper-pig.cyclic.app/create-payment-intent/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Origin': 'https://master.d27tbmvojyduy0.amplifyapp.com'
         },
         body: JSON.stringify({ items: YOUR_ITEMS }),
       });
