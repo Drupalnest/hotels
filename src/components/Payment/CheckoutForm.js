@@ -19,11 +19,16 @@ const CheckoutForm = ({ onSuccess }) => {
     try {
       // Create payment intent on your backend
       const response = await fetch(
-        "http://localhost:4242/create-payment-intent",
+        // "http://localhost:4242/create-payment-intent",
+
+        // "http://localhost:8888/.netlify/functions/createPaymentIntent",
+         "https://tense-zipper-pig.cyclic.app/createpaymentintent",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*", // Replace * with the appropriate domain
+            "Access-Control-Allow-Headers": "Content-Type",
           },
           body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
         }
@@ -64,3 +69,7 @@ const CheckoutForm = ({ onSuccess }) => {
 };
 
 export default CheckoutForm;
+
+
+
+

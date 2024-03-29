@@ -167,9 +167,10 @@ const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 app.use(express.json());
 
 // Allow requests from your frontend origin
-app.use(cors({
-  origin: "http://localhost:8000",
-}));
+app.use(cors());
+
+
+
 
 // Route to create a PaymentIntent
 app.post("/create-payment-intent", async (req, res) => {

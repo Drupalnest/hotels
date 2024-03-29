@@ -20,9 +20,7 @@ function Stripe() {
         <CheckoutForm onSuccess={handlePaymentSuccess} />
       </Elements>
       {paymentIntentId && (
-        <div>
-          Payment successful! PaymentIntent ID: {paymentIntentId}
-        </div>
+        <div>Payment successful! PaymentIntent ID: {paymentIntentId}</div>
       )}
     </div>
   );

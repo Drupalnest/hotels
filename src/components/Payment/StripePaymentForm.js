@@ -420,7 +420,7 @@ const CheckoutForm = ({ onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit}>
       <CardElement
         className="card-element flex flex-col border-2 border-red-600"
         options={{
@@ -438,7 +438,11 @@ const CheckoutForm = ({ onSuccess }) => {
           },
         }}
       />
-      <button   className="border-2 w-full  p-2 bg-blue-600 text-white" type="submit" disabled={!stripe}>
+      <button
+        className="border-2 w-full  p-2 bg-blue-600 text-white"
+        type="submit"
+        disabled={!stripe}
+      >
         Pay Now
       </button>
       {errorMessage && <div>{errorMessage}</div>}
