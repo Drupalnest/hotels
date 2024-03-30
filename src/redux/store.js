@@ -55,16 +55,123 @@
 
 
 
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducer'; // Updated import
 
-// Apply middleware without Redux DevTools Extension
-const middleware = applyMiddleware(/* any middleware you want to add */);
+// import { createStore, applyMiddleware } from 'redux';
+// import { persistStore, persistReducer } from 'redux-persist';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+// import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+// import rootReducer from './reducer'; // Import your root reducer
+// import thunk from "redux-thunk";
+// // Configuration for redux-persist
 
-// Create the Redux store with the combined reducer and middleware
-const store = createStore(rootReducer, middleware);
 
-export default store;
+// const persistConfig = {
+//   key: 'root', // Key for the persistor stored data
+//   storage, // Storage type (localStorage by default)
+// };
+
+// // Create a persisted reducer by wrapping the root reducer with persistReducer
+// // const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// // // Apply middleware, including any middleware you want to add
+// // const middleware = composeWithDevTools(applyMiddleware(/* any middleware you want to add */));
+
+// // // Create the Redux store with the persisted reducer and middleware
+// // export const store = createStore(persistedReducer, middleware);
+
+// // // Create the Redux persistor
+// // export const persistor = persistStore(store);
+
+
+
+
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
+// export const store = createStore(
+//   persistedReducer,
+//   composeWithDevTools(applyMiddleware(thunk))
+// );
+// export const persistor = persistStore(store);
+
+// // export const store = createStore(rootReducer, applyMiddleware(thunk));
+
+// export default store;
+
+
+
+
+
+// import { createStore, applyMiddleware } from 'redux';
+// import { persistStore, persistReducer } from 'redux-persist';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+// import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+// import rootReducer from './reducer'; // Import your root reducer
+// import thunk from "redux-thunk";
+// // Configuration for redux-persist
+
+
+// const persistConfig = {
+//   key: 'root', // Key for the persistor stored data
+//   storage, // Storage type (localStorage by default)
+// };
+
+
+
+
+
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
+// export const store = createStore(
+//   persistedReducer,
+//   composeWithDevTools(applyMiddleware(thunk))
+// );
+// export const persistor = persistStore(store);
+
+// // export const store = createStore(rootReducer, applyMiddleware(thunk));
+
+// export default store;
+
+
+
+
+import { createStore } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import rootReducer from './reducer'; // Import your root reducer
+
+// Configuration for redux-persist
+const persistConfig = {
+  key: 'root', // Key for the persistor stored data
+  storage, // Storage type (localStorage by default)
+};
+
+// Create a persisted reducer by wrapping the root reducer with persistReducer
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// Create the Redux store with the persisted reducer
+export const store = createStore(
+  persistedReducer,
+  composeWithDevTools() // Removed applyMiddleware(thunk)
+);
+
+// Create the Redux persistor
+export const persistor = persistStore(store);
+
+// Export the store and persistor
+export default { store, persistor };
+
+
+
+
+// import { createStore, applyMiddleware } from 'redux';
+// import rootReducer from './reducer'; // Updated import
+
+// // Apply middleware without Redux DevTools Extension
+// const middleware = applyMiddleware(/* any middleware you want to add */);
+
+// // Create the Redux store with the combined reducer and middleware
+// const store = createStore(rootReducer, middleware);
+
+// export default store;
 
 
 

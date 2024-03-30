@@ -70,10 +70,10 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
                     <div className="flex flex-col w-2/4  ">
                       <p className="text-sm  mb-2">
                         {/* Fri Jul 1, 2016 - After 03:00 PM */}
-                        {bookingDetails.checkInDate?.toDateString()}
+                        {bookingDetails.checkInDate}
                       </p>
                       <p className="text-sm  mb-2">
-                        {bookingDetails.checkOutDate?.toDateString()}
+                        {bookingDetails.checkOutDate}
                       </p>
                       <div className="flex flex-row  gap-2  space-y-2">
                         <button className="text-sm text-blue-500 hover:underline">

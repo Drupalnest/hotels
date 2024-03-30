@@ -1371,12 +1371,27 @@ export default function Cart() {
     checkoutData?.address?.address_line1 || "Address Not Available";
   const amenities = checkoutData?.amenities || [];
 
+  // const formatDate = (date) => {
+  //   const year = date.getFullYear();
+  //   const month = String(date.getMonth() + 1).padStart(2, "0");
+  //   const day = String(date.getDate()).padStart(2, "0");
+  //   return `${year}-${month}-${day}`;
+  // };
+
+
   const formatDate = (date) => {
+    // Check if date is a valid Date object
+    if (!(date instanceof Date)) {
+      console.error("Invalid date:", date);
+      return ""; // Or handle the invalid date based on your requirements
+    }
+  
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
+  
 
   // const bookinConfirmationClcik = () => {
 
@@ -1555,7 +1570,7 @@ export default function Cart() {
       console.error("Stripe is not yet loaded.");
       return;
     }
-
+    //https://jolly-blue-stockings.cyclic.app/
     try {
       // Create a checkout session
       const response = await fetch(
@@ -1731,7 +1746,7 @@ export default function Cart() {
                   </div>
                 </div>
 
-                <div className="flex flex-row  justify-around m-4 border rounded-2xl bg-slate-200">
+                {/* <div className="flex flex-row  justify-around m-4 border rounded-2xl bg-slate-200">
                   <span className="flex flex-col text-center p-2 ">
                     <p>CHECK-IN</p>
                     <p>{checkInDate?.toDateString()}</p>
@@ -1739,6 +1754,24 @@ export default function Cart() {
                   <span className="flex flex-col p-2 text-center">
                     <p>CHECK-OUT</p>
                     <p>{checkOutDate?.toDateString()}</p>
+                  </span>
+                  <span className="flex flex-col p-2 text-center">
+                    <p>NIGHTS</p>
+                    <p>{nights}</p>
+                  </span>
+                  <span className="flex flex-col p-2 text-center">
+                    <p>ROOMS</p>
+                    <p>{rooms}</p>
+                  </span>
+                </div> */}
+                <div className="flex flex-row  justify-around m-4 border rounded-2xl bg-slate-200">
+                  <span className="flex flex-col text-center p-2 ">
+                    <p>CHECK-IN</p>
+                    <p>{checkInDate}</p>
+                  </span>
+                  <span className="flex flex-col p-2 text-center">
+                    <p>CHECK-OUT</p>
+                    <p>{checkOutDate}</p>
                   </span>
                   <span className="flex flex-col p-2 text-center">
                     <p>NIGHTS</p>

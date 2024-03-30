@@ -808,10 +808,17 @@ const RoomSearch = ({ hotels  }) => {
               <p className="text-sm font-bold">Check-in - Check-out</p>
             </div>
             <div>
-              <p>
+              {/* <p>
                 {`${checkInDate?.toLocaleDateString() || ""}${
                   checkInDate && checkOutDate
                     ? " - " + (checkOutDate?.toLocaleDateString() || "")
+                    : ""
+                }`}
+              </p> */}
+              <p>
+                {`${checkInDate || ""}${
+                  checkInDate && checkOutDate
+                    ? " - " + (checkOutDate || "")
                     : ""
                 }`}
               </p>

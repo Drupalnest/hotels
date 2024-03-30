@@ -415,9 +415,14 @@ const HeaderSearchBox = ({
                     ? " - " + dateRange[1]?.toLocaleDateString()
                     : ""
                 }`} */}
-                {`${checkInDate?.toLocaleDateString() || ""}${
+                {/* {`${checkInDate?.toLocaleDateString() || ""}${
                   checkInDate && checkOutDate
                     ? " - " + (checkOutDate?.toLocaleDateString() || "")
+                    : ""
+                }`} */}
+                {`${checkInDate || ""}${
+                  checkInDate && checkOutDate
+                    ? " - " + (checkOutDate || "")
                     : ""
                 }`}
               </p>
