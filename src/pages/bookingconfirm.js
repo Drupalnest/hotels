@@ -11,6 +11,9 @@ import {
   setLastName,
 } from "../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../components/UI_components/Loader';
+
+
 const YourBookingComponent = () => {
 
   const dispatch = useDispatch();
@@ -37,6 +40,13 @@ const YourBookingComponent = () => {
     console.error('Address line 1 is not available.');
   }
   
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading process
+  setTimeout(() => {
+    setIsLoading(false); // Set isLoading to false after some time
+  }, 2000); //
 
 
   const amenities = checkoutData.amenities;
@@ -158,7 +168,12 @@ console.log(todayDate); // Output format: YYYY-MM-DD
   return (
     <div>
       {/* Other components or content */}
+      {isLoading ? (
+            // Render loading spinner or message
+            <Loader />
+          ) : (
       <BookingConfirmation bookingDetails={bookingDetails} />
+          )}
     </div>
   );
 };

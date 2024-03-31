@@ -68,9 +68,12 @@ const checkoutDataReducer = (state = initialCheckOutState, action) => {
 
 
 
-
-
-
+const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${month}/${day}/${year}`;
+};
 
 const initialDateState = {
   checkInDate: new Date(), // Set check-in date to today's date
@@ -79,18 +82,28 @@ const initialDateState = {
     tomorrow.setDate(tomorrow.getDate() + 1);
     return tomorrow;
   })(), // Set check-out date to tomorrow's date
+  formattedCheckInDate: formatDate(new Date()),
+  formattedCheckOutDate: formatDate(new Date()),
 };
+
+
 
 const dateReducer = (state = initialDateState, action) => {
   switch (action.type) {
     case SET_CHECK_IN_DATE:
-      return { ...state, checkInDate: action.payload };
+      const formattedCheckInDate = formatDate(action.payload);
+      return { ...state, checkInDate: action.payload, formattedCheckInDate };
     case SET_CHECK_OUT_DATE:
-      return { ...state, checkOutDate: action.payload };
+      const formattedCheckOutDate = formatDate(action.payload);
+      return { ...state, checkOutDate: action.payload, formattedCheckOutDate };
     default:
       return state;
   }
 };
+
+
+
+
 
 
 

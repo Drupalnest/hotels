@@ -123,7 +123,7 @@
 //   };
 
 //   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
+
 //   const dropdownRef = useRef(null);
 
 //   const handleToggleDropdown = () => {
@@ -249,7 +249,7 @@
 //   return (
 //     <div className=" relative z-50 w-1/ h-20  flex flex-row justify-center item-center ">
 //       {/* <div
-//        ref={dropdownRef} 
+//        ref={dropdownRef}
 //         className=" relative  mb-4 sm:mr-4 sm:mb-0 border-2 border-red-400"
 //       >
 //         <button
@@ -467,14 +467,6 @@
 // };
 // export default RoomSearch;
 
-
-
-
-
-
-
-
-
 import React, { useEffect, useRef, useState } from "react";
 //import DatePicker from "react-datepicker";
 import { DayPicker } from "react-day-picker";
@@ -490,8 +482,8 @@ import { navigate } from "gatsby";
 import { useDispatch, useSelector } from "react-redux";
 import {
   //setSearchTerm,
- // setSelectedHotel,
- // setHotelDetails,
+  // setSelectedHotel,
+  // setHotelDetails,
   //setFilteredHotels,
   setCheckInDate,
   setCheckOutDate,
@@ -506,7 +498,16 @@ import {
   setChildrenCount,
 } from "../../redux/actions";
 
-const RoomSearch = ({ hotels  }) => {
+function formatTime(time, prefix = "") {
+  if (time && typeof time === "object") {
+    const year = time.getFullYear();
+    const month = String(time.getMonth() + 1).padStart(2, "0");
+    const day = String(time.getDate()).padStart(2, "0");
+    return prefix + `${month}/${day}/${year}`;
+  }
+  return "";
+}
+const RoomSearch = ({ hotels }) => {
   const [searchTerm, setSearchTerm] = useState(""); // Define searchTerm state
   const [selectedHotel, setSelectedHotel] = useState(null);
   const allData = [...hotels];
@@ -521,86 +522,151 @@ const RoomSearch = ({ hotels  }) => {
   //   setSelectedHotel(hotel);
   // };
 
-  const today = new Date(); // Get the current date
-  const tomorrow = new Date(today); // Get tomorrow's date
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // const today = new Date(); // Get the current date
+  // const tomorrow = new Date(today); // Get tomorrow's date
+  // tomorrow.setDate(tomorrow.getDate() + 1);
 
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [dateRange, setDateRange] = useState([today, tomorrow]);
+  // const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  // const [dateRange, setDateRange] = useState([today, tomorrow]);
 
-  const handleDayPickerToggle = () => {
-    setIsCalendarOpen(!isCalendarOpen);
-  };
+  // const handleDayPickerToggle = () => {
+  //   setIsCalendarOpen(!isCalendarOpen);
+  // };
 
-  const checkInDate = useSelector((state) => state.date.checkInDate);
-  const checkOutDate = useSelector((state) => state.date.checkOutDate);
+  // const checkInDate = useSelector((state) => state.date.checkInDate);
+  // const checkOutDate = useSelector((state) => state.date.checkOutDate);
 
-  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
+  // console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
 
-  const [localCheckInDate, setLocalCheckInDate] = useState(today);
-  const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
+  // const [localCheckInDate, setLocalCheckInDate] = useState(today);
+  // const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
+
+  // // const handleDayClick = (day) => {
+  // //   const newDateRange = [...dateRange];
+
+  // //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+  // //     newDateRange[0] = day;
+  // //     newDateRange[1] = null;
+  // //   } else if (day > newDateRange[0]) {
+  // //     newDateRange[1] = day;
+  // //     setIsCalendarOpen(false);
+  // //   } else {
+  // //     // Swap dates if the selected date is before the check-in date
+  // //     newDateRange[1] = newDateRange[0];
+  // //     newDateRange[0] = day;
+  // //     setIsCalendarOpen(false);
+  // //   }
+
+  // //   setDateRange(newDateRange);
+  // // };
 
   // const handleDayClick = (day) => {
   //   const newDateRange = [...dateRange];
 
   //   if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
+  //     const today = new Date();
+
+  //     if (day < today) {
+  //       return;
+  //     }
+
+  //     // Set time to noon (12:00 PM) to avoid timezone issues
+  //     day.setHours(12, 0, 0, 0);
+
   //     newDateRange[0] = day;
   //     newDateRange[1] = null;
+
+  //     // Dispatch check-in date to Redux
+  //     dispatch(setCheckInDate(newDateRange[0]));
   //   } else if (day > newDateRange[0]) {
-  //     newDateRange[1] = day;
   //     setIsCalendarOpen(false);
+  //     // Set time to noon (12:00 PM) to avoid timezone issues
+  //     day.setHours(12, 0, 0, 0);
+  //     newDateRange[1] = day;
+
+  //     // Dispatch check-out date to Redux
+  //     dispatch(setCheckOutDate(newDateRange[1]));
   //   } else {
   //     // Swap dates if the selected date is before the check-in date
   //     newDateRange[1] = newDateRange[0];
   //     newDateRange[0] = day;
   //     setIsCalendarOpen(false);
+
+  //     // Dispatch both check-in and check-out dates to Redux
+  //     dispatch(setCheckInDate(newDateRange[0]));
+  //     dispatch(setCheckOutDate(newDateRange[1]));
   //   }
 
   //   setDateRange(newDateRange);
   // };
 
+  const checkInDate = useSelector((state) => state.date.checkInDate);
+  const checkOutDate = useSelector((state) => state.date.checkOutDate);
+  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
+
+  // Initialize localCheckInDate to today and localCheckOutDate to tomorrow
+  // Initialize localCheckInDate to today at noon and localCheckOutDate to tomorrow at noon
+  const [localCheckInDate, setLocalCheckInDate] = useState(() => {
+    const todayAtNoon = new Date();
+    todayAtNoon.setHours(12, 0, 0, 0);
+    return todayAtNoon;
+  });
+  const [localCheckOutDate, setLocalCheckOutDate] = useState(() => {
+    const tomorrowAtNoon = new Date();
+    tomorrowAtNoon.setDate(tomorrowAtNoon.getDate() + 1);
+    tomorrowAtNoon.setHours(12, 0, 0, 0);
+    return tomorrowAtNoon;
+  });
+
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const today = new Date();
+
+  useEffect(() => {
+    setLocalCheckInDate(checkInDate);
+    setLocalCheckOutDate(checkOutDate);
+  }, [checkInDate, checkOutDate]);
+
+  useEffect(() => {
+    // Dispatch initial check-in and check-out dates when component mounts
+    dispatch(setCheckInDate(localCheckInDate));
+    dispatch(setCheckOutDate(localCheckOutDate));
+  }, []); // Empty dependency array ensures this effect runs only once, on mount
+
+  const handleDayPickerToggle = () => {
+    setIsCalendarOpen(!isCalendarOpen);
+  };
+
   const handleDayClick = (day) => {
-    const newDateRange = [...dateRange];
+    // Set time to noon (12:00 PM) to avoid timezone issues
+    day.setHours(12, 0, 0, 0);
 
-    if (!newDateRange[0] || (newDateRange[0] && newDateRange[1])) {
-      const today = new Date();
+    if (!localCheckInDate || localCheckOutDate) {
+      // If check-in date is not set or both dates are already selected, set the check-in date
+      setLocalCheckInDate(day);
+      setLocalCheckOutDate(null); // Clear check-out date
+      dispatch(setCheckInDate(day)); // Pass the selected date to the action
+      dispatch(setCheckOutDate(null)); // Clear check-out date in Redux
+    } else if (day > localCheckInDate) {
+      // If check-out date is not set and selected date is after check-in date, set the check-out date
+      setLocalCheckOutDate(day);
 
-      if (day < today) {
-        return;
+      // Update check-out date in Redux only if the selected date is ahead of the current check-in date
+      if (day > localCheckInDate) {
+        dispatch(setCheckOutDate(day)); // Pass the selected date to the action
       }
 
-      // Set time to noon (12:00 PM) to avoid timezone issues
-      day.setHours(12, 0, 0, 0);
-
-      newDateRange[0] = day;
-      newDateRange[1] = null;
-
-      // Dispatch check-in date to Redux
-      dispatch(setCheckInDate(newDateRange[0]));
-    } else if (day > newDateRange[0]) {
       setIsCalendarOpen(false);
-      // Set time to noon (12:00 PM) to avoid timezone issues
-      day.setHours(12, 0, 0, 0);
-      newDateRange[1] = day;
-
-      // Dispatch check-out date to Redux
-      dispatch(setCheckOutDate(newDateRange[1]));
     } else {
-      // Swap dates if the selected date is before the check-in date
-      newDateRange[1] = newDateRange[0];
-      newDateRange[0] = day;
-      setIsCalendarOpen(false);
-
-      // Dispatch both check-in and check-out dates to Redux
-      dispatch(setCheckInDate(newDateRange[0]));
-      dispatch(setCheckOutDate(newDateRange[1]));
+      // Reset both check-in and check-out dates
+      setLocalCheckInDate(day);
+      setLocalCheckOutDate(null);
+      dispatch(setCheckInDate(day)); // Pass the selected date to the action
+      dispatch(setCheckOutDate(null)); // Pass null to clear the check-out date in Redux
     }
-
-    setDateRange(newDateRange);
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
+
   const dropdownRef = useRef(null);
 
   const handleToggleDropdown = () => {
@@ -796,7 +862,8 @@ const RoomSearch = ({ hotels  }) => {
       </div> */}
 
       <div className="flex flex-col sm:flex-row  justify-between text-blue-800 gap-3 ">
-        <div
+        
+        {/* <div
           onClick={handleDayPickerToggle}
           className=" relative  rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2  "
         >
@@ -808,13 +875,13 @@ const RoomSearch = ({ hotels  }) => {
               <p className="text-sm font-bold">Check-in - Check-out</p>
             </div>
             <div>
-              {/* <p>
+              <p>
                 {`${checkInDate?.toLocaleDateString() || ""}${
                   checkInDate && checkOutDate
                     ? " - " + (checkOutDate?.toLocaleDateString() || "")
                     : ""
                 }`}
-              </p> */}
+              </p>
               <p>
                 {`${checkInDate || ""}${
                   checkInDate && checkOutDate
@@ -844,7 +911,42 @@ const RoomSearch = ({ hotels  }) => {
               />
             </div>
           )}
+        </div> */}
+
+        <div
+      className="relative rounded-xl flex items-center border-2 p-2 w-full sm:w-1/2"
+      onClick={handleDayPickerToggle}
+    >
+      <div className="mr-2">
+        <CalendarMonthIcon className="font-montserrat font-bold text-2xl leading-10 text-orange-800" />
+      </div>
+      <div className="flex flex-col">
+        <div>
+          <p className="text-sm font-bold">Check-in - Check-out</p>
         </div>
+        <div>
+          <p>{`${formatTime(localCheckInDate)} - ${formatTime(localCheckOutDate)}`}</p>
+        </div>
+      </div>
+      {isCalendarOpen && (
+        <div className="w-auto absolute top-full left-0 bg-white border rounded shadow mt-2">
+          <DayPicker
+            onClick={handleDayPickerToggle}
+            selectedDays={[
+              localCheckInDate,
+              { from: localCheckInDate, to: localCheckOutDate },
+            ]}
+            numberOfMonths={2}
+            onDayClick={handleDayClick}
+            placeholderText="Check-in Check-out"
+            className="focus:outline-none focus:border-orange-500"
+            modifiers={{
+              disabled: { before: today },
+            }}
+          />
+        </div>
+      )}
+    </div>
 
         <button
           ref={dropdownRef}

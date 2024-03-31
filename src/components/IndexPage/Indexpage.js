@@ -4004,6 +4004,15 @@ import { Link, navigate } from "gatsby";
 import ListBar from "./ListBar";
 //import LiveLocation from "./LiveLocation";
 
+function formatTime(time, prefix = "") {
+  if (time && typeof time === "object") {
+    const year = time.getFullYear();
+    const month = String(time.getMonth() + 1).padStart(2, "0");
+    const day = String(time.getDate()).padStart(2, "0");
+    return prefix + `${month}/${day}/${year}`;
+  }
+  return "";
+}
 const Indexpage = ({ hotels }) => {
   const containerStyle = {
     width: "3/12",
@@ -4269,58 +4278,67 @@ const Indexpage = ({ hotels }) => {
   const checkOutDate = useSelector((state) => state.date.checkOutDate);
   console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
 
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // Initialize localCheckInDate to today and localCheckOutDate to tomorrow
+  // Initialize localCheckInDate to today at noon and localCheckOutDate to tomorrow at noon
+  const [localCheckInDate, setLocalCheckInDate] = useState(() => {
+    const todayAtNoon = new Date();
+    todayAtNoon.setHours(12, 0, 0, 0);
+    return todayAtNoon;
+  });
+  const [localCheckOutDate, setLocalCheckOutDate] = useState(() => {
+    const tomorrowAtNoon = new Date();
+    tomorrowAtNoon.setDate(tomorrowAtNoon.getDate() + 1);
+    tomorrowAtNoon.setHours(12, 0, 0, 0);
+    return tomorrowAtNoon;
+  });
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [dateRange, setDateRange] = useState([today, tomorrow]);
+  const today = new Date();
+
+  useEffect(() => {
+    setLocalCheckInDate(checkInDate);
+    setLocalCheckOutDate(checkOutDate);
+  }, [checkInDate, checkOutDate]);
+
+  useEffect(() => {
+    // Dispatch initial check-in and check-out dates when component mounts
+    dispatch(setCheckInDate(localCheckInDate));
+    dispatch(setCheckOutDate(localCheckOutDate));
+  }, []); // Empty dependency array ensures this effect runs only once, on mount
 
   const handleDayPickerToggle = () => {
     setIsCalendarOpen(!isCalendarOpen);
   };
 
-  const [localCheckInDate, setLocalCheckInDate] = useState(today);
-  const [localCheckOutDate, setLocalCheckOutDate] = useState(tomorrow);
-
   const handleDayClick = (day) => {
-    const newDateRange = [...dateRange];
-
     // Set time to noon (12:00 PM) to avoid timezone issues
     day.setHours(12, 0, 0, 0);
 
-    if (!newDateRange[0] || newDateRange[1]) {
-      // Only check-in date is selected or both dates are selected
-      if (day < today) {
-        // Prevent selection of past dates
-        return;
+    if (!localCheckInDate || localCheckOutDate) {
+      // If check-in date is not set or both dates are already selected, set the check-in date
+      setLocalCheckInDate(day);
+      setLocalCheckOutDate(null); // Clear check-out date
+      dispatch(setCheckInDate(day)); // Pass the selected date to the action
+      dispatch(setCheckOutDate(null)); // Clear check-out date in Redux
+    } else if (day > localCheckInDate) {
+      // If check-out date is not set and selected date is after check-in date, set the check-out date
+      setLocalCheckOutDate(day);
+
+      // Update check-out date in Redux only if the selected date is ahead of the current check-in date
+      if (day > localCheckInDate) {
+        dispatch(setCheckOutDate(day)); // Pass the selected date to the action
       }
 
-      newDateRange[0] = day;
-      newDateRange[1] = null;
-
-      // Dispatch check-in date to Redux
-      dispatch(setCheckInDate(newDateRange[0]));
-    } else if (day > newDateRange[0]) {
-      // Check-out date is selected
       setIsCalendarOpen(false);
-      newDateRange[1] = day;
-
-      // Dispatch check-out date to Redux
-      dispatch(setCheckOutDate(newDateRange[1]));
     } else {
-      // Swap dates if the selected date is before the check-in date
-      newDateRange[1] = newDateRange[0];
-      newDateRange[0] = day;
-      setIsCalendarOpen(false);
-
-      // Dispatch both check-in and check-out dates to Redux
-      dispatch(setCheckInDate(newDateRange[0]));
-      dispatch(setCheckOutDate(newDateRange[1]));
+      // Reset both check-in and check-out dates
+      setLocalCheckInDate(day);
+      setLocalCheckOutDate(null);
+      dispatch(setCheckInDate(day)); // Pass the selected date to the action
+      dispatch(setCheckOutDate(null)); // Pass null to clear the check-out date in Redux
     }
-
-    setDateRange(newDateRange);
   };
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownRef = useRef(null);
@@ -4489,33 +4507,28 @@ const Indexpage = ({ hotels }) => {
                   <p className="text-sm font-bold">Check-in - Check-out</p>
                 </div>
                 <div>
-                  <p>
+                  {/* <p>
                     {`${checkInDate || ""}${
                       checkInDate && checkOutDate
                         ? " - " + (checkOutDate || "")
                         : ""
                     }`}
-                  </p>
-                  {/* <p>
-                    {`${checkInDate?.toLocaleDateString() || ""}${
-                      checkInDate && checkOutDate
-                        ? " - " + (checkOutDate?.toLocaleDateString() || "")
-                        : ""
-                    }`}
                   </p> */}
+                  <p>{`${formatTime(localCheckInDate)} - ${formatTime(
+                    localCheckOutDate
+                  )}`}</p>
                 </div>
               </div>
               {isCalendarOpen && (
                 <div className="w-auto absolute top-full left-0 bg-white border rounded shadow mt-2">
                   <DayPicker
                     onClick={handleDayPickerToggle}
+                    selectedDays={[
+                      localCheckInDate,
+                      { from: localCheckInDate, to: localCheckOutDate },
+                    ]}
                     numberOfMonths={2}
-                    pagedNavigation
-                    selected={localCheckInDate} // Set the selected date to localCheckInDate
                     onDayClick={handleDayClick}
-                    startDate={dateRange[0]}
-                    endDate={dateRange[1]}
-                    selectsRange
                     placeholderText="Check-in Check-out"
                     className="focus:outline-none focus:border-orange-500"
                     modifiers={{

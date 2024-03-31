@@ -544,30 +544,25 @@ import Filter from "../components/HotelList/Filter";
 import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 import Navbar from "../components/Navbar/Navbar";
 import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
+import Loader from "../components/UI_components/Loader";
 
 const Hotellist = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
- 
+
   // const [filteredHotels, setFilteredHotels] = useState([]);
-
-
 
   // const storedFilteredHotels =
   //   JSON.parse(sessionStorage.getItem("filteredHotels")) || [];
-    
-    
-    
 
   //   useEffect(() => {
   //     // Check if the storedFilteredHotels have changed
   //     const isFilteredHotelsChanged = JSON.stringify(filteredHotels) !== JSON.stringify(storedFilteredHotels);
-  
+
   //     // If filtered hotels have changed, update the state
   //     if (isFilteredHotelsChanged) {
   //         setFilteredHotels(storedFilteredHotels);
   //     }
-  // }, [filteredHotels, storedFilteredHotels]); 
-   
+  // }, [filteredHotels, storedFilteredHotels]);
 
   // const [filteredHotels, setFilteredHotels] = useState([]);
   // const storedFilteredHotels =
@@ -584,7 +579,6 @@ const Hotellist = ({ data }) => {
   //   }
   // }, [filteredHotels, storedFilteredHotels]);
 
-  
   // const handleAmenityChange = (amenity) => {
   //   // Filter hotels based on selected amenity
   //   const updatedHotels = storedFilteredHotels.filter((hotel) =>
@@ -594,8 +588,6 @@ const Hotellist = ({ data }) => {
   // };
 
   // console.log("filter hotels",filteredHotels)
-
-
 
   const [filteredHotels, setFilteredHotels] = useState([]);
   const storedFilteredHotels =
@@ -624,23 +616,47 @@ const Hotellist = ({ data }) => {
 
   console.log("filter hotels", filteredHotels);
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading process
+  setTimeout(() => {
+    setIsLoading(false); // Set isLoading to false after some time
+  }, 2000); //
+
   return (
+    // <div className="flex flex-col gap-2 items-center justify-center">
+    //   <Navbar />
+    //   <HeaderSearchBox hotels={hotels} />
+    //   <div className="border border-blue-500 flex flex-row w-full justify-center">
+    //     <div className="flex flex-col border-2 w-1/1 py-2 px-4">
+    //       <Filter
+    //         //hotels={hotels}
+
+    //         onAmenityChange={handleAmenityChange}
+    //         hotels={filteredHotels}
+    //       />
+    //     </div>
+    //     <HotelDetailsComponent hotels={filteredHotels} />
+    //   </div>
+    // </div>
+
     <div className="flex flex-col gap-2 items-center justify-center">
       <Navbar />
-      <HeaderSearchBox
-        hotels={hotels}
-        
-      />
-      <div className="border border-blue-500 flex flex-row w-full justify-center">
-        <div className="flex flex-col border-2 w-1/1 py-2 px-4">
-          <Filter
-            //hotels={hotels}
-            
-            onAmenityChange={handleAmenityChange}
-            hotels={filteredHotels}
-          />
+      <HeaderSearchBox hotels={hotels} />
+      <div className=" flex flex-row w-full justify-center">
+        <div className="flex flex-col  w-1/1 py-2 px-4">
+          {isLoading ? (
+            // Render loading spinner or message
+            <Loader />
+          ) : (
+            // Render Filter component when loading is false
+            <Filter hotels={filteredHotels} />
+          )}
         </div>
-        <HotelDetailsComponent hotels={filteredHotels} />
+        {isLoading ? null : (
+          // Render HotelDetailsComponent when loading is false
+          <HotelDetailsComponent hotels={filteredHotels} />
+        )}
       </div>
     </div>
   );
@@ -687,7 +703,6 @@ export const query = graphql`
         }
       }
     }
-   
   }
 `;
 

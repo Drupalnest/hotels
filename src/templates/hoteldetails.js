@@ -1578,6 +1578,8 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 // import LocalizationProvider from "@mui/lab/LocalizationProvider";
 // import DatePicker from "@mui/lab/DatePicker";
 
+import Loader from "../components/UI_components/Loader";
+
 import Amenities from "../components/HotelDetails/Amenities ";
 import AboutHotel from "../components/HotelDetails/AboutHotel";
 import GuestPolicies from "../components/HotelDetails/GuestPolicies ";
@@ -1669,6 +1671,14 @@ const HotelDetails = ({ data }) => {
 
   console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
 
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading process
+  setTimeout(() => {
+    setIsLoading(false); // Set isLoading to false after some time
+  }, 2000); //
+
   useEffect(() => {
     // Handle date changes
     console.log("Selected Date:", selectedDate);
@@ -1743,9 +1753,19 @@ const HotelDetails = ({ data }) => {
   }
  
 
+
+
   return (
     <div className="py-2 container-fluid flex flex-col justify-center">
       <Navbar />
+     
+     
+      {isLoading ? (
+            // Render loading spinner or message
+            <Loader />
+          ) : (
+            <div>
+    
       <div className=" flex justify-center items-center">
         <Link
           className="flex mr-3 font-bold text-blue-600 hover:underline"
@@ -1762,8 +1782,12 @@ const HotelDetails = ({ data }) => {
         />
       </div>
 
-      {/* <Navbar /> */}
+    
       <ImageSlider />
+
+    
+
+
 
       <div className="container-fluid  flex  justify-center border-b border-gray-500">
         <div className="container ">
@@ -2087,6 +2111,12 @@ const HotelDetails = ({ data }) => {
           <Footer />
         </div>
       </div>
+
+      </div>
+    
+      )}
+    
+    
     </div>
   );
 };

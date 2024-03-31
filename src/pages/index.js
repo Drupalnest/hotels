@@ -121,7 +121,98 @@
 
 // export default MyPage;
 
-import React from "react";
+// import React from "react";
+// import { Link, graphql } from "gatsby";
+// import "../index.css";
+// import Image1 from "../assets/room1.jpg";
+// import Image2 from "../assets/room2.jpg";
+// import Image3 from "../assets/room3.jpg";
+// import Image4 from "../assets/room4.jpg";
+// import Image5 from "../assets/room5.jpg";
+// import Image6 from "../assets/room6.jpg";
+// import Indexpage from "../components/IndexPage/Indexpage";
+// import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
+// import Navbar from "../components/Navbar/Navbar";
+// import { useSelector } from "react-redux";
+// import Loader from "../components/UI_components/Loader"
+
+// const MyPage = ({ data }) => {
+//   const hotels = data?.allHotel?.nodes || [];
+
+//   // Fetch checkInDate and checkOutDate from Redux state
+//   const checkInDate = useSelector((state) => state.date.checkInDate);
+//   const checkOutDate = useSelector((state) => state.date.checkOutDate);
+
+//   // Determine if data is loading
+//   const isLoading = hotels.length === 0 || !checkInDate || !checkOutDate;
+
+  
+
+//   return (
+//     <div className="max-w-[1200] mx-auto bg-white p-6">
+//       <div>
+//         {isLoading ? (
+//           // Render loading spinner or message
+//           <p>Loading...</p>
+//         ) : (
+//           // Render Indexpage with hotels data
+//           <Indexpage hotels={hotels} checkInDate={checkInDate} checkOutDate={checkOutDate} />
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export const query = graphql`
+//   query MyQuery {
+//     allHotel {
+//       nodes {
+//         id
+//         drupal_id
+//         name
+//         phone
+//         hotel_code
+//         field_rooms {
+//           drupal_internal__target_id
+//         }
+//         lat_lon {
+//           value
+//           geo_type
+//           lat
+//           lon
+//           left
+//           top
+//           right
+//           bottom
+//           geohash
+//           latlon
+//         }
+//         email
+//         description
+//         crs_code
+//         crs_name
+//         address {
+//           address_line1
+//           country_code
+//           administrative_area
+//           locality
+//           postal_code
+//         }
+//         amenities {
+//           machine_name
+//           name
+//         }
+//       }
+//     }
+//   }
+// `;
+
+// export default MyPage;
+
+
+
+
+import React, { useState, useEffect } from "react";
 import { Link, graphql } from "gatsby";
 import "../index.css";
 import Image1 from "../assets/room1.jpg";
@@ -134,6 +225,7 @@ import Indexpage from "../components/IndexPage/Indexpage";
 import HotelDetailsComponent from "../components/HotelList/HotelDetailss";
 import Navbar from "../components/Navbar/Navbar";
 import { useSelector } from "react-redux";
+import Loader from "../components/UI_components/Loader";
 
 const MyPage = ({ data }) => {
   const hotels = data?.allHotel?.nodes || [];
@@ -143,14 +235,22 @@ const MyPage = ({ data }) => {
   const checkOutDate = useSelector((state) => state.date.checkOutDate);
 
   // Determine if data is loading
-  const isLoading = hotels.length === 0 || !checkInDate || !checkOutDate;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading process
+    setTimeout(() => {
+      setIsLoading(false); // Set isLoading to false after some time
+    }, 2000);
+  }, []);
 
   return (
     <div className="max-w-[1200] mx-auto bg-white p-6">
+      <Navbar />
       <div>
         {isLoading ? (
           // Render loading spinner or message
-          <p>Loading...</p>
+          <Loader />
         ) : (
           // Render Indexpage with hotels data
           <Indexpage hotels={hotels} checkInDate={checkInDate} checkOutDate={checkOutDate} />

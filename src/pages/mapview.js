@@ -887,6 +887,8 @@ import HeaderSearchBox from "../components/SearchComponents/HeaderSearchBox";
 import CloseIcon from "@mui/icons-material/Close";
 import room3 from "../assets/room3.jpg";
 
+import Loader from "../components/UI_components/Loader";
+
 const MapComponent = ({ data }) => {
   // const [filteredHotels, setFilteredHotels] = useState([]);
   // const [mapKey, setMapKey] = useState(0);
@@ -994,6 +996,14 @@ const MapComponent = ({ data }) => {
     }
   }, [filteredHotels, storedFilteredHotels]);
  
+
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading process
+  setTimeout(() => {
+    setIsLoading(false); // Set isLoading to false after some time
+  }, 2000); //
 
   const hotels = data?.allHotel?.nodes || [];
   const [isMapViewPage, setIsMapViewPage] = useState(true);
@@ -1109,6 +1119,11 @@ const MapComponent = ({ data }) => {
   return (
     <div className="container-fluid">
       <Navbar />
+      {isLoading ? (
+            // Render loading spinner or message
+            <Loader />
+          ) : (
+     <div>
       <div className="flex justify-center items-center">
         <Link
           className="flex mr-3 font-bold text-blue-600 hover:underline"
@@ -1218,6 +1233,9 @@ const MapComponent = ({ data }) => {
           )}
         </div>
       </div>
+    
+      </div>
+          )}
     </div>
   );
 };
