@@ -3871,7 +3871,7 @@ export default function Cart() {
     try {
       // Create a checkout session
       const response = await fetch(
-        "http://localhost:8080/create-checkout-session",
+        "https://jolly-blue-stockings.cyclic.app/create-checkout-session",
         {
           method: "POST",
           headers: {
