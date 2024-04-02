@@ -26,6 +26,9 @@ const BookingConfirmation = ({ bookingDetails, success }) => {
 
   console.log("bookingDetails",bookingDetails)
   
+
+  
+
   const [roomData, setRoomData] = useState(null);
 
   useEffect(() => {

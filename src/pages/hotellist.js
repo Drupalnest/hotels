@@ -621,7 +621,7 @@ const Hotellist = ({ data }) => {
   // Simulate loading process
   setTimeout(() => {
     setIsLoading(false); // Set isLoading to false after some time
-  }, 500); //
+  }, 300); //
 
   return (
     // <div className="flex flex-col gap-2 items-center justify-center">
