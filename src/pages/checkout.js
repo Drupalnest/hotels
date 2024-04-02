@@ -3649,10 +3649,16 @@ export default function Cart() {
     checkoutData?.address?.address_line1 || "Address Not Available";
   const amenities = checkoutData?.amenities || [];
 
-  
+
+
+  const checkInDate = useSelector((state) => state.date.checkInDate);
+  const checkOutDate = useSelector((state) => state.date.checkOutDate);
 
 
 
+
+  const formattedCheckInDate = checkInDate ? new Date(checkInDate).toISOString().slice(0, 19).replace('T', ' ') : '';
+  const formattedCheckOutDate = checkOutDate ? new Date(checkOutDate).toISOString().slice(0, 19).replace('T', ' ') : '';
 
   const bookingConfirmationClick = () => {
     // Your booking confirmation logic here
@@ -3662,8 +3668,8 @@ export default function Cart() {
       field_booking_id: "22",
       field_lastname: "lastName",
       $schema: "firstName",
-      field_checkin: checkInDate ? checkInDate : "",
-      field_checkout: checkOutDate ? checkOutDate : "",
+      field_checkin:formattedCheckInDate,
+      field_checkout: formattedCheckOutDate
     };
 
     axios
@@ -3699,9 +3705,7 @@ export default function Cart() {
     setIsModalOpen(false);
   };
 
-  const checkInDate = useSelector((state) => state.date.checkInDate);
-  const checkOutDate = useSelector((state) => state.date.checkOutDate);
-
+  
   // Calculate the number of nights
   const diffTime = Math.abs(checkOutDate - checkInDate);
   const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -3886,7 +3890,7 @@ export default function Cart() {
           "Error creating checkout session: " + response.statusText
         );
       }
-
+ console.log("productCartItem", productCartItem);
       const sessionData = await response.json();
       console.log("Session Data:", sessionData); // Log sessionData to check its structure
 
