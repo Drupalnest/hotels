@@ -1003,7 +1003,7 @@ const MapComponent = ({ data }) => {
   // Simulate loading process
   setTimeout(() => {
     setIsLoading(false); // Set isLoading to false after some time
-  }, 2000); //
+  }, 500); //
 
   const hotels = data?.allHotel?.nodes || [];
   const [isMapViewPage, setIsMapViewPage] = useState(true);

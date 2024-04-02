@@ -3754,7 +3754,7 @@ export default function Cart() {
   // Simulate loading process
   setTimeout(() => {
     setIsLoading(false); // Set isLoading to false after some time
-  }, 2000); //
+  }, 500); //
 
   const checkButtonState = (firstName, lastName) => {
     if (firstName.trim() !== "" && lastName.trim() !== "") {
@@ -3875,7 +3875,7 @@ export default function Cart() {
     try {
       // Create a checkout session
       const response = await fetch(
-        "https://jolly-blue-stockings.cyclic.app/create-checkout-session",
+        "http://localhost:8080/create-checkout-session",
         {
           method: "POST",
           headers: {
