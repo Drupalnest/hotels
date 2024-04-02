@@ -4274,68 +4274,117 @@ const Indexpage = ({ hotels }) => {
   //   }
   // };
 
-  const checkInDate = useSelector((state) => state.date.checkInDate);
-  const checkOutDate = useSelector((state) => state.date.checkOutDate);
-  console.log("checkInDate", checkInDate, "checkOutDate", checkOutDate);
+  // const checkInDateRedux = useSelector((state) => state.date.checkInDate);
+  // const checkOutDateRedux = useSelector((state) => state.date.checkOutDate);
 
-  // Initialize localCheckInDate to today and localCheckOutDate to tomorrow
-  // Initialize localCheckInDate to today at noon and localCheckOutDate to tomorrow at noon
-  const [localCheckInDate, setLocalCheckInDate] = useState(() => {
-    const todayAtNoon = new Date();
-    todayAtNoon.setHours(12, 0, 0, 0);
-    return todayAtNoon;
-  });
-  const [localCheckOutDate, setLocalCheckOutDate] = useState(() => {
-    const tomorrowAtNoon = new Date();
-    tomorrowAtNoon.setDate(tomorrowAtNoon.getDate() + 1);
-    tomorrowAtNoon.setHours(12, 0, 0, 0);
-    return tomorrowAtNoon;
-  });
+  // console.log(
+  //   "checkInDateRedux",
+  //   checkInDateRedux,
+  //   "checkOutDateRedux",
+  //   checkOutDateRedux
+  // );
+
+  // const [localCheckInDate, setLocalCheckInDate] = useState(
+  //   checkInDateRedux || new Date()
+  // );
+  // const [localCheckOutDate, setLocalCheckOutDate] = useState(
+  //   checkOutDateRedux ||
+  //     (() => {
+  //       const tomorrow = new Date();
+  //       tomorrow.setDate(tomorrow.getDate() + 1);
+  //       return tomorrow;
+  //     })()
+  // );
+
+  // const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  // const today = new Date();
+
+  // useEffect(() => {
+  //   setLocalCheckInDate(checkInDateRedux);
+  // }, [checkInDateRedux]);
+
+  // useEffect(() => {
+  //   setLocalCheckOutDate(checkOutDateRedux);
+  // }, [checkOutDateRedux]);
+
+  // const handleDayPickerToggle = () => {
+  //   setIsCalendarOpen(!isCalendarOpen);
+  // };
+
+  // const handleDayClick = (day) => {
+  //   day.setHours(12, 0, 0, 0);
+
+  //   if (!localCheckInDate || localCheckOutDate) {
+  //     setLocalCheckInDate(day);
+  //     setLocalCheckOutDate(null);
+  //     dispatch(setCheckInDate(day));
+  //     dispatch(setCheckOutDate(null));
+  //   } else if (day > localCheckInDate) {
+  //     setLocalCheckOutDate(day);
+  //     dispatch(setCheckOutDate(day));
+  //     setIsCalendarOpen(false);
+  //   } else {
+  //     setLocalCheckInDate(day);
+  //     setLocalCheckOutDate(null);
+  //     dispatch(setCheckInDate(day));
+  //     dispatch(setCheckOutDate(null));
+  //   }
+  // };
+
+  const checkInDateRedux = useSelector((state) => state.date.checkInDate);
+  const checkOutDateRedux = useSelector((state) => state.date.checkOutDate);
+
+  console.log(
+    "checkInDateRedux",
+    checkInDateRedux,
+    "checkOutDateRedux",
+    checkOutDateRedux
+  );
+
+  const [localCheckInDate, setLocalCheckInDate] = useState(
+    checkInDateRedux || new Date()
+  );
+  const [localCheckOutDate, setLocalCheckOutDate] = useState(
+    checkOutDateRedux ||
+      (() => {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        return tomorrow;
+      })()
+  );
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const today = new Date();
 
   useEffect(() => {
-    setLocalCheckInDate(checkInDate);
-    setLocalCheckOutDate(checkOutDate);
-  }, [checkInDate, checkOutDate]);
+    setLocalCheckInDate(checkInDateRedux);
+  }, [checkInDateRedux]);
 
   useEffect(() => {
-    // Dispatch initial check-in and check-out dates when component mounts
-    dispatch(setCheckInDate(localCheckInDate));
-    dispatch(setCheckOutDate(localCheckOutDate));
-  }, []); // Empty dependency array ensures this effect runs only once, on mount
+    setLocalCheckOutDate(checkOutDateRedux);
+  }, [checkOutDateRedux]);
 
   const handleDayPickerToggle = () => {
     setIsCalendarOpen(!isCalendarOpen);
   };
 
   const handleDayClick = (day) => {
-    // Set time to noon (12:00 PM) to avoid timezone issues
     day.setHours(12, 0, 0, 0);
 
     if (!localCheckInDate || localCheckOutDate) {
-      // If check-in date is not set or both dates are already selected, set the check-in date
-      setLocalCheckInDate(day);
-      setLocalCheckOutDate(null); // Clear check-out date
-      dispatch(setCheckInDate(day)); // Pass the selected date to the action
-      dispatch(setCheckOutDate(null)); // Clear check-out date in Redux
-    } else if (day > localCheckInDate) {
-      // If check-out date is not set and selected date is after check-in date, set the check-out date
-      setLocalCheckOutDate(day);
-
-      // Update check-out date in Redux only if the selected date is ahead of the current check-in date
-      if (day > localCheckInDate) {
-        dispatch(setCheckOutDate(day)); // Pass the selected date to the action
-      }
-
-      setIsCalendarOpen(false);
-    } else {
-      // Reset both check-in and check-out dates
       setLocalCheckInDate(day);
       setLocalCheckOutDate(null);
-      dispatch(setCheckInDate(day)); // Pass the selected date to the action
-      dispatch(setCheckOutDate(null)); // Pass null to clear the check-out date in Redux
+      dispatch(setCheckInDate(day));
+      dispatch(setCheckOutDate(null));
+    } else if (day > localCheckInDate) {
+      setLocalCheckOutDate(day);
+      dispatch(setCheckOutDate(day));
+      setIsCalendarOpen(false);
+    } else {
+      setLocalCheckInDate(day);
+      setLocalCheckOutDate(null);
+      dispatch(setCheckInDate(day));
+      dispatch(setCheckOutDate(null));
     }
   };
 
@@ -4514,9 +4563,15 @@ const Indexpage = ({ hotels }) => {
                         : ""
                     }`}
                   </p> */}
-                  <p>{`${formatTime(localCheckInDate)} - ${formatTime(
-                    localCheckOutDate
-                  )}`}</p>
+                  <p>
+                    {checkInDateRedux
+                      ? formatTime(checkInDateRedux)
+                      : "Select check-in date"}{" "}
+                    -
+                    {checkOutDateRedux
+                      ? formatTime(checkOutDateRedux)
+                      : "Select check-out date"}
+                  </p>
                 </div>
               </div>
               {isCalendarOpen && (
@@ -4531,9 +4586,7 @@ const Indexpage = ({ hotels }) => {
                     onDayClick={handleDayClick}
                     placeholderText="Check-in Check-out"
                     className="focus:outline-none focus:border-orange-500"
-                    modifiers={{
-                      disabled: { before: today },
-                    }}
+                    modifiers={{ disabled: { before: today } }}
                   />
                 </div>
               )}

@@ -69,24 +69,28 @@ const checkoutDataReducer = (state = initialCheckOutState, action) => {
 
 
 const formatDate = (date) => {
+  if (!date || typeof date !== 'object') {
+    return ''; // Return empty string if date is null or not an object
+  }
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${month}/${day}/${year}`;
 };
 
+const today = new Date();
+today.setHours(0, 0, 0, 0); // Set time to midnight for accurate comparison
+
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+tomorrow.setHours(0, 0, 0, 0); // Set time to midnight for accurate comparison
+
 const initialDateState = {
-  checkInDate: new Date(), // Set check-in date to today's date
-  checkOutDate: (() => {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    return tomorrow;
-  })(), // Set check-out date to tomorrow's date
-  formattedCheckInDate: formatDate(new Date()),
-  formattedCheckOutDate: formatDate(new Date()),
+  checkInDate: today,
+  checkOutDate: tomorrow,
+  formattedCheckInDate: formatDate(today),
+  formattedCheckOutDate: formatDate(tomorrow),
 };
-
-
 
 const dateReducer = (state = initialDateState, action) => {
   switch (action.type) {
@@ -100,8 +104,6 @@ const dateReducer = (state = initialDateState, action) => {
       return state;
   }
 };
-
-
 
 
 
